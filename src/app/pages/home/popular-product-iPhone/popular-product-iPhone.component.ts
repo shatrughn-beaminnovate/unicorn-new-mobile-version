@@ -850,22 +850,16 @@ export class PopularProductiPhone implements OnInit {
     });
   }
 
-
-
   closePopup() {
     this.displayModal = false;
   }
+  
   selectColor(index: number): void {
     this.recentlyColors.forEach(color => color.selected = false);
     this.recentlyColors[index].selected = true;
     this.selectedColor = this.recentlyColors[index].colorName;
   }
 
-  // selectSpace(index: number) {
-  //   this.space_variant.forEach(space => space.selected_space = false);
-  //   this.space_variant[index].selected_space = true;
-
-  // }
   selectSpace(index: number): void {
     this.space_variant.forEach(space => space.selected_space = false);
     this.space_variant[index].selected_space = true;
@@ -898,6 +892,7 @@ export class PopularProductiPhone implements OnInit {
       this.displayModal = true;
     }
   }
+
   wishlistToggle(productId: number) {
     if (localStorage.getItem('customer_data')) {
       this.commonService.getRequestWithToken(`add_to_wishlist?product_id=${productId}`).subscribe((resp) => {
@@ -943,6 +938,7 @@ export class PopularProductiPhone implements OnInit {
 
     }
   }
+
   increment() {
     this.currentNumber++;
   }

@@ -7,30 +7,6 @@
       </ng-container>
     </ol>
 
-    <!-- <div class="carousel-inner text-center">
-      <ng-container *ngFor="let banner of bannerHolder; let i = index">
-        <div [class.active]="i === 0" class="carousel-item" (click)="onClickBanner(banner)">
-          
-          <div *ngIf="!banner.link" class="d-flex align-items-center justify-content-center pointer">
-
-            <img *ngIf="banner.image" [src]="banner.image" [alt]="banner.alt" class="img-fluid w-100 d-none d-sm-block">
-            <img *ngIf="banner.mobile_image" [src]="banner.mobile_image" [alt]="banner.alt" class="img-fluid w-100 d-sm-none">
-
-            <span *ngIf="!banner.image && !banner.mobile_image">Banner Image Not Available</span>
-          </div>
-
-          <a *ngIf="banner.link" [href]="banner.link" [target]="(+banner.new_window === 1) ? '_blank' : '_self'" class="d-flex align-items-center justify-content-center">
-
-            <img *ngIf="banner.image" [src]="banner.image" [alt]="banner.alt" class="img-fluid w-100 d-none d-sm-block">
-            <img *ngIf="banner.mobile_image" [src]="banner.mobile_image" [alt]="banner.alt" class="img-fluid w-100 d-sm-none">
-
-            <span *ngIf="!banner.image && !banner.mobile_image">Banner Image Not Available</span>
-          </a>
-
-        </div>
-      </ng-container>
-    </div> -->
-
     <div class="carousel-inner text-center">
       <ng-container *ngFor="let banner of bannerHolder; let i = index">
         <div [class.active]="i === 0" class="carousel-item" (click)="onClickBanner(banner)">
@@ -77,43 +53,6 @@
 <!-- Banners End -->
 
 <div class="sections-container">
-  <!-- <section class="first-section">
-  <div class="d-flex banner-section baner_mobile h-100 tablet_size">
-
-    <a href="https://shop.unicornstore.in/category/iphone1" target="_blank" class="banner-sec-1 d-block">
-      <img src="assets/new/first[115].png" alt="" class="img-fluid iphone_images">
-      <h2 class="text-blue">IPHONE</h2> 
-      <div class="banner-sec-1-content">
-         <div class="d-flex align-self-center">
-          <img src="assets/img/apple-logo.svg" alt=" " width="30px">
-          <h3 class="pl-2 text-white text_iphones">IPHONE</h3>
-        </div> 
-        <p class="text-white text_description_power">A Total Powerhouse</p>
-        <button class="btn border text-white mt-2 btn_response text-white">SHOP NOW</button> 
-      </div>
-    </a>
-
-    <a class="banner-sec-2" href="https://shop.unicornstore.in/category/mac1" target="_blank">
-      <img src="assets/new/second[110].png" alt="">
-      <h2 class="text-green">FLAGSHIP STORE</h2>  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    </a>
-
-    <div class="banner-sec-3 h-100 baner_last bg-white">
-      <a href="https://shop.unicornstore.in/category/watch1" target="_blank" class="sub-banner-img-1  ">
-        <img src="assets/new/third[111].png" alt=" " class=" img-fluid">
-         <div class="sub-banner-img-1-content">
-          <button class="btn border border-dark text-dark mt-2 btn_response">SHOP NOW</button>
-        </div> 
-      </a>
-      <a href="https://shop.unicornstore.in/category/headphones-and-speakers1" target="_blank" class="sub-banner-img-2  ">
-        <img src="assets/new/fourth W[112].png" alt=" " class="banner_sec_img banner_sec_img_last">
-         <div class="sub-banner-img-2-content">
-          <button class="btn text-white mt-2 btn_response">SHOP NOW</button>
-        </div> 
-      </a>
-    </div>
-  </div>
-</section>   -->
 
   <!-- Business use cases Section -->
   <section class="second-section bg-white ">
@@ -142,106 +81,10 @@
             <img class="card-img-top img_bussinness" src="https://s3.ap-south-1.amazonaws.com/shop.unicorn/business_use_cases/2.jpg" alt="Card image cap">
           </a>
         </div>
-
-     
-
-        <!-- <div class="col-auto col-sm-6 mb-4 mb-sm-0 col-md-6 col-xl-3 mb-md-3">
-          <a routerLink="/back-to-school" class="card business_img">
-            <img class="card-img-top img_bussinness" src="https://s3.ap-south-1.amazonaws.com/shop.unicorn/business_use_cases/4.jpg" alt="Card image cap">
-          </a>
-        </div> -->
-
-        <!-- <div class="col-6 col-sm-auto mb-4 mb-sm-0">
-        <div class="media align-items-center text-center text-sm-left flex-column flex-sm-row">
-          <i class="fa fa-credit-card fa-3x mb-2 mb-sm-0"></i>
-          <div class="media-body ml-sm-3">
-            <h4 class="heading-md mb-1">Flexible Payment Plans</h4>
-            <p class="paragraph m-0">Pay with multiple cards</p>
-          </div>
-        </div>
-      </div> -->
-
       </div>
     </div>
   </section>
 </div>
-
-<!-- Dynamically Generated Home Component Start -->
-<!-- <ng-container *ngIf="homeComponentHolder && homeComponentHolder.length > 0">
-  <ng-container *ngFor="let parentItem of homeComponentHolder; let i = index; let isEven = even">
-    <section *ngIf="parentItem.component_type === 'slider'" [class.bg-light]="isEven"
-      class="home-dynamically-gen-sec-{{i+1}} pt-4 pb-4">
-      <div class="container-fluid position-relative">
-        <h2 class="title-sm text-center text-uppercase mb-4">{{parentItem.component}}</h2>
-        <div class="row">
-          <div class="col-sm">
-            <owl-carousel-o [options]="customOptions">
-              <ng-container *ngFor="let item of parentItem.component_values">
-                <ng-template carouselSlide>
-                  <a [routerLink]="['/type', item.slug]" [queryParams]="{ type: true }"
-                    *ngIf="isKeyExist(item, 'parent_product_id')" class="card shadow-sm w-100 h-100 border-0">
-                    <div class="card-body">
-                      <div class="slider-img-box">
-                        <img [src]="imgUrl +'/component/' + item?.image" class="img-fluid" alt=" ">
-                      </div>
-                      <h4 class="heading-sm px-2 mb-4 text-center">
-                        {{item.parent_product_name}}
-                      </h4>
-                    </div>
-                  </a>
-                  <a [routerLink]="['/category', item.slug]" *ngIf="isKeyExist(item, 'category_id')"
-                    class="card shadow-sm w-100 h-100 border-0">
-                    <div class="card-body">
-                      <div class="slider-img-box">
-                        <img [src]="imgUrl +'/component/' + item?.image" class="img-fluid" alt=" ">
-                      </div>
-                      <h4 class="heading-sm px-2 mb-4 text-center">
-                        {{item.category_name}}
-                      </h4>
-                    </div>
-                  </a>
-                  <a [routerLink]="['/product', item.slug]" *ngIf="isKeyExist(item, 'product_id')"
-                    class="card shadow-sm w-100 h-100 border-0">
-                    <div class="card-body">
-                      <div class="slider-img-box">
-                        <img [src]="imgUrl +'/component/' + item?.image" class="img-fluid" alt=" ">
-                      </div>
-                      <h4 class="heading-sm px-2 mb-4 text-center">
-                        {{item.product_name}}
-                      </h4>
-                    </div>
-                  </a>
-                </ng-template>
-              </ng-container>
-            </owl-carousel-o>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section *ngIf="parentItem.component_type === 'box'"
-      class="home-dynamically-gen-sec-{{i+1}} pt-4 pb-4 mt-0 mt-sm-4">
-      <div class="container-fluid position-relative">
-        <h2 class="title-sm text-center text-uppercase mb-4">{{parentItem.component}}</h2>
-        <div class="form-row justify-content-center">
-          <div class="col-sm-6 mb-2" *ngFor="let item of parentItem.component_values">
-            <a [routerLink]="['type', item.slug]" *ngIf="isKeyExist(item, 'parent_product_id')" class="box-img-box shadow-sm">
-              <img [src]="imgUrl +'/component/' + item?.image" class="img-fluid" alt=" ">
-            </a>
-            <a [routerLink]="['category', item.slug]" *ngIf="isKeyExist(item, 'category_id')" class="box-img-box shadow-sm">
-              <img [src]="imgUrl +'/component/' + item?.image" class="img-fluid" alt=" ">
-            </a>
-            <a [routerLink]="['product', item.slug]" *ngIf="isKeyExist(item, 'product_id')" class="box-img-box shadow-sm">
-              <img [src]="imgUrl +'/component/' + item?.image" class="img-fluid" alt=" ">
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </ng-container>
-</ng-container> -->
-<!-- Dynamically Generated Home Component End -->
-
 
 <section class="featured-product-section mb-4">
   <div class="container-fluid">
@@ -260,14 +103,6 @@
     <div class="row" id="deals-of-the-day-container" #dealsOfTheDayContainer>
       <div class="col-md-6 col-sm-6 col-auto col-lg-6 col-xl-6">
         <h4 class="deal_best weekly_best p-2">Product Categories</h4>
-        <!-- <h4 class="deal_best p-2">Deals of the day | <span class="deals_list">Sales up to 11% off On selected products </span></h4> -->
-      </div>
-      <div class="col-md-6 col-sm-6 col-6 col-lg-6 col-xl-6">
-        <!-- <div class="swiper_btn">
-          <div class="next swiper-button-next firsts-swiper-next"></div>
-          <span class="slide_pipe">|</span>
-          <div class="pre swiper-button-prev firsts-swiper-prev"></div>
-        </div> -->
       </div>
     </div>
   </div>

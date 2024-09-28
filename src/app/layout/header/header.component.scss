@@ -144,14 +144,15 @@
 }
 
 @media only screen and (min-width: 375px) and (max-width: 425px) {
- 
-    .tests.p-dialog {
-    
-      max-height: 40% !important;
-      z-index: 1101;
-  
+
+  .tests.p-dialog {
+
+    max-height: 40% !important;
+    z-index: 1101;
+
+  }
 }
-}
+
 // deal hot start
 
 .deal_hot_dropdown {
@@ -266,17 +267,26 @@ p.deal_head {
 }
 
 .popular_product {
-  border: 1px solid #cccccc;
-  padding: 7px 14px !important;
-  border-radius: 25px;
-  color: #939393;
-  font-size: 14px;
-  font-weight: 300;
-  margin: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  line-height: 1;
+  flex-wrap: wrap;
+  margin: 10px 0;
+
+  a {
+    border: 1px solid #cccccc;
+    padding: 5px 10px !important;
+    border-radius: 25px;
+    color: #151515;
+    font-size: 11px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-weight: 500;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
 }
 
 .modal-left-img {
@@ -614,4 +624,3 @@ p.deal_head {
     color: #fff;
   }
 }
-

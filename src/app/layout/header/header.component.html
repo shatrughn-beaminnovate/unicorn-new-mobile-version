@@ -760,43 +760,21 @@
         <button type="button" class="search-close-btn" (click)="clearInputField(searchInput)" data-dismiss="modal" #modalClose>&times;</button>
         <div class="row no-gutters justify-content-center mt-4">
           <div class="col-sm-10">
-            <h2 class="text-center my-2">What Are You Looking For ?</h2>
-            <form class="d-flex justify-content-center">
-              <input type="text" id="searchbar" name="search" placeholder="I'm Looking For" (input)="onSearch($event)" required autofocus autocomplete="off" #searchInput>
-            </form>
-            <div class="row my-4 justify-content-center">
-              <div class="col-sm-auto">
-                <p class="h5">Popular Searches: </p>
-              </div>
-              <div class="col-sm-10">
-                <div class="row">
-                  <div class="" *ngFor="let p of searchbar_popular">
-                    <h6 class="px-3 py-2 mx-3 popular_product pointer mb-2" [routerLink]="['/product', p.slug]" (click)="closeModal()">{{p.name}}</h6>
-                  </div>
-                  <!-- <h6 class="px-3 py-2 mx-3 popular_product">iPhone 13</h6>
-                  <h6 class="px-3 py-2 mx-3 popular_product">Apple Studio Display</h6>
-                  <h6 class="px-3 py-2 mx-3 popular_product">iPad 10th Generation</h6>
-                  <h6 class="px-3 py-2 mx-3 popular_product">Apple TV 4K</h6>
-                  <h6 class="px-3 py-2 mx-3 popular_product">HomePad</h6>
-                  <h6 class="px-3 py-2 mx-3 popular_product">Apple Watch Series 9</h6> -->
-                </div>
+
+            <h2 class="search-title">What Are You Looking For ?</h2>
+            <div class="row justify-content-center mb-3">
+              <div class="col-sm-6">
+                <input type="text" id="searchbar" class="w-100" name="search" placeholder="I'm Looking For" (input)="onSearch($event)" required autofocus autocomplete="off" #searchInput>
               </div>
             </div>
-            <div class="" *ngIf="!searchResultHolder.length">
-              <p class="h5">Popular Product: </p>
-              <div class="row my-3">
-                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 mb-2" *ngFor="let p of searchbar_products">
-                  <a class="card h-100 " [routerLink]="['/product', p.slug]" (click)="closeModal()">
-                    <!-- <img [src]="p.product_img" alt="" class="card-img-top img-fluid"> -->
-                    <img [src]="imgUrl + '/medium/' +p.images[0].filename" alt="Product Image" class="card-img-top img-fluid">
-                    <div class="card-body">
-                      <p class="card-text text-center text-black">{{p.name}}</p>
-                      <p class="card-text text-center text-black" *ngIf="p.price > p.saleprice"><del>{{p.price}}</del>&nbsp;&nbsp;{{p.saleprice}}</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
+
+            <p class="h5">Popular Searches: </p>
+            <div class="popular_product mb-3">
+              <a *ngFor="let p of searchbar_popular" [routerLink]="['/product', p.slug]" (click)="closeModal()">
+                {{p.name}}
+              </a>
             </div>
+
             <div style="max-height: 600px; overflow-y: auto; overflow-x: hidden">
               <ng-container *ngIf="searchResultHolder.length > 0">
                 <div id="filter-records" *ngFor="let searchValue of searchResultHolder">
@@ -807,34 +785,30 @@
                 <h5 class="text-danger">{{searchError.text}}</h5>
               </ng-container>
             </div>
+
+            <div class="" *ngIf="!searchResultHolder.length">
+              <p class="h5">Popular Product: </p>
+              <div class="row my-3">
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 mb-2" *ngFor="let p of searchbar_products">
+                  <a class="card h-100 " [routerLink]="['/product', p.slug]" (click)="closeModal()">
+                    <img [src]="imgUrl + '/medium/' +p.images[0].filename" alt="Product Image" class="card-img-top img-fluid">
+                    <div class="card-body">
+                      <p class="card-text text-center text-black">{{p.name}}</p>
+                      <p class="card-text text-center text-black" *ngIf="p.price > p.saleprice"><del>{{p.price}}</del>&nbsp;&nbsp;{{p.saleprice}}</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- Modal -->
 
-<!-- <p-dialog [(visible)]="showModal" [style]="{width: '50vw'}" [modal]="true" [closable]="false" [resizable]="false" [baseZIndex]="10000">
-  <div class="cart-details-sidebar-body">
-    <ng-container *ngIf="cartHolder.length > 0">
-      <div *ngFor="let item of cartHolder" class="media border-bottom py-2">
-        <a routerLink="/product/{{item.slug}}" class="img-box-sm" *ngIf="item.images">
-          <img [src]="imgUrl + '/categories/medium/' + item?.images[0]?.filename" class="align-self-center" [attr.alt]="item?.images[0]?.alt">
-        </a>
-        <div class="media-body">
-          <p>
-            Thank you for visiting the Unicorn Online Store! We are currently collaborating with our partners to enhance your browsing experience.
-            The website will be back in service to meet your needs shortly. For any queries, please feel free to reach out to us at 1-800-267-7888.
-          </p>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-</p-dialog> -->
-
-<p-dialog header="Forgot Password Form" [(visible)]="displayBasic2" [style]="{width: '50vw'}"
-  [draggable]="true" [resizable]="false" [dismissableMask]="false" [modal]="true">
+<p-dialog header="Forgot Password Form" [(visible)]="displayBasic2" [style]="{width: '50vw'}" [draggable]="true" [resizable]="false" [dismissableMask]="false" [modal]="true">
   <form [formGroup]="forgotPasswordForm">
     <div class="mb-3">
       <input type="text" formControlName="forgotEmail" class="form-control form-control-sm" placeholder="Enter Your Registered Email...">
@@ -850,20 +824,4 @@
   </div>
 </p-dialog>
 
-<!-- <p-dialog header="Forgot Password Form " [(visible)]="displayBasic2" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}"
-[draggable]="true" [resizable]="false" [dismissableMask]="false"  [modal]="true" >
-         <div class="mb-3">
-          <input type="text" [(ngModel)]="forgotEmail" name="customer_name" id="notify_customer_name" class="form-control form-control-sm" placeholder="Enter your  registered email...">
-        </div>
-      
-        <ng-template pTemplate="footer">
-   
-            <button type="submit" class="btn btn-success btn-sm w-100" (click)="submitForgot()">Submit</button>
-     
-   
-            <button type="submit" class="btn btn-success btn-sm w-100" (click)="closeForgot()">Cancel</button>
- 
-  
-        </ng-template>
-</p-dialog> -->
 <app-sidebarcart></app-sidebarcart>

@@ -5,11 +5,11 @@
 
       <!-- Left Side: Selected Product Details -->
       <div class="col-sm-5 text-center position-relative">
-        <div class="sticky-top pr-sm-4" style="top: 87px;" *ngIf="!isVarinet">
+        <div class="product-sticky-top pr-sm-4" *ngIf="!isVariant">
           <!-- <p-galleria *ngIf="selectedProduct && (selectedProduct | json) !== '{}' && selectedProduct.images.length > 0" [value]="selectedProduct.images" [responsiveOptions]="galleriaResponsiveOptions" [containerStyle]="{'max-width': '660px', 'height': '590px'}" [numVisible]="6" thumbnailsPosition="left">
           <ng-template pTemplate="item" let-item>
             <img [src]="imgUrl + '/full/' + item.filename" class="img-fluid" alt=" ">
-          </ng-template>isVarinet
+          </ng-template>isVariant
           <ng-template pTemplate="thumbnail" let-item>
             <div class="grid grid-nogutter thumb-img-box justify-content-center">
               <img [src]="imgUrl + '/thumbnail/' + item.filename" class="img-fluid" alt=" ">
@@ -35,7 +35,7 @@
             </swiper>
           </div>
         </div>
-        <div class="sticky-top pr-sm-4" style="top: 87px;" *ngIf="isVarinet">
+        <div class="sticky-top pr-sm-4" style="top: 87px;" *ngIf="isVariant">
           <!-- <p-galleria *ngIf="selectedProduct && (selectedProduct | json) !== '{}' && selectedProduct.images.length > 0" [value]="selectedProduct.images" [responsiveOptions]="galleriaResponsiveOptions" [containerStyle]="{'max-width': '660px', 'height': '590px'}" [numVisible]="6" thumbnailsPosition="left">
           <ng-template pTemplate="item" let-item>
             <img [src]="imgUrl + '/full/' + item.filename" class="img-fluid" alt=" ">
@@ -69,7 +69,7 @@
                     <li class="breadcrumb-item"><a [routerLink]="['/category', selectedProduct.parent_category_slug]" class="link">{{selectedProduct?.category_name}}</a></li>
                     <li class="breadcrumb-item"><span>{{selectedProduct?.name}}</span></li>
                   </ol>
-                  <h1 class="title-sm text-center text-sm-left " *ngIf="isVarinet">{{primaryProductDataName}}</h1>
+                  <h1 class="title-sm text-center text-sm-left " *ngIf="isVariant">{{primaryProductDataName}}</h1>
                   <h1 class="title-sm text-center text-sm-left " *ngIf="selectedProduct">{{selectedProduct.name}}</h1>
                   <div class="read-only-rating-boxs" *ngIf="rating">
                     <p-rating [ngModel]="rating" [cancel]="false" id="selected_product_rating"></p-rating>

@@ -44,7 +44,7 @@ export class TypeProductComponent implements OnInit, AfterViewInit, OnDestroy {
   relatedProductsHolder: any[] = [];
   isWishlistAdded = false;
   isModalOpen = false;
-  isVarinet = false;
+  isVariant = false;
   isLoading = false;
   guestForm!: FormGroup;
   submitted = false;
@@ -1249,7 +1249,7 @@ export class TypeProductComponent implements OnInit, AfterViewInit, OnDestroy {
           this.firstStepSalePrice = this.selectedProduct.saleprice * 0.75;
           this.payMonth = this.firstStepSalePrice / 24;
           this.finalSalePrice = this.selectedProduct.saleprice - this.firstStepSalePrice;
-          this.isVarinet = false;
+          this.isVariant = false;
           this.relatedProductsHolder = [];
           if (response.data.related_products && response.data.related_products.length > 0) {
             this.relatedProductsHolder = response.data.related_products;
@@ -1319,7 +1319,7 @@ export class TypeProductComponent implements OnInit, AfterViewInit, OnDestroy {
 
           this.handleOnProductVariantSelectGA4();
         } else {
-          this.isVarinet = true;
+          this.isVariant = true;
           this.varient = response.message
         }
       });
