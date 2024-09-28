@@ -1,0 +1,128 @@
+<h1 mat-dialog-title>Address Form</h1>
+<div mat-dialog-content>
+
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>First Name<span class="req">*</span></label>
+          <input type="text" formControlName="firstname" [class.is-invalid]="isFormSubmitted && f.firstname.errors" name="firstname" class="form-control form-control-sm">
+          <div *ngIf="isFormSubmitted && f.firstname.errors" class="invalid-feedback">
+            <div *ngIf="f.firstname.errors.required">First Name is Required</div>
+            <div *ngIf="f.firstname.errors.pattern">Only characters are allowed in first name.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Last Name<span class="req">*</span></label>
+          <input type="text" formControlName="lastname" [class.is-invalid]="isFormSubmitted && f.lastname.errors" name="lastname" class="form-control form-control-sm">
+          <div *ngIf="isFormSubmitted && f.lastname.errors" class="invalid-feedback">
+            <div *ngIf="f.lastname.errors.required">Last Name is Required</div>
+            <div *ngIf="f.lastname.errors.pattern">Only characters are allowed in last name.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="email">Email<span class="req">*</span></label>
+          <input type="text" formControlName="email" [class.is-invalid]="isFormSubmitted && f.email.errors" name="email" id="email" class="form-control form-control-sm">
+          <div *ngIf="isFormSubmitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is Required</div>
+            <div *ngIf="f.email.errors.pattern">Email is Not Valid</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="phone">Phone<span class="req">*</span></label>
+          <input type="text" formControlName="phone" [class.is-invalid]="isFormSubmitted && f.phone.errors" name="phone" id="phone" class="form-control form-control-sm">
+          <div *ngIf="isFormSubmitted && f.phone.errors" class="invalid-feedback">
+            <div *ngIf="f.phone.errors.required">Phone No. is Required</div>
+            <div *ngIf="f.phone.errors.pattern">Enter 10 digit Number</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label>Address 1 <span class="req">*</span></label>
+      <input type="text" formControlName="address1" [class.is-invalid]="isFormSubmitted && f.address1.errors" name="address1" id="f_address1" class="form-control form-control-sm">
+      <div *ngIf="isFormSubmitted && f.address1.errors" class="invalid-feedback">
+        <div *ngIf="f.address1.errors.required">Address is Required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Address 2</label>
+      <input type="text" formControlName="address2" name="address2" id="f_address2" class="form-control form-control-sm">
+    </div>
+
+    <div class="form-row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>City <span class="req">*</span></label>
+          <input type="text" formControlName="city" [class.is-invalid]="isFormSubmitted && f.city.errors" name="city" id="f_city" class="form-control form-control-sm">
+          <div *ngIf="isFormSubmitted && f.city.errors" class="invalid-feedback">
+            <div *ngIf="f.city.errors.required">City is Required</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Zip <span class="req">*</span></label>
+          <input type="text" formControlName="zip" [class.is-invalid]="isFormSubmitted && f.zip.errors" name="zip" id="f_zip" maxlength="6" class="form-control form-control-sm">
+          <div *ngIf="isFormSubmitted && f.zip.errors" class="invalid-feedback">
+            <div *ngIf="f.zip.errors.required">Zip Code is Required</div>
+            <div *ngIf="f.zip.errors.pattern">Zip Code Must be 6 digit</div>
+          </div>
+          <input type="hidden" name="check_error" value="1" id="check-error">
+          <span id="zip_error" class="text-danger"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="bill_country_id">Country <span class="req">*</span></label>
+          <select formControlName="country_id" [class.is-invalid]="isFormSubmitted && f.country_id.errors" (change)="onChangeCountry($event)" name="country_id" id="bill_country_id" class="custom-select custom-select-sm">
+            <option *ngFor="let country of countryHolder" [value]="country.id">{{country.name}}</option>
+          </select>
+          <div *ngIf="isFormSubmitted && f.country_id.errors" class="invalid-feedback">
+            <div *ngIf="f.country_id.errors.required">Country is Required</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="from-group">
+          <label for="bill_zone_id">State <span class="req">*</span></label>
+          <select formControlName="zone_id" [class.is-invalid]="isFormSubmitted && f.zone_id.errors" (change)="onChangeState($event)" name="zone_id" id="bill_zone_id" class="custom-select custom-select-sm">
+            <option value="">Select state</option>
+            <option *ngFor="let state of stateHolder" [value]="state.id">{{state.name}}</option>
+          </select>
+          <div *ngIf="isFormSubmitted && f.zone_id.errors" class="invalid-feedback">
+            <div *ngIf="f.zone_id.errors.required">State is Required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-dialog-actions align="end">
+      <button type="button" mat-button mat-stroked-button (click)="confirmDialog()">Cancel</button>
+      <button type="submit" mat-button class="btn btn-primary ml-2">
+        <mat-icon *ngIf="isLoading">
+          <mat-spinner diameter="15"></mat-spinner>
+        </mat-icon>
+        Submit
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>
+

@@ -1,0 +1,112 @@
+.price .mrp {
+  font-size: 20px;
+  color: #000;
+}
+
+
+.prebook-price {
+  font-size: 18px;
+  margin: 2px 0 5px !important;
+}
+
+.watch-share-box {
+  position: absolute;
+  top: 38px;
+  right: 15px;
+  z-index: 9;
+}
+
+.watch-wishlist-btn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  z-index: 9;
+}
+
+.mrp small {
+  color: #6d6d6d;
+  letter-spacing: 0.04em;
+}
+
+.no-stock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: red;
+  background: white;
+  font-size: 23px;
+  transform: translate(-50%, -304%);
+  opacity: 0.7;
+  display: none;
+}
+
+.coming-soon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: green;
+  background: white;
+  font-size: 23px;
+  transform: translate(-50%, -304%);
+  opacity: 0.7;
+}
+
+.img-preview {
+  height: 19rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-preview img {
+  max-height: 100%;
+  width: auto;
+}
+
+
+.product-section-bar .prod-desc-menu li a {
+  margin-top: 2px !important;
+}
+
+.modal-open .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+
+.product-details-page h3 {
+  font-family: 'proxima_novasemibold', sans-serif !important;
+  font-size: 21px !important;
+  margin-bottom: 2px !important;
+  color: #222 !important;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.product-details-page h6 {
+  font-family: 'proxima_novasemibold', sans-serif !important;
+  font-size: 18px !important;
+  margin-bottom: 2px !important;
+  color: #222 !important;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.product-details-page p strong {
+  font-family: 'proxima_novasemibold', sans-serif !important;
+  font-size: 18px !important;
+  margin-bottom: 2px !important;
+  color: #222 !important;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.product-details-page ul {
+  margin-bottom: 5px !important;
+}
+
+.product-details-page li, .product-details-page p {
+  font-family: 'proxima_novasemibold', sans-serif !important;
+  color: #333 !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}

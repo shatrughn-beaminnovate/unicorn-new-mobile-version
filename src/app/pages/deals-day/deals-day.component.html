@@ -1,0 +1,28 @@
+<div class="container mb-3">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row mt-3">
+          <div class="col-sm-12 d-flex align-item-center justify-content-between">
+            <h3 class="hading-md m-0">Deals Of The Day</h3>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-sm-3 mb-3" *ngFor="let p of newsletter_products;">
+                  <a [routerLink]="['/product', p.slug]"   class="card flex-fill deals_hot_card h-100" style="color: black !important;">
+                    <div class="hot-deals-img-box">
+                      <img [src]="p.product_img" alt="" class="img-fluid">
+                      <img *ngIf="p.images?.length > 0" [src]="imgUrl + '/full/' + p.images[0].filename" alt="Product Image" class="img-fluid">
+                      <img *ngIf="!p.images || p.images.length === 0" src="./assets/img/not-found/no-image-found.png" alt=" ">
+                    </div>
+                    <div class="card-body text-center">
+                      <p class="card-text text-center card_text_font mb-3 text-black"> {{ p.name }}</p>
+                      <app-price [price]="p.price" [saleprice]="p.saleprice" [strikePrice]="p.price" [isVerticalPrice]="true"></app-price>
+                    </div>
+                  </a>
+
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>

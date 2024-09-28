@@ -1,0 +1,307 @@
+<p-dialog position="top" [(visible)]="isCashifyModalShow" header="Exchange Your Device" [maximizable]="true" position="center" (onHide)="onModalHide()" [style]="{width: '70vw'}" [modal]="true" [draggable]="false" [resizable]="false">
+  <div id="phone_exchange_intro_step" *ngIf="isIntroStepOpen">
+    <div class="row no-gutters mb-4">
+      <div class="col-sm-3">
+        <div class="px-3 h-100">
+          <div class="img-box-cashify">
+            <img src="assets/img/cashify/user-bro.svg" class="img-fluid" alt="">
+          </div>
+          <h2 class="heading-number">1</h2>
+          <p class="intro-text text-center">
+            Know your device's worth by answering few simple questions
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="px-3 h-100">
+          <div class="img-box-cashify">
+            <img src="assets/img/cashify/ux-bro.svg" class="img-fluid" alt="">
+          </div>
+          <h2 class="heading-number">2</h2>
+          <p class="intro-text text-center">
+            Place order for new device at a full-price
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="px-3 h-100">
+          <div class="img-box-cashify">
+            <img src="assets/img/cashify/messenger-bro.svg" class="img-fluid" alt="">
+          </div>
+          <h2 class="heading-number">3</h2>
+          <p class="intro-text text-center">Receive your new device and set it up through old device</p>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="px-3 h-100">
+          <div class="img-box-cashify">
+            <img src="assets/img/cashify/messenger-cuate.svg" class="img-fluid" alt="">
+          </div>
+          <h2 class="heading-number">4</h2>
+          <p class="intro-text text-center">Handover your old device to delivery executive and get assured value</p>
+        </div>
+      </div>
+    </div>
+    <div class="row no-gutters justify-content-center">
+      <div class="col-sm-3">
+        <div class="d-flex align-items-center">
+          <button type="button" (click)="isCashifyModalShow = false" class="btn btn-light btn-block mr-2">Cancel</button>
+          <button type="button" (click)="nextStepClick('goto-step-1')" class="btn btn-primary btn-block mt-0">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="phone_exchange_step_1" *ngIf="isFirstStepOpen">
+    <div class="row align-items-center justify-content-center mb-4 no-gutters">
+      <div class="col-xl-6">
+        <h6 class="cashify-title">Does your phone switch on?</h6>
+        <div class="phone_switch_on_status_box">
+          <div class="form-row no-gutters">
+            <div class="col-sm-auto">
+              <label for="yes">
+                <input type="radio" [(ngModel)]="isPhoneSwitchOn" id="yes" name="phone_switch_on" value="Y" class="mr-2" style="width: 18px; height: 18px">
+                <span>Yes</span>
+              </label>
+            </div>
+            <div class="col-sm-auto">
+              <label for="no">
+                <input type="radio" [(ngModel)]="isPhoneSwitchOn" id="no" name="phone_switch_on" value="N" class="no mr-2" style="width: 18px; height: 18px">
+                <span>No</span>
+              </label>
+            </div>
+          </div>
+          <div class="text-danger" *ngIf="isPhoneSwitchOn === 'N'">
+            <small>Sorry, only working phones can be exchanged.</small>
+          </div>
+        </div>
+
+        <ng-container *ngIf="isPhoneSwitchOn === 'Y'">
+          <p>Phone must stay on for 30sec without connecting to a charger</p>
+          <p id="check_phone_status">Phone status will be checked during pickup</p>
+          <div class="pin-code-check my-3">
+            <div class="input-group input-group-sm">
+              <input type="text" [formControl]="pincode" class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" placeholder="Enter Pincode*" maxlength="6" name="pin" id="pin_for_availability" style="max-width: 10rem;">
+              <div class="input-group-append">
+                <button type="button" (click)="checkPin()" class="btn btn-primary">
+                  <i *ngIf="isCheckPinLoading" class="fa fa-spin fa-spinner mr-1"></i>
+                  <span [innerHTML]="isCheckPinLoading ? 'Checking...' : 'Check Pin'"></span>
+                </button>
+              </div>
+            </div>
+            <small class="d-block text-success first-letter-uppercase" *ngIf="pinCodeResponse.status">{{pinCodeResponse.msg}}</small>
+            <small class="d-block text-danger first-letter-uppercase" *ngIf="isPinCodeError.status">{{isPinCodeError.msg}}</small>
+          </div>
+        </ng-container>
+
+      </div>
+      <div class="col-sm-auto">
+        <div class="search-img-box">
+          <img src="assets/img/cashify/User-flow-pana.svg" style="height: 18rem;" class="img-fluid" alt=" ">
+        </div>
+      </div>
+    </div>
+
+    <div class="row no-gutters justify-content-center">
+      <div class="col-sm-3">
+        <div class="d-flex align-items-center">
+          <button type="button" (click)="stepBack('goto-intro-step')" class="btn btn-light btn-block mr-2">Back</button>
+          <button type="button" *ngIf="isPhoneSwitchOn === 'Y'" [disabled]="!isPinCodeAvailable" (click)="nextStepClick('goto-step-2')" class="btn btn-primary btn-block mt-0">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="phone_exchange_step_2" *ngIf="isSecondStepOpen">
+    <div class="row justify-content-center pt-3">
+      <div class="col-xl-6">
+        <h6 class="cashify-title">Which phone do you have?</h6>
+        <div class="form-group">
+          <label for="brands-list">Top Brands <span class="req">*</span></label>
+          <p-dropdown [options]="brands" [(ngModel)]="selectedBrand" (onChange)="onBrandSelected()" optionLabel="brandName" [style]="{'width':'100%'}" appendTo="body" [filter]="true" placeholder="Select Brand" [disabled]="isBrandLoading">
+            <ng-template pTemplate="selectedItem">
+              <div>{{ selectedBrand.brandName }}</div>
+            </ng-template>
+            <ng-template let-brand pTemplate="item">
+              <div class="d-flex align-items-center justify-content-between">
+                <span>{{ brand.brandName }}</span>
+                <img [src]="brand.brandImage" class="img-fluid mr-2" (error)="onBrandImageNotFound($event)" style="width: 45px">
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+        <div class="form-group">
+          <label for="products-list">Products <span class="req">*</span></label>
+          <p-dropdown [options]="products" [(ngModel)]="selectedProduct" appendTo="body" optionLabel="name" [style]="{'width':'100%'}" [filter]="true" (onChange)="onProductSelected()" placeholder="Select Product" [disabled]="isProductLoading"></p-dropdown>
+        </div>
+        <div class="form-group">
+          <label for="variants-list">Variants <span class="req">*</span></label>
+          <p-dropdown [options]="variants" [(ngModel)]="selectedVariant" appendTo="body" optionLabel="name" [style]="{'width':'100%'}" [filter]="true" (onChange)="onVariantSelected()" placeholder="Select Variant" [disabled]="isVariantLoading"></p-dropdown>
+        </div>
+        <div class="form-group">
+          <label for="imei">Enter Device IMEI Number <span class="req">*</span></label>
+          <input type="number" [(ngModel)]="imei" [ngModelOptions]="{standalone: true}" name="imei" id="imei" class="form-control form-control-sm">
+          <small class="d-block text-danger first-letter-uppercase" *ngIf="isImeiError">{{imeiErrorMsg}}</small>
+        </div>
+        <p>(Dial *#06# to gt your device IMEI. Enter the first 15 digits without any space or special characters)</p>
+      </div>
+      <div class="col-sm-auto">
+        <img src="https://shop.unicornstore.in/beam/themes/2019/assets/img/cashify/search-rafiki.svg" style="height: 22rem; transform: scale(1.2);" class="img-fluid" alt=" ">
+      </div>
+    </div>
+    <div class="row no-gutters justify-content-center mt-3">
+      <div class="col-sm-3">
+        <div class="d-flex align-items-center">
+          <button type="button" (click)="stepBack('goto-step-1')" class="btn btn-light btn-block mr-2">Back</button>
+          <button type="button" (click)="nextStepClick('goto-step-3')" class="btn btn-primary btn-block mt-0">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="phone_exchange_step_3" *ngIf="isThirdStepOpen">
+    <div class="fixed-max-height" style="max-height: 695px !important">
+      <h2 class="cashify-title mb-3">Answer the below questions</h2>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="cashifyQuoteResponseStatus === 'error'">
+        {{cashifyQuoteResponseMsg}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="question-box mb-3 pb-3">
+        <h3 class="cashify-title">Q1. Is your device able to make and receive calls?</h3>
+        <p class="text">Your phone should be able to stay on and should be able to make and receive calls.</p>
+        <div class="d-flex align-items-center">
+          <label for="isAllianceMobileSwitchOnYes" class="quote-radio-box">
+            <p-radioButton name="allianceMobileSwitchOn" value="Y" [(ngModel)]="isAllianceMobileSwitchOn" [ngModelOptions]="{standalone: true}" inputId="isAllianceMobileSwitchOnYes"></p-radioButton>
+            <span for="isAllianceMobileSwitchOnYes" class="ml-2 pl-1 mb-0">Yes</span>
+          </label>
+
+          <label for="isAllianceMobileSwitchOnNo" class="quote-radio-box">
+            <p-radioButton name="allianceMobileSwitchOn" value="N" [(ngModel)]="isAllianceMobileSwitchOn" [ngModelOptions]="{standalone: true}" inputId="isAllianceMobileSwitchOnNo"></p-radioButton>
+            <span class="ml-2 pl-1 mb-0">No</span>
+          </label>
+        </div>
+      </div>
+      <div class="question-box mb-3 pb-3">
+        <h3 class="cashify-title">Q2. Does the device function properly?</h3>
+        <p class="text">
+          The phones's WiFi, GPS, Bluetooth, Sensors and both front and back camera should work. <br>
+          *Your Phone is not eligible if more than 2 functional issues ar detected at the doorstep.
+        </p>
+        <div class="d-flex align-items-center">
+          <label for="isAllianceFunctionalConditionYes" class="quote-radio-box">
+            <p-radioButton name="allianceFunctionalCondition" value="Y" [(ngModel)]="isAllianceFunctionalCondition" [ngModelOptions]="{standalone: true}" inputId="isAllianceFunctionalConditionYes"></p-radioButton>
+            <span for="isAllianceFunctionalConditionYes" class="ml-2 pl-1 mb-0">Yes</span>
+          </label>
+
+          <label for="isAllianceFunctionalConditionNo" class="quote-radio-box">
+            <p-radioButton name="allianceFunctionalCondition" value="N" [(ngModel)]="isAllianceFunctionalCondition" [ngModelOptions]="{standalone: true}" inputId="isAllianceFunctionalConditionNo"></p-radioButton>
+            <span class="ml-2 pl-1 mb-0">No</span>
+          </label>
+        </div>
+      </div>
+      <div class="question-box mb-3 pb-3">
+        <h3 class="cashify-title">Q3. Is your device body in good shape?</h3>
+        <p class="text">
+          The phone body should not have any cracks or major scratches; The buttons should work and should not be damaged. <br>
+          * Your devices is ineligible for exchange if any part of body is shattered, broken or missing.
+        </p>
+        <div class="d-flex align-items-center">
+          <label for="isAllianceBodyConditionYes" class="quote-radio-box">
+            <p-radioButton name="allianceBodyCondition" value="Y" [(ngModel)]="isAllianceBodyCondition" [ngModelOptions]="{standalone: true}" inputId="isAllianceBodyConditionYes"></p-radioButton>
+            <span for="isAllianceBodyConditionYes" class="ml-2 pl-1 mb-0">Yes</span>
+          </label>
+
+          <label for="isAllianceBodyConditionNo" class="quote-radio-box">
+            <p-radioButton name="allianceBodyCondition" value="N" [(ngModel)]="isAllianceBodyCondition" [ngModelOptions]="{standalone: true}" inputId="isAllianceBodyConditionNo"></p-radioButton>
+            <span class="ml-2 pl-1 mb-0">No</span>
+          </label>
+        </div>
+      </div>
+      <div class="question-box mb-3">
+        <h3 class="cashify-title">Q4. Is your device screen in good shape?</h3>
+        <p class="text">
+          The touchscreen should work: the screen display should not have any lines and dots;
+          Screen glass should not have major cracks &amp; scratches.
+        </p>
+        <div class="d-flex align-items-center">
+          <label for="isAllianceScreenConditionYes" class="quote-radio-box">
+            <p-radioButton name="allianceScreenCondition" value="Y" [(ngModel)]="isAllianceScreenCondition" [ngModelOptions]="{standalone: true}" inputId="isAllianceScreenConditionYes"></p-radioButton>
+            <span for="isAllianceScreenConditionYes" class="ml-2 pl-1 mb-0">Yes</span>
+          </label>
+
+          <label for="isAllianceScreenConditionNo" class="quote-radio-box">
+            <p-radioButton name="allianceScreenCondition" value="N" [(ngModel)]="isAllianceScreenCondition" [ngModelOptions]="{standalone: true}" inputId="isAllianceScreenConditionNo"></p-radioButton>
+            <span class="ml-2 pl-1 mb-0">No</span>
+          </label>
+        </div>
+
+      </div>
+    </div>
+    <div class="form-row justify-content-center">
+      <div class="col-sm-2">
+          <button type="button" (click)="stepBack('goto-step-2')" class="btn btn-light btn-block">Back</button>
+      </div>
+      <div class="col-sm-2">
+          <p-button label="Next" [loading]="isQuoteLoading" (onClick)="nextStepClick('goto-step-4')" styleClass="btn btn-primary w-100 btn-block"></p-button>
+      </div>
+    </div>
+  </div>
+
+  <div id="phone_exchange_step_4" *ngIf="isFourthStepOpen">
+    <div class="fixed-max-height" style="max-height: 695px !important">
+      <!-- Success Alert -->
+      <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="getExchangeProductDetails?.couponPrice">
+        <strong>Success!</strong> Your coupon has been applied successfully.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <h2 class="cashify-title mb-2">
+        Price for Your {{getExchangeProductDetails?.productName}} : {{getExchangeProductDetails?.couponPrice ? getExchangeProductDetails?.newQuotePrice : getExchangeProductDetails?.buyBackPrice}}
+      </h2>
+      <h2 class="cashify-title mb-2 cashify-coupon-details d-none">Coupon Price : <i class="fa fa-inr mr-1"></i><span id="cashify-coupon-price"></span></h2>
+      <h2 class="cashify-title mb-2 cashify-coupon-details d-none">New Price of Your Device : <i class="fa fa-inr mr-1"></i><span id="final-product-price"></span></h2>
+      <small>*Terms &amp; Conditions Applied</small>
+      <p class="my-3">
+        <b>NOTE</b> <br>
+        Your exchange can be rejected if current phone is not in working condition, has scratches / cracks on the screen or dents on the body.
+      </p>
+
+      <div class="row" *ngIf="!getExchangeProductDetails?.couponPrice">
+        <div class="col-12 col-sm-6">
+          <div class="form-group">
+            <label for="cashify_coupon">Add a Coupon</label>
+            <div class="input-group input-group-sm">
+              <!--value="unicorn_exc2"-->
+              <input type="text" [(ngModel)]="cashifyCouponCode" name="cashify_coupon" id="cashify_coupon" class="form-control">
+              <div class="input-group-append">
+                <p-button label="Apply" [loading]="isCashifyCouponLoading" (onClick)="applyCashifyCoupon()" styleClass="btn btn-primary btn-sm"></p-button>
+              </div>
+            </div>
+          </div>
+          <p class="d-none m-0" id="cashify-coupon-code-msg-box"></p>
+        </div>
+      </div>
+    </div>
+    <div class="row no-gutters justify-content-center mt-5">
+      <div class="col-sm-3">
+        <div class="d-flex align-items-center">
+          <button type="button" (click)="stepBack('goto-step-3')" class="btn btn-light btn-block mr-2">Back</button>
+          <button type="button" (click)="proceedWithCashify()" class="btn btn-primary btn-block mt-0">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <hr class="mb-2"> -->
+  <ng-template pTemplate="footer">
+    <div class="cashify-logo-box mb-1">
+      <p class="mb-0 mr-1 text-center">Powered by </p><img src="assets/img/cashify/cashify_logo_sm.png" alt=" ">
+    </div>
+    <div class="disclaimer">
+      *The Buyback Services (“Services”) are provided by “Cashify” at its sole discretion and you agree to the Terms of Use of Cashify before availing the same. Unicorn is not responsible for, and expressly disclaims all liability for, damages of any kind arising out of use, reference to, or reliance on any information contained either on Cashify’s Terms of Use or the services provided by them. <a href="https://www.cashify.in/terms-of-use" target="_blank">Terms of Use Cashify</a>.
+    </div>
+  </ng-template>
+</p-dialog>

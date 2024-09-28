@@ -1,0 +1,301 @@
+<h1 mat-dialog-title>Personal Shopper</h1>
+<div mat-dialog-content>
+  <div class="personal-shopper">
+    <!--<p>
+        Book an appointment today to enjoy a video or telephone consultation with your personal Apple Expert from Unicorn. Whether you want expert guidance on the Apple product that is right for you or need online shopping support, a dedicated member of our in-store team is here for you.
+    </p>-->
+    <form>
+      <!-- progressbar -->
+      <ul id="progressbar">
+        <li id="account" [class.active]="steps === 'consultation-type' || steps === 'book-appointment' || steps === 'submit-details' || steps === 'finish'">Consultation Type</li>
+        <li id="personal" [class.active]="steps === 'book-appointment' || steps === 'submit-details' || steps === 'finish'">Book Appointment</li>
+        <li id="payment" [class.active]="steps === 'submit-details' || steps === 'finish'">Submit Details</li>
+        <li id="confirm" [class.active]="steps === 'finish'">Finish</li>
+      </ul>
+
+      <!-- Step 1 Start -->
+      <fieldset *ngIf="steps === 'consultation-type'">
+        <div class="row">
+          <div class="col-7"><h2 class="heading text-left">Select Consultation Type</h2></div>
+          <div class="col-5"><h2 class="heading text-right">Step 1 - 4</h2></div>
+          <div class="col-12 text-center pb-3">
+            <span class="heading-section-2">{{consultationType}} Consultation</span>
+          </div>
+        </div>
+        <div class="row justify-content-center text-center">
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <div (click)="onClickConsultationType('video')" [class.active]="consultationType === 'Video'" class="consult-type-box">
+              <i class="fa fa-video-camera fa-3x"></i>
+              <h6 class="heading-md mt-2">20 Minutes Free</h6>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div (click)="onClickConsultationType('phone')" [class.active]="consultationType === 'Phone'" class="consult-type-box">
+              <i class="fa fa-mobile fa-3x"></i>
+              <h6 class="heading-md mt-2">20 Minutes Free</h6>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row justify-content-center justify-content-sm-end">
+          <div class="col-auto call-sm-auto">
+            <button type="button" (click)="nextStep('book-appointment')" class="btn btn-primary">Next</button>
+          </div>
+        </div>
+      </fieldset>
+      <!-- Step 1 End -->
+
+      <!-- Step 2 -->
+      <fieldset *ngIf="steps === 'book-appointment'">
+        <div class="row mb-4">
+          <div class="col-7"><h2 class="heading text-left">Book Appointment</h2></div>
+          <div class="col-5"><h2 class="heading text-right">Step 2 - 4</h2></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div id="datepicker">
+              <div class="datepicker datepicker-inline">
+                <div class="datepicker-days" style="display: block;">
+                  <table class=" table-condensed">
+                    <thead>
+                    <tr>
+                      <th class="prev" style="visibility: hidden;">«</th>
+                      <th colspan="5" class="datepicker-switch">May 2022</th>
+                      <th class="next" style="visibility: visible;">»</th>
+                    </tr>
+                    <tr>
+                      <th class="dow">Su</th>
+                      <th class="dow">Mo</th>
+                      <th class="dow">Tu</th>
+                      <th class="dow">We</th>
+                      <th class="dow">Th</th>
+                      <th class="dow">Fr</th>
+                      <th class="dow">Sa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td class="old disabled day disabled">24</td>
+                      <td class="old disabled day disabled">25</td>
+                      <td class="old disabled day disabled">26</td>
+                      <td class="old disabled day disabled">27</td>
+                      <td class="old disabled day disabled">28</td>
+                      <td class="old disabled day disabled">29</td>
+                      <td class="old disabled day disabled">30</td>
+                    </tr>
+                    <tr>
+                      <td class="disabled day disabled">1</td>
+                      <td class="disabled day disabled">2</td>
+                      <td class="day disabled">3</td>
+                      <td class="day disabled">4</td>
+                      <td class="day disabled">5</td>
+                      <td class="day disabled">6</td>
+                      <td class="day disabled">7</td>
+                    </tr>
+                    <tr>
+                      <td class="day disabled">8</td>
+                      <td class="day disabled">9</td>
+                      <td class="day disabled">10</td>
+                      <td class="day disabled">11</td>
+                      <td class="day disabled">12</td>
+                      <td class="day disabled">13</td>
+                      <td class="day disabled">14</td>
+                    </tr>
+                    <tr>
+                      <td class="day disabled">15</td>
+                      <td class="day disabled">16</td>
+                      <td class="day disabled">17</td>
+                      <td class="day disabled">18</td>
+                      <td class="day disabled">19</td>
+                      <td class="day disabled">20</td>
+                      <td class="day disabled">21</td>
+                    </tr>
+                    <tr>
+                      <td class="day disabled">22</td>
+                      <td class="day disabled">23</td>
+                      <td class="day disabled">24</td>
+                      <td class="day disabled">25</td>
+                      <td class="day disabled">26</td>
+                      <td class="day disabled">27</td>
+                      <td class="day disabled">28</td>
+                    </tr>
+                    <tr>
+                      <td class="day disabled">29</td>
+                      <td class="day disabled">30</td>
+                      <td class="day disabled">31</td>
+                      <td class="new day disabled">1</td>
+                      <td class="new day disabled">2</td>
+                      <td class="new day disabled">3</td>
+                      <td class="new day disabled">4</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                      <th colspan="7" class="today" style="display: none;">Today</th>
+                    </tr>
+                    <tr>
+                      <th colspan="7" class="clear" style="display: none;">Clear</th>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <div class="datepicker-months" style="display: none;">
+                  <table class="table-condensed">
+                    <thead>
+                    <tr>
+                      <th class="prev" style="visibility: hidden;">«</th>
+                      <th colspan="5" class="datepicker-switch">2022</th>
+                      <th class="next" style="visibility: visible;">»</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td colspan="7"><span class="month disabled">Jan</span><span class="month disabled">Feb</span><span class="month disabled">Mar</span><span class="month disabled">Apr</span><span class="month">May</span><span class="month">Jun</span><span class="month">Jul</span><span class="month">Aug</span><span class="month">Sep</span><span class="month">Oct</span><span class="month">Nov</span><span class="month">Dec</span></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                      <th colspan="7" class="today" style="display: none;">Today</th>
+                    </tr>
+                    <tr>
+                      <th colspan="7" class="clear" style="display: none;">Clear</th>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <div class="datepicker-years" style="display: none;">
+                  <table class="table-condensed">
+                    <thead>
+                    <tr>
+                      <th class="prev" style="visibility: hidden;">«</th>
+                      <th colspan="5" class="datepicker-switch">2020-2029</th>
+                      <th class="next" style="visibility: visible;">»</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td colspan="7"><span class="year old disabled">2019</span><span class="year disabled">2020</span><span class="year disabled">2021</span><span class="year">2022</span><span class="year">2023</span><span class="year">2024</span><span class="year">2025</span><span class="year">2026</span><span class="year">2027</span><span class="year">2028</span><span class="year">2029</span><span class="year new">2030</span></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                      <th colspan="7" class="today" style="display: none;">Today</th>
+                    </tr>
+                    <tr>
+                      <th colspan="7" class="clear" style="display: none;">Clear</th>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <h6 class="heading-md" id="appointment">Select Date And Time</h6>
+            <div class="text-center mt-3" id="select_service_date_msg">
+              <div class="p-3" style="border-style: dashed; border-color: #67c0528a; background-color: #f8fef8;">
+                <span>We aren't taking appointment at this moment. You can book an appointment from 10am - 8pm.</span>
+              </div>
+            </div>
+            <div class="select_time d-none mt-3">
+              <div class="row no-gutters">
+                <div class="col-sm-12">
+                  <div class="text-center mt-3 py-0">
+                    <div class="p-3" style="border-style: dashed; border-color: #67c0528a; background-color: #f8fef8;">
+                      <span>Service is not available..</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row justify-content-center justify-content-sm-end">
+          <div class="col-auto call-sm-auto">
+            <button type="button" (click)="nextStep('consultation-type')" class="btn btn-primary-alt mr-2">Previous</button>
+            <button type="button" (click)="nextStep('submit-details')" class="btn btn-primary">Next</button>
+          </div>
+        </div>
+      </fieldset>
+      <!-- Step 2 End -->
+
+      <!-- Step 3 -->
+      <fieldset *ngIf="steps === 'submit-details'">
+        <div class="row">
+          <div class="col-7"><h2 class="heading text-left">Submit Details :</h2></div>
+          <div class="col-5"><h2 class="heading text-right">Step 3 - 4</h2></div>
+        </div>
+        <!-- Form -->
+        <div class="row mt-3">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <input type="text" name="name" class="form-control form-control-sm" id="name" placeholder="Enter name">
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" class="form-control form-control-sm" id="email" placeholder="Enter email">
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="form-group">
+              <input type="number" name="phone" class="form-control form-control-sm" id="phone" placeholder="Phone">
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="form-group">
+              <select id="region" class="custom-select custom-select-sm">
+                <option value="" style="color: #999 !important;">Select Region</option>
+              </select>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="form-group">
+              <select name="location" id="location" class="custom-select custom-select-sm">
+                <option value="" style="color: #999 !important;">Select
+                  Location
+                </option>
+              </select>
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+          <div class="col-lg-6 text-left">
+            <label>Please let us know if you have any special requests.</label>
+            <div class="form-group">
+              <textarea class="form-control form-control-sm" name="description" id="description" rows="6"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center mt-2">
+          By clicking below you agree to these
+          <a target="_blank" href="https://shop.unicornstore.in/terms-and-conditions" title="Terms & Conditions">t & c</a>
+          and
+          <a target="_blank" href="https://shop.unicornstore.in/privacy-policy">privacy policies.</a>
+        </p>
+        <h6 class="heading-sm mt-2">Thank you.</h6>
+        <hr>
+        <div class="row justify-content-center justify-content-sm-end">
+          <div class="col-auto call-sm-auto">
+            <button type="button" (click)="nextStep('book-appointment')" class="btn btn-primary-alt mr-2">Previous</button>
+            <button type="button" (click)="nextStep('finish')" class="btn btn-primary">Next</button>
+          </div>
+        </div>
+      </fieldset>
+      <!-- Step 3 End -->
+
+      <!-- Step 4 -->
+      <fieldset *ngIf="steps === 'finish'">
+        <div class="form-card">
+          <div class="row">
+            <div class="col-7">
+              <h2 class="heading text-left">Finish:</h2>
+            </div>
+            <div class="col-5">
+              <h2 class="heading text-right">Step 4 - 4</h2>
+            </div>
+          </div>
+          <img src="https://shop.unicornstore.in/beam/themes/2019/assets/images/Yes-Mark-01.png" style="width: auto; height: 10rem;" class="img-fluid my-3">
+          <h5 class="text-center text-success">You Have Successfully Booked Up</h5>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

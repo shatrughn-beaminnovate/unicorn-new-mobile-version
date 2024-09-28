@@ -1,0 +1,16 @@
+.hot-deals-img-box {
+    height: 10rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 1rem 0;
+
+    img {
+        max-height: 100%;
+        width: auto;
+    }
+}
+
+.deals_hot_card .card-body {
+    padding-top: 0 !important;
+}

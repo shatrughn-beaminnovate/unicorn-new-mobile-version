@@ -1,0 +1,40 @@
+<swiper [config]="swiperConfigs" direction="horizontal"
+        [loop]="true"
+        [loopedSlides]="accessories.length"
+        [autoHeight]="false"
+        [allowTouchMove]="true"
+        [autoplay]="{ delay: 1000, disableOnInteraction: false }"
+        [pagination]="false"
+        [navigation]="{ nextEl: '.ra-swiper-next', prevEl: '.ra-swiper-prev' }">
+  <ng-template class="swipe" swiperSlide *ngFor="let item of accessories">
+    <ng-container *ngIf="!loading; else skeleton">
+      <a class="fisrt_col_best" [routerLink]="['/product', item.slug]" (click)="fireRecommendedAccessoriesSelectGA4Event(item)">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="text-center slider-img-box">
+              <!-- Image Skeleton -->
+              <p-skeleton width="100%" height="200px" animation="wave" class="mb-3"></p-skeleton>
+              <img *ngIf="item.images.length > 0" [src]="imgUrl + '/medium/' + item.images[0].filename" alt="Product Image" (error)="handleImageError($event, item)" class="img-fluid "  >
+              <img *ngIf="!item.images || item.images.length === 0" src="./assets/img/not-found/no-image-found.png" alt=" ">
+              <!-- <img [src]="imgUrl + '/component/' + item.image" (error)="handleImageError($event, item)" alt="Product Image" class="img-fluid"> -->
+            </div>
+            <p class="mt-2 pricee text-center">{{ item.name }}</p>
+          </div>
+        </div>
+      </a>
+    </ng-container>
+  </ng-template>
+  
+  <!-- Skeleton Template -->
+  <ng-template #skeleton>
+    <div class="card h-100">
+      <div class="card-body">
+        <!-- Image Skeleton -->
+        <p-skeleton width="100%" height="200px" animation="wave" class="mb-3"></p-skeleton>
+        <div class="text-center">
+          <p-skeleton width="70%" height="10px" animation="wave" class="mt-2 mb-2"></p-skeleton> 
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</swiper>

@@ -1,0 +1,630 @@
+<div class="container my-4">
+  <!-- <h4 class="title-sm">Checkout</h4> -->
+
+  <div class="row mb-3 justify-content-center">
+
+    <!-- order-details  -->
+    <div class="col-sm-12 col-md-4">
+      <div class="order-sticky">
+        <h4 class="heading mb-2">Order Details</h4>
+
+        <!-- Products Details -->
+        <div class="media w-100 border-bottom pb-2 mb-2" *ngFor="let item of cartItemsHolder">
+          <div class="media-img-box">
+            <img [src]="getFirstImageFileName(item.images)" (error)="setFallbackImage($event)" class="img-fluid" alt=" ">
+          </div>
+          <div class="media-body ml-2">
+            <h4 class="product-name">{{item?.name}}</h4>
+            <div class="d-flex align-items-end justify-content-between mb-2">
+              <div class="item-1">
+                <div class="quantity">
+                  <h5 class="heading-link-md">Quantity: {{item?.item_quantity}}</h5>
+                </div>
+                <app-price *ngIf="+item.enabled === 1 && !item.bts && +item.item_quantity > 1 && +item.bundle === 0" [price]="+item.saleprice" [priceLabel]="'Price'" [isInlinePrice]="true"></app-price>
+                <app-price *ngIf="+item.enabled === 1 && !item.bts && +item.item_quantity > 1 && +item.bundle === 2" [price]="+item.product_value" [priceLabel]="'Price'" [isInlinePrice]="true"></app-price>
+                <app-price *ngIf="+item.enabled === 1 && !item.bts && +item.item_quantity > 1 && +item.bundle === 1" [price]="+item.accessory_value" [priceLabel]="'Price'" [isInlinePrice]="true"></app-price>
+                <app-price *ngIf="+item.enabled === 3" [price]="+item.saleprice" [prebookPrice]="+item.custom_column_2" [priceLabel]="+item.custom_column_2 > 0 ? 'Prebook Price' : 'Price'" [isInlinePrice]="true"></app-price>
+              </div>
+              
+              <div class="item-2">
+                <app-price *ngIf="+item.enabled === 1 && +item.bts === 1" [price]="+item.price" [priceLabel]="'Price'" [isInlinePrice]="true"></app-price>
+                <app-price *ngIf="+item.enabled === 1 && !item.bts && +item.bundle === 0" [price]="+item.saleprice * +item.item_quantity" priceLabel="Subtotal" [isInlinePrice]="true"></app-price>
+                <app-price *ngIf="+item.enabled === 1 && !item.bts && +item.bundle === 2" [price]="+item.product_value" priceLabel="Subtotal" [isInlinePrice]="true"></app-price>
+                <app-price *ngIf="+item.enabled === 1 && !item.bts && +item.bundle === 1" [price]="+item.accessory_value" priceLabel="Subtotal" [isInlinePrice]="true"></app-price>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="price-breakup">
+
+          <!-- Cart SubTotal -->
+          <div class="row align-items-center border-bottom no-gutters pt-2 pb-1" *ngIf="+orderSummary?.subtotal && +orderSummary?.subtotal !== +orderSummary?.total">
+            <div class="col">
+              <h6 class="heading-md m-0 fw-400">Subtotal : </h6>
+            </div>
+            <div class="col-auto">
+              <app-price [price]="+orderSummary?.subtotal" priceStyleClass="price-sm"></app-price>
+            </div>
+          </div>
+
+          <!-- Coupon Discount -->
+          <div class="row align-items-center border-bottom no-gutters pt-2 pb-1" *ngIf="+orderSummary?.coupon_discount > 0">
+            <div class="col">
+              <h6 class="heading-md m-0 fw-400">Coupon Discount : </h6>
+            </div>
+            <div class="col-auto d-flex align-items-baseline">
+              <i class="fa fa-minus mr-2 fa-sm"></i> <app-price [price]="+orderSummary?.coupon_discount" priceStyleClass="price-sm"></app-price>
+            </div>
+          </div>
+
+          <!-- GST Details -->
+          <div class="row align-items-center border-bottom no-gutters pt-2 pb-1" *ngIf="+orderSummary?.subtotal && +orderSummary?.gst_percent > 0">
+            <div class="col">
+              <h6 class="heading-md m-0 fw-400">GST ({{+orderSummary?.gst_percent}} %) : </h6>
+            </div>
+            <div class="col-auto d-flex align-items-baseline">
+              <i class="fa fa-plus mr-2 fa-sm"></i> <app-price [price]="((+orderSummary?.subtotal! * +orderSummary?.gst_percent!)/100)" priceStyleClass="price-sm"></app-price>
+            </div>
+          </div>
+
+
+          <div class="row align-items-center mt-2 mb-4">
+            <div class="col">
+              <h4 class="heading-link-lg">Grand Total</h4>
+            </div>
+            <div class="col-auto">
+              <app-price [price]="+orderSummary?.total" priceStyleClass="price-lg m-0"></app-price>
+            </div>
+            <div class="col-12 text-right">
+              <small class="text-muted">(*Inclusive of all taxes)</small>
+            </div>
+          </div>
+
+        </div>
+
+        <!--<h6 class="total-saving text-right">Your Total Savings on this order : <span class="price-sm"></span></h6>-->
+
+        <!-- Notes Here -->
+        <p class="pg">
+          By submitting your order, you agree to the
+          <a routerLink="/page/terms-and-conditions" target="_blank">Terms & Conditions</a>
+          and
+          <a routerLink="/page/privacy-policy" target="_blank">Privacy Policy</a>
+        </p>
+        <h6 class="heading-sm need-help-text mb-0"><i class="fa fa-info-circle mr-1"></i>Need any help?</h6>
+        <p class="pg m-0 need-help-text">
+          Speak to our e-commerce specialist : <a href="tel:18002677888" target="_blank">18002677888</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-lg-6 mb-3 mb-lg-0">
+
+      <!-- Show Alert For Payment Failure -->
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="paymentFailedHolder.show_msg === true && paymentFailedHolder.payment_failure_type === 'message'">
+        <strong>Payment Failed !</strong> We apologize, but your payment has not been successful. Please get in touch with our support team for assistance.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="paymentFailedHolder.show_msg === true && paymentFailedHolder.payment_failure_type === 'code'">
+        <!-- <ng-container *ngFor="let item of paymentCodeHolder"> -->
+        <div *ngIf="paymentFailedHolder.payment_failure_code">
+          Payment for order #{{paymentFailedHolder.order_number}} has been canceled/Failed. Status Code: {{paymentFailedHolder.payment_failure_code}}.
+          <p class="m-0 small">Please get in touch with our support team for assistance.</p>
+        </div>
+
+        <!-- </ng-container> -->
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Billing Address Start -->
+      <div #billingBox class="billing-box border-bottom px-3 py-2 bg-light" [class.completed]="getBillingDetails()">
+        <div class="heading mb-1 d-flex align-items-center justify-content-between">
+          <h6 class="heading">Billing Address</h6>
+          <div *ngIf="!isBillingEditable()">
+            <i class="fa fa-check text-success"></i>
+            <!--<i class="fa fa-edit text-info ml-2" (click)="editBill()"></i>-->
+          </div>
+        </div>
+        <p class="pg m-0" *ngIf="!isBillingEditable()">
+          {{getBillingDetails()?.firstname}}, {{getBillingDetails()?.lastname}}, {{getBillingDetails()?.email}}, {{getBillingDetails()?.phone}}, <br>{{getBillingDetails()?.address1 + '' + getBillingDetails()?.address2}} {{getBillingDetails()?.city}} {{getBillingDetails()?.state}}, {{getBillingDetails()?.country}} - {{getBillingDetails()?.zip}}
+        </p>
+        <form [formGroup]="billingForm" (ngSubmit)="onBillingFormSubmit()" *ngIf="isBillingEditable()" class="billing">
+          <!-- First Name & Last Name -->
+          <div class="form-row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>First Name<span class="req">*</span></label>
+                <input type="text" formControlName="firstname" [class.is-invalid]="isBillingFormSubmitted && billingFormControl.firstname.errors" name="firstname" class="form-control form-control-sm">
+                <div *ngIf="isBillingFormSubmitted && billingFormControl.firstname.errors" class="invalid-feedback">
+                  <div *ngIf="billingFormControl.firstname.errors.required">First Name is Required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Last Name<span class="req">*</span></label>
+                <input type="text" formControlName="lastname" [class.is-invalid]="isBillingFormSubmitted && billingFormControl.lastname.errors" name="lastname" class="form-control form-control-sm">
+                <div *ngIf="isBillingFormSubmitted && billingFormControl.lastname.errors" class="invalid-feedback">
+                  <div *ngIf="billingFormControl.lastname.errors.required">Last Name is Required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Email & Phone -->
+          <div class="form-row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Email<span class="req">*</span></label>
+                <input type="text" formControlName="email" [class.is-invalid]="isBillingFormSubmitted && billingFormControl.email.errors" name="email" class="form-control form-control-sm">
+                <div *ngIf="isBillingFormSubmitted && billingFormControl.email.errors" class="invalid-feedback">
+                  <div *ngIf="billingFormControl.email.errors.required">Email is Required</div>
+                  <div *ngIf="billingFormControl.email.errors.pattern">Email is Not Valid</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Phone<span class="req">*</span></label>
+                <input type="text" formControlName="phone" oninput="this.value = this.value.replace(/^0/, '')" onchange="this.value = this.value.replace(/^0/, '')" [class.is-invalid]="isBillingFormSubmitted && billingFormControl.phone.errors" name="phone" class="form-control form-control-sm">
+                <div *ngIf="isBillingFormSubmitted && billingFormControl.phone.errors" class="invalid-feedback">
+                  <div *ngIf="billingFormControl.phone.errors.required">Phone No. is Required</div>
+                  <div *ngIf="billingFormControl.phone.errors.pattern">Enter 10 digit Number</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Address 1 -->
+          <div class="form-group">
+            <label>Address 1 <span class="req">*</span></label>
+            <input type="text" formControlName="address1" [class.is-invalid]="isBillingFormSubmitted && billingFormControl.address1.errors" name="address1" class="form-control form-control-sm">
+            <div *ngIf="isBillingFormSubmitted && billingFormControl.address1.errors" class="invalid-feedback">
+              <div *ngIf="billingFormControl.address1.errors.required">Address is Required</div>
+            </div>
+          </div>
+
+          <!-- Address 2 -->
+          <div class="form-group">
+            <label>Address 2</label>
+            <input type="text" formControlName="address2" name="address2" id="f_address2" class="form-control form-control-sm">
+          </div>
+
+          <!-- City & Pin -->
+          <div class="form-row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>City <span class="req">*</span></label>
+                <input type="text" formControlName="city" [class.is-invalid]="isBillingFormSubmitted && billingFormControl.city.errors" name="city" class="form-control form-control-sm">
+                <div *ngIf="isBillingFormSubmitted && billingFormControl.city.errors" class="invalid-feedback">
+                  <div *ngIf="billingFormControl.city.errors.required">City is Required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Pin <span class="req">*</span></label>
+                <input type="text" formControlName="zip" (input)="getDetailsByPin(billingFormControl.zip.value, 'billing')" (change)="getDetailsByPin(billingFormControl.zip.value, 'billing')" [class.is-invalid]="isBillingFormSubmitted && billingFormControl.zip.errors" name="zip" maxlength="6" #billingPin class="form-control form-control-sm">
+                <div *ngIf="isBillingFormSubmitted && billingFormControl.zip.errors" class="invalid-feedback">
+                  <div *ngIf="billingFormControl.zip.errors.required">Zip Code is Required</div>
+                  <div *ngIf="billingFormControl.zip.errors.pattern">Invalid Zip Code</div>
+                </div>
+                <div *ngIf="pinAvailability?.status" class="text-success mt-1 text-capitalize">
+                  <small>{{pinAvailability?.message}}</small>
+                </div>
+                <!-- <div *ngIf="pinAvailability?.status" class="text-success mt-1 text-capitalize">
+                  <i class="fa fa-shipping-fast mr-1"></i>
+                  <small>{{pinAvailability?.TAT}}</small>
+                </div> -->
+                <div *ngIf="!pinAvailability?.status" class="text-danger mt-1 text-capitalize">
+                  <small>{{pinAvailability?.message}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Country & State -->
+          <div class="form-row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Country <span class="req">*</span></label>
+                <select formControlName="country_id" [class.is-invalid]="isBillingFormSubmitted && billingFormControl.country_id.errors" (change)="onChangeCountry($event)" name="country_id" class="custom-select custom-select-sm">
+                  <option *ngFor="let country of countryHolder" [value]="country.id">{{country.name}}</option>
+                </select>
+                <div *ngIf="isBillingFormSubmitted && billingFormControl.country_id.errors" class="invalid-feedback">
+                  <div *ngIf="billingFormControl.country_id.errors.required">Country is Required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="from-group">
+                <label>State <span class="req">*</span></label>
+                <select formControlName="zone_id" [class.is-invalid]="isBillingFormSubmitted && billingFormControl.zone_id.errors" (change)="onChangeState($event)" name="zone_id" class="custom-select custom-select-sm">
+                  <option value="">Select state</option>
+                  <option *ngFor="let state of stateHolder" [value]="state.id">{{state.name}}</option>
+                </select>
+                <div *ngIf="isBillingFormSubmitted && billingFormControl.zone_id.errors" class="invalid-feedback">
+                  <div *ngIf="billingFormControl.zone_id.errors.required">State is Required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- check blacklisted gst -->
+          <div class="form-group">
+            <label>GSTIN</label>
+            <input type="text" [(ngModel)]="gst" [ngModelOptions]="{standalone: true}" [class.is-invalid]="isBillingFormSubmitted && gstValidationStatus" name="gst_no" class="form-control form-control-sm">
+            <div *ngIf="isBillingFormSubmitted && gstValidationStatus" class="invalid-feedback">
+              {{gstValidationText}}
+            </div>  
+          </div>
+
+          <hr class="my-2">
+          <div class="row justify-content-end">
+            <div class="col-auto">
+              <button type="submit" class="btn btn_continue">Continue</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Shipping Method Start -->
+      <div #shippingBox class="shipping-box border-bottom px-3 py-2" [class.completed]="getShippingDetails() || getNearestStoreAddress()">
+        <div class="row">
+          <div class="col-sm">
+            <div class="d-flex align-items-center justify-content-between">
+              <h4 class="heading mb-0">Shipping Address / Store Pickup</h4>
+              <div class="tool-box" *ngIf="!isShippingEditable() && !isBillingEditable() &&  (getShippingDetails() || getNearestStoreAddress())">
+                <i class="fa fa-check text-success"></i>
+                <!--<i class="fa fa-edit text-info ml-2" (click)="editShip()"></i>-->
+              </div>
+            </div>
+            <p class="pg mb-0 mt-1" *ngIf="!isShippingEditable() && getShippingDetails()">
+              {{getShippingDetails()?.firstname}}, {{getShippingDetails()?.lastname}}, {{getShippingDetails()?.email}}, {{getShippingDetails()?.phone}}, <br>{{getShippingDetails()?.address1 + '' + getShippingDetails()?.address2}} {{getShippingDetails()?.city}} {{getShippingDetails()?.state}}, {{getShippingDetails()?.country}} - {{getShippingDetails()?.zip}}
+            </p>
+
+            <div *ngIf="!isShippingEditable() && getNearestStoreAddress()">
+              <h6 class="heading-sm mb-0 mt-2">Store Pickup :- </h6>
+              <p class="pg m-0">
+                {{getNearestStoreAddress()?.address}}
+              </p>
+            </div>
+
+            <div class="shipping" *ngIf="isShippingEditable() && !isBillingEditable()">
+              <!--This form is for bill to ship and store pickup-->
+
+
+              <!-- Ship to billing address Radio -->
+              <div class="custom-control custom-radio">
+                <input type="radio" (change)="shipToBilling()" [checked]="isShipToBilling" name="ship_to" id="shipToBilling" class="custom-control-input">
+                <label class="custom-control-label" for="shipToBilling">Ship to billing address</label>
+              </div>
+
+              <!-- Ship to your nearest Unicorn store Radio -->
+              <div class="custom-control custom-radio">
+                <input type="radio" (change)="shipToNearestStore()" [checked]="isShipToNearestStore || getNearestStoreAddress()?.isShipToNearestStore" name="ship_to" id="shipToNearestStore" class="custom-control-input">
+                <label class="custom-control-label" for="shipToNearestStore">Ship to your nearest Unicorn store</label>
+              </div>
+
+              <!-- Nearest Store Box -->
+              <div class="nearest-store-box" *ngIf="isShipToNearestStore || getNearestStoreAddress()">
+                <!-- <input type="text" (keyup)="findNearestStores($event)" [value]="(getNearestStoreAddress()) ? getNearestStoreAddress()?.searchTerm : val.value" #val name="nearest_stores" class="form-control form-control-sm" placeholder="Search Nearest Stores by city name"> -->
+                <p-dropdown [options]="cityOptions" (onChange)="findNearestStores($event)" [filter]="true" [showClear]="true" (onClear)="onClearCityDropdown()" placeholder="Please select your city to find the nearest unicorn store" inputId="nearestStore" appendTo="body" [style]="{'width' : '100%'}"></p-dropdown>
+
+                <!-- Skeleton Loader -->
+                <div class="text-center mt-2" *ngIf="isFetchingNearestStores">
+                  <div class="row mb-3">
+                    <div class="col-sm-6">
+                      <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+                      <p-skeleton height=".75rem" styleClass="mb-2"></p-skeleton>
+                      <p-skeleton height=".75rem" styleClass="mb-2" width="75%"></p-skeleton>
+                    </div>
+                    <div class="col-sm-6">
+                      <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+                      <p-skeleton height=".75rem" styleClass="mb-2"></p-skeleton>
+                      <p-skeleton height=".75rem" styleClass="mb-2" width="75%"></p-skeleton>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+                      <p-skeleton height=".75rem" styleClass="mb-2"></p-skeleton>
+                      <p-skeleton height=".75rem" styleClass="mb-2" width="75%"></p-skeleton>
+                    </div>
+                    <div class="col-sm-6">
+                      <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+                      <p-skeleton height=".75rem" styleClass="mb-2"></p-skeleton>
+                      <p-skeleton height=".75rem" styleClass="mb-2" width="75%"></p-skeleton>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row mt-2" id="find_nearest_store_address" *ngIf="!isFetchingNearestStores">
+
+                  <!-- Store List -->
+                  <div *ngFor="let store of storeHolder; trackBy: nearestStoreTrackBy; let i = index" class="col-sm-6 mb-2">
+                    <div (click)="onSelectedNearestStore(store)" class="nearest_store_selector p-2" [class.active1]="getNearestStoreAddress()?.store_id === store.store_id">
+                      <address class="font-regular">
+                        <h6 class="heading-md">{{store.store_name}}</h6>
+                        {{store.store_address}}
+                        <span *ngIf="getNearestStoreAddress()?.store_id === store.store_id" style="top: 7px; right:10px;" class="position-absolute fa fa-check text-success float-right"></span>
+                      </address>
+                    </div>
+                  </div>
+
+                  <!-- Store Not Found -->
+                  <div class="col-sm-12" *ngIf="isSearchTerm === true && storeHolder && storeHolder.length === 0">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      <strong>Store Not Found !</strong> Please select another city.
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- Default Shipping Address / Enter a new address -->
+              <div class="custom-control custom-radio">
+                <input type="radio" (change)="shipToNewAddress()" [checked]="isShipToNewAddress" name="ship_to" id="enterNewAddress" class="custom-control-input">
+                <label class="custom-control-label" for="enterNewAddress">Default Shipping Address / Enter a new address</label>
+              </div>
+              <div class="row mt-3" *ngIf="!isShipToNewAddress">
+                <div class="col-sm">
+                  <button type="button" (click)="clickOnShipBack()" class="btn-link btn-link-primary">
+                    <i class="fa fa-arrow-left mr-2"></i>Back
+                  </button>
+                </div>
+                <div class="col-sm text-right">
+                  <button type="button" (click)="onClickContinueShipping()" class="btn btn-primary">Continue</button>
+                </div>
+              </div>
+
+
+              <form *ngIf="isShipToNewAddress" [formGroup]="shippingForm" (ngSubmit)="onShippingFormSubmit()" class="mt-3">
+                <!-- First Name & Last Name -->
+                <div class="form-row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>First Name<span class="req">*</span></label>
+                      <input type="text" formControlName="firstname" [class.is-invalid]="isShippingFormSubmitted && shippingFormControl.firstname.errors" name="firstname" class="form-control form-control-sm">
+                      <div *ngIf="isShippingFormSubmitted && shippingFormControl.firstname.errors" class="invalid-feedback">
+                        <div *ngIf="shippingFormControl.firstname.errors.required">First Name is Required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Last Name<span class="req">*</span></label>
+                      <input type="text" formControlName="lastname" [class.is-invalid]="isShippingFormSubmitted && shippingFormControl.lastname.errors" name="lastname" class="form-control form-control-sm">
+                      <div *ngIf="isShippingFormSubmitted && shippingFormControl.lastname.errors" class="invalid-feedback">
+                        <div *ngIf="shippingFormControl.lastname.errors.required">Last Name is Required</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Email<span class="req">*</span></label>
+                      <input type="text" formControlName="email" [class.is-invalid]="isShippingFormSubmitted && shippingFormControl.email.errors" name="email" class="form-control form-control-sm">
+                      <div *ngIf="isShippingFormSubmitted && shippingFormControl.email.errors" class="invalid-feedback">
+                        <div *ngIf="shippingFormControl.email.errors.required">Email is Required</div>
+                        <div *ngIf="shippingFormControl.email.errors.pattern">Email is Not Valid</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Phone<span class="req">*</span></label>
+                      <input type="text" formControlName="phone" oninput="this.value = this.value.replace(/^0/, '')" onchange="this.value = this.value.replace(/^0/, '')" [class.is-invalid]="isShippingFormSubmitted && shippingFormControl.phone.errors" name="phone" class="form-control form-control-sm">
+                      <div *ngIf="isShippingFormSubmitted && shippingFormControl.phone.errors" class="invalid-feedback">
+                        <div *ngIf="shippingFormControl.phone.errors.required">Phone No. is Required</div>
+                        <div *ngIf="shippingFormControl.phone.errors.pattern">Enter 10 digit Number</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Address 1 <span class="req">*</span></label>
+                  <input type="text" formControlName="address1" [class.is-invalid]="isShippingFormSubmitted && shippingFormControl.address1.errors" name="address1" class="form-control form-control-sm">
+                  <div *ngIf="isShippingFormSubmitted && shippingFormControl.address1.errors" class="invalid-feedback">
+                    <div *ngIf="shippingFormControl.address1.errors.required">Address is Required</div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Address 2</label>
+                  <input type="text" formControlName="address2" name="address2" class="form-control form-control-sm">
+                </div>
+
+                <div class="form-row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>City <span class="req">*</span></label>
+                      <input type="text" formControlName="city" [class.is-invalid]="isShippingFormSubmitted && shippingFormControl.city.errors" name="city" class="form-control form-control-sm">
+                      <div *ngIf="isShippingFormSubmitted && shippingFormControl.city.errors" class="invalid-feedback">
+                        <div *ngIf="shippingFormControl.city.errors.required">City is Required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="shipping-pin-label">Pin <span class="req">*</span></label>
+                      <input type="text" formControlName="zip" (input)="getDetailsByPin(shippingFormControl.zip.value, 'shipping')" (change)="getDetailsByPin(shippingFormControl.zip.value, 'shipping')" [class.is-invalid]="isShippingFormSubmitted && shippingFormControl.zip.errors" name="zip" maxlength="6" class="form-control form-control-sm">
+                      <div *ngIf="isShippingFormSubmitted && shippingFormControl.zip.errors" class="invalid-feedback">
+                        <div *ngIf="shippingFormControl.zip.errors.required">Zip Code is Required</div>
+                        <div *ngIf="shippingFormControl.zip.errors.pattern">Invalid Zip Code</div>
+                      </div>
+                      <div *ngIf="pinAvailabilityForShipping?.status" class="text-success mt-1 text-capitalize">
+                        <small>{{pinAvailabilityForShipping?.message}}</small>
+                      </div>
+                      <!-- <div *ngIf="pinAvailabilityForShipping?.status" class="text-success mt-1 text-capitalize">
+                        <i class="fa fa-shipping-fast mr-1"></i>
+                        <small>{{pinAvailabilityForShipping?.TAT}}</small>
+                      </div> -->
+                      <div *ngIf="!pinAvailabilityForShipping?.status" class="text-danger mt-1 text-capitalize">
+                        <small>{{pinAvailabilityForShipping?.message}}</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Country <span class="req">*</span></label>
+                      <select formControlName="country_id" [class.is-invalid]="isShippingFormSubmitted && shippingFormControl.country_id.errors" (change)="onChangeCountry($event)" name="country_id" class="custom-select custom-select-sm">
+                        <option *ngFor="let country of countryHolder" [value]="country.id">{{country.name}}</option>
+                      </select>
+                      <div *ngIf="isShippingFormSubmitted && shippingFormControl.country_id.errors" class="invalid-feedback">
+                        <div *ngIf="shippingFormControl.country_id.errors.required">Country is Required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="from-group">
+                      <label>State <span class="req">*</span></label>
+                      <select formControlName="zone_id" [class.is-invalid]="isShippingFormSubmitted && shippingFormControl.zone_id.errors" (change)="onChangeState($event)" name="zone_id" class="custom-select custom-select-sm">
+                        <option value="">Select state</option>
+                        <option *ngFor="let state of stateHolder" [value]="state.id">{{state.name}}</option>
+                      </select>
+                      <div *ngIf="isShippingFormSubmitted && shippingFormControl.zone_id.errors" class="invalid-feedback">
+                        <div *ngIf="shippingFormControl.zone_id.errors.required">State is Required</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col-sm">
+                    <button type="button" (click)="clickOnShipBack()" class="btn-link btn-link-primary ship-add-back">
+                      <i class="fa fa-arrow-left mr-2"></i>Back
+                    </button>
+                  </div>
+                  <div class="col-sm text-right">
+                    <button type="submit" class="btn btn-primary">Continue</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Method Start -->
+      <div #paymentBox class="payment-box px-3 pt-2" [class.completed]="getPaymentStatus()?.order_status === 'PAID' && paymentStatus === 'ACTIVE'">
+        <div class="row">
+          <div class="col-sm">
+            <div class="d-flex align-items-center justify-content-between">
+              <h4 class="heading mb-0">Payment {{getPaymentStatus()?.order_status === 'PAID' ? 'Status' : 'Methods'}} </h4>
+              <div class="tool-box" *ngIf="!isPaymentEditable() && getPaymentStatus()?.order_status === 'PAID' && !isBillingEditable() && !isShippingEditable()">
+                <i class="fa fa-check text-success"></i>
+              </div>
+            </div>
+
+            <!-- Payment Details After Payment Successfully Done -->
+            <div class="mt-1" *ngIf="!isPaymentEditable() && getPaymentStatus()?.order_status === 'PAID' && !paymentStatus">
+              {{getPaymentStatus()?.order_status}}
+            </div>
+            
+            <!-- Payment Details After Payment Failed -->
+            <div class="mt-1" *ngIf="paymentStatus === 'ACTIVE'">
+              <span>Payment Failed ! Technical Issue at your bank.</span>
+              <button type="button" (click)="retryPayment()" class="btn btn-link">Please, Retry</button>
+            </div>
+
+            <!-- Payment Methods Information -->
+            <div class="payment mt-2" *ngIf="isPaymentEditable() && !isBillingEditable() && !isShippingEditable() && !paymentStatus">
+              <ng-container *ngFor="let item of paymentModuleHolder; let i = index">
+                <p-button type="button" [label]="isPaymentProcessing[i] ? 'Please wait...' : item.pg_name" [loading]="isPaymentProcessing[i]" [disabled]="isPaymentProcessing[i]" (onClick)="proceedToPayment(item, i)" #openLink styleClass="p-button-info p-button-payment mr-2"></p-button>
+              </ng-container>
+              <!-- <button type="button" *ngFor="let item of paymentModuleHolder;" (click)="proceedToPayment(item)" class="btn btn-primary text-capitalize mr-2">{{item.pg_name}}</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Confirm Order Start -->
+      <!--<div class="confirm-box border-bottom px-3 py-2">
+        <div class="row">
+          <div class="col-sm">
+            <h6 class="heading mb-0">Place Order</h6>
+            <div class="confirm" *ngIf="getPaymentStatus()?.order_status === 'PAID' || getPaymentStatus()?.payment_info">
+              <label>I have read and accept the <a class="btn-link btn-link-primary" data-toggle="modal" data-target="#showTermsConditions" href="javascript:void(0);">Terms & Conditions</a> on sale.</label>
+              <div class="row mt-3">
+                <div class="col-sm">
+                  <button type="button" class="btn btn-link btn-link-primary"><i class="fa fa-angle-double-left mr-2"></i>Back</button>
+                </div>
+                <div class="col-sm text-right">
+                  <button type="button" (click)="placeOrder()" class="btn btn-primary">Place Order</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>-->
+    </div>
+
+  </div>
+
+  <!-- New Design Start Here Now  -->
+
+  <!-- <div class="row">
+  <div class="col-md-4">
+<h1 class="heading text-muted">Hi, Your Cart</h1>
+<div class="d-flex justify-content-between">
+  <div class="img_containet  ">
+    <img src="https://s3.ap-south-1.amazonaws.com/shop.unicorn/medium/6493443f702959921c7dbc2461a560bd.png" alt="" class="img-fluid">
+
+  </div>
+  <div class="details ">
+   <h4 class="heading text-muted">Iphone 15(Green)128GB</h4>
+   <div class="d-flex justify-content-between mb-2">
+    <div class="mr-5">
+    <h5 class="heading-md">Total Price</h5>
+    <p class="heading-link-sm"  [innerHTML]="orderSummary?.total | currency | priceAfterDotSmall">Rs.79000   /p>
+  </div>
+    <div class="ml-5">
+    <h5 class="heading-md">Quantity</h5>
+    <button type="button" class="btn quantity_btn heading-link-sm">
+      <i (click)="decrement()" class="fa fa-regular fa-minus px-2"></i>
+      <span class="px-2">{{currentNumber}}</span>
+      <i (click)="increment()" class="fa fa-solid fa-plus px-2"></i>
+    </button>
+  </div>
+   </div> 
+   <div class="d-flex justify-content-between">
+    <a href="" class="link_tag">
+      Edit
+    </a>
+    <a href="" class="link_tag">
+     Save For Later | Remove 
+    </a>
+   </div>
+
+  </div>
+</div>
+<hr>
+  </div>
+  <div class="col-md-6">
+<h1 class="heading text-muted">Order Summary</h1>
+<div class="d-flex">
+  <span>Subtotal</span>
+  <span>Rs 150000.00</span>
+<hr>
+</div>
+  </div>
+</div> -->
+
+</div>

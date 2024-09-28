@@ -1,0 +1,138 @@
+// .latest-blog-img-container {
+//   height: 10rem;
+
+//   img {
+//     max-height: 100%;
+//     max-width: 100%;
+//   }
+// }
+
+// .blog-list-img {
+//   height: 13rem;
+
+//   img {
+//     max-height: 100%;
+//     max-width: 100%;
+//   }
+// }
+
+// hr {
+//   margin-top: 1rem;
+//   margin-bottom: 1rem;
+//   border: 0;
+//   border-top: 1px solid rgb(112 191 68);
+// }
+
+// .image-news {
+//   height: 60px;
+//   width: 60px;
+// }
+
+// .para-blog {
+//   display: -webkit-box;
+//   -webkit-line-clamp: 3;
+//   -webkit-box-orient: vertical;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// }
+
+.blog-sec-2 .media-img-box {
+  height: 14rem;
+  background-color: white;
+
+
+}
+
+.img_data .mb-2 {
+  color: black;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.img_data .mb-2:hover {
+  color: #28a745;
+}
+
+.media-img-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+}
+
+.media-img-box img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+}
+
+
+
+.pg {
+  color: #444;
+  font-size: 15px;
+
+}
+
+.pg-lg {
+  letter-spacing: .015em;
+}
+
+.intro-sec {
+
+  .breadcrumb-item.active {
+    color: black !important;
+    font-size: 15px;
+
+  }
+
+  .breadcrumb li {
+    font-size: 15px !important;
+    font-weight: 400 !important;
+  }
+
+  .breadcrumb li a {
+    font-size: 15px !important;
+    color: black !important;
+    font-weight: 500 !important;
+  }
+
+  .breadcrumb-item+.breadcrumb-item::before {
+    content: "»";
+    color: #28a745 !important;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 21px;
+  }
+}
+
+.heading-link-lg {
+  font-size: 1.15em;
+}
+
+.heading-link-lg:hover {
+  color: #28a745 !important;
+}
+
+
+.col-sm-6,
+.col-md-6,
+.col-lg-4 {
+  overflow: hidden;
+  /* Ensure that the border-radius doesn't clip the box-shadow */
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease-in-out;
+  /* Add a smooth transition effect */
+}
+
+
+
+/* Apply box-shadow on hover with shadow from top */
+.col-sm-6:hover,
+.col-md-6:hover,
+.col-lg-4:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 -4px 8px rgba(0, 0, 0, 0.1);
+  /* Adjust the shadow properties as needed */
+  transition: box-shadow 0.3s ease-in-out;
+  /* Add a smooth transition effect */
+}

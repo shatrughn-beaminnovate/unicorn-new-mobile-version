@@ -1,0 +1,35 @@
+.filter-bg {
+  background-color: #f2f2f2;
+}
+
+.filter-col ul a:hover {
+  color: #0070c9;
+}
+
+.custom-control-label.starlight:before{
+  background-color:  #DCD2C9;
+}
+
+.custom-control-label.midnight:before{
+  background-color:  #3C3D42;
+}
+
+.custom-control-label.green:before{
+  background-color:  #496149;
+}
+
+.custom-control-label.productred:before{
+  background-color:  #C33647;
+}
+
+.col-sm-4:nth-child(3n) {
+  border-right: 0 !important;
+}
+
+
+
+//.col-sm-4:nth-last-child(-n+3) {
+//  border-bottom: 0 !important;
+//}
+
+

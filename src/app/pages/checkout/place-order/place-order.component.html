@@ -1,0 +1,266 @@
+<section class="container order-placed-section py-4">
+  <!-- Thank You Msg -->
+  <div class="text-center">
+    <div class="success-checkmark">
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
+    <h4 class="title text-success">Thank You!</h4>
+    <h4 class="title-md text-success">Your Order Successfully Placed</h4>
+    <h5 class="title-xs" *ngIf="!isGuestOrderSuccess">Order No. :- {{orderSummaryHolder?.order_number}}</h5>
+    <h5 class="title-xs" *ngIf="isGuestOrderSuccess">Order No. :- {{orderNumberForGuestOrder}}</h5>
+  </div>
+
+  <!-- Order Details -->
+  <ng-container *ngIf="orderSummaryHolder">
+    <hr>
+    <div class="row">
+      <div class="col-sm-3 mb-4" *ngIf="!isGuestOrderSuccess">
+        <h4 class="heading">Account Information</h4>
+        <h5 class="heading-sm">{{orderSummaryHolder?.firstname + ' ' + orderSummaryHolder?.lastname}}</h5>
+        <a href="mailto: {{orderSummaryHolder?.email}}" class="heading-link-sm">{{orderSummaryHolder?.email}}</a>
+        <a href="tel: {{orderSummaryHolder?.phone}}" class="heading-link-sm">{{orderSummaryHolder?.phone}}</a>
+      </div>
+      <div class="col-sm-3 mb-4">
+        <h4 class="heading">Shipping Information</h4>
+        <h5 class="heading-sm">{{orderSummaryHolder?.ship_firstname + ' ' + orderSummaryHolder?.ship_lastname}}</h5>
+        <address class="mb-1">
+          {{orderSummaryHolder?.ship_address1}} {{orderSummaryHolder?.ship_address2}}
+          {{orderSummaryHolder?.ship_city}}
+          {{orderSummaryHolder?.ship_zone}}
+          {{orderSummaryHolder?.ship_zip}}
+        </address>
+        <a href="mailto: {{orderSummaryHolder?.ship_email}}" class="heading-link-sm">{{orderSummaryHolder?.ship_email}}</a>
+        <a href="tel: {{orderSummaryHolder?.ship_phone}}" class="heading-link-sm">{{orderSummaryHolder?.ship_phone}}</a>
+      </div>
+      
+      <div class="col-sm-3 mb-4">
+        <h4 class="heading">Billing Information</h4>
+        <h5 class="heading-sm">{{orderSummaryHolder?.bill_firstname + ' ' + orderSummaryHolder?.bill_lastname}}</h5>
+        <address class="mb-1">
+          {{orderSummaryHolder?.bill_address1}} {{orderSummaryHolder?.bill_address2}}
+          {{orderSummaryHolder?.bill_city}}
+          {{orderSummaryHolder?.bill_zone}}
+          {{orderSummaryHolder?.bill_zip}}
+        </address>
+        <a href="mailto: {{orderSummaryHolder?.bill_email}}" class="heading-link-sm">{{orderSummaryHolder?.bill_email}}</a>
+        <a href="tel: {{orderSummaryHolder?.bill_phone}}" class="heading-link-sm">{{orderSummaryHolder?.bill_phone}}</a>
+      </div>
+
+      <div class="col-sm-3 mb-4" *ngIf="orderSummaryHolder?.ordered_on || orderSummaryHolder?.status || orderSummaryHolder?.referral || orderSummaryHolder?.notes">
+        <h4 class="heading">Additional Information</h4>
+        <h4 class="heading-sm" *ngIf="orderSummaryHolder?.ordered_on">Ordered On: <span class="fw-400">{{orderSummaryHolder?.ordered_on}}</span></h4>
+        <h4 class="heading-sm" *ngIf="orderSummaryHolder?.status">Order Status: <span class="fw-400">{{orderSummaryHolder?.status}}</span></h4>
+        <h4 class="heading-sm" *ngIf="orderSummaryHolder?.referral">{{orderSummaryHolder?.referral}}</h4>
+        <div class="heading-sm" *ngIf="orderSummaryHolder?.notes">{{orderSummaryHolder?.notes}}</div>
+      </div>
+
+      <div class="col-sm-3 mb-4" *ngIf="orderSummaryHolder?.fast_shipping">
+        <h4 class="heading">Shipping Method</h4>
+        <h4 class="heading-sm">{{orderSummaryHolder?.fast_shipping}}</h4>
+      </div>
+      <div class="col-sm-3 mb-4">
+        <h4 class="heading">Payment Information</h4>
+        <h4 class="heading-sm" *ngIf="orderSummaryHolder?.payment_info">Payment Mode: <span class="fw-400">{{orderSummaryHolder?.payment_info}}</span></h4>
+        <h4 class="heading-sm" *ngIf="orderSummaryHolder?.transaction_id">Payment Transaction Id: <span class="fw-400">{{orderSummaryHolder?.transaction_id}}</span></h4>
+      </div>
+    </div>
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h4 class="title-sm">Order Details</h4>
+      </div>
+      <!-- Normal Product Details Show  -->
+      <div class="card-body" *ngIf="!prebook">
+        <div class="form-row border-bottom d-none d-sm-flex">
+          <div class="col-sm-6">
+            <h4 class="heading-sm">Product Info</h4>
+          </div>
+          <div class="col-sm-3">
+            <h4 class="heading-sm">Price</h4>
+          </div>
+          <div class="col-sm-3">
+            <h4 class="heading-sm">Subtotal</h4>
+          </div>
+        </div>
+
+        <ng-container *ngFor="let product of products">
+          <div class="form-row align-items-center py-2 border-bottom text-center text-sm-left ng-star-inserted">
+            <div class="col-sm-6 order-details mb-3 mb-sm-0">
+              <div class="media align-items-center">
+                <div class="img-box-sm">
+                  <img *ngIf="(product.images | json) !== '{}'" class="img-fluid" [src]="imgUrl + '/medium/' + product.images?.filename" [alt]="product.images?.alt">
+                  <img *ngIf="(product.images | json) === '{}'" class="img-fluid" src="assets/img/not-found/no-image-found.png" alt=" ">
+                </div>
+                <div class="media-body ml-3 mr-2 mt-0">
+                  <a href="#" class="heading-link-md">{{product.name}}</a>
+                  <h4 class="heading-sm">Qty : {{product.quantity}}</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 mb-3 mb-sm-0">
+              <h4 class="heading-sm-dark d-block d-sm-none">Price</h4>
+              <!-- When prebook Amount Include -->
+              <div class="price-box price-box-sm m-0" *ngIf="orderSummaryHolder.prebook_amt > 0">
+                <span class="price" *ngIf="product.price >= product.saleprice"   [innerHTML]="(product.saleprice - orderSummaryHolder.prebook_amt | currency | priceAfterDotSmall)  "></span>
+                <span class="price" *ngIf="product.price < product.saleprice"   [innerHTML]="(product.price - orderSummaryHolder.prebook_amt | currency | priceAfterDotSmall)"></span>
+            
+              </div>
+              <div class="price-box price-box-sm m-0" *ngIf="orderSummaryHolder.prebook_amt === 0">
+                <span class="price" *ngIf="product.price >= product.saleprice" [innerHTML]="product.saleprice | currency | priceAfterDotSmall"></span>
+                <span class="price" *ngIf="product.price < product.saleprice" [innerHTML]="product.price | currency | priceAfterDotSmall"></span>
+              </div>
+            </div>
+            <div class="col-sm-3 mb-3 mb-sm-0" *ngIf="orderSummaryHolder.prebook_amt > 0">
+              <h4 class="heading-sm-dark d-block d-sm-none">Subtotal</h4>
+              <div class="price-box price-box-sm m-0"  >
+                <span class="price" [innerHTML]="orderSummaryHolder.total | currency | priceAfterDotSmall"></span>
+              </div>
+              <!-- <div class="price-box price-box-sm m-0" *ngIf="!product.subtotal">
+                <span class="price" *ngIf="product.price >= product.saleprice" [innerHTML]="(product.saleprice * product.quantity) | currency | priceAfterDotSmall"></span>
+                <span class="price" *ngIf="product.price < product.saleprice" [innerHTML]="(product.price * product.quantity) | currency | priceAfterDotSmall"></span>
+              </div> -->
+            </div>
+            <div class="col-sm-3 mb-3 mb-sm-0" *ngIf="orderSummaryHolder.prebook_amt === 0">
+              <h4 class="heading-sm-dark d-block d-sm-none">Subtotal</h4>
+              <div class="price-box price-box-sm m-0" *ngIf="product.subtotal">
+                <span class="price" [innerHTML]="product.subtotal  | currency | priceAfterDotSmall"></span>
+              </div>
+              <div class="price-box price-box-sm m-0" *ngIf="!product.subtotal">
+                <span class="price" *ngIf="product.price >= product.saleprice" [innerHTML]="(product.saleprice * product.quantity) | currency | priceAfterDotSmall"></span>
+                <span class="price" *ngIf="product.price < product.saleprice" [innerHTML]="(product.price * product.quantity) | currency | priceAfterDotSmall"></span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- <div class="row align-items-center text-right pt-2 pb-1" *ngIf="orderSummaryHolder?.subtotal !== orderSummaryHolder?.total">
+          <div class="col">
+            <h4 class="heading mb-0">Subtotal : </h4>
+          </div>
+          <div class="col-auto">
+            <div class="price-box m-0">
+              <span class="price" [innerHTML]="orderSummaryHolder?.subtotal | currency | priceAfterDotSmall"></span>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="row align-items-center text-right pt-2 pb-1" *ngIf="orderSummaryHolder?.coupon_discount">
+          <div class="col">
+            <h4 class="heading mb-0">Coupon Discount : </h4>
+          </div>
+          <div class="col-auto">
+            <div class="price-box m-0">
+              <span class="price" [innerHTML]="-orderSummaryHolder?.coupon_discount | currency | priceAfterDotSmall"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row align-items-center text-right pt-2 pb-1">
+          <div class="col">
+            <h4 class="heading mb-0">Grand Total : </h4>
+          </div>
+          <div class="col-auto">
+            <div class="price-box m-0">
+              <span class="price" [innerHTML]="orderSummaryHolder?.total | currency | priceAfterDotSmall"></span>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <small>(*Inclusive of all taxes)</small>
+          </div>
+
+        </div>
+      </div>
+      <!-- PreBook Amount Details Show -->
+      <div class="card-body" *ngIf="prebook">
+        <div class="form-row border-bottom d-none d-sm-flex">
+          <div class="col-sm-6">
+            <h4 class="heading-sm">Product Info</h4>
+          </div>
+          <div class="col-sm-3">
+            <h4 class="heading-sm">Price</h4>
+          </div>
+          <div class="col-sm-3">
+            <h4 class="heading-sm">Subtotal</h4>
+          </div>
+        </div>
+
+        <ng-container *ngFor="let product of products">
+          <div class="form-row align-items-center py-2 border-bottom text-center text-sm-left ng-star-inserted">
+            <div class="col-sm-6 order-details mb-3 mb-sm-0">
+              <div class="media align-items-center">
+                <div class="img-box-sm">
+                  <img *ngIf="(product.images | json) !== '{}'" class="img-fluid" [src]="imgUrl + '/medium/' + product.images?.filename" [alt]="product.images?.alt">
+                  <img *ngIf="(product.images | json) === '{}'" class="img-fluid" src="assets/img/not-found/no-image-found.png" alt=" ">
+                </div>
+                <div class="media-body ml-3 mr-2 mt-0">
+                  <a href="#" class="heading-link-md">{{product.name}}</a>
+                  <h4 class="heading-sm">Qty : {{product.quantity}}</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 mb-3 mb-sm-0">
+              <h4 class="heading-sm-dark d-block d-sm-none">Price</h4>
+              <div class="price-box price-box-sm m-0">
+                <span class="price"   [innerHTML]="orderSummaryHolder.prebook_amt | currency | priceAfterDotSmall"></span>
+                <!-- <span class="price" *ngIf="product.price < product.saleprice" [innerHTML]="product.price | currency | priceAfterDotSmall"></span> -->
+              </div>
+            </div>
+            <div class="col-sm-3 mb-3 mb-sm-0">
+              <h4 class="heading-sm-dark d-block d-sm-none">Subtotal</h4>
+              <!-- <div class="price-box price-box-sm m-0" *ngIf="product.subtotal">
+                <span class="price" [innerHTML]="product.subtotal | currency | priceAfterDotSmall"></span>
+              </div> -->
+              <div class="price-box price-box-sm m-0" >
+                <span class="price"   [innerHTML]="orderSummaryHolder.prebook_amt | currency | priceAfterDotSmall"></span>
+
+                <!-- <span class="price" *ngIf="product.price < product.saleprice" [innerHTML]="(product.price * product.quantity) | currency | priceAfterDotSmall"></span> -->
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- <div class="row align-items-center text-right pt-2 pb-1" *ngIf="orderSummaryHolder?.subtotal !== orderSummaryHolder?.total">
+          <div class="col">
+            <h4 class="heading mb-0">Subtotal : </h4>
+          </div>
+          <div class="col-auto">
+            <div class="price-box m-0">
+              <span class="price" [innerHTML]="orderSummaryHolder?.subtotal | currency | priceAfterDotSmall"></span>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="row align-items-center text-right pt-2 pb-1" *ngIf="orderSummaryHolder?.coupon_discount">
+          <div class="col">
+            <h4 class="heading mb-0">Coupon Discount : </h4>
+          </div>
+          <div class="col-auto">
+            <div class="price-box m-0">
+              <span class="price" [innerHTML]="-orderSummaryHolder?.coupon_discount | currency | priceAfterDotSmall"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row align-items-center text-right pt-2 pb-1">
+          <div class="col">
+            <h4 class="heading mb-0">Grand Total: </h4>
+          </div>
+          <div class="col-auto">
+            <div class="price-box m-0">
+              <span class="price" [innerHTML]="orderSummaryHolder?.total | currency | priceAfterDotSmall"></span>
+            </div>
+          </div>
+          <div class="col-12">
+            <small>(*Inclusive of all taxes)</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</section>

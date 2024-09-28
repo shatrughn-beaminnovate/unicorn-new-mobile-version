@@ -1,0 +1,1461 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 class="heading-lg">How to Prepare Your Apple Device Before Visiting Service Provider</h1>
+      <div class="step">
+          <div class="step-title">Follow the below steps before visiting the Service Provider:</div>
+          <div class="step-content">
+              <ul>
+                  <li>Back up your Device.</li>
+                  <li>Turn off Apple Cash:Go to the Settings app, scroll down, then tap Wallet & Apple Pay.
+                    Then turn off Apple Cash.
+                  </li>
+                  <li>Remove your cards and passes from Apple Wallet:Open the Wallet app, select a card or pass, tap the More button, then tap Card (or Pass) Details.
+                       Tap Remove Card (or Pass).
+                  </li>
+                  <li>Turn off Find My:
+                        Go to the Settings app > your name > Find My, then tap "Find My [Device]" and turn it off.
+                        If you can’t turn off Find My this way on your iPhone, go to the Find My app or iCloud.com/find, select your iPhone, then select Remove This Device and follow the onscreen instructions to prepare it for repair.
+                  </li>
+              </ul>
+          </div>
+      </div>
+      <div class="step">
+          <div class="step-title">If you’re bringing your device in for service, make sure you bring:</div>
+          <div class="step-content">
+              <ul>
+                  <li>Your device and any accessories that you need help with.</li>
+                  <li>If possible, your sales receipt (some repairs may require proof of purchase).</li>
+                  <li>A form of personal identification, such as a driving license, passport, or other government-issued ID.</li>
+              </ul>
+          </div>
+      </div>
+      <h1 class="heading-lg">Here to help</h1>
+      <p class="fonts">
+        Total Peace of Mind.<br>
+        Ensured by experts.<br>
+      </p>
+      <p class="fonts">
+        Apple Authorized  Service Center by Unicorn one of India's largest Apple Premium Resellers.
+      </p>
+      <p class="fonts">You are in safe hands.</p>
+      <p class="fonts">
+        Our Apple-trained technicians get back up and running, enable you to boost performance, and keep you ahead in
+        your game.
+      </p>
+      <a class="btn btn-primary mt-2 mb-2"
+        href="https://getsupport.apple.com/?caller=grl&amp;locale=en_IN&amp;storeID=28909524&amp;lat=28.63022781&amp;long=77.22119892&amp;SG=SG003"
+        target="_blank">
+        Book an Appointment
+      </a>
+    </div>
+    <div class="col-md-6 align-items-center d-flex">
+      <img class="img-fluid fr-fic fr-dib"
+        src="http://mum01.beaminnovate.com/shop.unicornstore.in/uploads/images/Unicorn_support.jpg">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h3 class="title-md">Authorized <br>Service Provider</h3>
+      <ul>
+        <li *ngFor="let location of locations">
+          <div class="collapsible" (click)="toggleCollapse(location)">
+            <h5>{{ location.name }} <span><i class="fa fa-regular fa-angle-down"></i></span></h5>
+          </div>
+          <div class="content" *ngIf="!isLocationCollapsed(location) || isAnySubLocationActive(location)">
+            <ul class="uls">
+              <li *ngFor="let subLocation of location.subLocations">
+                <div class="location" [id]="subLocation.id" (click)="showLocationDetails(subLocation.id)" [ngClass]="{'active-sub-location': subLocation.id === activeSubLocationId}">
+                  {{ subLocation.name }}
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-9">
+      <div class="location_contents" id="location_content_1">
+        <div class="google-map w-100">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.3626999323105!2d72.82835801114636!3d19.135594450023593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63e59f62821%3A0xd3202fe54c68b44a!2sUnicorn%2C%20Apple%20Premium%20Reseller!5e0!3m2!1sen!2sin!4v1706794317417!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15077.523520038778!2d72.8322609!3d19.134798!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7d3f497c6bb%3A0x74af7324c68669c3!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725706599651!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>B-103/104/105 Kotia Nirman,</p>
+              <p>New Link Road</p>
+              <p>Andheri (West), Mumbai,</p>
+              <p>Maharashtra- 400053</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;">
+                <a class="direction btn btn-primary" href="https://maps.app.goo.gl/535jALZruZcJc5BN6" target="_blank">
+                  Direction
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">022-67354035</p>
+              <p class="phone">IOS Team: 9820079821</p>
+              <p class="phone">Laptop Team: 9920046067</p>
+              <p class="phone">Desktop Team: 9769473115</p>
+              <p class="email">support@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday 10:30 AM - 07:30 PM</p>
+              <p style="color:#666;">Sunday 10:30 AM - 06:30 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_2" style=" display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.029141638904!2d73.12286681490373!3d19.237561686995367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6ba06176b851b2d9!2sUnicorn+Service+centre!5e0!3m2!1sen!2sin!4v1555334337411!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15068.144657645202!2d73.1253715!3d19.2372556!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be795de0931fb51%3A0x98c6f7375b324a7a!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725705267635!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Shop No.17/117, Aum Supreme,</p>
+              <p>Bail Bazar, Next to DMart,</p>
+              <p>Kalyan(West), Mumbai,</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/iMLVwCE5M5mFWWo57" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91 251 2201813</p>
+              <p class="phone">8104109285</p>
+              <p class="email">unicornkalyan@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday - Saturday (10.30 AM to 6.30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_3" style="display: none;">
+        <div class="google-map w-100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.156651414855!2d72.82967361114247!3d18.924459056637737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce3fd11bd895%3A0x386f769325d6c0eb!2sUnicorn%2C%20Apple%20Premium%20Reseller!5e0!3m2!1sen!2sin!4v1706797463846!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Units No. 03, Cecil Court,</p>
+              <p>Colaba Causeway Road,</p>
+              <p>Next to Regal Theatre, Colaba,</p>
+              <p>Mumbai, Maharashtra - 400039</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/DREvMMqynAxzAdAh7" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">022-6639 6503</p>
+              <!-- <p class="phone">993 000 8784</p> -->
+              <p class="email">unicorncolaba@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (11:00 AM to 7:30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_4" style="display: none;">
+        <div class="google-map w-100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.10653034074!2d73.84640341113536!3d18.524087468993432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c18cee85c571%3A0x7799ffd52598ea60!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1706798070189!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15132.409322437037!2d73.8494184!3d18.5242773!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x96f87ba53af498de!2sUnicorn%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1648018581539!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>3rd Floor, Rainbow Plaza Building,</p>
+              <p>Above Just In Time, </p>
+              <p>Opp. Modern High School,</p>
+              <p>J.M.Road, Shivaji Nagar, Pune</p>
+              <p>Maharashtra - 411005</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/BBvYmAdgdH2noY788" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">020-29912799</p>
+              <p class="phone">9822898886</p>
+              <p class="email">service_jmr@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday: (10:30 AM To 8:30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_404" style="display: none;">
+        <div class="google-map w-100">
+          
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15132.409322437037!2d73.8494184!3d18.5242773!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x96f87ba53af498de!2sUnicorn%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1648018581539!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3781.420765737104!2d73.75444507592869!3d18.600135066737657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTjCsDM2JzAwLjUiTiA3M8KwNDUnMjUuMyJF!5e0!3m2!1sen!2sin!4v1723456803985!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Upper Ground floor,</p>
+              <p>132/23, Phoenix Mall, </p>
+              <p>Phoenix Market City, Sayaji Hotel, Hinjewadi,</p> 
+              <p>Pune, Maharashtra - 411057</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/Q7qU8T9kE1NGHDvA9" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">9890634563</p> 
+              <p class="email">servicewakad@mail.unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday: (11:00 AM To 8:00 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_5" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.2501934759994!2d73.91716811489337!3d18.56275578738443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4c5677a4a3defca3!2sUnicorn+Service+Centre!5e0!3m2!1sen!2sin!4v1555333206089!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15129.006438910197!2d73.9186219!3d18.5626919!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c12be639bf47%3A0x8ee5a103cad5ea63!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725707098758!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Showroom No 6, Sr No 198/1B,</p>
+              <p>Delta 2 Building, Giga Space,</p>
+              <p>Viman Nagar, Tal Haveli, Pune,</p>
+              <p>Maharashtra - 411014</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/QuDcvrUYnA15twz97" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">020-48606999</p>
+              <p class="phone">9822396669</p>
+              <p class="email">unicornvimannagar@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (10:30 AM To 7:30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_6" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.2891541281765!2d73.80989611489332!3d18.560998187385376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x849fe2ca87bebd76!2sUnicorn+Service+Centre!5e0!3m2!1sen!2sin!4v1555333288402!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+           
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1891.1323272441552!2d73.80840838881852!3d18.56210343831484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfa31624f2e9%3A0x5ffd8e3701d47a0d!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1723444969782!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Shop No 1, Ground Floor,Business Avenue,</p>
+              <p>Sanghavi Keshri Road,Near Parihar Chowk ,Aundh</p>
+              <p>Pune ,Maharashtra - 411007</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/V2fHToY7dCYgUYTf7" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">020-48607725</p>
+              <p class="phone">020- 48697726</p>
+              <p class="phone">9822396662</p>
+              <p class="email">service@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 10:30 AM - 07:30 PM</p>
+              <p style="color:#666;">Sunday 10:30 AM - 06:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_7" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30266.802521170102!2d73.86130187610453!3d18.513064994442093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5123d4268b949ea9!2sUnicorn+Service+Centre!5e0!3m2!1sen!2sin!4v1555332964184!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15132.988500134701!2d73.8790011!3d18.5177314!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1e124dfa8df%3A0x4e9a34690b6696d2!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725707250443!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Talera Court, Shop No.2,</p>
+              <p>next to Biba Showroom,</p>
+              <p>M.G.Road,</p>
+              <p>Camp, Pune-411001.</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/fzWEZshFT6bhXtmz7" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">020 41280663</p>
+              <p class="phone">+91 9822898884</p>
+              <p class="email">puneservice@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (10:30 AM To 7:30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_8" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.5890710740705!2d77.10375051544627!3d28.64207559039903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0341746419fd%3A0xb658c1741f0f5bdb!2sUnicorn%20Store%2C%20Pacific%20Mall%2C%20New%20Delhi!5e0!3m2!1sen!2sin!4v1645791381415!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14006.151679193283!2d77.0869843!3d28.643608!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d030eff261689%3A0xf4dd85f634d9024f!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725706933453!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>GF-43, Ground floor back side (near bike parking area),</p>
+              <p>Pacific Mall,</p>
+              <p>Subhash Nagar,</p>
+              <p>New Delhi - 110018</p>
+              <!--                            <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary" href="https://goo.gl/maps/7kMKW3u42sK2" target="_blank">Direction</a></div>-->
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/eoPLrDyL1ZNo1RtH9" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <!--                        <div class="add"><p class="phone">IOS/Watch/Beats/Mac Tel: 011-45606482,</p>-->
+            <div class="add">
+              <p>iPhone/Mac/iPad/AirPods/Watch</p>
+              <p class="phone"> Tel: 011-45606482,</p>
+              <p class="phone">+91 9910993888</p>
+              <p class="phone">For SMS Only-9910991222</p>
+              <p class="email">supportpacific@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 11:00 AM - 08:00 PM</p>
+              <p style="color:#666;">Sunday 11:00 AM - 07:30 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_9" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.9410628562755!2d77.09527251136751!3d28.451192992190737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19cbee9427b9%3A0xbb89fc1642da34a0!2sUnicorn%2C%20Apple%20Premium%20Reseller!5e0!3m2!1sen!2sin!4v1706798826742!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14032.026006334236!2d77.099769!3d28.4492204!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1958ab66fd0f%3A0xbc241af2d0bf3529!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725708912637!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>T-01, Shop No -112 Floor Plaza tower,</p>
+              <p>One Horizon Center,</p>
+              <p>Golf Course Road, Sector - 43,</p>
+              <p>Gurgaon, Haryana - 122 002</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/C46CPBmrWCbp41Ed9" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">0124-2575503/0124-2575504</p>
+              <p class="phone">+91-9717745263</p>
+              <p class="email">servicehorizon@unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (10:30 AM To 7:30 PM)</p>
+              <p style="color:#666;">Sunday 10:30 AM To 7:30 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_10" style="display: none;">
+        <div class="google-map w-100">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28057.776857857367!2d77.07377182903154!3d28.47285702293514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1958ab66fd0f%3A0xbc241af2d0bf3529!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1723447642663!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Unit No. 8 Building-8C,</p>
+              <p>DLF Cyber City,</p>
+              <p>DLF Phase-II.</p>
+              <p>Gurugram-122002</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/6R6Fxh3e5rbJtGFK9" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">For Mac-9311800893</p>
+              <p class="phone">For iOS-9971899772</p>
+              <p class="email">servicegurgaon@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 10:30 AM - 08:00 PM</p>
+              <p style="color:#666;">Sunday, 11:00 AM - 07:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_11" style="display: none;">
+        <div class="google-map w-100">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.331523966396!2d77.30512931507893!3d28.469560982482363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5bdf21c599b9a24d!2sUnicorn!5e0!3m2!1sen!2sin!4v1555332833044!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Crown Interiorz Shopping Mall, </p>
+              <p>1st Floor,Shop No:36-B,Sec-35,</p>
+              <p>Delhi-mathura Road</p>
+              <p>Haryana - 121003</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://goo.gl/maps/6P1q4AX29tq" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">0129-4007425</p>
+              <p class="phone">0129-4007426</p>
+              <p class="phone">9910999338 </p>
+              <p class="email">supportfaridabad@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (10:30 AM To 7:00 PM)</p>
+              <p style="color:#666;">Sunday 11:00 AM To 7:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_111" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3442.4544802506775!2d76.76285391134022!3d30.366450003136887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1zR0bCoMKgU0NPIDgyOS04MzAgLCBBTUJBTEEgUm9hZCzCoMKgT3Bwb3NpdGXCoMKgQkFOU0FMIEhPU1BJVEFMLMKgwqBNT0RFTCBUT1dOLCBLQUlUSEFMwqAsIEhhcnlhbmEgMTM2MDI3!5e0!3m2!1sen!2sin!4v1702305775883!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13769.817090660117!2d76.7653477!3d30.3664559!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3911e19e9d8272af%3A0xe1faa4fab4e464a0!2sUnicorn%2C%20Apple%20Authorised%20Reseller!5e0!3m2!1sen!2sin!4v1725705842391!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>GF SCO 829-830 , KAITHAL, AMBALA,</p>
+              <p>Road, Opposite BANSAL</p>
+              <p>HOSPITAL, MODEL TOWN,</p>
+              <p>KAITHAL - 136027</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/3h4QxwLP2Kt4TF9G7" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91-8288874002</p>
+              <!-- <p class="phone">9910999338, 7503377020</p> -->
+              <p class="email">servicekaithal@unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 10:30 AM - 07:00 PM</p>
+              <p style="color:#666;">Sunday - Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_12" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28032.36903794644!2d77.22413678826156!3d28.568377476344363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x442781a2386931b!2sUnicorn+service+centre!5e0!3m2!1sen!2sin!4v1555332905393!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14015.315996291883!2d77.2293485!3d28.5748972!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce3c9033d02cf%3A0xf3ac5b3926304b!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725711411927!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>A- 270 Basement, Defence Colony,</p>
+              <p>Near Arya Samaj Mandir,</p>
+              <p>New Delhi - 110024</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/HREowW25ykCNBmHu5" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">011-41610176/011-41610177</p>
+              <p class="phone">+91-9599967714</p>
+              <p class="email">supportdefence@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday - Saturday (10:00 AM To 07:30 PM)</p>
+              <p style="color:#666;">Sunday - 10:30 AM To 07:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_13" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14020.824034705416!2d77.206172!3d28.533527!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x443627bd53e4a7d!2sApple%20Authorised%20Service%20Provider%20-%20Unicorn%2C%20Malviya%20Nagar%2C%20New%20Delhi!5e0!3m2!1sen!2sin!4v1648031636959!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14020.786527203092!2d77.2065951!3d28.5338089!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce3c1b7faee6b%3A0x17969a9feeac7e93!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725705142820!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>B/9,</p>
+              <p>Shivalik,</p>
+              <p>Malviya Nagar,</p>
+              <p>Delhi NCR - 110017</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/4K9bx8Hpyg5THLUFA" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">011-40661610</p>
+              <p class="phone">+91 8076298923, +91 8076298924</p>
+
+              <!-- <p class="phone">For iOS Support: +918076298923 / 011-40661604,</p> -->
+              <p class="email">supportdelhi@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (10:00 AM To 7:30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_14" style="display: none;">
+        <div id="googleMap" style="width:100%;">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.6679392515584!2d80.93932237543733!3d26.85051197668421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd114c977119%3A0x3223d71c4ecc37a5!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1714050160564!5m2!1sen!2sin" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Office No 1-A, 3rd Floor, Halwasiya Court, Hazratganj, Lucknow-226001</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;">
+                <a class="direction btn btn-primary" href="https://maps.app.goo.gl/jSoUCbyHdWhcrCWs7" target="_blank">Direction</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <!--<p class="phone">0522-4108735</p>
+              <p class="phone">0522-4011483</p>-->
+              <p class="phone">+91 97211 21133</p>
+              <p class="email">supportlucknow@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">
+                Monday-Sunday - 10:30 AM - 7:30 PM
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_2008" style="display: none;">
+        <div id="googleMap" style="width:100%;">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.6679392515584!2d80.93932237543733!3d26.85051197668421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd114c977119%3A0x3223d71c4ecc37a5!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1714050160564!5m2!1sen!2sin"
+           style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+          <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3579.5902367267754!2d81.23512908682561!3d26.21000473083418!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDEyJzM2LjAiTiA4McKwMTQnMjQuMCJF!5e0!3m2!1sen!2sin!4v1723457150284!5m2!1sen!2sin" 
+          style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>690/24, Kutchery Rd, Hazratganj,  opposite Manyavar, Nirala Nagar Lucknow-229001</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;">
+                <a class="direction btn btn-primary" href="https://maps.app.goo.gl/X8fcQfu4x1NFQfsq7" target="_blank">Direction</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <!--<p class="phone">0522-4108735</p>
+              <p class="phone">0522-4011483</p>-->
+              <p class="phone">+91 9236322900</p>
+              <p class="email">supportraebareli@mail.unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">
+                Monday-Saturday - 10:30 AM - 7:30 PM
+              </p>
+              <p style="color:#666;">
+                Sunday - Closed
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_21" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1752.023090358505!2d77.32209895809143!3d28.568375945610807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5e5c2432263%3A0x52a08147eef86385!2sApple%20Service%20Centre%20(Unicorn)%20DLF%20Mall%20Noida!5e0!3m2!1sen!2sin!4v1566651594304!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14016.405183609984!2d77.3208489!3d28.5667208!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce58d4a115a67%3A0x49c54c6d028e6cf7!2sUnicorn%2C%20Apple%20Authorised%20Reseller!5e0!3m2!1sen!2sin!4v1725707869942!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>DLF Mall of India,</p>
+              <p>C-39, Lower Ground Floor, Plot No.M-03,</p>
+              <p>Sector-18, Noida,</p>
+              <p>Uttar Pradesh - 201301</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;">
+                <a class="direction btn btn-primary" href="https://maps.app.goo.gl/MnaMLAPes5eACejt6" target="_blank">
+                  Direction
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">9717864315</p>
+              <p class="phone">91-7827997629</p>
+              <!-- <p class="phone">+91-9289212244,</p>
+              <p class="phone">+91-9289212255,</p>
+              <p class="phone">0120-6229675 / 0120-6229674</p> -->
+              <p class="email">unicornmoi@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 11:00 AM - 08:00 PM</p>
+              <p style="color:#666;">Sunday 11:00 AM - 07:30 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_15" style="display: none;">
+        <div class="google-map w-100">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13773.5699564466!2d76.3868976!3d30.3397935!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xdf53dffbb0742114!2sApple%20Authorised%20Service%20Provider%20-%20Unicorn%2C%20Patiala!5e0!3m2!1sen!2sin!4v1648031754964!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>First Floor,Mittal Building,Bhupendra Road</p>
+              <p>Near Columbia Hospital,</p>
+              <p>Patiala Punjab - 147001</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://goo.gl/maps/EwDnAVZZqbJ2" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">0175-5008172 / 0175-5008173</p>
+              <p class="phone">+91 8288036002</p>
+              <p class="email">unicornpatiala@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 10:00 AM - 08:00 PM</p>
+              <p style="color:#666;">Sunday 10:00 AM - 07:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_155" style="display: none;">
+        <div class="google-map w-100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3431.471735616275!2d76.72151267557824!3d30.677000774611173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fef0f85e379bd%3A0x253105033faa45b2!2sUnicorn%2C%20Apple%20Authorised%20Reseller!5e0!3m2!1sen!2sin!4v1712225547209!5m2!1sen!2sin" frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>SHOP No-G29 F-26C FIRST FLOOR</p>
+              <p>CP 67 Mall, SITE No 252</p>
+              <p>Sector 67 Airport Road</p>
+              <p>Mohali 160062</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/zy6tTQ2VvnZLA1Fv6" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91-7341111784</p>
+              <p class="email">servicemohali@unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 10:30 AM - 07:30 PM</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_16" style="display: none;">
+        <div class="google-map w-100">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3429.7233538266223!2d76.76335241513128!3d30.72617678163955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x28780181411fc5de!2sUnicorn+service+centre!5e0!3m2!1sen!2sin!4v1555332755487!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>SCO #315-316, Sector - 35 B,</p>
+              <p>Chandigarh -160022</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://goo.gl/maps/WkCxYCmBa9x" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">0172-4066535 / 0172-4066536</p>
+              <p class="phone">+91 8288036004</p>
+              <p class="email">unicornchandigarh@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 10:30 AM - 07:30 PM</p>
+              <p style="color:#666;">Sunday 11:00 AM - 07:30 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_17" style="display: none;">
+        <div class="google-map w-100">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3671.372381347172!2d72.53099999999999!3d23.0468056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDAyJzQ4LjUiTiA3MsKwMzEnNTEuNiJF!5e0!3m2!1sen!2sin!4v1725967563797!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Shop No. 1B, Basement,</p>
+              <p>Himalaya Mall, Drive-In Road,</p>
+              <p>Ahmedabad, Gujarat - 380059.</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/JCSh3hsiu3Ssn6Ua7" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">079-40092945 / 079-40092946</p>
+              <p class="email">supportahmd@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday : (10:30 AM to 7:30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_289" style="display: none;">
+        <div class="google-map w-100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1835.762772407983!2d72.5303801065388!3d23.041186563002615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e85209aa26e59%3A0xd7814038457e0bd1!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1719921733197!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>P2_G-01/P2_F-01, Phase 2, Plot no. 216, Ahmedabad One Mall, T. P. Scheme No.1, Near Vastrapur Lake, Vastrapur Ahmedabad, Gujarat 380054.</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;">
+                <a class="direction btn btn-primary" href="https://maps.app.goo.gl/PGuhbGJp89LyyCU26" target="_blank">
+                  Direction
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91-8141884000</p>
+               <p class="email">supportahmd@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (11 AM To 7 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_2890" style="display: none;">
+        <div class="google-map w-100">
+      <!--       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3711.9544926421772!2d70.45714337597862!3d21.50950237109204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395801708a5f73f7%3A0xa92b0237bbea753!2sUnicorn%2C%20Apple%20Authorised%20Reseller!5e0!3m2!1sen!2sin!4v1723457558835!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14847.674032844863!2d70.4588546!3d21.5109117!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3958018f3c813409%3A0x92b59dfd0c8f05df!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725711522629!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Shop no. 4, Marigold-3, Opposite Bahauddin college, Gujarat 362001.</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;">
+                <a class="direction btn btn-primary" href="https://maps.app.goo.gl/8uRKd4CLzeRT7qx59" target="_blank">
+                  Direction
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">8141968000</p>
+               <p class="email">servicejunagadh@mail.unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday : (10:30 AM to 7:30 PM),</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_19" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d229.46387449423744!2d72.57000245874825!3d23.044985702259066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x40eb4b3dda20dccb!2sUnicorn+Service+centre!5e0!3m2!1sen!2sin!4v1555333146206!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14687.321896929052!2d72.5701417!3d23.0299959!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e85ba75722acd%3A0x90ac278cffea5454!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725705432909!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>33, GF/FF, Ratna Business Square Next To,</p>
+              <p>Chamber Of Commerce, Opp HK College,</p>
+              <p>Ashram Road, Ahmedabad, Gujarat-380009,</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/P6rmZ7b1YZZ2Wego6" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">079-66630235 / 079-66630239,</p>
+              <p class="phone">+91-9712655511,</p>
+              <p class="email">unicornashram@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday : (10:30 AM to 7:30 PM),</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_18" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d234879.45966244309!2d72.39133300465464!3d23.097404903725213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x677c00cf2cf23d65!2sUnicorn+Service+Centre!5e0!3m2!1sen!2sin!4v1555332420335!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14687.753848349375!2d72.5077263!3d23.0260316!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e9ba268f53f09%3A0x26b1b430316e3eb5!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725706797642!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Unit No. 18, GF, Devarc Mall,</p>
+              <p>Main Satellite Junction, ,</p>
+              <p>S. G. Road, Ahmedabad, Gujarat - 380015,</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/6US7W3KS6Y5nUqHQ8" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">079-40395009</p>
+              <p class="phone">091-9978895511</p>
+              <p class="email">unicorndevarc@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 10:30 AM - 07:00 PM</p>
+              <p style="color:#666;">Sunday 10:30 AM - 07:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_20" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.1194447433318!2d73.18631521495418!3d22.273464785337538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe26299696d30195b!2sUnicorn!5e0!3m2!1sen!2sin!4v1556782352310!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14768.503083638658!2d73.1892933!3d22.2732251!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc5f9fff3d0ef%3A0xd7997538a2ff542d!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725705532404!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Eva Mall</p>
+              <p>Unit no.15 &amp; 15A,</p>
+              <p>Near Sports Complex,</p>
+              <p>Patidar Crossing,</p>
+              <p>Manjalpur, Vadodara.</p>
+              <p>Gujarat - 390011.</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/D7DSN9VqzMhriKYy6" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91 7861852580</p>
+              <p>unicornvadodra@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (10:30 AM To 06:30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_98" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.045762313107!2d70.75738207529173!3d22.276256279703972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959cb5fab13d083%3A0x1fa0e9e9044ac5ce!2sUnicorn%2C%20Apple%20Premium%20Reseller!5e0!3m2!1sen!2sin!4v1712227759135!5m2!1sen!2sin"
+           frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14768.195390271567!2d70.7600238!3d22.2761394!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959cb870145e397%3A0x638b8a19c2a0ef26!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725706179970!5m2!1sen!2sin" 
+          frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Shop no 3,</p>
+              <p>Mantra Shops and Offices</p>
+              <p>AG chowk, Next to crystal Mall,</p>
+              <p>Kalwad Road, Rajkot - 360001,</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/fZo6niQpfuAxqqvY8" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91 8141995000
+              </p>
+              <p>rajkot.service@mail.unicornstore.in
+              </p>
+       
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 10:30 AM - 07:00 PM</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_22" style="display: none;">
+        <div class="google-map w-100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.430987771317!2d72.85586571114726!3d19.176369148738306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7eb5416b4f1%3A0xd3afc8b5ca3bbf92!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1706797743519!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15073.717889440471!2d72.8582215!3d19.1764354!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xad58c8c6bdb4554d!2sUnicorn%20Apple%20Authorised%20Service%20Center%2C%20Malad!5e0!3m2!1sen!2sin!4v1628666882104!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Shop No-87,</p>
+              <p>Lower floor, Ground floor</p>
+              <p>1st floor, Express Zone </p>
+              <p>Malad, Mumbai.</p>
+              <p>Maharashtra - 400097.</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/XWZ8GosMSGNg3rwc8" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91-9769276811</p>
+              <p>unicornmalad@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (10:30 AM To 07:30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_202" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3752.7896358712483!2d75.89543971182201!3d19.848851981444415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTnCsDUwJzU1LjkiTiA3NcKwNTMnNTIuOSJF!5e0!3m2!1sen!2sin!4v1711434655918!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15011.158541730078!2d75.89802!3d19.848852!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bda5745e2f64d81%3A0x5961ebe67269f874!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725708637900!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Ground Floor,2,Gopinand Complex </p>
+              <p>Rai Harichandra Sahani(DUKBI) Marg</p>
+              <p>Dukhi Marg , Mama Chowk</p>
+              <p>Maharashtra - 431203.</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/Qa9rSxubRCe29GXD7" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91-8856966629</p>
+              <p>servicejalna@unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday 10:30 AM To 07:30 PM</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_100" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3848.926731210275!2d73.97667471174223!3d15.271790985236775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTXCsDE2JzE4LjUiTiA3M8KwNTgnNDUuMyJF!5e0!3m2!1sen!2sin!4v1711436289050!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15395.706923757962!2d73.979225!3d15.271791!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfb3dae9c0b2bf%3A0x7099f5c863245e8f!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725705931709!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              First Floor, Building/Flat No.C/20, Kayji Palladium, Eastern By Pass, Davorlim Junction, Gogol, South Goa, Margao-403601
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/azANXDEbA5svohdp8" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">8655856654,8655857833</p>
+              <p>servicegoa@unicornstore.in
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday 11:00 AM To 08:00 PM</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="location_content" id="location_content_23" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14237.181386920682!2d81.0105163!3d26.862356!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf0630cf8a9d5d722!2sOne%20Awadh%20Center!5e0!3m2!1sen!2sin!4v1645789194283!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14237.186949874384!2d81.0105656!3d26.8623118!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399be36e27740ae1%3A0xd00884316da75f9c!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725705734679!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>One Awadh Mall, 5th floor, Unit 1,</p>
+              <p>Plot Number-384 Vibhuti Khand,</p>
+              <p>Gomti Nagar,</p>
+              <p>Lucknow - 226010</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/vLGJTGd4wFzgM5Qa8" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <!--<p class="phone">+91-6386660935</p>-->
+              <p class="phone">+91 88107 12020</p>
+              <p class="email">unicornoneawadh@unicornstore.in</p> 
+              <!-- <p class="email">supportlucknow@uipl.co.in</p> -->
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (10:30 AM To 8:00 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_24" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15128.86932050071!2d73.7769432!3d18.5642382!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xaeaa6bee6352596e!2sApple%20Authorised%20Service%20Provider%20-%20Unicorn%2C%20Baner!5e0!3m2!1sen!2sin!4v1648021939705!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15128.854892410456!2d73.7791777!3d18.5644009!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf528ccd949d%3A0x172089a348bf83df!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725707573630!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p></p>
+              <p>1st floor, Shop No 2,</p>
+              <p>Anjani Palladium IT Zone,</p>
+              <p>Near Prabhavi Tech Park,</p>
+              <p>Baner</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/QdcYQVjKjzRTkcot9" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91-9823396662</p>
+              <p>service@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (10:30 AM To 08:30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_26" style="display: none;">
+        <div class="google-map w-100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.6004036137733!2d77.10408087635543!3d28.64173607565969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0363c4edf747%3A0x240c75aa3d09de7a!2sPacific%20Mall%20Tagore%20Garden!5e0!3m2!1sen!2sin!4v1697005787279!5m2!1sen!2sin" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+          <!--          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14695.04923460274!2d72.6305426!3d22.9589793!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xea8e25852fdb52a6!2sUnicorn%20Store%2C%20Ahmedabad%20One%20Mall%2C%20Ahmedabad!5e0!3m2!1sen!2sin!4v1652876172924!5m2!1sen!2sin"  style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>-->
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Shop No.18/19/20,</p>
+              <p>Ground Floor,</p>
+              <p>Pacific Mall Subhash Nagar,</p>
+              <p>New Delhi-110018</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://goo.gl/maps/M38AjR4BrZkaXCM29" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91-9910993888</p>
+              <p>supportpacific@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 10:30 AM - 08:00 PM</p>
+              <p style="color:#666;">Sunday, 11:00 AM - 07:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_28" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d662.6861027140807!2d78.00861594864472!3d27.159219297871672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjfCsDA5JzM0LjEiTiA3OMKwMDAnMzIuMSJF!5e0!3m2!1sen!2sin!4v1697007985398!5m2!1sen!2sin" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+          <!--          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14695.04923460274!2d72.6305426!3d22.9589793!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xea8e25852fdb52a6!2sUnicorn%20Store%2C%20Ahmedabad%20One%20Mall%2C%20Ahmedabad!5e0!3m2!1sen!2sin!4v1652876172924!5m2!1sen!2sin"  style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>-->
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14199.562707059835!2d78.0088758!3d27.1597297!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974779c97860693%3A0xdf6a3ac58ed939d6!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725707996899!5m2!1sen!2sin"  style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Shop No.17 A,</p>
+              <p>First Floor,</p>
+              <p>Taj Rd Sadar Bazar,</p>
+              <p>Agra Cantt, Agra-282001, UP</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/FewQgBcGDHhg6nM98" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91-9205996250</p>
+              <p class="phone">+91-9205996254</p>
+              <p>serviceagra@unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">
+                Monday-Saturday, 10:00 AM - 07:00 PM, <br> Sunday 10:00 AM - 07:00 PM
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_288" style="display: none;">
+        <div class="google-map w-100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3605.6156411815236!2d82.96438297538684!3d25.35067557761246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2dab6bbb443d%3A0x2a1b600c1f013258!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1712219791246!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d662.6861027140807!2d78.00861594864472!3d27.159219297871672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjfCsDA5JzM0LjEiTiA3OMKwMDAnMzIuMSJF!5e0!3m2!1sen!2sin!4v1697007985398!5m2!1sen!2sin"
+           style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              Ward-Secrole, Krishna Complex, Plot no.93, Ground floor Mauza, Gilat Bazar, Chotta Chuppepur, Varanasi, Uttar Pradesh 221002
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/uDD9YQH6fY9xfpZs8" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <!-- <p class="phone">+91-9151874961</p> -->
+              <p class="phone">+91 88107 12017</p>
+              <p>servicevaranasi@unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday, 10:30 AM - 07:00 PM</p>
+              <p style="color:#666;">Sunday, 10:30 AM - 07:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_25" style="display: none;">
+        <div class="google-map w-100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14695.04923460274!2d72.6305426!3d22.9589793!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xea8e25852fdb52a6!2sUnicorn%20Store%2C%20Ahmedabad%20One%20Mall%2C%20Ahmedabad!5e0!3m2!1sen!2sin!4v1652876172924!5m2!1sen!2sin" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+          <!--                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15128.86932050071!2d73.7769432!3d18.5642382!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xaeaa6bee6352596e!2sApple%20Authorised%20Service%20Provider%20-%20Unicorn%2C%20Baner!5e0!3m2!1sen!2sin!4v1648021939705!5m2!1sen!2sin"  style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>-->
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p></p>
+              <p>P2_G-01/P2_F-01, </p>
+              <p>Phase 2, Plot no. 216, </p>
+              <p>Ahmedabad One Mall, T. P. Scheme No.1,</p>
+              <p>Near Vastrapur Lake, Vastrapur </p>
+              <p>Ahmedabad-380054</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://goo.gl/maps/M38AjR4BrZkaXCM29" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91-8141884000</p>
+              <p>supportahmd@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (11 AM To 7 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_255" style="display: none;">
+        <div class="google-map w-100">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13839.297966678227!2d77.87587535341031!3d29.86933500593499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390eb3d3212bf32d%3A0x1c3ccae71685a32f!2sUnicorn%2C%20Apple%20Authorised%20Reseller!5e0!3m2!1sen!2sin!4v1706799667365!5m2!1sen!2sin"
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13839.209643336266!2d77.8904648!3d29.8699717!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390eb58b02899159%3A0x2c8b4ac60bcce9b5!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725708787044!5m2!1sen!2sin" 
+            frameborder="0" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p></p>
+              <p>1022 1-5, New Haridwar Road </p>
+              <p>18 Civil Lines, </p>
+              <p>Civil Line, Roorkee- 247667</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://maps.app.goo.gl/j1iZLzsYUUo1bJrq6" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91-9319889972</p>
+              <p>serviceroorkee@unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday 10:30 AM to 7:00 PM.</p>
+              <p style="color:#666;">Sunday - Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_27" style="display: none;">
+        <div class="google-map w-100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3506.492659761695!2d77.08569857635123!3d28.494821775740238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDI5JzQxLjQiTiA3N8KwMDUnMTcuOCJF!5e0!3m2!1sen!2sin!4v1697007215153!5m2!1sen!2sin" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+          <!--          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14695.04923460274!2d72.6305426!3d22.9589793!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xea8e25852fdb52a6!2sUnicorn%20Store%2C%20Ahmedabad%20One%20Mall%2C%20Ahmedabad!5e0!3m2!1sen!2sin!4v1652876172924!5m2!1sen!2sin"  style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>-->
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              <p>Shop No.1,</p>
+              <p>DLF Cyber Hub,</p>
+              <p>DLF City Phase-IIIGurugram-122001</p>
+              <div style="margin-top: 10%;margin-bottom: 10%;"><a class="direction btn btn-primary"
+                  href="https://goo.gl/maps/M38AjR4BrZkaXCM29" target="_blank">Direction</a></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p class="phone">+91-9971899772</p>
+              <p>servicegurgaon@uipl.co.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (11 AM To 7 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_203" style="display: none;">
+        <div id="googleMap" style="width:100%;">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.116308783366!2d72.82195999999999!3d19.407379999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7a9d559fe6167%3A0xf27fb748ff16a598!2sUnicorn%2C%20Apple%20Authorised%20Reseller!5e0!3m2!1sen!2sin!4v1714025382509!5m2!1sen!2sin" 
+          style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15051.775196348599!2d72.8244655!3d19.4148341!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d036de1e48a25%3A0x815b6206703c00ea!2sUnicorn%2C%20Apple%20Authorised%20Service%20Provider!5e0!3m2!1sen!2sin!4v1725706280303!5m2!1sen!2sin"
+          style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              Lower Ground Floor-24,The Capital Mall,Off New Link Road Village, Achole Rd, Nalasopara East, Maharashtra 401209
+              <div style="margin-top: 10%;margin-bottom: 10%;">
+                <a class="direction btn btn-primary" href="https://maps.app.goo.gl/CdEqytpXk9P1CvaV8" target="_blank">Direction</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="add">
+              <p class="phone">+91 86556 88035</p>
+              <p>servicenallasopara@mail.unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Sunday (10:30 AM To 7:30 PM)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_2030" style="display: none;">
+        <div id="googleMap" style="width:100%;">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.116308783366!2d72.82195999999999!3d19.407379999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7a9d559fe6167%3A0xf27fb748ff16a598!2sUnicorn%2C%20Apple%20Authorised%20Reseller!5e0!3m2!1sen!2sin!4v1714025382509!5m2!1sen!2sin" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15286.816034071495!2d74.44781026223058!3d16.69168879895035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc0e33f185b1883%3A0x688299495c0598dc!2sUnicorn%2C%20Apple%20Authorised%20Reseller!5e0!3m2!1sen!2sin!4v1723457877075!5m2!1sen!2sin" 
+          style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              Shop no. 5, 6, 7, Sindhu Bhavan, Main Rd, Kagwade Mala, Maharashtra 416115
+              <div style="margin-top: 10%;margin-bottom: 10%;">
+                <a class="direction btn btn-primary" href="https://maps.app.goo.gl/ZnftgHAXjteE1rVHA" target="_blank">Direction</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="add">
+              <p class="phone">+91 8655856647</p>
+              <p>serviceichalkaranji@mail.unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (10:30 AM To 7:30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location_content" id="location_content_2000" style="display: none;">
+        <div id="googleMap" style="width:100%;">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.116308783366!2d72.82195999999999!3d19.407379999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7a9d559fe6167%3A0xf27fb748ff16a598!2sUnicorn%2C%20Apple%20Authorised%20Reseller!5e0!3m2!1sen!2sin!4v1714025382509!5m2!1sen!2sin" style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe> -->
+   
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.886930272096!2d74.72794297593686!3d19.11261565082065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdcb14fa1caea49%3A0xbb518fddb955e82e!2sUnicorn%2C%20Apple%20Authorised%20Reseller!5e0!3m2!1sen!2sin!4v1723458189085!5m2!1sen!2sin" 
+          style="border:0;width: 100%;height: 300px;" allowfullscreen=""></iframe>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="add">
+              Shop No. 2, Aurum Business Hub, Nagar Manmad Road, Savedi, Maharashtra 414001
+              <div style="margin-top: 10%;margin-bottom: 10%;">
+                <a class="direction btn btn-primary" href="https://maps.app.goo.gl/neAx1x1pHRo9YEzq7" target="_blank">Direction</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="add">
+              <p class="phone">+91 8624966608</p>
+              <p>serviceahmednagar@mail.unicornstore.in</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add">
+              <p style="color:#666;">Monday-Saturday (10:30 AM To 7:30 PM)</p>
+              <p style="color:#666;">Sunday Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

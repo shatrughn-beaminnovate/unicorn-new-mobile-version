@@ -1,0 +1,204 @@
+<div class="container py-3">
+
+  <!-- Breadcrumb Start -->
+  <div class="row">
+    <div class="col-auto">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/" class="link">Home</a></li>
+        <li class="breadcrumb-item">Product</li>
+        <li class="breadcrumb-item active d-flex align-items-center text-capitalize">{{title}}</li>
+      </ol>
+    </div>
+  </div>
+  <hr class="mt-1 mb-3">
+  <!-- Breadcrumb End -->
+
+  <div class="row" *ngIf="primaryProductData">
+    <div class="col-sm-5 text-center border-right">
+
+      <!-- Product Image Preview Box -->
+      <div class="product-img-box">
+        <img class="img-fluid" [src]="imgUrl + '/medium/' + primaryProductData.images" alt="Image Not Available">
+      </div>
+<!--
+      <div class="product-img-box">
+        <img class="img-fluid" [src]="imgUrl + '/medium/' + product.images.filename" alt="Image Not Available">
+      </div>
+-->
+
+      <div class="row mb-3 justify-content-center align-items-center">
+        <div class="col">
+          <a href="#" class="wishlist-btn d-none">
+            <i class="fa fa-heart-o fa-lg"></i>
+          </a>
+
+          <div class="d-none" id="share-box-mobile" style="top: 20% !important">
+            <div class="product-share-btn">
+              <i class="fa fa-share-square-o fa-lg"></i>
+            </div>
+            <div class="product-share-box d-none">
+              <a class="share-icon wp mb-2" href="https://api.whatsapp.com/send?text=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" data-action="share/whatsapp/share" target="_blank">
+                <i class="fa fa-whatsapp"></i>
+              </a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" class="share-icon fb ml-2 mb-2" target="_blank">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a class="share-icon tw" title="Share on Twitter" data-network="twitter" data-action="share" href="https://twitter.com/intent/tweet?url=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a class="share-icon ln ml-2" title="Share on LinkedIn" data-network="linkedin" data-action="share" href="https://www.linkedin.com/sharing/share-offsite/?url=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank">
+                <i class="fa fa-linkedin "></i>
+              </a>
+              <!--<div class="fb-share-button" data-href="" data-layout="button_count" data-size="small">
+                  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=&src=" class="fb-xfbml-parse-ignore">
+                      Share
+                  </a>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <div class="row no-gutters owl-carousel-product owl-carousel mb-5 owl-loaded owl-drag">
+        <div class="owl-stage-outer" style="margin-inline: auto">
+          <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 185px;">
+            <div class="owl-item active" style="width: 87px; margin-right: 5px;">
+              <div class="col p-0">
+                <div class="thumbnail-img-box">
+                  <img src="https://shop.unicornstore.in/uploads/images/medium/922b205e126b8e1ffe8f54f519972d13.jpeg" alt="AirPods with Charging Case | UniFest 2022 | PreBook">
+                </div>
+              </div>
+            </div>
+            <div class="owl-item active" style="width: 87px; margin-right: 5px;">
+              <div class="col p-0">
+                <div class="thumbnail-img-box">
+                  <img src="https://shop.unicornstore.in/uploads/images/medium/97721001276c5e8e8123a7908c3b5347.jpg" alt="AirPods with Charging Case | UniFest 2022 | PreBook">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="col-12 col-sm-7 text-center text-sm-left animated fadeInRight">
+      <div class="row">
+        <div class="col-sm">
+          <h2 class="product-name mb-3">{{primaryProductData?.name}}</h2>
+        </div>
+        <!-- Desktop Share Icons -->
+        <div class="col-sm-auto">
+          <div (click)="onClickProductShare()" class="product-share-btn"><i class="fa fa-share-square-o fa-lg"></i></div>
+          <div class="product-share-box" [class.d-none]="!isProductShare">
+            <!-- Whatsapp Share -->
+            <a class="share-icon wp mb-2" href="https://api.whatsapp.com/send?text=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" data-action="share/whatsapp/share" target="_blank">
+              <i class="fa fa-whatsapp"></i>
+            </a>
+
+            <!-- Facebook Share -->
+            <a class="share-icon fb ml-2 mb-2" href="https://www.facebook.com/sharer/sharer.php?u=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank">
+              <i class="fa fa-facebook"></i>
+            </a>
+
+            <!-- Twitter Share-->
+            <a class="share-icon tw" title="Share on Twitter" data-network="twitter" data-action="share" href="https://twitter.com/intent/tweet?url=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank">
+              <i class="fa fa-twitter"></i>
+            </a>
+
+            <!-- Linkedin Share -->
+            <a class="share-icon ln ml-2" title="Share on LinkedIn" data-network="linkedin" data-action="share" href="https://www.linkedin.com/sharing/share-offsite/?url=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank">
+              <i class="fa fa-linkedin "></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <p class="pg" *ngIf="primaryProductData?.excerpt">
+        {{primaryProductData?.excerpt}}
+      </p>
+
+      <!-- Cashback Offers Start -->
+      <div class="cashback-offer-box">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" name="option[603][]" value="1376" class="custom-control-input" id="cashback_offer">
+          <label for="cashback_offer" class="custom-control-label">Cashback up to ₹ 1,500.00* on HDFC Bank cards</label>
+        </div>
+      </div>
+
+      <!-- Price Details -->
+      <div class="price-box mt-3">
+        <span class="price-text">Price : </span>
+        <span class="price" *ngIf="primaryProductData?.price >= primaryProductData?.saleprice" [innerHTML]="primaryProductData?.saleprice | currency| priceAfterDotSmall"></span>
+        <span class="price" *ngIf="primaryProductData?.price < primaryProductData?.saleprice" [innerHTML]="primaryProductData?.price | currency| priceAfterDotSmall"></span>
+      </div>
+
+      <h4 class="out-of-stock mt-3 mb-1" *ngIf="+primaryProductData?.quantity === 0">
+        Out of Stock
+      </h4>
+
+      <button type="button" *ngIf="+primaryProductData?.quantity > 0" (click)="addToCart(primaryProductData?.id)" class="btn btn-primary mt-3">Add To Cart</button>
+      <button type="button" *ngIf="+primaryProductData?.quantity === 0" (click)="addToCart(primaryProductData?.id)" class="btn btn-primary mt-3">Notify Me</button>
+
+    </div>
+  </div>
+</div>
+
+<nav class="border-top border-bottom">
+  <div class="container nav nav-tabs pdp-tab" id="nav-tab" role="tablist">
+    <a class="nav-link active show" data-toggle="tab" href="#recommended" *ngIf="recommendProduct.length > 0">Recommended Accessories</a>
+    <a class="nav-link" data-toggle="tab" href="#desc_tab" *ngIf="product?.description">Description</a>
+    <a class="nav-link d-none" id="reviews_head" data-toggle="tab" href="#reviews_tab">Reviews</a>
+  </div>
+</nav>
+
+<div class="tab-content container">
+
+  <!-- Recommended Tab-->
+  <div class="tab-pane py-3 fade active show" id="recommended" *ngIf="recommendProduct.length > 0">
+    <div class="row no-gutters recommended-carousel owl-carousel">
+      <div class="owl-item active" style="width: 285px;" *ngFor="let item of recommendProduct">
+        <div class="col-sm border-right p-0">
+          <form action="https://shop.unicornstore.in/cart/add_to_cart" class="h-100" method="post" accept-charset="utf-8">
+            <div class="card border-0 text-center h-100">
+              <div class="card-body">
+                <a class="recommended-img-box" href="https://shop.unicornstore.in/exquisite-genuine-leather-case-for-airpods-1-and-2">
+                  <img alt="" [src]="imgUrl + '/products/medium/' + item.images.filename" style="max-height:100%;" title="">
+                </a>
+                <a href="https://shop.unicornstore.in/exquisite-genuine-leather-case-for-airpods-1-and-2" class="heading-link">
+                  Monocozzi Exquisite Genuine Leather case for AirPods 1 and 2
+                </a>
+
+                <div class="price-box price-box-sm">
+                  <span class="price-text">Starting from : </span>
+                  <span class="price">₹&nbsp;1,599<span class="price-last-two-char">.00</span></span>
+                </div>
+
+              </div>
+              <div class="card-footer">
+                <input type="submit" class="btn btn-primary add-to-cart-button" name="submit" value="Add to Cart">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Description Tab-->
+  <div class="tab-pane py-3 fade" id="desc_tab" *ngIf="product?.description">
+    <div class="container description">
+      {{product?.description}}
+    </div>
+  </div>
+  <!-- END Description Tab-->
+
+  <!-- PRODUCT PDP Tab -->
+  <!-- END PRODUCT PDP Tab -->
+
+  <!-- Reviews Tab-->
+  <div class="tab-pane py-3 fade d-none" id="reviews_tab">
+    <div id="reviews_container">
+      <h3 class="m-0 text-center py-4 title-lg">Reviews Not Available</h3>
+    </div>
+  </div>
+
+</div>

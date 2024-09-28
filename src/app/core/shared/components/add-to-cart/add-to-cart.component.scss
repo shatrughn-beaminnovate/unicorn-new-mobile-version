@@ -1,0 +1,22 @@
+.add_cart {
+  border: 1px solid #9f9f9f;
+  border-radius: 36px !important;
+  text-align: center;
+  font-size: 14px !important;
+  padding: 3px 8px !important;
+  margin-top: 8px;
+}
+
+.add_carts {
+  border: 0px solid #9f9f9f !important;
+  border-radius: 0px !important;
+  background-color: whitesmoke !important;
+  margin-top: 0px !important;
+  width: 100% !important;
+}
+
+@media screen and (min-width: 300px) and (max-width: 350px) {
+  .add_carts {
+    font-size: 14px !important;
+  }
+}

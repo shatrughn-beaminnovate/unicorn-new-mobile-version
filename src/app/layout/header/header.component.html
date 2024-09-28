@@ -1,0 +1,869 @@
+<!-- Top Navbar - Logo, Search, Currency Dropdown, Some Menu Links -->
+<nav class="navbar navbar-expand-lg navbar-first py-1">
+  <div class="container-fluid">
+    <a class="logoLeft" routerLink="/">
+      <img [src]="imgUrl + '/logo/client_logo.png'" alt="logo">
+    </a>
+    <!-- Mobile Menu Icons   openSidebarCart() {
+    this.commonService.sidebarCartToggle$.next(true)-->
+    <div class="mobile-menu-icons d-lg-none">
+      <!-- Previous cart  -->
+      <!-- <button type="button" class="mobile-cart-btn" data-toggle="modal" data-target="#sidebarcartModal" (click)="openSidebarCartsMobile()">
+        <i class="fa fa-shopping-cart"></i>
+      </button> -->
+
+      <!-- this is updated cart -->
+      <button type="button" class="mobile-cart-btn btn" (click)="openSidebarCart()">
+        <i class="fa fa-shopping-cart text-white"></i><span class="badge badge-light badge_cart">{{getCartItemsCount}}</span>
+      </button>
+      <button type="button" class="mobile-search-btn" data-target="#search_modal" data-toggle="modal">
+        <i class="fa fa-search"></i><span class="sr-only">Search</span>
+      </button>
+      <div class="hamburger" (click)="isMobileMenuOpen = !isMobileMenuOpen" [class.is-active]="isMobileMenuOpen">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <div class="collapse navbar-collapse align-items-center justify-content-center">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item mr-2 mega-dropdown dropdown deal_hot_dropdown" #megaDrop>
+          <a class="nav-link deals_link">
+            <span style="border-bottom: 2px solid #479f76">Deals Of The Day</span>
+            <!-- Example of using *ngFor to iterate over an array --> </a>
+          <div class="dropdown-menu mega-dropdown-menu rounded-0 shadow-sm deal_hot_dropdown_menu box_shadows " #megaDropDowns>
+            <div class="container mb-3">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="row mt-3">
+                    <div class="col-sm-12 d-flex align-item-center justify-content-between">
+                      <h3 class="hading-md m-0">Deals Of The Day</h3>
+                      <div class="swiper_btn">
+                        <div class="swiper_prev swiper-button-prev "></div>
+                        <span class="slide_pipe">|</span>
+                        <div class="swiper_next swiper-button-next"></div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-sm-12">
+                      <swiper [config]="customSwiperOptions" effect="fade">
+                        <ng-container *ngFor="let p of newsletter_products;">
+                          <ng-template swiperSlide>
+                            <a [routerLink]="['/product', p.slug]" (click)="onClickHideMegaMenus()" class="card flex-fill deals_hot_card h-100" style="color: black !important;">
+                              <div class="hot-deals-img-box">
+                                <img [src]="p.product_img" alt="" class="img-fluid">
+                                <img *ngIf="p.images?.length > 0" [src]="imgUrl + '/full/' + p.images[0].filename" alt="Product Image" class="img-fluid">
+                                <img *ngIf="!p.images || p.images.length === 0" src="./assets/img/not-found/no-image-found.png" alt=" ">
+                              </div>
+                              <div class="card-body text-center">
+                                <p class="card-text text-center card_text_font mb-3 text-black"> {{ p.name }}</p>
+                                <!-- <span class="price_main mb-3"><del class="pricee">&#8377;{{ p.product_price }}</del>&nbsp; &nbsp; &#8377;{{ p.product_sell_price }}</span> -->
+
+                                <app-price [price]="p.price" [saleprice]="p.saleprice" [strikePrice]="p.price" [isVerticalPrice]="true"></app-price>
+                              </div>
+                            </a>
+                          </ng-template>
+                        </ng-container>
+                      </swiper>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-sm-3">
+                  <div class="h-100">
+                    <img src="./assets/Creative/Frame 11857.png" class="deals_hot_img2 img-fluid" alt="" (click)="navigateToHomePod()">
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item mr-2">
+          <a routerLink="/hot-deals" class="nav-link deals_link">
+            Hot Deals
+          </a>
+        </li>
+        <!-- iPhoneLive  -->
+        <li class="nav-item mr-2" *ngIf="headerData.ipflStatus ">
+          <a routerLink="/iphone-life-product" class="nav-link deals_link">
+            iPhone For Life
+          </a>
+        </li>
+        <li class="nav-item menu-item dropdown dropdown-mega mega-dropdown position-static" #megaDropDown>
+          <a class="nav-link dropdown-toggle " href="javascript:void(0)" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+            Shop <i class="fa fa-caret-down"></i>
+          </a>
+          <div class="dropdown-menu mega-dropdown-menu shadow-sm border-top" id="product_list" #megaDropDownMenu>
+            <div class="mega-content px-4">
+              <div class="container-fluid justify-content-center">
+                <div class="row justify-content-center w-100">
+                  <ng-container *ngFor="let item of newCategoryHolder">
+                    <div class="col-sm-auto mb-4" *ngIf="+item.is_navigable === 1">
+                      <div class="img-box">
+                        <img [src]="imgUrl + '/medium/' + item.image" class="img-fluid" alt=" ">
+                      </div>
+                      <a [routerLink]="['category', item.slug]" (click)="onClickHideMegaMenu(item)" class="heading-md">{{item.name}}</a>
+                      <hr class="mb-2 mt-0">
+                      <ul *ngIf="item.childrens && item.childrens.length > 0">
+                        <li *ngFor="let child of item.childrens">
+                          <a *ngIf="+child.is_navigable === 1 && child.childrens && child.childrens.length === 0 && child.category_type === 'configurable'" [routerLink]="['/type', child.slug]" (click)="onClickHideMegaMenu(child)" class="d-flex align-items-center justify-content-between">
+                            <span class="pr-3">{{child.name}}</span> <span class="cat-badge" *ngIf="child.cat_badge">{{child.cat_badge}}</span>
+                          </a>
+                          <a *ngIf="+child.is_navigable === 1 && child.childrens && child.childrens.length === 0 && child.category_type === 'simple'" [routerLink]="['/products', child.slug]" (click)="onClickHideMegaMenu(child)" class="d-flex align-items-center justify-content-between">
+                            <span class="pr-3">{{child.name}}</span> <span class="cat-badge" *ngIf="child.cat_badge">{{child.cat_badge}}</span>
+                          </a>
+                          <a *ngIf="+child.is_navigable === 1 && child.childrens && child.childrens.length > 0" [routerLink]="['/category', child.slug]" (click)="onClickHideMegaMenu(child)" class="d-flex align-items-center justify-content-between">
+                            <span class="pr-3">{{child.name}}</span> <span class="cat-badge" *ngIf="child.cat_badge">{{child.cat_badge}}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item mr-2">
+          <a routerLink="/back-to-school" class="nav-link">
+            Student Offers
+          </a>
+        </li>
+
+        <!-- <li class="nav-item mr-2" routerLinkActive="active-link">
+          <a class="nav-link " routerLink="/contact" routerLinkActive="active-link">Contact</a>
+        </li> -->
+
+        <li class="nav-item mr-2" routerLinkActive="active-link">
+          <a class="nav-link" routerLink="/find-store" routerLinkActive="active-link">Store Locator</a>
+        </li>
+
+        <li class="nav-item mr-2" routerLinkActive="active-link">
+          <a class="nav-link" routerLink="/support" routerLinkActive="active-link">Support</a>
+        </li>
+
+        <li *ngIf="isUserLoggedIn" routerLinkActive="active-link">
+          <a class="nav-link" routerLink="/account" routerLinkActive="active-link">My Account</a>
+        </li>
+
+        <li *ngIf="isUserLoggedIn" routerLinkActive="active-link">
+          <button type="button" class="nav-link" (click)="onClickLogout()">Logout</button>
+        </li>
+
+        <!-- <li *ngIf="!isUserLoggedIn">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li> -->
+
+        <li *ngIf="!isUserLoggedIn">
+          <a class="nav-link button-style" (click)="openLoginSidebar()">Login</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav align-items-end justify-content-end ml-auto">
+        <li class="nav-item input-search position-relative">
+          <button type="button" data-target="#search_modal" data-toggle="modal" class="btn only-search-btn mr-2">
+            <i class="fa fa-search"></i> <span class="sr-only">Search</span>
+          </button>
+        </li>
+
+        <li class="nav-item input-search position-relative">
+          <button type="button" class="btn only-search-btn" (click)="openSidebarCart()">
+            <i class="fa fa-shopping-cart text-white"></i><span class="badge badge-light badge_cart">{{getCartItemsCount}}</span>
+          </button>
+        </li>
+
+        <!--<li class="nav-item">
+          <select name="to_currency" (change)="onChangeCurrency($event);" class="custom-select custom-select-sm currency-select">
+            <option *ngFor="let currency of currencyHolder" [value]="currency.value" [attr.selected]="(checkSelectedCurrency() === currency.value) ? true : null">{{currency.text}}</option>
+          </select>
+        </li>-->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="delivery-quotes" *ngIf="isDeliveryQuotesShow && +headerData.noticeBarEnabled === 1">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col">
+        <p class="text-center text-white m-0">{{headerData.noticeBarDescription}}</p>
+        <!-- <p class="text-center text-white m-0">Shop Online & Collect in-Store in 90 Min</p> -->
+      </div>
+      <div class="col-auto" *ngIf="+headerData.noticeBarClosable === 1">
+        <span class="font-weight-bold" (click)="close()">&times;</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="maintenance-mode-notice" *ngIf="+headerData.maintenanceMode === 1">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col">
+        <h4 class="text-center text-white m-0" [innerHTML]="headerData.maintenanceTitle"></h4>
+        <p class="text-center m-0" [innerHTML]="headerData.maintenanceDescription"></p>
+        <!-- <p class="text-center m-0">
+          Thank you for visiting the Unicorn Online Store! We are currently collaborating with our partners to enhance your browsing experience.
+          The website will be back in service to meet your needs shortly. For any queries, please feel free to reach out to us at 1-800-267-7888.
+        </p> -->
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- For Mobile -->
+<div class="overlay" (click)="isMobileMenuOpen = false" [class.active]="isMobileMenuOpen"></div>
+<div class="mobile-menu-sidebar" [class.mobile-menu-open]="isMobileMenuOpen">
+  <ul class="navbar-nav">
+
+    <li class="nav-item" *ngIf="isUserLoggedIn">
+      <a class="nav-link" routerLink="/account" (click)="isMobileMenuOpen = false">My Account</a>
+    </li>
+
+    <!-- <li class="nav-item" *ngIf="!isUserLoggedIn">
+      <a class="nav-link" routerLink="/login" (click)="isMobileMenuOpen = false">Login</a>
+    </li> -->
+
+    <li class="nav-item" *ngIf="!isUserLoggedIn">
+      <a class="nav-link button-style" (click)="openLoginSidebar()">Login</a>
+    </li>
+
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/back-to-school" (click)="isMobileMenuOpen = false">
+        Student Offer
+      </a>
+      <a class="nav-link" routerLink="/">
+        <span (click)="isMobileMenuOpen = false">Home</span> <i class="fa fa-plus sidebar-icon" data-toggle="collapse" data-target="#show-div" aria-expanded="true"></i>
+      </a>
+      <div class="collapse show" id="show-div">
+        <ul class="navbar-nav">
+
+          <li class="nav-item" *ngFor="let item of newCategoryHolder; let i = index">
+            <div class="d-flex align-items-center position-relative">
+              <a [routerLink]="['category', item.slug]" (click)="isMobileMenuOpen = false">{{item.name}}</a>
+              <i class="fa fa-caret-down sidebar-icon collapsed" data-toggle="collapse" [attr.data-target]="'#_' + item.id" aria-expanded="false"></i>
+            </div>
+            <div class="child-menu collapse" [attr.id]="'_' + item.id">
+              <ul class="navbar-nav">
+
+                <li *ngFor="let child of item.childrens" class="nav-item">
+                  <a *ngIf="child.childrens && child.childrens.length === 0 && child.category_type === 'configurable'" [routerLink]="['/type', child.slug]" (click)="isMobileMenuOpen = false" class="collapse-link">1{{child.name}}</a>
+                  <a *ngIf="child.childrens && child.childrens.length > 0" [routerLink]="['/category', child.slug]" (click)="isMobileMenuOpen = false" class="collapse-link">2{{child.name}}</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" routerLink="/training" (click)="isMobileMenuOpen = false">Training </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/support" (click)="isMobileMenuOpen = false">Support </a>
+    </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link" routerLink="/contact" (click)="isMobileMenuOpen = false">Contact </a>
+    </li> -->
+    <li class="nav-item" *ngIf="isUserLoggedIn">
+      <a class="nav-link" href="javascript:void(0)" (click)="onClickLogout(); isMobileMenuOpen = false">Logout</a>
+    </li>
+  </ul>
+</div>
+
+<aside class="cart-details-sidebar" id="view-cart">
+  <div class="cart-details-sidebar-header">
+    <h6 class="mb-0">Shopping Cart</h6>
+    <button type="button" class="close-cart-details-sidebar" (click)="hideSideCartDetails()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="cart-details-sidebar-body">
+    <ng-container *ngIf="cartHolder.length > 0">
+      <div *ngFor="let item of cartHolder" class="media border-bottom py-2">
+        <a routerLink="/product/{{item.slug}}" class="img-box-sm" *ngIf="item.images">
+          <img [src]="imgUrl + '/categories/medium/' + item?.images[0]?.filename" class="align-self-center" [attr.alt]="item?.images[0]?.alt">
+        </a>
+        <div class="media-body ml-3">
+          <a routerLink="/product/{{item.slug}}" class="heading-link-md">{{item.name}}</a>
+          <div class="d-flex align-items-center justify-content-between">
+            <h6 class="heading-sm">Quantity : {{item.ordered_quantity}}</h6>
+            <div class="price-box price-box-sm">
+              <span class="price-text">{{item.ordered_quantity}} &times;</span>
+              <span class="price" *ngIf="item.price >= item.saleprice" [innerHTML]="item.saleprice | currency | priceAfterDotSmall"></span>
+              <span class="price" *ngIf="item.price < item.saleprice" [innerHTML]="item.price | currency | priceAfterDotSmall"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-box text-right mt-1 mb-3" *ngIf="cartSummaryHolder">
+        <span class="price-text">Cart Subtotal :</span>
+        <span class="price" [innerHTML]="cartSummaryHolder.subtotal | currency | priceAfterDotSmall"></span>
+      </div>
+      <a routerLink="/view-cart" class="btn btn-primary btn-block mb-2">Go to Shopping Cart</a>
+    </ng-container>
+  </div>
+
+  <div class="cart-details-sidebar-footer" *ngIf="cartHolder.length === 0">
+    <div class="text-center py-4 px-3">
+      <i class="fa fa-shopping-cart fa-4x mb-2"></i>
+      <h6 class="font-weight-bold">You have no item in your cart.</h6>
+    </div>
+  </div>
+</aside>
+
+
+<!-- for Login -->
+<p-sidebar [(visible)]="loginSidebar" [position]="'right'" class="custom-sidebar" [showCloseIcon]="showCloseIcon" (onHide)="onSidebarCloseOnPhone()">
+  <button type="button" (click)="loginSidebar = false" class="login-close-btn"><i class="fa fa-times"></i></button>
+  <div class="container-fluid m-0">
+    <div class="row login_form_sidebar">
+      <div class="col-sm-5 modal_left order-sm-1 order-2 ">
+        <img src="./assets/Creative/service-247/Creative 2.png" class="modal-left-img img-fluid" alt="">
+        <div class="modal-left-container my-5">
+          <h3 class="text-white">Don't Have an Account Yet?</h3>
+          <p>New here? Sign up now to access exclusive benefits and join our community today</p>
+          <button class="btn text-white border border-white rounded-3" style="border-width: 2px;" (click)="openRegisterSidebar()">Sign up</button>
+        </div>
+      </div>
+      <div class="col-sm-7 modal_right my-5 px-3 order-sm-2 order-1 ">
+
+        <div class="modal-right-container mx-5">
+
+          <div class="modal_right_form ">
+
+            <form [hidden]="isLoginWithOtpForm || isForgotPasswordForm" [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
+              <h3 class="mb-2">Log in to your account</h3>
+              <div class="form-group">
+                <label for="email" class="label_font">Email<span class="req">*</span></label>
+                <input type="email" id="email" formControlName="email" [class.is-invalid]="loginSubmitted && getLoginControls.email.errors" name="email" class="form-control form-control-sm">
+                <div *ngIf="loginSubmitted && getLoginControls.email.errors" class="invalid-feedback">
+                  <div *ngIf="getLoginControls.email.errors.required">Email is required</div>
+                  <div *ngIf="getLoginControls.email.errors.pattern">This email is not valid</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="password" class="label_font">Password<span class="req">*</span></label>
+                <div class="input-group">
+                  <input [type]="showPassword ? 'text' : 'password'" formControlName="password" id="password" [class.is-invalid]="loginSubmitted && getLoginControls.password.errors" class="form-control rounded-right-0 rounded-bottom-right-0" style="border-right: none; background-color: white;" (focus)="onPasswordFocus()" (blur)="onPasswordBlur()" />
+                  <div class="input-group-append">
+                    <span class="input-group-text rounded-left-0 rounded-bottom-left-0 eye-icon" (click)="showUserPassword($event)" style="cursor: pointer; background-color: white !important;" [ngClass]="{'dark-border': isPasswordFocused, 'border-red': loginSubmitted}">
+                      <i style="font-size: 14px; color: #000000;" class="fa fa-eye" *ngIf="showPassword"></i>
+                      <i style="font-size: 14px;" class="fa fa-eye-slash" *ngIf="!showPassword"></i>
+                    </span>
+                  </div>
+                </div>
+                <div *ngIf="loginSubmitted && getLoginControls.password.errors" class="invalid-feedback d-block">
+                  <div *ngIf="getLoginControls.password.errors.required">Password is Required</div>
+                </div>
+              </div>
+              <div class="row my-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input type="checkbox" id="rememberme" name="rememberme" class="form-check-input">
+                    <label for="rememberme" class="form-check-label ml-2">Remember Me</label>
+                  </div>
+                </div>
+                <div class="col-auto text-right">
+                  <button type="button" class="btn-link btn-link-primary" (click)="showBasicDialog2()">Forgot Password?</button>
+                </div>
+              </div>
+              <!-- <div id="google-btn"></div> -->
+              <div class="form-row mt-2">
+                <div class="col-sm-6 mb-3">
+                  <button type="submit" class="btn btn-success btn-sm w-100">Login</button>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <button type="button" (click)="onClickOtpLogin()" class="btn btn-primary btn-sm w-100">OTP Login</button>
+                </div>
+              </div>
+              <!-- <div class="my-3">
+                <p class="text-secondary text-center my-3">Or login Using </p>
+                <div class="row justify-content-center login_using_brand my-3">
+                  <div class="col-sm-auto">
+                    <button (click)="onClickGoogleLogin()" class="btn btn-primary btn-sm" type="button"><i class="fab fa-google"></i></button>
+                  </div>
+                  <div class="col-sm-auto">
+                    <i class="fab fa-facebook-f"></i>
+                  </div>
+                  <div class="col-sm-auto">
+                    <i class="fab fa-twitter"></i>
+                  </div>
+                </div>
+              </div> -->
+
+              <!-- <div class="div"  >
+                <div id="google-btns"></div>
+              </div> -->
+            </form>
+            <!-- Mobile Number Form Fields -->
+            <div class="login-with-otp-container" [hidden]="!(isLoginWithOtpForm && !isOtp)">
+              <h3 class="mb-2">Login with OTP</h3>
+              <hr class="mt-0">
+              <div class="form-group">
+                <label for="mobile_no">Enter Mobile Number <span class="req">*</span></label>
+                <input type="text" #mobileNumber name="mobile_no" id="mobile_no" class="form-control form-control-sm">
+              </div>
+              <hr class="my-3">
+              <div class="form-row">
+                <div class="col">
+                  <button type="button" (click)="verifyMobile(mobileNumber.value)" class="btn btn-primary mb-2">Request Otp</button>
+                </div>
+                <div class="col-auto">
+                  <button type="button" (click)="loginWithEmail()" class="btn btn-primary mb-2">Login With Email</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- OTP Verify Form Fields -->
+            <div class="otp-varification-container" [hidden]="!(isLoginWithOtpForm && isOtp)">
+              <h3 class="mb-2">Login with OTP</h3>
+              <hr class="mt-0">
+              <div class="form-group">
+                <label>Enter Otp to verify your account <span class="req">*</span> </label>
+                <ngx-otp-input [config]="otpInputConfig" (otpChange)="handleOtpChange($event)" (fill)="handleFillEvent($event)"></ngx-otp-input>
+                <small class="d-block mb-2"> A code has been sent to {{mobile}}</small>
+                <h6 class="heading-sm my-2 font-weight-normal font-italic text-danger"> {{(otpExpires !== 0) ? 'OTP Expires in ' + otpExpires + ' Seconds' : 'Otp Expired' }} </h6>
+                <div class="d-flex align-items-end">Didn't get the code?
+                  <button type="button" (click)="resendOtp()" class="btn-link btn-link-primary ml-2">Resend OTP</button>
+                </div>
+              </div>
+              <hr class="my-3">
+              <div class="form-row">
+                <div class="col" *ngIf="isOtp">
+                  <button type="button" (click)="validateOtp()" class="btn btn-primary">Validate Otp</button>
+                </div>
+                <div class="col-auto">
+                  <button type="button" (click)="loginWithEmail()" class="btn btn-primary">Login With Email</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-sidebar>
+
+
+<!-- for Register -->
+<p-sidebar [(visible)]="registerSidebar" [position]="'right'" class="custom-sidebar" [showCloseIcon]="showCloseIcon" (onHide)="onSidebarCloseOnPhone()">
+  <div class="container-fluid m-0">
+    <div class="row login_form_sidebar">
+      <div class="col-sm-5 modal_left order-sm-1 order-2 ">
+        <img src="./assets/Creative/service-247/Creative 2.png" class="modal-left-img img-fluid" alt="">
+        <div class="modal-left-container my-3">
+          <h3 class="text-white">Already Signed Up?</h3>
+          <p>You're already in, now let's make it unforgettable together!</p>
+          <button class="btn text-white border border-white rounded-3" style="border-width: 2px;" (click)="openLoginSidebar()">Login</button>
+        </div>
+      </div>
+      <div class="col-sm-7 modal_register_right_scroll my-4 px-3 order-sm-2 order-1 ">
+        <div class="mx-4">
+          <h3 class="mb-3">Create New Account</h3>
+          <div class="register_modal_right_form">
+            <form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit()">
+              <div class="row">
+                <div class="col-sm">
+                  <div class="form-group">
+                    <label for="company" class="label_font">Company Name</label>
+                    <input type="text" id="company" formControlName="company" name="company" class="form-control form-control-sm placeholder-light" placeholder="Enter Your Company Name">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="firstname" class="label_font">First Name <span class="req">*</span></label>
+                    <input type="text" id="firstname" formControlName="firstname" [class.is-invalid]="registerSubmitted && registerForm.get('firstname')?.errors" name="firstname" class="form-control form-control-sm" placeholder="Your First Name">
+                    <div *ngIf="registerSubmitted && registerForm.get('firstname')?.errors" class="invalid-feedback">
+                      <div *ngIf="registerForm.get('firstname')?.errors?.required">First Name is Required</div>
+                      <div *ngIf="registerForm.get('firstname')?.errors?.pattern">Only characters are allowed in the first name.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="lastname" class="label_font">Last Name <span class="req">*</span></label>
+                    <input type="text" id="lastname" formControlName="lastname" [class.is-invalid]="registerSubmitted && registerForm.get('lastname')?.errors" name="lastname" class="form-control form-control-sm" placeholder="Your Last Name">
+                    <div *ngIf="registerSubmitted && registerForm.get('lastname')?.errors" class="invalid-feedback">
+                      <div *ngIf="registerForm.get('lastname')?.errors?.required">Last Name is Required</div>
+                      <div *ngIf="registerForm.get('lastname')?.errors?.pattern">Only characters are allowed in the last name.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email" class="label_font">Email<span class="req">*</span></label>
+                    <input type="email" id="email" formControlName="email" [class.is-invalid]="registerSubmitted && registerForm.get('email')?.errors" name="email" class="form-control form-control-sm" placeholder="Your Email-Id">
+                    <div *ngIf="registerSubmitted && registerForm.get('email')?.errors" class="invalid-feedback">
+                      <div *ngIf="registerForm.get('email')?.errors?.required">Email is Required</div>
+                      <div *ngIf="registerForm.get('email')?.errors?.pattern">This Email is Not Valid</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="phone" class="label_font">Mobile Number <span class="req">*</span></label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <input type="text" class="form-control country-code" placeholder="+91" formControlName="countryCode" [class.is-invalid]="registerSubmitted && registerForm.get('countryCode')?.errors" />
+                      </div>
+                      <input type="text" id="phone" formControlName="phone" [class.is-invalid]="registerSubmitted && registerForm.get('phone')?.errors" name="phone" class="form-control form-control-sm phone-number" placeholder="Eg: 9867159067">
+                      <div *ngIf="registerSubmitted && registerForm.get('phone')?.errors" class="invalid-feedback">
+                        <div *ngIf="registerForm.get('phone')?.errors?.required">
+                          Phone is Required
+                        </div>
+                        <div *ngIf="registerForm.get('phone')?.errors?.pattern">
+                          Phone No. is 10 digits
+                        </div>
+                      </div>
+                      <div *ngIf="registerSubmitted && registerForm.get('countryCode')?.errors" class="invalid-feedback">
+                        <div *ngIf="registerForm.get('countryCode')?.errors?.pattern">
+                          Invalid country code format
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Password Field -->
+                  <div class="form-group">
+                    <label for="password" class="label_font">Password<span class="req">*</span></label>
+                    <div class="input-group">
+                      <input [type]="showPassword ? 'text' : 'password'" formControlName="password" id="password" [class.is-invalid]="registerSubmitted && registerForm.get('password')?.errors" class="form-control rounded-right-0 rounded-bottom-right-0" style="border-right: none; background-color: white;" placeholder="Enter Your Password" (focus)="onPasswordFocus()" (blur)="onPasswordBlur()" />
+                      <div class="input-group-append">
+                        <span class="input-group-text rounded-left-0 rounded-bottom-left-0 eye-icon" (click)="showUserPassword($event)" style="cursor: pointer; background-color: white !important;" [ngClass]="{'dark-border': isPasswordFocused, 'border-red': registerSubmitted}">
+                          <i style="font-size: 14px; color: #000000;" class="fa fa-eye" *ngIf="showPassword"></i>
+                          <i style="font-size: 14px;" class="fa fa-eye-slash" *ngIf="!showPassword"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <div *ngIf="registerSubmitted && registerForm.get('password')?.errors" class="invalid-feedback d-block">
+                      <div *ngIf="registerForm.get('password')?.errors?.required">Password is Required</div>
+                    </div>
+                  </div>
+
+                  <!-- Confirm Password Field -->
+                  <div class="form-group">
+                    <label for="conf_password" class="label_font">Confirm Password <span class="req">*</span></label>
+                    <div class="input-group">
+                      <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="conf_password" id="conf_password" [class.is-invalid]="registerSubmitted && registerForm.get('conf_password')?.errors" class="form-control rounded-right-0 rounded-bottom-right-0" style="border-right: none; background-color: white;" placeholder="Re Enter Your Password" (focus)="onConfirmPasswordFocus()" (blur)="onConfirmPasswordBlur()" />
+                      <div class="input-group-append">
+                        <span class="input-group-text rounded-left-0 rounded-bottom-left-0" (click)="showUserConfirmPassword($event)" style="cursor: pointer; background-color: white !important;" [ngClass]="{'dark-border': isConfirmPasswordFocused, 'border-red': registerSubmitted}">
+                          <i style="font-size: 14px; color: #000000;" class="fa fa-eye" *ngIf="showConfirmPassword"></i>
+                          <i style="font-size: 14px;" class="fa fa-eye-slash" *ngIf="!showConfirmPassword"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <div *ngIf="registerSubmitted && registerForm.get('conf_password')?.errors" class="invalid-feedback d-block">
+                      <div *ngIf="registerForm.get('conf_password')?.errors?.required">Confirm Password is Required</div>
+                      <div *ngIf="registerForm.get('conf_password')?.errors?.mustMatch">Password & Confirm Password Must Match</div>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label class="label_font">GSTN</label>
+                    <input type="text" formControlName="gst" [class.is-invalid]="registerSubmitted && getRegisterControls.gst.errors" name="gst" class="form-control form-control-sm">
+                    <div *ngIf="registerSubmitted && getRegisterControls.gst.errors" class="invalid-feedback">
+                      <div *ngIf="getRegisterControls.gst.errors.pattern">GST Number is Not Valid</div>
+                    </div>
+                  </div>
+
+                  <div class="mt-3">
+                    <div class="form-group">
+                      <div class="custom-checkbox custom-control">
+                        <input type="checkbox" formControlName="TandC" name="TandC" class="custom-control-input" id="TandC" checked="checked" [class.is-invalid]="registerSubmitted && registerForm.get('TandC')?.errors" />
+                        <label class="custom-control-label" for="TandC">I Accept <span class="text-primary">Terms & Condition</span> </label>
+                        <div *ngIf="registerSubmitted && registerForm.get('TandC')?.errors" class="invalid-feedback">
+                          <div *ngIf="registerForm.get('TandC')?.errors?.required">Please agree to the Terms & Conditions </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="custom-checkbox custom-control">
+                        <input type="checkbox" formControlName="email_subscribe" name="email_subscribe" class="custom-control-input" id="subscribe_email" checked="checked" />
+                        <label class="custom-control-label" for="subscribe_email">Subscribe to our email list</label>
+                        <!-- <div *ngIf="registerSubmitted && registerForm.get('email_subscribe')?.errors" class="invalid-feedback">
+                          <div *ngIf="registerForm.get('TandC')?.errors?.required">Terms & Condition is Required</div>
+                        </div> -->
+                        <!-- [class.is-invalid]="registerSubmitted && registerForm.get('email_subscribe')?.errors -->
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <button type="submit" [disabled]="isLoading" class="btn btn-success btn-sm w-100">Register</button>
+                </div>
+              </div>
+              <div *ngIf="isLoading" class="loading-indicator">Loading...</div>
+            </form>
+            <!-- <div class="my-3">
+              <p class="text-secondary text-center my-3">Or login Using </p>
+              <div class="row login_using_brand my-3">
+                <i class="fab fa-google"></i>
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-twitter"></i>
+              </div>
+            </div> -->
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</p-sidebar>
+
+<!-- <div class="row">
+  <div id="google-btn"></div>
+</div> -->
+
+<!-- For Mobile -->
+<div class="overlay" (click)="isMobileMenuOpen = false" [class.active]="isMobileMenuOpen"></div>
+<div class="mobile-menu-sidebar" [class.mobile-menu-open]="isMobileMenuOpen">
+  <ul class="navbar-nav">
+
+    <li class="nav-item" *ngIf="isUserLoggedIn">
+      <a class="nav-link" routerLink="/account" (click)="isMobileMenuOpen = false">My Account</a>
+    </li>
+
+    <!-- <li class="nav-item" *ngIf="!isUserLoggedIn">
+      <a class="nav-link" routerLink="/login" (click)="isMobileMenuOpen = false">Login</a>
+    </li> -->
+
+    <li class="nav-item" *ngIf="!isUserLoggedIn">
+      <a class="nav-link button-style" (click)="openLoginSidebar()" (click)="isMobileMenuOpen">Login</a>
+    </li>
+
+
+    <li class="nav-item">
+
+      <a class="nav-link" routerLink="/">
+        <span (click)="isMobileMenuOpen = false">Home</span> <i class="fa fa-plus sidebar-icon" data-toggle="collapse" data-target="#show-div" aria-expanded="true"></i>
+      </a>
+      <div class="collapse show" id="show-div">
+        <ul class="navbar-nav">
+
+          <ng-container *ngFor="let item of newCategoryHolder; let i = index">
+            <li class="nav-item" *ngIf="+item.is_navigable === 1">
+              <div class="d-flex align-items-center position-relative">
+                <a [routerLink]="['category', item.slug]" (click)="isMobileMenuOpen = false">{{item.name}}</a>
+                <i class="fa fa-caret-down sidebar-icon collapsed" data-toggle="collapse" [attr.data-target]="'#_' + item.id" aria-expanded="false"></i>
+              </div>
+              <div class="child-menu collapse" [attr.id]="'_' + item.id">
+                <ul class="navbar-nav">
+                  <li *ngFor="let child of item.childrens" class="nav-item">
+                    <a *ngIf="+child.is_navigable === 1 && child.childrens && child.childrens.length === 0 && child.category_type === 'configurable'" [routerLink]="['/type', child.slug]" (click)="isMobileMenuOpen = false" class="collapse-link d-flex align-items-center justify-content-between">
+                      <span class="pr-3">{{child.name}}</span> <span class="cat_badge" *ngIf="child.cat_badge">{{child.cat_badge}}</span>
+                    </a>
+                    <a *ngIf="+child.is_navigable === 1 && child.childrens && child.childrens.length > 0" [routerLink]="['/category', child.slug]" (click)="isMobileMenuOpen = false" class="collapse-link d-flex align-items-center justify-content-between">
+                      <span class="pr-3">{{child.name}}</span> <span class="cat_badge" *ngIf="child.cat_badge">{{child.cat_badge}}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" routerLink="/back-to-school" (click)="isMobileMenuOpen = false">
+        Student Offer
+      </a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" routerLink="/hot-deals" (click)="isMobileMenuOpen = false">
+        Hot Deals
+      </a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" routerLink="/deals-of-day" (click)="isMobileMenuOpen = false">
+        Deals Of The Day
+      </a>
+    </li>
+    <li class="nav-item ">
+      <!-- <a class="nav-link" routerLink="/training" (click)="isMobileMenuOpen = false">Training </a> -->
+      <a class="nav-link" routerLink="/find-store" (click)="isMobileMenuOpen = false">Store Locator </a>
+
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/support" (click)="isMobileMenuOpen = false">Support </a>
+    </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link" routerLink="/contact" (click)="isMobileMenuOpen = false">Contact </a>
+    </li> -->
+    <li class="nav-item" *ngIf="isUserLoggedIn">
+      <a class="nav-link" href="javascript:void(0)" (click)="onClickLogout(); isMobileMenuOpen = false">Logout</a>
+    </li>
+  </ul>
+</div>
+
+<aside class="cart-details-sidebar" id="view-cart">
+  <div class="cart-details-sidebar-header">
+    <h6 class="mb-0">Shopping Cart</h6>
+    <button type="button" class="close-cart-details-sidebar" (click)="hideSideCartDetails()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="cart-details-sidebar-body">
+    <ng-container *ngIf="cartHolder.length > 0">
+      <div *ngFor="let item of cartHolder" class="media border-bottom py-2">
+        <a routerLink="/product/{{item.slug}}" class="img-box-sm" *ngIf="item.images">
+          <img [src]="imgUrl + '/categories/medium/' + item?.images[0]?.filename" class="align-self-center" [attr.alt]="item?.images[0]?.alt">
+        </a>
+        <div class="media-body ml-3">
+          <a routerLink="/product/{{item.slug}}" class="heading-link-md">{{item.name}}</a>
+          <div class="d-flex align-items-center justify-content-between">
+            <h6 class="heading-sm">Quantity : {{item.ordered_quantity}}</h6>
+            <div class="price-box price-box-sm">
+              <span class="price-text">{{item.ordered_quantity}} &times;</span>
+              <span class="price" *ngIf="item.price >= item.saleprice" [innerHTML]="item.saleprice | currency | priceAfterDotSmall"></span>
+              <span class="price" *ngIf="item.price < item.saleprice" [innerHTML]="item.price | currency | priceAfterDotSmall"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-box text-right mt-1 mb-3" *ngIf="cartSummaryHolder">
+        <span class="price-text">Cart Subtotal :</span>
+        <span class="price" [innerHTML]="cartSummaryHolder.subtotal | currency | priceAfterDotSmall"></span>
+      </div>
+      <a routerLink="/view-cart" class="btn btn-primary btn-block mb-2">Go to Shopping Cart</a>
+    </ng-container>
+  </div>
+
+  <div class="cart-details-sidebar-footer" *ngIf="cartHolder.length === 0">
+    <div class="text-center py-4 px-3">
+      <i class="fa fa-shopping-cart fa-4x mb-2"></i>
+      <h6 class="font-weight-bold">You have no item in your cart.</h6>
+    </div>
+  </div>
+</aside>
+
+<!-- Loader -->
+<div id="loading-bar-spinner" class="spinner" *ngIf="isGlobalLoader | async">
+  <div class="spinner-icon"></div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="search_modal" tabindex="-1">
+  <div class="modal-dialog modal-xxl" role="document">
+    <div class="modal-content" style="background-color: #fffffff2;">
+      <div class="modal-body" style="min-height: calc(96vh - 58px);">
+        <button type="button" class="search-close-btn" (click)="clearInputField(searchInput)" data-dismiss="modal" #modalClose>&times;</button>
+        <div class="row no-gutters justify-content-center mt-4">
+          <div class="col-sm-10">
+            <h2 class="text-center my-2">What Are You Looking For ?</h2>
+            <form class="d-flex justify-content-center">
+              <input type="text" id="searchbar" name="search" placeholder="I'm Looking For" (input)="onSearch($event)" required autofocus autocomplete="off" #searchInput>
+            </form>
+            <div class="row my-4 justify-content-center">
+              <div class="col-sm-auto">
+                <p class="h5">Popular Searches: </p>
+              </div>
+              <div class="col-sm-10">
+                <div class="row">
+                  <div class="" *ngFor="let p of searchbar_popular">
+                    <h6 class="px-3 py-2 mx-3 popular_product pointer mb-2" [routerLink]="['/product', p.slug]" (click)="closeModal()">{{p.name}}</h6>
+                  </div>
+                  <!-- <h6 class="px-3 py-2 mx-3 popular_product">iPhone 13</h6>
+                  <h6 class="px-3 py-2 mx-3 popular_product">Apple Studio Display</h6>
+                  <h6 class="px-3 py-2 mx-3 popular_product">iPad 10th Generation</h6>
+                  <h6 class="px-3 py-2 mx-3 popular_product">Apple TV 4K</h6>
+                  <h6 class="px-3 py-2 mx-3 popular_product">HomePad</h6>
+                  <h6 class="px-3 py-2 mx-3 popular_product">Apple Watch Series 9</h6> -->
+                </div>
+              </div>
+            </div>
+            <div class="" *ngIf="!searchResultHolder.length">
+              <p class="h5">Popular Product: </p>
+              <div class="row my-3">
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 mb-2" *ngFor="let p of searchbar_products">
+                  <a class="card h-100 " [routerLink]="['/product', p.slug]" (click)="closeModal()">
+                    <!-- <img [src]="p.product_img" alt="" class="card-img-top img-fluid"> -->
+                    <img [src]="imgUrl + '/medium/' +p.images[0].filename" alt="Product Image" class="card-img-top img-fluid">
+                    <div class="card-body">
+                      <p class="card-text text-center text-black">{{p.name}}</p>
+                      <p class="card-text text-center text-black" *ngIf="p.price > p.saleprice"><del>{{p.price}}</del>&nbsp;&nbsp;{{p.saleprice}}</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div style="max-height: 600px; overflow-y: auto; overflow-x: hidden">
+              <ng-container *ngIf="searchResultHolder.length > 0">
+                <div id="filter-records" *ngFor="let searchValue of searchResultHolder">
+                  <a [routerLink]="['/'+ searchValue.redirect_type +'/'+ searchValue.slug + '?search=text']" class="search-result-link" (click)="modalClose.click(); onSearch(''); searchInput.value = ''">{{searchValue.name}}</a>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="searchError.status">
+                <h5 class="text-danger">{{searchError.text}}</h5>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+
+<!-- <p-dialog [(visible)]="showModal" [style]="{width: '50vw'}" [modal]="true" [closable]="false" [resizable]="false" [baseZIndex]="10000">
+  <div class="cart-details-sidebar-body">
+    <ng-container *ngIf="cartHolder.length > 0">
+      <div *ngFor="let item of cartHolder" class="media border-bottom py-2">
+        <a routerLink="/product/{{item.slug}}" class="img-box-sm" *ngIf="item.images">
+          <img [src]="imgUrl + '/categories/medium/' + item?.images[0]?.filename" class="align-self-center" [attr.alt]="item?.images[0]?.alt">
+        </a>
+        <div class="media-body">
+          <p>
+            Thank you for visiting the Unicorn Online Store! We are currently collaborating with our partners to enhance your browsing experience.
+            The website will be back in service to meet your needs shortly. For any queries, please feel free to reach out to us at 1-800-267-7888.
+          </p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</p-dialog> -->
+
+<p-dialog header="Forgot Password Form" [(visible)]="displayBasic2" [style]="{width: '50vw'}"
+  [draggable]="true" [resizable]="false" [dismissableMask]="false" [modal]="true">
+  <form [formGroup]="forgotPasswordForm">
+    <div class="mb-3">
+      <input type="text" formControlName="forgotEmail" class="form-control form-control-sm" placeholder="Enter Your Registered Email...">
+      <div *ngIf="f.forgotEmail.touched && f.forgotEmail.invalid" class="text-danger">
+        <div *ngIf="f.forgotEmail.errors?.required">Email is required.</div>
+        <div *ngIf="f.forgotEmail.errors?.email">Please enter a valid email.</div>
+      </div>
+    </div>
+  </form>
+  <div class="float-right">
+    <p-button label="Submit" styleClass="btn btn-success btn-sm" type="submit" (click)="submitForgot()"></p-button>
+    <p-button label="Cancel" styleClass="btn btn-sm" (click)="closeForgot()"></p-button>
+  </div>
+</p-dialog>
+
+<!-- <p-dialog header="Forgot Password Form " [(visible)]="displayBasic2" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}"
+[draggable]="true" [resizable]="false" [dismissableMask]="false"  [modal]="true" >
+         <div class="mb-3">
+          <input type="text" [(ngModel)]="forgotEmail" name="customer_name" id="notify_customer_name" class="form-control form-control-sm" placeholder="Enter your  registered email...">
+        </div>
+      
+        <ng-template pTemplate="footer">
+   
+            <button type="submit" class="btn btn-success btn-sm w-100" (click)="submitForgot()">Submit</button>
+     
+   
+            <button type="submit" class="btn btn-success btn-sm w-100" (click)="closeForgot()">Cancel</button>
+ 
+  
+        </ng-template>
+</p-dialog> -->
+<app-sidebarcart></app-sidebarcart>

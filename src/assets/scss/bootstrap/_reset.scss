@@ -1,0 +1,74 @@
+.badge-primary {
+  color: $primary-color !important;
+  background-color: $primary-light-color !important;
+}
+
+.badge {
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.015em;
+  line-height: 9px;
+  padding: 4px 4px 3px;
+}
+
+.mb-2,
+.my-2 {
+  margin-bottom: 10px !important;
+}
+
+.mt-2,
+.my-2 {
+  margin-top: 10px !important;
+}
+
+.breadcrumb-item.active {
+  color: #060606 !important;
+}
+
+.nav-cart {
+  .dropdown-toggle {
+    &::after {
+      opacity: 0;
+    }
+  }
+}
+
+.custom-control-input {
+  &:not(:disabled) {
+    &:active {
+      ~.custom-control-label {
+        &::before {
+          color: #fff;
+          background-color: $primary-light-color;
+          border-color: $primary-light-color;
+        }
+      }
+    }
+  }
+
+  &:checked {
+    ~.custom-control-label {
+      &::before {
+        border-color: $primary-color;
+        background-color: $primary-color;
+      }
+    }
+  }
+}
+
+table {
+  width: 100%;
+  border-color: #ddd !important;
+
+  th {
+    padding: 0 8px;
+    font-weight: 400;
+    font-size: 15px;
+  }
+
+  td {
+    font-size: 14px;
+    font-weight: 300;
+    padding: 0 8px;
+  }
+}

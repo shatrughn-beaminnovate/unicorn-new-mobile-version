@@ -1,0 +1,364 @@
+ 
+
+.sales {
+	// background-color: #28a745 !important;
+	// color: white;
+	// border-top-right-radius: 20px;
+	// border-bottom-right-radius: 20px;
+	// position: absolute;
+	// top: 3px;
+	// left: 3px;
+	// font-size: 15px;
+	position: absolute;
+    top: 12px;
+    left: -28px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 8px 3px 8px;
+    display: flex;
+    align-items: flex-end;
+    line-height: 13px;
+    font-weight: 500;
+    transform: rotate(-45deg);
+    width: 6rem;
+    justify-content: center;
+    letter-spacing: 0.025em;
+    perspective: 200px;
+}
+
+ .center-images {
+	text-align: center;
+}
+
+.pricee {
+	font-size: 20px;
+	margin: 0px;
+	text-align: center;
+}
+.p-dialog-headerss {
+	border-bottom: 0 none;
+	background: #fbfbfb;
+	color: rgba(0, 0, 0, 0.87) !important;
+	padding: 2px 3px !important;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	top: 3px;
+	position: relative;
+
+}
+.price_main {
+	// color: #5c5c5c;
+	font-size: 17px;
+	font-weight: 500;
+
+}
+ 
+
+.view_product {
+	background-color: #474747 !important;
+}
+
+
+
+.nav-tabs .nav-link.active {
+	color: green !important;
+	background-color: #fbfbfb;
+	border-bottom: 3px solid #479f76 !important;
+}
+
+
+.first_row {
+	background-color: #fff !important;
+	height: 100%;
+}
+
+.first_row:hover {
+	border-color: #6c6c6c !important;
+}
+
+.wishlist-btn {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.first_row:hover .wishlist-btn {
+	visibility: visible;
+	opacity: 1;
+	border-radius: 50%;
+	height: 35px;
+	width: 35px;
+	box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.add-btn {
+	visibility: hidden;
+	opacity: 0;
+	transition: 0.3s;
+	// transition: visibility 0.2s, opacity 0.3s ease 0.1s;  
+
+}
+
+
+.first_row:hover .add-btn {
+	visibility: visible;
+	opacity: 1;
+	cursor: pointer;
+}
+
+.wishlist-btn.Compare {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.center-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.Compare {
+	margin-top: 60px !important;
+	margin-right: 21px !important;
+}
+
+.Compares {
+	margin-right: 21px !important;
+}
+
+.add_to {
+	background-color: #f5f5f5;
+}
+
+ 
+
+.product_namess {
+	font-size: 20px !important;
+}
+
+.Popup_content {
+	height: 26rem;
+	width: 24rem;
+	border: 1px solid #ddd;
+}
+
+ 
+
+.img_popup {
+	max-height: 100%;
+	width: auto;
+}
+
+ 
+
+.btn {
+	padding: 4px 18px;
+	border-radius: 50px !important;
+}
+
+
+
+.text-white {
+	color: white !important;
+}
+ 
+
+a {
+	color: black !important;
+	text-decoration: none !important;
+	transition: 0.3s;
+}
+ 
+
+ .add_to_cart {
+	margin-top: -64px !important;
+}
+
+ 
+
+.button_stock {
+	background: #fbfbfb;
+	padding: 2px 17px !important;
+	color: #28a745;
+	border: 1px solid #28a745 !important;
+}
+
+
+.view_details {
+	text-decoration: underline !important;
+	font-size: medium;
+	border: none;
+	background-color: #fbfbfb;
+}
+
+.colors {
+	border-radius: 50%;
+	background-color: #6edff6;
+}
+
+.circules_color {
+	padding: 20px 20px;
+	border-radius: 50%;
+	cursor: pointer;
+	border: 2px solid #fbfbfb;
+
+}
+
+.selected {
+	border: 2px solid #5a88e1;
+
+}
+
+.circules_space {
+	border: 2px solid #ddd;
+	border-radius: 5px;
+	padding: 4px 13px;
+	cursor: pointer;
+
+}
+
+.selected_space {
+	border: 2px solid #5a88e1 !important;
+
+}
+
+.quantity_btn {
+	border: 1px solid #ddd;
+	padding: 5px;
+	border-radius: 3px !important;
+
+	* {
+		color: #656565;
+	}
+}
+
+.broder_button {
+	border-radius: 3px !important;
+
+}
+
+
+
+
+ 
+
+
+
+
+
+ 
+@media (max-width: 768px) {
+	
+	.price_main {
+		font-size: 17px !important;
+	}
+
+	.pricee {
+		font-size: 16px !important;
+		margin: 0px;
+		text-align: center;
+	}
+
+	}
+
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+  
+
+	.Popup_content {
+		height: 20rem !important;
+		width: auto !important;
+		border: 1px solid #ddd;
+	}
+
+}
+
+
+
+@media only screen and (min-width: 1441px) and (max-width: 1700px) {
+
+	.Popup_content {
+		height: 24rem !important;
+		width: 22rem !important;
+		border: 1px solid #ddd;
+	}
+
+	
+}
+
+@media screen and (min-width: 320px) and (max-width: 425px) {
+	.Popup_content {
+		height: auto !important;
+		width: auto !important;
+		border: 1px solid #ddd;
+	}
+
+
+	
+
+	.button_stock {
+		background: #fbfbfb;
+		padding: 3px 3px !important;
+		color: #28a745;
+		border: 1px solid #28a745 !important;
+		font-size: 12px !important;
+	}
+
+	.add-btn {
+		visibility: visible !important;
+		opacity: 1;
+		cursor: pointer;
+	}
+
+	.add_to_cart {
+		margin-top: -39px !important;
+	}
+
+	.Compares {
+		margin-right: 15px !important;
+	}
+
+	.wishlist-btn {
+		visibility: visible !important;
+		opacity: 1;
+		border-radius: 50%;
+		height: 35px;
+		width: 35px;
+		box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+	}
+
+	.Compare {
+		margin-right: 13px !important;
+	}
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1493px) {
+	.Popup_content {
+		height: 20rem !important;
+		width: auto !important;
+		border: 1px solid #ddd;
+	}
+	.pricee {
+		font-size: 17px !important;
+	}
+
+	.price_main {
+		font-size: 16px !important;
+	}
+}
+ 
+ 
+@media screen and (min-width: 1100px) and (max-width: 1300px) {
+
+.Popup_content {
+		height: 20rem !important;
+		width: auto !important;
+		border: 1px solid #ddd;
+	}
+
+ }
+

@@ -1,0 +1,140 @@
+<div class="container">
+  <!-- <div class="py-2 border-bottom">
+    <div class="row align-items-end">
+      <div class="col-sm">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item"><a routerLink="/" class="link">Home</a></li>
+          <li class="breadcrumb-item active d-flex align-items-center">{{title}}</li>
+        </ol>
+      </div>
+      <div class="col-sm-auto">
+        <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" styleClass="pDropdown"></p-dropdown>
+        <button type="button" [disabled]="!sortKey" class="btn btn-sm btn-danger-alt ml-2 text-nowrap" (click)="clearFilter();">Clear</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+  <div class="form-row justify-content-center">
+
+    <!-- Filters Column Start -->
+    <div class="col-sm-3 d-none" *ngIf="categoryTypeHolder">
+      <div class="card border-0 shadow-sm sticky-top-filters filters-section">
+        <div class="card-header d-flex align-items-center justify-content-between">
+          <h4 class="heading mb-0 mt-1">Filters</h4>
+          <button type="button" (click)="clearAllFilters()" *ngIf="isFilterApplied" class="btn-link clr-btn">CLEAR ALL</button>
+        </div>
+        <div class="card-body">
+          <div class="filter-box mb-4">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h5 class="filter-label">PRICE </h5>
+              <button type="button" (click)="clearPriceFilters()" *ngIf="isPriceFilterApplied" class="btn-link clr-btn">CLEAR</button>
+            </div>
+            <ngx-slider [(value)]="minValue" (mouseup)="onPriceChanged()" [(highValue)]="maxValue" [options]="options"></ngx-slider>
+            <div class="d-flex align-items-center justify-content-between mt-2">
+              <div class="form-groups">
+                <label>Min Price</label>
+                <div class="input-group input-group-xs">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text rounded-0"><i class="fa fa-rupee-sign"></i></span>
+                  </div>
+                  <input type="text" [(ngModel)]="minValue" (change)="onPriceChanged()" class="form-control form-control-xs rounded-0">
+                </div>
+              </div>
+              <span class="px-2"><label>&nbsp;</label><br>to</span>
+              <div class="form-groups">
+                <label>Max Price</label>
+                <div class="input-group input-group-xs">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text rounded-0"><i class="fa fa-rupee-sign"></i></span>
+                  </div>
+                  <input type="text" [(ngModel)]="maxValue" (change)="onPriceChanged()" class="form-control form-control-xs rounded-0">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ng-container *ngFor="let attr of attributesHolder; trackBy: trackByFunc; let i = index">
+            <div class="filter-box">
+              <button type="button" class="btn-link filter-btn" data-toggle="collapse" [attr.data-target]="'#collapsible_' + i" aria-expanded="true">
+                <span>{{attr.attribute_label}}</span> <span><i class="fa fa-angle-right ml-2"></i></span>
+              </button>
+              <div class="collapse show" id="collapsible_{{i}}">
+                <div class="mb-2">
+                  <ng-container *ngFor="let opt of attr.attribute_options">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" [(ngModel)]="opt.selected" (change)="onAttributesSelectedForFilters()" class="custom-control-input" [id]="opt.id">
+                      <label class="custom-control-label" [attr.for]="opt.id">{{opt.option_name}}</label>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-12">
+
+      <div class="row pt-2 pb-3 justify-content-center text-center">
+        <div class="col-sm-3 cg-4" *ngFor="let item of categoryAttrHolder;" >
+          <a *ngIf="item.childrens && item.childrens.length === 0 && item.category_type === 'configurable'" (click)="setMetaData(item)" [routerLink]="['/type', item.slug]" class="product-list-box">
+            <app-image-loader [imageUrl]="imgUrl + '/medium/' +item.image" noImageUrl="assets/img/not-found/no-image-found.png" [imageLoading]="true" imageContainerHeight="11rem" alt="Image Not Available"></app-image-loader>
+            <h3 class="heading mt-3 mb-2">{{item.name}}</h3>
+            <app-price [price]="item.min_saleprice" priceLabel="Starting From"></app-price>
+          </a>
+
+          <a *ngIf="item.childrens && item.childrens.length === 0 && item.category_type === 'simple'" (click)="setMetaData(item)" [routerLink]="['/accessories', item.slug]" class="product-list-box">
+            <app-image-loader [imageUrl]="imgUrl + '/medium/' +item.image" noImageUrl="assets/img/not-found/no-image-found.png" [imageLoading]="true" imageContainerHeight="11rem" alt="Image Not Available"></app-image-loader>
+            <h3 class="heading mt-3 mb-2">{{item.name}}</h3>
+            <app-price [price]="item.min_saleprice" priceLabel="Starting From"></app-price>
+          </a>
+
+          <a *ngIf="item.childrens && item.childrens.length > 0" [routerLink]="['/category', item.slug]" (click)="setMetaData(item)" class="product-list-box">
+            <app-image-loader [imageUrl]="imgUrl + '/medium/' +item.image" noImageUrl="assets/img/not-found/no-image-found.png" [imageLoading]="true" imageContainerHeight="11rem" alt="Image Not Available"></app-image-loader>
+            <h3 class="heading mt-3 mb-2">{{item.name}}</h3>
+            <app-price [price]="item.min_saleprice" priceLabel="Starting From"></app-price>
+          </a>
+        </div>
+        <div class="col-sm" *ngIf="categoryTypeHolder?.length === 0">
+          <h4 class="heading text-danger m-0 py-5">Categories Not Available</h4>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- With Pagination -->
+  <!-- Data View Column -->
+
+  <!--
+      <p-dataView [value]="categoryTypeHolder"
+                  [paginator]="true"
+                  [rows]="10"
+                  [lazy]="true"
+                  (onLazyLoad)="loadData($event)"
+                  [totalRecords]="totalRecords"
+                  [sortField]="sortField"
+                  [sortOrder]="sortOrder"
+                  layout="grid"  styleClass="flex-grid">
+        <ng-template let-item pTemplate="gridItem">
+          <div class="col-sm-6 text-center border-odd">
+            <a class="img-boxes test" [routerLink]="'/type/' + item.slug" (click)="onClickProduct(item.id, item.name)">
+              <ng-container *ngFor="let image of item.images">
+                <img *ngIf="image && image.primary" [src]="(image && image.primary) ? imgUrl + '/medium/' + image.filename : 'assets/img/not-found/no-image-found.png'" class="img-fluid" alt=" ">
+              </ng-container>
+            </a>
+            <a class="heading-link mb-1" [routerLink]="'/type/' + item.slug" (click)="onClickProduct(item.id, item.name)">
+              {{item.name}}
+            </a>
+            <div class="price-box mb-3">
+              <span class="price-text">Starting from : </span>
+              <span class="price" [innerHTML]="item.price | currency | priceAfterDotSmall"></span>
+            </div>
+            <a [href]="'http://192.168.1.18/bics-backend-build-local/#/admin/products/edit/' + item.id" class="btn-link mb-2 d-block" target="_blank">Edit</a>
+          </div>
+        </ng-template>
+</p-dataView>-->

@@ -1,0 +1,365 @@
+<div [class.open]="isCartOpen" class="sidebar-cart">
+  <div *ngIf="retrievedData && retrievedData.length > 0" class="inner-page">
+
+    <!-- Header -->
+    <div class="sidebar-heading sidebar-cart-header py-3 px-4 sticky-top">
+      <div class="d-flex align-items-center">
+        <h3 class="m-0">Shopping Cart</h3>
+        <small class="ml-3 badge badge-pill badge-success">{{ retrievedData.length }} Product</small>
+      </div>
+      <button (click)="closeSidebarCart()" aria-label="Close" class="close-btn py-2 px-4" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="sidebar-cart-body p-3 bg-white">
+      <!-- Cart Product List -->
+      <div class="cart-list">
+        <div *ngFor="let item of retrievedData; let i = index; trackBy: cartTrackByFn;" class="product-in-cart py-2 w-100" [class.border-top]="i > 0 && (+item.bundle === 2 || +item.bundle === 0)">
+          <div [class.pl-3]="+item.bundle === 1" class="media">
+            <div class="cartproduct-img">
+              <img (error)="setFallbackImage($event)" [src]="getFirstImageFileName(item.images)" alt=" " class="img-fluid">
+              <span class="bundle-flag" *ngIf="+item.bundle === 2 || +item.bundle === 1"></span>
+            </div>
+            <div class="media-body ml-2">
+              <div class="row">
+                <div class="col">
+                  <a [routerLink]="['/product', item.slug]" class="heading-link-md d-block">{{ item.name }}</a>
+                </div>
+                <div class="col-auto" *ngIf="+item.bundle === 0 || +item.bundle === 2">
+                  <button (click)="removeItem(item, +item.bundle)" class="btn btn-link text-danger p-0" title="Remove item" type="button">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+              <span class="heading-link-sm">SKU: {{ item.sku }} </span>
+
+              <!-- Bank logo  here ICICI and SBI Bank  -->
+              <div class="heading-link-sm" *ngIf="+item.bundle === 0 || +item.bundle === 2">
+                <img class="img-fluid logo-icici" src="https://s3.ap-south-1.amazonaws.com/shop.unicorn/bank-logo/bank-logo-1.jpeg" alt="ICICI CARD">
+                <img class="img-fluid logo-icici mx-1" src="https://s3.ap-south-1.amazonaws.com/shop.unicorn/bank-logo/bank-logo-2.png" alt="Kotak Mahindara Bank">
+                <img class="img-fluid logo-icici" src="https://s3.ap-south-1.amazonaws.com/shop.unicorn/bank-logo/bank-logo-3.png" alt="SBI CARD">
+              </div>
+
+              <div *ngIf="item && +item.cashback && item.cashback_note" class="cashback-offers-box mt-1">
+                <h5 class="heading-sm fw-400 m-0">{{item.cashback_note}}</h5>
+              </div>
+
+              <div class="d-flex align-items-center justify-content-between mt-2 w-100">
+
+                <h4 *ngIf="+item.fixed_quantity === 1 || +item.bundle === 1 || +item.bundle === 2" class="heading-md" title="Can only bought one quantity in an order">Qty: {{item.item_quantity}}</h4>
+                <div *ngIf="+item.fixed_quantity === 0 && +item.bundle === 0" class="quantity">
+                  <span (click)="decrementQty(item.cart_item_id, qty.value, item)" [title]="+item.item_quantity === 1 ? 'Remove Product' : ''" class="decrement btn">—</span>
+                  <input #qty [value]="item.item_quantity" class="text-center" name="qty" type="text" value="1"/>
+                  <span (click)="incrementQty(item.cart_item_id, qty.value)" class="increment btn">&#65291;</span>
+                </div>
+
+
+                <!-- Price Box -->
+                <div *ngIf="+item.enabled === 1 && +item.bundle === 0" class="price-box m-0">
+                  <h3 *ngIf="!item.bts" [innerHTML]="+item.saleprice | currency | priceAfterDotSmall" class="price-sm m-0"></h3>
+                  <h3 *ngIf="item.bts" [innerHTML]="+item.price | currency | priceAfterDotSmall" class="price-sm m-0"></h3>
+                </div>
+
+                <!-- Price Box -->
+                <div *ngIf="+item.enabled === 1 && (+item.bundle === 2)" class="price-box m-0">
+                  <h3 *ngIf="!item.bts" [innerHTML]="+item.product_value | currency | priceAfterDotSmall" class="price-sm m-0"></h3>
+                  <h3 *ngIf="item.bts" [innerHTML]="+item.price | currency | priceAfterDotSmall" class="price-sm m-0"></h3>
+                </div>
+                
+                <!-- Price Box -->
+                <div *ngIf="+item.enabled === 1 && (+item.bundle === 1)" class="price-box m-0">
+                  <h3 *ngIf="!item.bts" [innerHTML]="+item.accessory_value | currency | priceAfterDotSmall" class="price-sm m-0"></h3>
+                  <h3 *ngIf="item.bts" [innerHTML]="+item.price | currency | priceAfterDotSmall" class="price-sm m-0"></h3>
+                </div>
+
+                <!-- Prebook Price Box -->
+                <div *ngIf="+item.enabled === 3" class="price-box m-0">
+                  <span class="price-text">Prebook Price: </span>
+                  <h3 [innerHTML]="(item.custom_column_2 | currency | priceAfterDotSmall)"></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="hr">
+
+      <!-- Price Breakup -->
+
+      <!-- Cart SubTotal -->
+      <div *ngIf="priceDetailsHolder?.subtotal && priceDetailsHolder?.subtotal !== priceDetailsHolder?.total" class="row align-items-center border-bottom no-gutters pt-2 pb-1">
+        <div class="col">
+          <h6 class="heading-md m-0 fw-400">Subtotal : </h6>
+        </div>
+        <div class="col-auto">
+          <app-price [price]="priceDetailsHolder?.subtotal" priceStyleClass="price-sm"></app-price>
+        </div>
+      </div>
+
+      <!-- Coupon Discount -->
+      <div *ngIf="priceDetailsHolder?.coupon_discount > 0" class="row align-items-center border-bottom no-gutters pt-2 pb-1">
+        <div class="col">
+          <h6 class="heading-md m-0 fw-400">Coupon Discount : </h6>
+        </div>
+        <div class="col-auto d-flex align-items-baseline">
+          <i class="fa fa-minus mr-2 fa-sm"></i>
+          <app-price [price]="priceDetailsHolder?.coupon_discount" priceStyleClass="price-sm"></app-price>
+        </div>
+      </div>
+
+      <!-- GST Details -->
+      <div *ngIf="priceDetailsHolder?.subtotal && +priceDetailsHolder?.gst_percent > 0" class="row align-items-center border-bottom no-gutters pt-2 pb-1">
+        <div class="col">
+          <h6 class="heading-md m-0 fw-400">GST ({{priceDetailsHolder?.gst_percent}} %) : </h6>
+        </div>
+        <div class="col-auto d-flex align-items-baseline">
+          <i class="fa fa-plus mr-2 fa-sm"></i>
+          <app-price [price]="((+priceDetailsHolder?.subtotal! * +priceDetailsHolder?.gst_percent!)/100)" priceStyleClass="price-sm"></app-price>
+        </div>
+      </div>
+
+      <div class="row align-items-center mt-2 mb-4">
+        <div class="col">
+          <h4 class="heading-link-lg">Grand Total</h4>
+        </div>
+        <div class="col-auto">
+          <app-price [price]="priceDetailsHolder?.total" priceStyleClass="price-lg m-0"></app-price>
+        </div>
+        <div class="col-12 text-right">
+          <small class="text-muted">(*Inclusive of all taxes)</small>
+        </div>
+      </div>
+
+      <form action="" class="sidebarcart-form">
+        <!-- Pin Code Container -->
+        <div class="pin-code-form-group mb-3">
+          <label for="pin-code">Pin code</label>
+          <div class="input-group">
+            <input [formControl]="pinControl" class="form-control form-control-sm font-weight-light" id="pin-code" maxlength="6" name="pincode" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" type="text"/>
+            <div class="input-group-append">
+              <p-button (onClick)="checkPin(pinControl.value, false)" [disabled]="isPinCheckingLoader" [label]="isPinCheckingLoader ? 'Checking...' : 'Check'" [loading]="isPinCheckingLoader" styleClass="p-button-info"></p-button>
+            </div>
+          </div>
+
+          <div *ngIf="pinAvailability()?.status" class="text-success mt-1 text-capitalize">
+            <small>{{pinAvailability()?.message}}</small>
+          </div>
+          <div *ngIf="pinAvailability()?.status" class="text-success mt-1">
+            <i class="fa fa-shipping-fast mr-1"></i>
+            <small>{{pinAvailability()?.TAT}}</small>
+            <small class="d-block">iPhone 16 Series, Apple Watch 10 Series, Apple Watch Ultra 2 Series, Apple Watch SE Series, and AirPods 4 Series prebook orders will only be dispatched after 20th September 2024.</small>
+          </div>
+          <div *ngIf="!pinAvailability()?.status" class="text-danger mt-1 text-capitalize">
+            <small>{{pinAvailability()?.message}}</small>
+          </div>
+          <div *ngIf="isPin">
+            <small class="text-danger font-weight-lighter pt-1">
+              Please Enter 6 Digit Pin Code
+            </small>
+          </div>
+        </div>
+
+        <div *ngIf="isCustomerLoggedIn" class="coupon-form-group mb-3">
+          <div *ngIf="!isCouponApplied" class="form-group">
+            <label for="coupon-code">Coupon code</label>
+            <div class="input-group">
+              <input #couponCode class="form-control form-control-sm font-weight-light text-uppercase" name="coupon_code" type="text">
+              <div class="input-group-append">
+                <p-button (onClick)="applyCoupon(couponCode.value)" [disabled]="isCouponApplyingLoader" [label]="isCouponApplyingLoader ? 'Applying...' : 'Apply'" [loading]="isCouponApplyingLoader" styleClass="p-button-info"></p-button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isCouponApplied" class="text-success d-flex justify-content-between align-items-center mb-2 ">
+            <div class="d-flex align-items-center">
+              <i class="fa fa-check-square fa-2x   coupon-codes"></i>
+              <span class="ml-2">Coupon Successfully Applied</span>
+            </div>
+            <div class=" ">
+              <button (click)="removeCoupon()" class="btn btn-danger-alt btn-sm btn-block mt-1" type="button">Remove Coupon</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+      <!-- <div class="d-flex pt-2">
+         <input type="checkbox" id="bajaj-emi-checkbox" class="mr-2">
+         <p class="text-secondary">Bajaj EMI Available, Do You Want It? <span> <a href="#" class="custom-link">Details</a> </span></p>
+      </div> -->
+
+      <div class="t-and-c mb-2">
+        <div class="d-flex align-items-center pt-2">
+          <!-- <input #agreeCheckbox [(ngModel)]="isChecked" class="mr-2" id="agree-with-terms" type="checkbox"> -->
+          <!-- <label [class.text-danger]="!isChecked && showErrorMessage" class="text-secondary pt-1 mb-0" for="agree-with-terms">
+            <span>I agree with the</span>
+            <a [routerLink]="['/terms-conditions']" class="custom-link"> Terms & Conditions.</a>
+          </label> -->
+        </div>
+        <span *ngIf="!isChecked && showErrorMessage" class="text-danger terms-error">Please agree to the Terms & Conditions before Checkout.</span>
+      </div>
+
+      <div class="cart-buttons text-center">
+        <button (click)="proceedToCheckout()" class="btn btn-primary w-100">Continue Checkout</button>
+ 
+      </div>
+      <label [class.text-danger]="!isChecked && showErrorMessage" class="text-secondary pt-1 mb-0" for="agree-with-terms">
+        <span>By clicking the checkout button you agree to our</span>
+        <a [routerLink]="['/terms-conditions']" class="custom-link"> Terms & Conditions.</a>
+      </label>
+    </div>
+    <div class="sidebar-footer py-3 px-4">
+      <div *ngIf="bestSellerProducts && bestSellerProducts.length > 0" class="carousel slide" data-ride="carousel" id="product-carousel">
+        <h5 class="pb-2">You May Also Like...</h5>
+        <ol class="carousel-indicators">
+          <ng-container *ngFor="let item of bestSellerProducts; let i = index">
+            <li [attr.data-slide-to]="i" [class.active]="i == 0" data-target="#carouselExampleCaptions"></li>
+          </ng-container>
+        </ol>
+        <div class="carousel-inner">
+          <ng-container *ngFor="let item of bestSellerProducts; let i = index">
+            <div [class.active]="i == 0" class="carousel-item active">
+              <div class="product-in-cart d-flex">
+                <div class="img-box-sm mr-3">
+                  <img *ngIf="item.images && item.images.length > 0" [src]="imgUrl + '/small/' + item.images[0].filename" alt="{{ item.name }}" class="img-fluid">
+                  <img *ngIf="!item.images || item.images.length === 0" alt="{{ item.name }}" class="img-fluid" src="placeholder_image_url">
+                </div>
+                <div>
+                  <div class="py-1">
+                    <!-- <div class="star-rating">
+                       <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" [class.full]="i < rating">&#9733;</span>
+                    </div> -->
+                    <h6>{{item.name}}</h6>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="carousel-add-to-cart">
+                      <app-add-to-cart [product]="item" [showPopularButton]="false" styleClass="mb-2  "></app-add-to-cart>
+                      <!-- <button class="btn btn-primary">Add to Cart</button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <div class="carousel-control-position">
+          <button class="carousel-control-previous" data-slide="prev" data-target="#product-carousel" type="button">
+            <span aria-hidden="true"><i class="fas fa-angle-left"></i></span>
+          </button>
+          <button class="carousel-control-nextslide" data-slide="next" data-target="#product-carousel" type="button">
+            <span aria-hidden="true"><i class="fas fa-angle-right"></i></span>
+          </button>
+        </div>
+      </div>
+      <div class="support-number font-weight-light d-flex mt-5">
+        <i class="material-icons pr-2" id="i-custom"></i>
+        <p class="text-secondary">
+          Need any help? Speak to our e-commerce specialist.
+          <span class="text-success"><i class="fas fa-phone-alt"></i><small class="font-weight-lighter">18002677888</small></span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="retrievedData && retrievedData.length === 0" class="inner-page">
+
+    <div class="sidebar-heading sticky-top py-3 px-4">
+      <h3>Shopping Cart </h3>
+      <button (click)="closeSidebarCart()" aria-label="Close" class="close py-2 px-4" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="py-4 bg-white">
+      <div class="product-in-cart text-center">
+        <div class="img_container_empty mb-3">
+          <img alt="Product Image" class="img-fluid" src="/assets/img/empty-cart-creative.png">
+        </div>
+        <h5 class="text-uppercase">Your Shopping cart is empty</h5>
+        <p class="">Please click the button below to continue shopping</p>
+        <a (click)="closeSidebarCart()" class="btn btn-primary-alt return_button" routerLink="/">
+          <i class="fas fa-arrow-left mr-2 text-white"></i> Continue Shopping
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer  pb-3">
+
+      <ng-container *ngIf="bestSellerProducts && bestSellerProducts.length > 0">
+        <div class="d-flex justify-content-between p-2">
+          <h5 class="heading-md m-0">Bestseller Products</h5>
+        </div>
+
+        <div class="swiper_btn">
+          <div class="next swiper-button-next best_seller-swiper-next"></div>
+        </div>
+
+        <swiper [allowTouchMove]="true" [autoHeight]="false"
+                [autoplay]="{ delay: 1000, disableOnInteraction: false }"
+                [config]="swiperConfig"
+                [loop]="true"
+                [loopedSlides]="bestSellerProducts.length"
+                [navigation]="{ nextEl: '.best_seller-swiper-next', prevEl: '.best_seller-swiper-prev' }"
+                [pagination]="false"
+                direction="horizontal">
+          <ng-template *ngFor="let item of bestSellerProducts" swiperSlide>
+            <div class="best_seller_content d-flex align-items-center h-100 ml-2">
+              <div class="img_container">
+                <img *ngIf="item.images && item.images.length > 0" [src]="imgUrl + '/small/' + item.images[0].filename" alt="{{ item.name }}" class="img-fluid">
+                <img *ngIf="!item.images" alt="No Image Available" class="img-fluid" src="assets/img/not-found/no-image-found.png">
+              </div>
+
+              <div class="details_container mb-1 p-1">
+                <a [routerLink]="['/product', item.slug]" class="heading-link-sm ">{{ item.name }}</a>
+                <div class="d-flex justify-content-between pr-3 price-color">
+
+                  <app-price [price]="item.price" [saleprice]="item.saleprice" priceStyleClass="price-sm"></app-price>
+                </div>
+                <!-- <button type="button" class="btn btn-outline-light btn-sm mb-2">Add to Cart</button> -->
+                <div class="cart-button">
+                  <app-add-to-cart [product]="item" [showPopularButton]="false" styleClass="mb-2  "></app-add-to-cart>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </swiper>
+      </ng-container>
+
+      <div class="d-flex justify-content-between p-2 mt-2">
+        <h5 class="heading-md">Recommended Accessories</h5>
+        <a class="heading-link-sm" routerLink="/category/accessories1">View All</a>
+      </div>
+
+      <div class="swiper_btn">
+        <div class="next_slide swiper-button-next recently_swiper-swiper-next"></div>
+      </div>
+
+      <swiper
+          [allowTouchMove]="true" [autoHeight]="false"
+          [autoplay]="{ delay: 1000, disableOnInteraction: false }"
+          [config]="swiperConfigs"
+          [loop]="true"
+          [loopedSlides]="Recommended_Accessories.length"
+          [navigation]="{ nextEl: '.recently_swiper-swiper-next', prevEl: '.recently_swiper-swiper-prev' }"
+          [pagination]="false"
+          direction="horizontal">
+
+        <ng-template *ngFor="let product of Recommended_Accessories" class=" h-100  ml-1" swiperSlide>
+          <a [routerLink]="['/product', product.slug]" class="recently_product_content bg-white h-100">
+            <p>
+              <span class="saless price_main mb-3"> &#8377;{{ product.saleprice }} </span>
+            </p>
+            <div class="second_swiper">
+              <img (error)="setFallbackImage($event)" [alt]=" " [src]="getFirstImageFileName(product.images)" class="img-fluid">
+            </div>
+            <div class="details_container text-center pb-2">
+              <h3 class="heading-sm p-2">{{product.name}}</h3>
+            </div>
+          </a>
+        </ng-template>
+      </swiper>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,130 @@
+<div class="tab-pane fade active show col-sm-12" id="Iphone">
+  <div class="description">
+    <div class="row">
+      <ng-container *ngIf="!loading; else skeleton">
+        <div class="col-sm-3 mb-2 col-md-6 col-12 col-lg-4 col-xl-3" *ngFor="let re_product of recently_products_mac">
+          <div class="first_row">
+            <div class="card h-100">
+              <div class="card-body">
+                <span class="sales p-1" *ngIf="re_product.price > re_product.saleprice"> {{ (((re_product.price - re_product.saleprice) / re_product.price) * 100).toFixed(0) + '%' + ' off' }}</span>
+                <!-- <button type="button" class="wishlist-btn Compares mt-3 mr-3" (click)="wishlistToggle(re_product.id)">
+                  <div class="center-icon">
+                    <i class="far fa-heart fa-lg" title="Add to Wishlist"></i>
+                  </div>
+                </button> -->
+                <div class="center-images">
+                  <!-- Image Skeleton -->
+                  <div class="slider-img-box">
+                    <!-- <img class="img-fluid" [src]="re_product.image" alt="Product Image"> -->
+                    <img [src]="imgUrl + '/medium/' +re_product.images[0].filename" alt="Product Image" class="img-fluid">
+
+                  </div>
+                  <div class="add_to_cart">
+                    <div class="row p-2">
+                      <div class="col-sm-6 add-btn add_to p-2 col-6 col-md-6 col-xl-6">
+                        <!-- Add to cart button -->
+                        <app-add-to-cart [showPopularButton]="true" [product]="re_product" styleClass="add_carts"></app-add-to-cart>
+                      </div>
+                      <div class="col-sm-6 add-btn view_product p-2 col-6 col-md-6 col-xl-6" (click)="showModalDialog(re_product.id)">
+                        <!-- View product button -->
+                        <span><i class="far fa-regular fa-eye" style="color: #ffffff;"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <p-rating [ngModel]="re_product.ratings" [cancel]="false" class="rating ratings"></p-rating> -->
+                  <a class="product_namess" [routerLink]="['/product', re_product.slug]" (click)="fireProductSelectImpression(re_product)">{{ re_product.name }}</a>
+                </div>
+                <!-- <span class="price_main d-flex justify-content-center">
+                  <del class="pricee">
+                    &#8377;{{ re_product.price | number: '1.0-0' }}
+                  </del>
+                  &nbsp; &nbsp;
+                  &#8377;{{ re_product.saleprice | number: '1.0-0' }}
+                </span> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Skeleton Template -->
+<ng-template #skeleton>
+  <div class="col-sm-3 mb-2 col-md-6 col-12 col-lg-4 col-xl-3" *ngFor="let re_product of recently_products_mac">
+    <div class="first_row">
+      <div class="card h-100">
+        <div class="card-body">
+          <!-- Image Skeleton -->
+          <p-skeleton width="100%" height="200px" animation="wave" class="slider-img-box"></p-skeleton>
+          <p-skeleton width="70%" height="10px" animation="wave" class="mt-3"></p-skeleton>
+            <p-skeleton width="60%" height="10px" animation="wave"></p-skeleton>
+          <p-skeleton width="100%" height="20px" animation="wave"></p-skeleton>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+<p-dialog [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false" [showHeader]="false">
+  <div class="p-dialog-header p-dialog-headerss">
+    <span class="p-dialog-title" id="pr_id_4-label"></span>
+    <div class="p-dialog-header-icons">
+      <button type="button" pripple="" class="p-ripple p-element p-dialog-header-icon p-dialog-header-close p-link" tabindex="-1" (click)="displayModal = false">
+        <span class="p-dialog-header-close-icon pi pi-times"></span><span class="p-ink"></span>
+      </button>
+    </div>
+  </div>
+
+
+<div *ngFor="let re_product of recently_popup | filterById:selectedProductId">
+<div class="row">
+  <div class="col-sm-6 col-12 text-center">
+    <div class="sticky-top pr-sm-4 Popup_content pl-sm-4 bg-white d-flex justify-content-center align-items-center">
+        <img [src]="imgUrl + '/medium/' + re_product.images[0].filename" alt="Product Image" class="img-fluid img_popup">
+    </div>
+</div>
+
+  <div class="col-sm-6 col-12">
+    <div class="d-flex justify-content-between mt-3">
+      <div class="text-start">
+        <a [href]="re_product.href">
+          <h3 class="heading text-justify font-weight-bold mr-3">{{re_product.name}}</h3>
+        </a>
+        <!-- <div class="d-flex justify-content-between align-items-center">
+          <p-rating [ngModel]="re_product.ratings" [cancel]="false" class="rating ratings"></p-rating>
+          <span class="text-muted">(100)</span>
+        </div> -->
+      </div>
+     
+    </div>
+    <div>
+      <div class="price-box text-justify">
+        <span class="price">
+          <!-- <span class="price-strike">&#8377;{{re_product.price}}<span class="price-last-two-char">.00</span></span> -->
+        </span>
+        <span class="price ml-2" [innerHTML]="re_product.saleprice | currency | priceAfterDotSmall">  </span>
+      </div>
+      <!--<p class="heading-link-md text-left text-muted">
+        The Apple Watch display has rounded corners that follows a beautiful curved design, and these corners are within a sta..
+      </p>-->
+      <a [href]="re_product.href">
+      <button class="d-flex view_details mb-2 p-0" [routerLink]="['/product', re_product.slug]" >View Details</button></a>
+      <span class="btn-sm mt-2 button_stock text-uppercase">In Stock</span>
+   
+    
+    </div>
+    <div class="row mt-3">
+      <div class="col col-sm-6">
+        <app-add-to-cart [showRoundButton]="true" [product]="re_product" styleClass="add_carts h-100" (click)="closePopup()"></app-add-to-cart>
+
+        <!-- <button type="button" class="btn btn-info w-100 text-center broder_button h-100">Add to Cart</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</p-dialog>

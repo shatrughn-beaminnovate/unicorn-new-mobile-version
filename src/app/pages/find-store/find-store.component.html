@@ -1,0 +1,47 @@
+<div class="container py-3">
+  <h4>Store Locator</h4>
+  <hr class="my-2">
+  <div class="row">
+    <div class="col-12 col-sm">
+
+      <!-- Select State & City -->
+      <div class="row mb-3">
+        <div class="col-sm-6">
+          <select (change)="onStateChange($event)" name="state" id="state" class="custom-select custom-select-sm" >
+            <option value="0">Select State</option>
+            <option *ngFor="let stores of stateHolder" [value]="stores.state">{{stores.state}}</option>
+          </select>
+        </div>
+        <div class="col-sm-6">
+          <select name="city" (change)="onCityChange($event)" class="custom-select custom-select-sm">
+            <option value="0">Select City</option>
+            <option *ngFor="let item of cityHolder" [value]="item.city">{{item.city}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="address-box" *ngIf="storesHolder.length > 0">
+        <h4 class="heading mb-0">Store Address</h4>
+        <hr class="mb-2 mt-1">
+        <div class="row">
+          <ng-container *ngFor="let store of storesHolder">
+            <div class="col-sm-6 mb-4">
+              <h6 class="heading-md">{{store.store_name}}</h6>
+              <address class="mb-1">
+                {{store.store_address}}
+              </address>
+              <h6 class="heading-link-sm mb-1">Phone No. - {{store.phone}}</h6>
+              <button type="button" (click)="viewLocation(store.src)" class="btn-link">View Location</button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+      <div class="map" id="map" *ngIf="!isViewLocation"></div>
+      <div class="iframe-map" *ngIf="isViewLocation">
+          <iframe [src]="mapSrc" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+</div>

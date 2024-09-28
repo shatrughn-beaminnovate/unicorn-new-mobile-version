@@ -1,0 +1,36 @@
+<p-dialog [(visible)]="isQuickViewProduct" [modal]="true" [showHeader]="false" [style]="{ width: '40vw' }" [draggable]="false" [resizable]="false">
+  <button type="button" (click)="isQuickViewProduct = !isQuickViewProduct" class="btn-close">&times;</button>
+  <div class="mt-4 mb-2" *ngIf="product">
+    <div class="row">
+      <div class="col-sm-5">
+        <app-image-loader [imageUrl]="(product && product.images && product.images.length > 0) ? imgUrl + '/medium/' + product.images[0].filename : ''" imageContainerHeight="25rem"></app-image-loader>
+      </div>
+      <div class="col-sm border-left">
+        <h2 class="product-name mb-3">{{product.name}}</h2>
+        <div class="price-holder mt-2">
+          <div class="price-box" *ngIf="product.price > product.saleprice">
+            <span class="price"><del [innerHTML]="product.price | currency | priceAfterDotSmall"></del></span>
+            <span class="price ml-2" [innerHTML]="product.saleprice | currency | priceAfterDotSmall"></span>
+          </div>
+          <div class="price-box" *ngIf="product.price === product.saleprice">
+            <span class="price ml-2" [innerHTML]="product.saleprice | currency | priceAfterDotSmall"></span>
+          </div>
+        </div>
+
+        <p class="para" [innerHTML]="product.excerpt"></p>
+        <h5 class="out-of-stock m-0" *ngIf="+product.quantity === 0">Out of Stock</h5>
+        <!-- All Action Box: Add to Cart, Notify Me, EMI Available -->
+        <div class="all-action-box d-flex align-items-center mt-3">
+
+          <!-- Notify Me Action -->
+          <button type="button" *ngIf="+product.quantity === 0" data-toggle="modal" data-target="#notify_me_modal" class="btn btn-primary mr-2">
+            Notify Me
+          </button>
+          <!-- Add to Cart Action -->
+          <app-add-to-cart *ngIf="product.quantity && product.quantity > 0" [product]="product"></app-add-to-cart>
+          <button type="button" *ngIf="product.quantity" (click)="addToWishlist(product.id, product.name)" class="btn btn-light mr-2">Add to Wishlist</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>

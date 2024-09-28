@@ -1,0 +1,25 @@
+<p-dialog position="top" [(visible)]="isNotifyMeModalShow" header="Notify Me" position="center" [style]="{width: '25rem'}" [modal]="true" [draggable]="false" [resizable]="false">
+
+  <div class="mb-3">
+    <input type="text" [(ngModel)]="customerName" name="customer_name" id="notify_customer_name" class="form-control form-control-sm" placeholder="Enter your name...">
+  </div>
+
+  <div class="mb-3">
+    <input type="tel" [(ngModel)]="mobile" name="mobile" id="notify_mobile" maxlength="10" pattern="^\d{10}$" class="form-control form-control-sm" placeholder="Enter your phone number...">
+  </div>
+
+  <div class="text-right">
+    <p-button label="Send OTP" [loading]="loading" (onClick)="sendOtp()" [disabled]="loading || isOtpResendTimerStart > 1 && isOtpResendTimerStart < 30" styleClass="p-button-success p-button-sm"></p-button>
+  </div>
+
+  <div class="mb-3 mt-3" *ngIf="isOtpSent">
+    <div class="d-flex align-items-center">
+      <input type="text" [(ngModel)]="otp" name="otp" id="otp" maxlength="6" pattern="^\d{6}$" class="form-control form-control-sm" placeholder="Enter OTP...">
+      <button type="button" class="btn btn-success btn-sm ml-2" (click)="verifyOtp()">Verify</button>
+    </div>
+
+  </div>
+
+  <label class="otp-resend-message" *ngIf="isOtpResendTimerStart > 1 && isOtpResendTimerStart < 30">Resend OTP In <span class="timer">{{isOtpResendTimerStart}}</span> seconds.</label>
+
+</p-dialog>

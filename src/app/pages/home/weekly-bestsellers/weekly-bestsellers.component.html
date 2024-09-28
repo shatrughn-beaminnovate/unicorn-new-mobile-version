@@ -1,0 +1,67 @@
+<div class="row align-items-end" *ngIf="weekly_bestsellersHolder && weekly_bestsellersHolder.length > 0">
+  <div class="col-sm-auto col-md-3 col-xl-2  d-flex justify-content-center justify-sm-content-end">
+    <a routerLink="/accessories/beats-flex-all-day-wireless-earphones-yuzu-yellow11" class="d-flex align-items-center pointer ">
+      <img src="https://s3.ap-south-1.amazonaws.com/shop.unicorn/homepage-promotion-banners/vertical-banner-1.jpg" alt=" " class="img-fluid img_bestseller border">
+    </a>
+  </div>
+  <div class="col-sm-9 col-xl-10">
+    <div class="row" id="weekly_bestsellers_container">
+      <div class="col-md-6 col-sm-6 col-11 col-lg-6 col-xl-6">
+        <h4 class="weekly_best mb-0">Weekly Bestsellers</h4>
+      </div>
+      <div class="col-md-6 col-sm-6 col-1 col-lg-6 col-xl-6">
+        <div class="swiper_btn">
+          <div class="swiper-button-next first-swiper-next"></div>
+          <span class="slide_pipe first-swiper-next ">|</span>
+          <div class="swiper-button-prev first-swiper-prev"></div>
+        </div>
+      </div>
+    </div>
+
+    <swiper [config]="swiperConfigs" direction="horizontal"
+      [autoHeight]="false"
+      [allowTouchMove]="true"
+      [autoplay]="{ delay: 1000, disableOnInteraction: false }"
+      [pagination]="false"
+      [navigation]="{ nextEl: '.first-swiper-next', prevEl: '.first-swiper-prev ' }">
+      <ng-template class="swipe mb-2" swiperSlide *ngFor="let re_product of weekly_bestsellersHolder">
+
+        <a class="fisrt_col_best  " [routerLink]="['/product', re_product.slug]" (click)="fireWeeklyBestsellersSelectGA4Event(re_product)">
+          <div class="card h-100">
+            <div class="card-body" *ngIf="!loading; else skeleton">
+              <span class="saless p-1" *ngIf="re_product.price > re_product.saleprice"> {{ calculateSalePercentage(re_product) }}</span>
+              <div class="text-center slider-img-box">
+                <!-- Image Skeleton -->
+                <p-skeleton width="100%" height="200px" animation="wave" class="mb-3"></p-skeleton>
+                <img *ngIf="re_product.images?.length > 0" [src]="imgUrl + '/full/' + re_product.images[0].filename" alt="Product Image" class="img-fluid" (load)="loading = false">
+                <img *ngIf="!re_product.images || re_product.images.length === 0" src="./assets/img/not-found/no-image-found.png" alt=" ">
+              </div>
+              <div class="text-center">
+                <p class="mt-2 pricee truncated" style="text-align: center;">{{ re_product.name }}</p>
+                <!-- <p-rating [ngModel]="re_product.average_rating" [cancel]="false" class="rating ratings"></p-rating> -->
+                <span class="price_main mb-3" *ngIf="re_product.price > re_product.saleprice">
+                  <app-price [price]="re_product.price" [saleprice]="re_product.saleprice" [strikePrice]="re_product.price"  [isVerticalPrice]="true"></app-price>
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </ng-template>
+
+      <ng-template #skeleton>
+        <div class="card h-100">
+          <div class="card-body">
+            <!-- <span class="saless p-1 "> <p-skeleton width="60px" animation="wave"></p-skeleton> </span> -->
+            <!-- Image Skeleton -->
+            <p-skeleton width="100%" height="200px" animation="wave" class="mb-3 "></p-skeleton>
+            <div class="text-center">
+              <p-skeleton width="70%" height="10px" animation="wave" class="mt-2 mb-2 "></p-skeleton>
+              <p-skeleton width="100%" height="20px" animation="wave" class="mb-2 mt-2"></p-skeleton>
+              <p-skeleton width="70%" height="20px" animation="wave" class="mb-3 mt-2"></p-skeleton>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </swiper>
+  </div>
+</div>

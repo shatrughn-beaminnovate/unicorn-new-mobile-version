@@ -1,0 +1,474 @@
+<div class="container py-3">
+
+  <!-- Breadcrumb Start -->
+  <!-- <div class="row align-items-end">
+    <div class="col-sm-auto">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/" class="link">Home</a></li>
+        <li class="breadcrumb-item active text-nowrap">My Account</li>
+      </ol>
+    </div>
+  </div>
+  <hr class="mt-1 mb-3"> -->
+  <!-- Breadcrumb End -->
+
+  <!-- Account Information, Wishlist -->
+  <section class="tab-section mb-4">
+    <p-tabView (onChange)="handleChange($event)">
+
+      <p-tabPanel header="Account Details">
+        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+          <div class="profile-img-box position-relative mb-3" *ngIf="isProfilePicShow && profilePic && profilePic.file_name">
+            <img [src]="frontImgUrl + '/public/profile_image/' + profilePic.file_name" alt=" " (error)="isProfilePicShow = false" class="img-fluid">
+            <i class="fa fa-times profile-remove-btn" (click)="removeProfilePic()"></i>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Company</label>
+                <input type="text" name="company" formControlName="company" class="form-control form-control-sm">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Profile Pic</label>
+                <div class="d-flex align-items-center">
+                  <div class="custom-file custom-file-sm">
+                    <input type="file" name="profile_pic" (change)="onProfilePicSelected($event)" class="custom-file-input" id="profile_pic">
+                    <label class="custom-file-label m-0" for="profile_pic"> {{(profilePicFile) ? profilePicFile.name : 'Choose file'}}</label>
+                  </div>
+                  <button class="btn btn-primary btn-sm ml-2 py-2" *ngIf="profilePicFile" (click)="uploadProfilePic()" style="padding: 6px 12px !important">Upload</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>First Name<span class="req">*</span></label>
+                <input type="text" formControlName="firstname" [class.is-invalid]="isFormSubmitted && f.firstname.errors" name="firstname" class="form-control form-control-sm">
+                <div *ngIf="isFormSubmitted && f.firstname.errors" class="invalid-feedback">
+                  <div *ngIf="f.firstname.errors.required">First Name is Required</div>
+                  <div *ngIf="f.firstname.errors.pattern">Only characters are allowed in first name.</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Last Name<span class="req">*</span></label>
+                <input type="text" formControlName="lastname" [class.is-invalid]="isFormSubmitted && f.lastname.errors" name="lastname" class="form-control form-control-sm">
+                <div *ngIf="isFormSubmitted && f.lastname.errors" class="invalid-feedback">
+                  <div *ngIf="f.lastname.errors.required">Last Name is Required</div>
+                  <div *ngIf="f.lastname.errors.pattern">Only characters are allowed in Last Name.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="email">Email<span class="req">*</span></label>
+                <input type="text" formControlName="email" [class.is-invalid]="isFormSubmitted && f.email.errors" name="email" id="email" class="form-control form-control-sm">
+                <div *ngIf="isFormSubmitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">Email is Required</div>
+                  <div *ngIf="f.email.errors.pattern">Email is Not Valid</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="phone">Phone<span class="req">*</span></label>
+                <input type="text" formControlName="phone" [class.is-invalid]="isFormSubmitted && f.phone.errors" name="phone" id="phone" class="form-control form-control-sm">
+                <div *ngIf="isFormSubmitted && f.phone.errors" class="invalid-feedback">
+                  <div *ngIf="f.phone.errors.required">Phone No. is Required</div>
+                  <div *ngIf="f.phone.errors.pattern">Enter 10 digit Phone Number</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" formControlName="password" name="password" id="password" class="form-control form-control-sm">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="confirm_psw">Confirm Password</label>
+                <input type="password" formControlName="confirm_psw" [class.is-invalid]="isFormSubmitted && f.confirm_psw.errors" name="confirm_psw" id="confirm_psw" class="form-control form-control-sm">
+                <div *ngIf="isFormSubmitted && f.confirm_psw.errors" class="invalid-feedback">
+                  <div *ngIf="f.confirm_psw.errors.mustMatch">Password & Confirm Password Must Match</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="gst">GST IN</label>
+                <input type="text" formControlName="gst" [class.is-invalid]="isFormSubmitted && f.gst.errors" name="gst" id="gst" class="form-control form-control-sm">
+                <div *ngIf="isFormSubmitted && f.gst.errors" class="invalid-feedback">
+                  <div *ngIf="f.gst.errors.pattern">GST Number is Not Valid</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Gender<span class="req">*</span></label>
+                <select name="gender" formControlName="gender" [class.is-invalid]="isFormSubmitted && f.gender.errors" class="custom-select custom-select-sm">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+                <div *ngIf="isFormSubmitted && f.gender.errors" class="invalid-feedback">
+                  <div *ngIf="f.gender.errors.required">Gender is Required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <input type="checkbox" formControlName="email_subscribe" name="email_subscribe" id="email_subscribe" checked class="mr-1 primary-checkbox">
+            <label for="email_subscribe">Subscribe to our email list</label>
+          </div>
+          <hr class="my-3">
+          <button type="submit" class="btn btn-primary">
+            <mat-icon *ngIf="isLoading">
+              <mat-spinner diameter="15"></mat-spinner>
+            </mat-icon>
+            Submit
+          </button>
+        </form>
+      </p-tabPanel>
+
+      <p-tabPanel header="Address Manager">
+        <button type="button" (click)="createAddress()" class="btn btn-primary mb-3">Add Address</button>
+        <div class="row py-2 border-top d-none d-sm-flex">
+          <div class="col-sm-5"><b>Address</b></div>
+          <div class="col-sm-5"><b>Choose Default</b></div>
+          <div class="col-sm-auto"><b>Action</b></div>
+        </div>
+        <ng-container *ngIf="customerAddress.length > 0">
+          <div class="row py-2 border-top" *ngFor="let address of customerAddress; let i = index">
+            <div class="col-sm-5 mb-3 mb-sm-0">
+              <h6 class="heading-sm mb-1">{{address.field_data.firstname + ' ' + address.field_data.lastname}}</h6>
+              <p class="m-0">{{address.field_data.phone}}</p>
+              <address class="text-capitalize mb-0">
+                {{address.field_data.address1}}
+              </address>
+            </div>
+            <div class="col-sm-5 mb-3 mb-sm-0">
+              <div class="d-flex align-items-center my-2">
+                <input class="primary-checkbox mr-1" [checked]="address.default_billing_address" (change)="setDefaultAddress(address.id, 'billing')" type="radio" name="bill_chk" id="bill_check_{{i}}">
+                <label for="bill_check_{{i}}">Default Billing</label>
+              </div>
+              <div class="d-flex align-items-center">
+                <input class="primary-checkbox mr-1" [checked]="address.default_shipping_address" (change)="setDefaultAddress(address.id, 'shipping')" type="radio" name="ship_chk" id="ship_chk_{{i}}">
+                <label for="ship_chk_{{i}}">Default Shipping</label>
+              </div>
+            </div>
+            <div class="col-sm-auto mb-3 mb-sm-0 flex-nowrap d-flex align-items-center">
+              <button type="button" (click)="editAddress(address.id)" class="btn btn-primary btn-sm mr-2">Edit</button>
+              <button type="button" (click)="deleteAddress(address.id)" class="btn btn-danger-alt btn-sm">Delete</button>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="row py-2 border-top" *ngIf="customerAddress.length === 0">
+          <div class="col-sm mb-3 mb-sm-0">
+            <h5 class="heading-md m-0 py-4 text-danger text-center">Address Not Available. Please Add Address First.</h5>
+          </div>
+        </div>
+
+      </p-tabPanel>
+
+      <p-tabPanel header="Wishlist">
+        <div class="wishlist-box d-flex justify-content-center flex-wrap text-center h-100 w-100 pb-3">
+          <div class="card rounded-sm mr-3 mb-3" *ngIf="btsWishlistHolder && btsWishlistHolder?.product_details" style="max-width: 230px; min-width: 230px;">
+            <div class="card-body pb-2">
+              <a class="home-img-box mb-2" routerLink="/type/{{btsWishlistHolder?.product_details?.slug}}">
+                <img *ngIf="btsWishlistHolder?.product_details?.images[0]?.filename" [src]="imgUrl + '/medium/' + btsWishlistHolder?.product_details?.images[0]?.filename" class="img-fluid" alt=" ">
+                <img *ngIf="!btsWishlistHolder?.product_details?.images[0]?.filename" src="assets/img/not-found/no-image-found.png" class="img-fluid" alt=" ">
+              </a>
+              <a class="heading-link-md mb-3" routerLink="/type/{{btsWishlistHolder.product_details.slug}}">{{btsWishlistHolder.product_details.name}}</a>
+              <!-- {{btsWishlistHolder?.product_details?.code  | slice:0:3}} -->
+              <span class="crt-product offer-bts" *ngIf="btsWishlistHolder?.product_details?.code">BTS</span>
+              
+              
+              <!-- Price Details -->
+              <div class="price-holder mt-2">
+                <div class="price-box" *ngIf="+btsWishlistHolder?.product_details?.price > +btsWishlistHolder?.product_details?.offerprice">
+                  <span class="price-md ml-2" [innerHTML]="+btsWishlistHolder?.product_details?.price | currency | priceAfterDotSmall"></span>
+                </div>
+                <div class="price-box" *ngIf="+btsWishlistHolder?.product_details?.price > +btsWishlistHolder?.product_details?.offerprice">
+                  <span class="price-text">Student Offer Price</span>
+                  <span class="price ml-2" [innerHTML]="(+btsWishlistHolder?.product_details?.offerprice | currency | priceAfterDotSmall)"></span>
+                </div>
+              </div>
+
+              <!-- Discount Percentage -->
+              <h4 class="price-discount ml-2" *ngIf="btsWishlistHolder?.product_details?.price > btsWishlistHolder?.product_details?.offerprice">
+                {{ (((btsWishlistHolder?.product_details?.price - btsWishlistHolder?.product_details?.offerprice) / btsWishlistHolder?.product_details?.price) * 100).toFixed(0) + '%' + ' off' }}
+              </h4>
+
+
+              <!-- <span (click)="removeWishlist(btsWishlistHolder?.product_details?.id, btsWishlistHolder?.product_details?.name)" class="wishlist-remove-btn"><i class="fa fa-times"></i></span> -->
+            </div>
+            <div class="card-footer" *ngIf="!isBTSWishlistProductAddedToCart">
+              <!-- Add to Cart Action -->
+              <button type="button" (click)="addToCart(btsWishlistHolder?.product_details)" *ngIf="btsWishlistHolder?.product_details.quantity" class="btn btn-primary btn-sm">
+                Add to Cart
+              </button>
+              <!-- Out Of Stock -->
+              <h5 class="out-of-stock m-0" *ngIf="btsWishlistHolder?.product_details.quantity === 0">Out of Stock</h5>
+            </div>
+          </div>
+          <ng-container *ngIf="wishlistHolder && wishlistHolder.length > 0">
+            <ng-container *ngFor="let wishlist of wishlistHolder; trackBy: wishlistTrack">
+              <div class="card rounded-sm mr-3 mb-3" style="max-width: 230px; min-width: 230px;" *ngIf="+wishlist?.product_details?.id !== +btsWishlistHolder?.product_details?.id">
+                <div class="card-body pb-2">
+                  <a class="home-img-box mb-2" routerLink="/type/{{wishlist?.product_details?.slug}}">
+                    <img *ngIf="wishlist?.product_details?.images[0]?.filename" [src]="imgUrl + '/medium/' + wishlist?.product_details?.images[0]?.filename" class="img-fluid" alt=" ">
+                    <img *ngIf="!wishlist?.product_details?.images[0]?.filename" src="assets/img/not-found/no-image-found.png" class="img-fluid" alt=" ">
+                  </a>
+                  <a class="heading-link-md mb-3" routerLink="/type/{{wishlist.product_details.slug}}">{{wishlist.product_details.name}}</a>
+
+                  <!-- <span class="crt-product" *ngIf="wishlist?.product_details?.coupon[0]?.code !== ''">BTS Offer</span> -->
+                  
+                  <!-- Price Details -->
+                  <div class="price-holder mt-2">
+                    <div class="price-box" *ngIf="wishlist?.product_details?.price > wishlist?.product_details?.saleprice">
+                      <span class="price price-strike price-strike-sm" [innerHTML]="'<small>MRP: </small> ' + (wishlist?.product_details?.price | currency | priceAfterDotSmall)"></span>
+                      <span class="price ml-2" [innerHTML]="wishlist?.product_details?.saleprice | currency | priceAfterDotSmall"></span>
+                    </div>
+                    <div class="price-box" *ngIf="wishlist?.product_details?.price === wishlist?.product_details?.saleprice">
+                      <span class="price ml-2" [innerHTML]="wishlist?.product_details?.saleprice | currency | priceAfterDotSmall"></span>
+                    </div>
+                  </div>
+
+                  <!-- Discount Percentage -->
+                  <h4 class="price-discount ml-2" *ngIf="wishlist?.product_details?.price > wishlist?.product_details?.saleprice">
+                    {{ (((wishlist?.product_details?.price - wishlist?.product_details?.saleprice) / wishlist?.product_details?.price) * 100).toFixed(0) + '%' + ' off' }}
+                  </h4>
+
+
+                  <span (click)="removeWishlist(wishlist?.product_id, wishlist?.product_details?.name)" class="wishlist-remove-btn"><i class="fa fa-times"></i></span>
+                </div>
+                <div class="card-footer">
+                  <!-- Add to Cart Action -->
+                  <button type="button" (click)="addToCart(wishlist.product_details)" *ngIf="wishlist.product_details.quantity" class="btn btn-primary btn-sm">Add to Cart</button>
+                  <!-- Out Of Stock -->
+                  <h5 class="out-of-stock m-0" *ngIf="wishlist.product_details.quantity === 0">Out of Stock</h5>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        <h5 *ngIf="wishlistHolder && wishlistHolder.length === 1 && isBTSWishlistProductAddedToCart" class="heading-md m-0 py-4 text-black-50 text-center">
+          You have no items in your wishlist. Start adding!
+        </h5>
+      </p-tabPanel>
+
+      <p-tabPanel header="Prebook">
+        <!-- Prebook list -->
+        <div class="row align-items-center" *ngIf="prebookProductsHolder">
+          <div class="col-sm-4">
+            <div class="media align-items-center">
+              <div class="media-img-box">
+                <img [src]="imgUrl + '/small/' + prebookProductsHolder?.images[0]?.filename" class="img-fluid" alt=" ">
+              </div>
+              <div class="media-body ml-3">
+                <h6>{{prebookProductsHolder?.name}}</h6>
+                <p>SKU: {{prebookProductsHolder?.sku}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <b class="text d-block mb-2">Prebook Amount</b>
+            <span class="price" [innerHTML]="prebookProductsHolder?.prebook_amt | currency | priceAfterDotSmall"></span>
+          </div>
+          <div class="col-sm-2">
+            <b class="text d-block mb-2">Final Price</b>
+            <span class="price" [innerHTML]="prebookProductsHolder?.final_price | currency | priceAfterDotSmall"></span>
+          </div>
+          <div class="col-sm-4" *ngIf="+prebookProductsHolder?.quantity > 0">
+            <b class="text d-block mb-2">Pay with </b>
+            <button type="button" *ngFor="let item of paymentModuleHolder;" (click)="proceedToPayment(item)" class="btn btn-primary btn-xs text-capitalize mr-2">{{item.pg_name}}</button>
+          </div>
+          <div class="col-sm-4" *ngIf="+prebookProductsHolder?.quantity === 0">
+            <b class="text d-block text-danger"> Out of Stock </b>
+          </div>
+        </div>
+
+        <h5 *ngIf="!prebookProductsHolder" class="heading-md m-0 py-4 text-black-50 text-center">You have no items in your prebook list.</h5>
+      </p-tabPanel>
+
+      <p-tabPanel header="Order History">
+        <p-dataView [value]="orderHistoryHolder" [paginator]="true" [rows]="10" [lazy]="true" (onLazyLoad)="loadData($event)" [totalRecords]="totalRecords" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+          <ng-template let-item pTemplate="gridItem" let-i="rowIndex">
+            <div class="order-history-item">
+              <div class="order-item">
+                <div class="row align-items-center py-2">
+                  <div class="col-sm-6">
+                    <div class="media align-items-center">
+                      <div class="product-sm-img-box" *ngIf="item.product && item.product.length > 0 && item.product[0].images">
+                        <img *ngIf="item.product[0].images.length > 0" [src]="imgUrl + '/medium/' + item.product[0].images![0].filename" class="img-fluid" alt=" ">
+                      </div>
+                      <div class="media-body ml-2" (click)="rateAndReviewModalShow(item.id, i)">
+                        <h6>{{item.product[0].name}}</h6>
+                        <h6 class="heading-link-sm">{{ item.ordered_on | date: 'MMM d, y, h:mm a' }}</h6>
+                        {{(item.product.length > 1) ? item.product.length - 1 + ' More Items' : ''}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-2">
+                    <span class="price" [innerHTML]="item.total | currency | priceAfterDotSmall"></span>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6 class="text-capitalize"><i class="fa fa-circle" style="color: green"></i> {{item.status}}</h6>
+                    <!-- <p class="m-0">Your {{(item.product.length > 1) ? item.product.length : ''}} Items has been delivered</p> -->
+                    <!-- <a (click)="rateAndReviewModalShow(item.id, i)" class="btn-link-primary">
+                      <i class="fa fa-star mr-2 text-warning"></i>Rate & Review Product
+                    </a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-dataView>
+        <h5 *ngIf="orderHistoryHolder?.length === 0" class="heading-md m-0 py-4 text-black-50 text-center">You have no items in your order history. Start shopping!</h5>
+      </p-tabPanel>
+    </p-tabView>
+    <hr>
+    <div class="form-row justify-content-center text-center mt-4">
+      <div class="col-sm-auto mb-2 mb-sm-0">
+        <a class="btn btn-outline-light" routerLink="/">Continue Shopping</a>
+      </div>
+      <div class="col-sm-auto">
+        <a class="btn btn-outline-light" (click)="goToCart()">Go to Cart</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Rate & Review Modal -->
+<p-dialog position="top" [(visible)]="isReviewModalShow" header="Your order items" position="center" (onHide)="clearData()" [style]="{width: '50vw', height: '80vh'}" [modal]="true" [draggable]="false" [resizable]="false">
+  <div class="row">
+    <div class="col-sm">
+      <!-- <small *ngIf="filterOderHistory.length > 1"><b>Note: </b> Select Product to Rate & Review</small> -->
+      <div *ngFor="let product of filterOderHistory; let i = index" class="media product-rate-container align-items-center p-2 mb-3" [class.active]="isProductActiveForReview === i" (click)="onClickRateProduct(i, product.id)">
+        <div class="product-sm-img-box">
+          <img [src]="imgUrl + '/medium/' + product.images[0].filename" class="img-fluid" alt=" ">
+        </div>
+        <div class="media-body ml-2">
+          <h6>{{product.name}}</h6>
+          <!-- <h6 class="heading-link-sm">{{product.ordered_on}}</h6> -->
+
+          <!-- <h6 class="overall-rating">Overall Rating: 4.3</h6> -->
+          <span class="price" [innerHTML]="product.saleprice | currency | priceAfterDotSmall"></span>
+        </div>
+      </div>
+
+    </div>
+    <!-- <div class="col-sm">
+      <div class="card">
+        <div class="card-body">
+          <h5>Rate the experience</h5>
+          <div class="d-flex align-items-center">
+            <div class="rating-star-box">
+              <p-rating [(ngModel)]="rating" [id]="'_' + ngxStarRatingId" [cancel]="false" [stars]="5"></p-rating>
+            </div>
+            <div *ngIf="rating">
+              <h6 class="ml-3 mb-0" [class.text-green]="rating === 5 || rating === 4" [class.text-warning]="rating === 3 || rating === 2" [class.text-danger]="rating === 1">
+                {{rating === 5 ? 'Very Good' : rating === 4 ? 'Good' : rating === 3 ? 'Bad' : rating === 2 ? 'Very Bad' : rating === 1 ? 'Poor' : ''}}
+              </h6>
+            </div>
+          </div>
+
+          <div>
+            <h5 *ngIf="rating">What went <span *ngIf="rating <= 3">bad?</span><span *ngIf="rating === 5 || rating === 4">well</span>!</h5>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-checkbox-inline">
+                  <input type="checkbox" name="delivery_associate" id="delivery_associate" [(ngModel)]="deliveryAssociate" ngDefaultControl>
+                  <label for="delivery_associate">Delivery Associate</label>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-checkbox-inline">
+                  <input type="checkbox" name="packaging" id="packaging" [(ngModel)]="packaging" ngDefaultControl>
+                  <label for="packaging">Packaging</label>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-checkbox-inline">
+                  <input type="checkbox" name="others" id="others" [(ngModel)]="others" ngDefaultControl>
+                  <label for="others">Others</label>
+                </div>
+              </div>
+            </div>
+            <div class="is-delivery-associate-checked pt-3" *ngIf="deliveryAssociate">
+              <h5 class="heading-md">Tell us more about the packaging:</h5>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-checkbox-inline">
+                    <input type="checkbox" name="polite_behavior" id="polite_behavior" [(ngModel)]="isPoliteBehavior" ngDefaultControl>
+                    <label for="polite_behavior">Polite Behavior</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="is-packaging-checked pt-3" *ngIf="packaging">
+              <h5 class="heading-md">Tell us more about the packaging:</h5>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-checkbox-inline">
+                    <input type="checkbox" name="others" id="sturdy_packaging" [(ngModel)]="isSturdyPackaging" ngDefaultControl>
+                    <label for="sturdy_packaging">Sturdy packaging</label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-checkbox-inline">
+                    <input type="checkbox" name="recycling_packaging" id="recycling_packaging" [(ngModel)]="isRecyclingPackaging" ngDefaultControl>
+                    <label for="recycling_packaging">100% recycling packaging</label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-checkbox-inline">
+                    <input type="checkbox" name="appropriate_packaging" id="appropriate_packaging" [(ngModel)]="isAppropriatePackaging" ngDefaultControl>
+                    <label for="appropriate_packaging">Appropriate packaging</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-3" *ngIf="others">
+            <label for="review_product">Review This Product <span class="req">*</span></label>
+            <textarea [(ngModel)]="reviewText" ngDefaultControl name="review_product" id="review_product" rows="5" class="form-control"></textarea>
+          </div>
+          <div class="row mt-2">
+            <div class="col-sm">
+              <label for="review_file" class="upload-box"><i class="fa fa-camera fa-lg"></i></label>
+              <input type="file" name="review_file" id="review_file" (change)="onReviewProductPhoto($event)" class="d-none">
+            </div>
+            <div class="col-sm-auto">
+              <button type="button" (click)="onSubmitRatingAndReview()" class="btn btn-primary btn-sm">Submit</button>
+            </div>
+          </div>
+          <hr class="my-2">
+          <div class="review-images " *ngIf="selectedImageUrl || reviewImage">
+            <ng-container *ngIf="reviewImage && reviewImage.length > 0 && !selectedImageUrl">
+              <img *ngFor="let img of reviewImage" [src]="frontImgUrl + '/public/reviews/' + img" class="img-thumbnail mr-2" alt=" ">
+            </ng-container>
+            <img *ngIf="selectedImageUrl" [src]="selectedImageUrl" class="img-thumbnail" alt=" ">
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</p-dialog>

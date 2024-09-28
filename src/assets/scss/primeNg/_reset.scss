@@ -1,0 +1,99 @@
+.p-dropdown .p-dropdown-trigger {
+  width: 1.75rem;
+}
+
+.pi {
+  font-size: 14px;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+  min-width: 32px;
+  height: 29px;
+  border-radius: 3px;
+  line-height: 27px !important;
+}
+
+.p-dropdown {
+  border: 1px solid #ddd;
+}
+
+.p-dropdown:not(.p-disabled).p-focus {
+  border: 1px solid #126dff;
+  box-shadow: none;
+}
+
+.p-paginator .p-paginator-first,
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-last {
+  min-width: 32px;
+  height: 31px;
+  border-radius: 3px;
+}
+
+.p-dropdown .p-inputtext {
+  border: 0 none !important;
+  padding: 0.25em 0 0.2rem 0.5rem !important;
+}
+
+.p-paginator .p-dropdown {
+  height: 1.8rem !important;
+}
+
+.p-inputtext {
+  font-size: 13px;
+  border-radius: 0.15rem;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  margin: 0;
+  padding: 0.15rem 0.75rem !important;
+}
+
+.pDropdown {
+  min-width: 10rem;
+}
+
+.p-input-icon-left > i:first-of-type {
+  right: 0.75rem;
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: -6px;
+  left: unset;
+}
+
+.p-button.p-button-icon-only {
+  width: 2.2rem;
+  padding: 0.35rem;
+  border-radius: 0.15rem;
+}
+
+.p-selectbutton .p-button.p-highlight {
+  background: $primary-color;
+  border-color: $primary-color;
+  color: rgb(255 255 255);
+}
+
+.p-dataview .p-dataview-header {
+  padding: 0.35rem 0 !important;
+}
+//
+//.p-grid.p-nogutter.grid.grid-nogutter {
+//  display: flex;
+//  flex-wrap: wrap;
+//  justify-content: center;
+//}
+
+.p-dataview .p-paginator-bottom {
+  border: 0;
+}
+
+.cdk-overlay-container {
+  z-index: 99999999 !important;
+}
+
+.p-dataview .p-dataview-emptymessage {
+  text-align: center;
+  color: red;
+  font-weight: 400;
+  font-size: 18px;
+}

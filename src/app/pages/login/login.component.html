@@ -1,0 +1,313 @@
+<div class="container py-4">
+  <div class="row jsutify-content-center ">
+    <!-- border-right align-itemsloginOffer-center-->
+    <div class="col-sm-6 m-auto " *ngIf="loginOffer">
+      <!-- <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()" *ngIf="!isLoginWithOtpForm && !isForgotPasswordForm">
+        <h5 class="font-regular mt-3">Login</h5>
+        <hr class="mt-0">
+
+        <div *ngIf="alertMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+          <button type="button" class="close" (click)="alertMessage = ''">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <p class="m-0 text-capitalize">{{alertMessage}}</p>
+        </div>
+
+        <div class="form-group">
+          <label for="email_id">Email Address <span class="req">*</span></label>
+          <input type="email" formControlName="email_id" [class.is-invalid]="loginSubmitted && getLoginControls.email_id.errors" name="email_id" id="email_id" class="form-control form-control-sm">
+          <div *ngIf="loginSubmitted && getLoginControls.email_id.errors" class="invalid-feedback">
+            <div *ngIf="getLoginControls.email_id.errors.required">Email Address is Required</div>
+            <div *ngIf="getLoginControls.email_id.errors.pattern">This Email Address is Not Valid</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password <span class="req">*</span></label>
+          <input type="password" formControlName="password" [class.is-invalid]="loginSubmitted && getLoginControls.password.errors" name="password" id="password" class="form-control form-control-sm">
+          <div *ngIf="loginSubmitted && getLoginControls.password.errors" class="invalid-feedback">
+            <div *ngIf="getLoginControls.password.errors.required">Password is Required</div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col">
+            <a routerLink="/" class="btn-link btn-link-primary">Return To Store</a>
+          </div>
+          <div class="col-auto text-right">
+            <button type="button" (click)="onClickForgotPassword()" class="btn-link btn-link-primary">Forgot Password?</button>
+          </div>
+        </div>
+        <hr class="mt-1">
+
+        <div class="row mb-4">
+          <div class="col">
+            <button type="button" (click)="onClickOtpLogin()" class="btn btn-primary">Login with OTP</button>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary">
+              <mat-icon *ngIf="isLoginLoading">
+                <mat-spinner diameter="15"></mat-spinner>
+              </mat-icon>
+              Login
+            </button>
+          </div>
+        </div>
+
+      </form> -->
+
+      <!-- Mobile Number Form Fields -->
+      <ng-container *ngIf="isLoginWithOtpForm && !isOtp">
+        <h5 class="font-regular">Login with OTP</h5>
+        <hr class="mt-0">
+        <div class="form-group">
+          <label for="mobile_no">Enter Mobile Number <span class="req">*</span></label>
+          <input type="text" #mobileNumber  [(ngModel)]="userOfferData.phone" name="mobile_no" id="mobile_no" class="form-control form-control-sm">
+        </div>
+        <hr class="my-3"> 
+        <div class="row">
+          <div class="col-sm">
+            <button type="button" (click)="verifyMobile(mobileNumber.value)" class="btn btn-primary">Request Otp</button>
+          </div>
+          <!-- <div class="col-sm-auto">
+            <button type="button" (click)="loginWithEmail()" class="btn btn-primary">Login With Email</button>
+          </div> -->
+        </div>
+      </ng-container>
+
+      <!-- OTP Verify Form Fields -->
+      <ng-container *ngIf="isLoginWithOtpForm && isOtp">
+        <h5 class="font-regular">Login with OTP</h5>
+        <hr class="mt-0">
+        <div class="form-group">
+          <label>Enter Otp to verify your account <span class="req">*</span> </label>
+          <ngx-otp-input [config]="otpInputConfig" (otpChange)="handleOtpChange($event)" (fill)="handleFillEvent($event)"></ngx-otp-input>
+          <small class="d-block mb-2"> A code has been sent to {{mobile}}</small>
+          <h6 class="heading-sm my-2 font-weight-normal font-italic text-danger"> {{(otpExpires !== 0) ? 'OTP Expires in ' + otpExpires + ' Seconds' : 'Otp Expired' }} </h6>
+          <div class="d-flex align-items-end">Didn't get the code?
+            <button type="button" (click)="resendOtp()" class="btn-link btn-link-primary ml-2">Resend OTP</button>
+          </div>
+        </div>
+        <hr class="my-3">
+        <div class="row">
+          <div class="col-sm" *ngIf="isOtp">
+            <button type="button" (click)="validateOtp()" class="btn btn-primary">Validate Otp</button>
+          </div>
+          <!-- <div class="col-sm-auto">
+            <button type="button" (click)="loginWithEmail()" class="btn btn-primary">Login With Email</button>
+          </div> -->
+        </div>
+      </ng-container>
+
+      <!-- Forgot Password -->
+      <ng-container *ngIf="isForgotPasswordForm">
+        <h5 class="font-regular">Forgot Your Password</h5>
+        <hr class="mt-0">
+        <div class="form-group">
+          <label>Enter Email <span class="req">*</span></label>
+          <input type="text" #email name="email" class="form-control form-control-sm">
+        </div>
+        <hr class="my-3">
+        <div class="row">
+          <div class="col-sm">
+            <button type="button" (click)="resetPassword(email.value)" class="btn btn-primary">Reset Password</button>
+          </div>
+          <div class="col-sm-auto">
+            <button type="button" (click)="loginWithEmail()" class="btn btn-primary">Login With Email</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="col-sm-7 m-auto" *ngIf="registerOffer">
+      <!-- Registration Form Start -->
+      <form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit()">
+        <h5>Create New Account</h5>
+        <hr class="mt-0">
+        <div *ngIf="registerSuccessMsg" class="alert alert-success alert-dismissible fade show" role="alert">
+          <button type="button" class="close" (click)="registerSuccessMsg = ''">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <p class="m-0 text-capitalize">{{registerSuccessMsg}}</p>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" formControlName="company" name="company" class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+
+        <!-- First Name & Last Name -->
+        <div class="form-row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="firstname">First Name <span class="req">*</span></label>
+              <input type="text" id="firstname" formControlName="firstname" [class.is-invalid]="registerSubmitted && getRegisterControls.firstname.errors" name="firstname" class="form-control form-control-sm">
+              <div *ngIf="registerSubmitted && getRegisterControls.firstname.errors" class="invalid-feedback">
+                <div *ngIf="getRegisterControls.firstname.errors.required">First Name is Required</div>
+                <div *ngIf="getRegisterControls.firstname.errors.pattern">Only characters are allowed in first name.</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="lastname">Last Name <span class="req">*</span></label>
+              <input type="text" id="lastname" formControlName="lastname" [class.is-invalid]="registerSubmitted && getRegisterControls.lastname.errors" name="lastname" class="form-control form-control-sm">
+              <div *ngIf="registerSubmitted && getRegisterControls.lastname.errors" class="invalid-feedback">
+                <div *ngIf="getRegisterControls.lastname.errors.required">Last Name is Required</div>
+                <div *ngIf="getRegisterControls.lastname.errors.pattern">Only characters are allowed in last name.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email & Phone -->
+        <div class="form-row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" formControlName="email" [class.is-invalid]="registerSubmitted && getRegisterControls.email.errors" name="email" class="form-control form-control-sm">
+              <div *ngIf="registerSubmitted && getRegisterControls.email.errors" class="invalid-feedback">
+                <div *ngIf="getRegisterControls.email.errors.required">Email is Required</div>
+                <div *ngIf="getRegisterControls.email.errors.pattern">This Email is Not Valid</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="phone">Phone <span class="req">*</span></label>
+              <input type="text" id="phone" formControlName="phone" [class.is-invalid]="registerSubmitted && getRegisterControls.phone.errors" name="phone" class="form-control form-control-sm">
+              <div *ngIf="registerSubmitted && getRegisterControls.phone.errors" class="invalid-feedback">
+                <div *ngIf="getRegisterControls.phone.errors.required">Phone is Required</div>
+                <div *ngIf="getRegisterControls.phone.errors.pattern">Phone No. is 10 digit</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Password & Confirm Password -->
+        <div class="form-row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Password <span class="req">*</span></label>
+              <input type="password" formControlName="password" [class.is-invalid]="registerSubmitted && getRegisterControls.password.errors" name="password" class="form-control form-control-sm">
+              <div *ngIf="registerSubmitted && getRegisterControls.password.errors" class="invalid-feedback">
+                <div *ngIf="getRegisterControls.password.errors.required">Password is Required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="conf_password">Confirm Password <span class="req">*</span></label>
+              <input type="password" id="conf_password" formControlName="conf_password" [class.is-invalid]="registerSubmitted && getRegisterControls.conf_password.errors" name="conf_password" class="form-control form-control-sm">
+              <div *ngIf="registerSubmitted && getRegisterControls.conf_password.errors" class="invalid-feedback">
+                <div *ngIf="getRegisterControls.conf_password.errors.required">Confirm Password is Required</div>
+                <div *ngIf="getRegisterControls.conf_password.errors.mustMatch">Password & Confirm Password Must Match</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>GST IN.</label>
+          <input type="text" formControlName="gst" [class.is-invalid]="registerSubmitted && getRegisterControls.gst.errors" name="gst" class="form-control form-control-sm">
+          <div *ngIf="registerSubmitted && getRegisterControls.gst.errors" class="invalid-feedback">
+            <div *ngIf="getRegisterControls.gst.errors.pattern">GST Number is Not Valid</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="custom-checkbox custom-control">
+            <input type="checkbox" formControlName="email_subscribe" name="email_subscribe" class="custom-control-input" id="subscribe_email" checked="checked" />
+            <label class="custom-control-label" for="subscribe_email">Subscribe to our email list</label>
+          </div>
+        </div>
+        <hr class="my-2">
+        <button type="submit" [disabled]="isLoading" class="btn btn-primary float-right">
+          <mat-icon *ngIf="isLoading">
+            <mat-spinner diameter="15"></mat-spinner>
+          </mat-icon>
+          Register {{isLoading ? '' : 'Now'}}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Cart and Guest Items Compare Modal -->
+<p-dialog header="We have found items that were added earlier." [(visible)]="displayCartGuestItemsCompare" [modal]="true" [responsive]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [closable]="true" [draggable]="false" [resizable]="false">
+  <!-- Cart Items -->
+  <div class="container-fluid mb-3" *ngIf="cartItems && cartItems.length > 0">
+    <div class="row border-bottom mb-2">
+      <div class="col-sm-12">
+        <h6 class="font-regular">Previous added items</h6>
+      </div>
+    </div>
+    <div class="row pb-2 border-bottom">
+      <div class="col-sm-3"><h6 class="m-0 heading-sm">Product Name</h6></div>
+      <div class="col-sm-3"><h6 class="m-0 heading-sm">Quantity</h6></div>
+      <div class="col-sm-3"><h6 class="m-0 heading-sm">Price</h6></div>
+      <div class="col-sm-3"><h6 class="m-0 heading-sm">Action</h6></div>
+    </div>
+    <div *ngFor="let item of cartItems; let i = index" class="row align-items-center border-bottom py-2">
+      <div class="col-sm-3">
+        <div class="d-flex align-items-center">
+          <div class="img-box-sm mr-2">
+            <img class="img-fluid" *ngIf="!item?.images" src="assets/img/not-found/no-image-found.png" alt=" ">
+            <img class="img-fluid" *ngIf="item?.images" [src]="imgUrl + '/medium/' + item?.images[0]?.filename" alt="{{item?.images?.alt}}">
+          </div>
+          <span>{{ item.name }}</span>
+        </div>
+      </div>
+      <div class="col-sm-3">{{ item.item_quantity }}</div>
+      <div class="col-sm-3">{{ item.item_value }}</div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-sm btn-danger" (click)="removeCartItem(false, item.id, i)">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guest Cart Items -->
+  <div class="container-fluid" *ngIf="guestCartItems && guestCartItems.length > 0">
+    <div class="row border-bottom mb-2">
+      <div class="col-sm-12">
+        <h6 class="font-regular">Recently added items</h6>
+      </div>
+    </div>
+    <div class="row pb-2 border-bottom">
+      <div class="col-sm-3"><h6 class="m-0 heading-sm">Product Name</h6></div>
+      <div class="col-sm-3"><h6 class="m-0 heading-sm">Quantity</h6></div>
+      <div class="col-sm-3"><h6 class="m-0 heading-sm">Price</h6></div>
+      <div class="col-sm-3"><h6 class="m-0 heading-sm">Action</h6></div>
+    </div>
+    <div class="row align-items-center py-2 border-bottom" *ngFor="let item of cartItems; let i = index">
+      <div class="col-sm-3">
+        <div class="d-flex align-items-center">
+          <div class="img-box-sm mr-2">
+            <img class="img-fluid" *ngIf="!item?.images" src="assets/img/not-found/no-image-found.png" alt=" ">
+            <img class="img-fluid" *ngIf="item?.images" [src]="imgUrl + '/medium/' + item?.images[0]?.filename" alt="{{item?.images?.alt}}">
+          </div>
+          <span>{{ item.name }}</span>
+        </div>
+      </div>
+      <div class="col-sm-3">{{ item.item_quantity }}</div>
+      <div class="col-sm-3">{{ item.item_value ?? item.saleprice }}</div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-sm btn-danger" (click)="removeCartItem(true, item.id, i)">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary" (click)="keepInCart()">Keep in cart</button>
+      </div>
+    </div>
+  </ng-template>
+
+</p-dialog>

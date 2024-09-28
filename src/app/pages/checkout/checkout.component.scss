@@ -1,0 +1,133 @@
+.my-submit {
+  width: 60% !important;
+}
+
+.nearest_store_selector {
+  display: block;
+  transition: 0.5s ease-in-out;
+}
+
+.nearest_store_selector:hover {
+  background-color: #eee;
+  cursor: pointer;
+  color: white;
+}
+
+.active1 {
+  background-color: #eee;
+}
+
+.need-help-text {
+  font-size: 0.83rem;
+  font-family: sans-serif !important;
+  font-weight: 600;
+}
+
+.quantity_btn {
+  border: 1px solid #ddd;
+  padding: 3px;
+  border-radius: 3px !important;
+
+  * {
+    color: #656565;
+  }
+}
+
+.img_containet {
+  width: 8rem;
+  border: 1px solid #ddd;
+
+}
+
+.link_tag {
+  color: #198754;
+  text-decoration: underline !important;
+}
+
+hr {
+  border-top: 1px solid rgb(185 184 185) !important;
+}
+
+// .total_price{
+//   width: 10rem !important;
+// }
+a {
+  color: #198754 !important;
+  text-decoration: none !important;
+  transition: 0.3s;
+}
+
+.btn_continue {
+  background-color: #198754 !important;
+  color: white;
+  border-radius: 2px;
+}
+
+.details {
+  width: 20rem;
+}
+
+
+.product-name {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+}
+
+
+
+// floating label 
+// .form-group {
+//   margin-bottom: 16px;
+//   position: relative !important;
+// }
+// input {
+//   position: relative !important;
+//   display: block;
+//   width: 100%;
+//   border: 1px solid rgba(0,0,0,.37);
+//   border-radius: 4px;
+//   background-color: transparent;
+//   margin: 0px auto;
+//   padding: 6px 4px 4px 14px;
+//   height: 40px;
+//   outline: none !important;
+//   font-size: 16px;
+//   color: rgba(0,0,0,0.85);
+//   transition: all .2s ease-in-out;
+// }
+
+// label {
+//   position: absolute !important;
+//   top: 20px; 
+//   left: 12px;
+//   text-align: left;
+//   display: inline-block;
+//   padding: 0 4px;
+//   height: 14px;
+//   line-height: 14px;
+//   font-size: 14px;
+//   font-weight: 400;
+//   background: #fff;
+//   color: rgba(0,0,0,0.5);
+//   margin: 0px auto;
+//   cursor: text;
+//   transition: all .15s ease-in-out;
+// }
+// input:hover, input:focus { border: 1px solid #000; }
+
+// input:valid + label, input:focus + label { 
+//   top: -6px;
+//   color: #000;
+//   font-weight: bold;
+// }
+// .gl-form-asterisk {
+//     background-color: inherit;
+//     color: #e32b2b;
+//     padding: 0;
+//     padding-left: 3px;
+
+// }
+// .gl-form-asterisk:after {
+//     content: "*";
+// }

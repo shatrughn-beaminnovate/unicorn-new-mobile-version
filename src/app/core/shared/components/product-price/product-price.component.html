@@ -1,0 +1,46 @@
+<ng-container *ngIf="selectedProduct && +selectedProduct.price > 0 && +selectedProduct.saleprice > 0">
+  <div class="price-box" *ngIf="+selectedProduct.price < +selectedProduct.saleprice  && +selectedProduct.cashback_price === 0 && +selectedProduct.enabled === 1">
+    <span class="price ml-2" [innerHTML]="selectedProduct.price | currency | priceAfterDotSmall"></span>
+  </div>
+
+  <div class="price-box" *ngIf="+selectedProduct.price === +selectedProduct.saleprice  && +selectedProduct.cashback_price === 0 && +selectedProduct.enabled === 1">
+    <span class="price ml-2" [innerHTML]="selectedProduct.saleprice | currency | priceAfterDotSmall"></span>
+  </div>
+
+  <!-- Discounted Price -->
+  <div class="price-box" *ngIf="+selectedProduct.price > +selectedProduct.saleprice && +selectedProduct.cashback_price === 0 && +selectedProduct.enabled === 1">
+    <span class="price"><span class="price-strike" [innerHTML]="(selectedProduct.price | currency | priceAfterDotSmall)"></span></span>
+    <span class="price ml-2" [innerHTML]="selectedProduct.saleprice | currency | priceAfterDotSmall"></span>
+  </div>
+
+
+  
+
+  <!-- Price with Cashback (if available): Working Fine -->
+  <div class="price-box" *ngIf="selectedProduct?.cashback_price > 0 && selectedProduct?.enabled === 1">
+    <span class="price">
+      <span class="price-strike" *ngIf="selectedProduct?.price > selectedProduct?.saleprice" [innerHTML]="(selectedProduct?.price | currency)"></span>
+      <span class="price-lg" *ngIf="selectedProduct?.price === selectedProduct?.saleprice" [innerHTML]="(selectedProduct?.price | currency)"></span>
+    </span>
+    <span class="price-md d-block mb-2" *ngIf="selectedProduct?.price > selectedProduct?.saleprice" [innerHTML]="selectedProduct?.saleprice | currency"></span>
+    <span class="price-text" *ngIf="selectedProduct?.cashback === 0 && selectedProduct?.cashback_amt">Price After Cashback</span>
+    <span class="price-text" *ngIf="selectedProduct?.cashback === 1 && selectedProduct?.cashback_price">Price After Cashback</span>
+    <span class="price ml-2" *ngIf="selectedProduct?.after_cashback" [innerHTML]="selectedProduct?.after_cashback | currency"></span>
+    <span class="price ml-2" *ngIf="selectedProduct?.cashback === 0 && selectedProduct?.cashback_amt" [innerHTML]="(selectedProduct?.saleprice - selectedProduct?.cashback_amt) | currency"></span>
+    <span class="price ml-2" *ngIf="selectedProduct?.cashback === 1 && selectedProduct?.cashback_price" [innerHTML]="(selectedProduct?.saleprice - selectedProduct?.cashback_price) | currency"></span>
+  </div>
+
+  <!-- Prebook Price -->
+  <div class="price-box" *ngIf="+selectedProduct.enabled === 3 && +selectedProduct.custom_column_2 > 0">
+    <span class="price-lg d-block my-2" [innerHTML]="selectedProduct.saleprice | currency | priceAfterDotSmall"></span>
+    <span class="price-text">Prebook Price:</span>
+    <span class="price ml-2" [innerHTML]="selectedProduct.custom_column_2 | currency | priceAfterDotSmall"></span>
+  </div>
+
+  <!-- Discount Percentage: working fine -->
+  <h4 class="price-discount" *ngIf="+selectedProduct.price > +selectedProduct.saleprice">
+    {{(((+selectedProduct.price - +selectedProduct.saleprice) / +selectedProduct.price) * 100) | number:'1.0-1'}}% off
+  </h4>
+  
+ 
+</ng-container>

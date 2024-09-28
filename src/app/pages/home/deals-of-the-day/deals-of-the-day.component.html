@@ -1,0 +1,58 @@
+<!-- <swiper [config]="configOptions" direction="horizontal"
+        [loop]="true"
+        [loopedSlides]="products.length"
+        [autoHeight]="false"
+        [allowTouchMove]="true"
+        [autoplay]="{ delay: 1000, disableOnInteraction: false }"
+        [pagination]="false"
+        [navigation]="{ nextEl: '.firsts-swiper-next', prevEl: '.firsts-swiper-prev' }">
+  <ng-template class="no-margin-right swipe mb-4 h-100" swiperSlide *ngFor="let product of products">
+    <ng-container *ngIf="!loading; else skeleton">
+      <div class="first_colm d-flex h-100">
+        <div class="img_content"> 
+          <img [src]="imgUrl + '/medium/' +product.images[0].filename" alt="Product Image" class="image_dis image">
+        </div>
+        <div class="mt-2">
+          <a [href]="product.href" class="heading-link-sm m-0 mt-1">{{product.name}}</a>
+          <p-rating [ngModel]="product.rating" [cancel]="false" class="rating ratings "></p-rating>
+          <span class="price_main mb-3">
+            <del class="pricee"> &#8377;{{ product.price | number: '1.0-0' }} </del>
+            &nbsp; &nbsp;
+            &#8377;{{ product.saleprice | number: '1.0-0' }}
+          </span>
+          <app-add-to-cart [showFirstButton]="false" [product]="product" styleClass="add_cart btn btn-sm d-flex align-items-center mb-2"></app-add-to-cart>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</swiper> -->
+<!-- Skeleton Start Here  -->
+<!-- <ng-template #skeleton>
+   <div class="card h-100">
+     <div class="card-body"> 
+       <p-skeleton width="100%" height="100px" animation="wave" class="mb-3"></p-skeleton>
+       <div class="text-center">
+         <p-skeleton width="70%" height="10px" animation="wave" class="mt-2 mb-2"></p-skeleton> 
+       </div>
+     </div>
+   </div>
+ </ng-template> -->
+<!-- Replace with Product Categories Deals of the day here -->
+<div class="row justify-content-center">
+
+    <div class="col-sm mb-2" *ngFor="let item of categoryItems">
+        <a [href]="item.link" (click)="fireCategorySelectGA4Event(item)">
+            <div class="category-item">
+                <div class="product-img">
+                    <img [src]="item.image" class="img-fluid" alt="">
+                    <div class="product-overly"></div>
+                </div>
+                <div class="categori-link">
+                    <h6 class="link-cat">{{ item.name }}</h6>
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+</div>

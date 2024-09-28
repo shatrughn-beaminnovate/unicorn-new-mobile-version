@@ -1,0 +1,122 @@
+
+
+body{
+  background-color: #fbfbfb !important;
+}
+.product-preview img {
+  max-height: 100%;
+  width: auto;
+}
+
+.product-preview {
+  height: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.variant-options {
+  display: flex;
+  flex-wrap: wrap;
+
+  .variant-option-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    margin: 0 10px 10px 0;
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 0.35rem;
+    min-width: 6.814rem;
+    min-height: 3.2rem;
+    cursor: pointer;
+    max-width: 12rem;
+
+    &.selected {
+      border-color: $primary-color;
+      pointer-events: none;
+      // box-shadow: 0 0 6px 0 #00000057;
+       
+      // width: 50px;
+      // height: 50px;
+      // border: 1px solid #0095d7;
+      // border-radius: 50%;
+      
+    }
+
+    .heading-sm {
+      margin: 0 !important;
+    }
+
+    span.checked {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: $primary-color;
+      color: #fff;
+      font-size: 10px;
+      padding: 0 0 0 1px;
+      border-radius: 50%;
+      height: 18px;
+      width: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &:not(.selected) .checked {
+      display: none;
+    }
+
+    .option-color {
+      display: block;
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      margin: 3px 0 5px;
+    }
+  }
+}
+
+.product-share-btn, .share-btn {
+  background: 0;
+  border: 0;
+  padding: 0;
+  line-height: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.product-share-box, .share-product {
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  top: 28px;
+  right: 5px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 6px;
+  z-index: 9;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+
+  .share-icon {
+    height: 28px;
+    width: 28px;
+    cursor: pointer;
+
+    &.fb {
+      background: #1773ea;
+    }
+
+    &.wp {
+      background: #49c559;
+    }
+  }
+}

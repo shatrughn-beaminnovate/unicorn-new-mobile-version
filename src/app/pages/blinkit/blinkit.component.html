@@ -1,0 +1,17 @@
+<a class="logo shadow-sm" href="https://shop.unicornstore.in/">
+  <img src="assets/img/logo/unicorn-logo-black.svg" class="mr-3" alt="Unicorn">
+</a>
+<div class="container my-4" *ngIf="blinkitProduct">
+  <div class="row">
+    <div class="col-sm text-center">
+      <h2 class="title">{{blinkitProduct?.name}}</h2>
+      <div class="img-box my-4">
+        <img [src]="imgUrl + '/medium/' + productImage" class="img-fluid" alt="iPhone XR Black 64GB" />
+      </div>
+      <h4 class="title-bold" [innerHTML]="blinkitProduct?.saleprice | currency | priceAfterDotSmall"></h4>
+      <a [href]="blinkitData?.blinkIt_url" class="btn btn-success px-5 py-2 mt-3" target="_blank">Confirm Order</a>
+      <br><br>
+      <p class="text">Unicorn will send the order to Blinkit for delivery in minutes</p>
+    </div>
+  </div>
+</div>

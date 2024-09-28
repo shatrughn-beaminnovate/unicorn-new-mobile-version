@@ -1,0 +1,71 @@
+<div class="container py-3">
+    <!-- <div class="row" *ngIf="title">
+      <div class="col-sm">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/" class="link">Home</a></li>
+          <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">{{title}}</li>
+        </ol>
+      </div>
+    </div>
+    <hr class="mb-2 mt-0"> -->
+    <div class="row justify-content-center" *ngIf="productsHolder && productsHolder.length > 0">
+        <ng-container *ngFor="let item of productsHolder; let i = index">
+            <div *ngIf="+item.enabled === 1 || +item.enabled === 3" class="col-sm-4 mb-3">
+                <div class="accessories-product-box h-100">
+                    <a [routerLink]="['/product/' + item.slug]">
+                        <app-image-loader [imageUrl]="(item.images && item.images.length > 0) ? imgUrl + '/medium/' + item.images[0].filename : ''" imageContainerClass="mb-4" imageClass="product-item" imageContainerHeight="15rem"></app-image-loader>
+                        <h3 class="heading-link mb-1">{{item.name}}</h3>
+                    </a>
+
+                    <div class="price-holder mt-2"  *ngIf="+item.enabled === 1 ">
+                        <div class="price-box" *ngIf="item.price > item.saleprice">
+                            <span class="price"><del [innerHTML]="item.price | currency | priceAfterDotSmall"></del></span>
+                            <span class="price ml-2" [innerHTML]="item.saleprice | currency | priceAfterDotSmall"></span>
+                        </div>
+                        <div class="price-box" *ngIf="item.price === item.saleprice">
+                            <span class="price ml-2" [innerHTML]="item.saleprice | currency | priceAfterDotSmall"></span>
+                        </div>
+                    </div>
+                    <div class="price-holder mt-2" *ngIf="+item.enabled === 3 && +item.custom_column_2 > 0">
+                        <div class="price-box"  >
+                          <span class="price ml-2" [innerHTML]="+item.custom_column_2 | currency | priceAfterDotSmall"></span>
+                        </div>
+                      </div>
+                    <!-- off % -->
+                    <h5 class="price-discount m-0" *ngIf="+item.enabled === 1 &&  item.price > item.saleprice">
+                        {{((item.price - item.saleprice) / item.price * 100) | number:'1.0-0'}}% off
+                    </h5>
+
+                    <h5 class="out-of-stock m-0" *ngIf="+item.quantity === 0">Out of Stock</h5>
+
+                    <!-- All Action Box: Add to Cart, Notify Me, EMI Available -->
+                    <div class="all-action-box mt-3  ">
+                        <div class="d-flex justify-content-center flex-sm-wrap">
+                            <!-- Notify Me Action -->
+                            <button type="button" *ngIf="item.quantity === '0'" (click)="notifyMeModal.show(item.id)" class="btn btn-primary mr-2">
+                                Notify Me
+                            </button>
+
+                            <!-- Add to Cart Action -->
+                            <app-add-to-cart *ngIf="item.quantity && item.quantity > 0" [showRoundButton]="true" [product]="item" styleClass="rounded"></app-add-to-cart>
+
+                            <!-- Wishlist -->
+                            <button type="button" *ngIf="item.quantity" (click)="wishlistToggle(item, i)" class="btn wishlist-btn">
+                                <i *ngIf="!isWishlistAdded[i]" class="far fa-heart" pTooltip="Add to Wishlist" tooltipPosition="bottom"></i>
+                                <i *ngIf="isWishlistAdded[i]" class="fa fa-heart" pTooltip="Remove from Wishlist" tooltipPosition="bottom"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <h4 *ngIf="productsHolder && productsHolder.length === 0 && !isFetching" class="heading text-center text-danger m-0 py-5">
+        Products Not Available
+    </h4>
+    <h4 *ngIf="isFetching" class="heading text-center text-danger m-0 py-5">
+        Loading...
+    </h4>
+</div>
+<app-notify-me-modal #notifyMeModal></app-notify-me-modal>

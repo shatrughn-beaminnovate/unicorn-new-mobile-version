@@ -1,0 +1,11 @@
+<div class="image-container" [ngClass]="imageContainerClass" [style.height]="imageContainerHeight" [style.width]="imageContainerWidth">
+  <img loading="lazy"
+       [src]="imageLoading ? imageLoadingUrl : imageUrl"
+       [alt]="alt"
+       [id]="imageId"
+       (load)="onImageLoaded()"
+       (error)="handleEmptyImage()"
+       [ngClass]="imageClass"
+       class="img-fluid" [attr.id]="id"
+  />
+</div>

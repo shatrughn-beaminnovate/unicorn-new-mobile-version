@@ -1,0 +1,285 @@
+<div class="container py-3">
+  <!-- Breadcrumb Start -->
+  <div class="row">
+    <div class="col">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/" class="link">Home</a></li>
+        <li class="breadcrumb-item"><span>Your Cart</span></li>
+      </ol>
+    </div>
+  </div>
+  <!-- Breadcrumb End -->
+  <hr class="mt-1">
+</div>
+<div class="container pb-4">
+  <!-- Empty Cart Box -->
+  <div *ngIf="cartItemsHolder && cartItemsHolder.length === 0" class="text-center mb-4">
+    <!--<div class="cart-empty-img-box">
+      <img src="assets/img/" class="img-fluid" alt=" ">
+    </div>-->
+    <i class="fa fa-shopping-cart fa-4x text-dark my-4"></i>
+    <h2 class="title-sm text-uppercase my-3">Your Shopping cart is empty</h2>
+    <h6 class="heading fw-400 mb-3">Please click the button below to continue shopping</h6>
+    <a routerLink="/" class="btn btn-primary-alt">Return to Homepage</a>
+  </div>
+
+  <!-- Cart Product List -->
+  <div class="row justify-content-center" *ngIf="cartItemsHolder && cartItemsHolder.length > 0">
+    <div class="col-sm-12 col-lg-8 col-xl-9 mb-2">
+
+      <div class="form-row d-none d-sm-flex text-center text-sm-left border-bottom">
+        <div class="col-sm-6">
+          <h6 class="heading-sm">Product Info</h6>
+        </div>
+        <div class="col-sm-2">
+          <h6 class="heading-sm">Price</h6>
+        </div>
+        <div class="col-sm-2">
+          <h6 class="heading-sm">Quantity</h6>
+        </div>
+        <div class="col-sm-2">
+          <h6 class="heading-sm">Subtotal</h6>
+        </div>
+      </div>
+
+      <ng-container *ngFor="let item of cartItemsHolder; let i = index; trackBy: cartTrackByFn;">
+        <div class="form-row align-items-center text-center text-sm-left border-bottom  py-2 cart-products">
+
+          <!-- Product Info -->
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="media" [class.pl-4]="item.bundle">
+              <div class="img-box-sm">
+                <img class="img-fluid" *ngIf="!item?.images" src="assets/img/not-found/no-image-found.png" alt=" ">
+                <img class="img-fluid" *ngIf="item?.images" [src]="imgUrl + '/medium/' + item?.images[0]?.filename" alt="{{item?.images?.alt}}">
+              </div>
+              <div class="media-body ml-3 mr-2 mt-0">
+                <a [routerLink]="['/product', item.slug]" class="heading-link-md p-0"> {{item.name}} </a>
+                <span class="heading-link-xs p-0" *ngIf="item.sku"> <b>SKU : </b> {{item.sku}} </span>
+                <button type="button" (click)="moveToWishlist(item.cart_item_id)" class="btn-link btn-link-sm btn-link-primary mt-1" title="Remove Cart Item">
+                  Move To Wishlist
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price -->
+          <div class="col-sm-2 mb-3 mb-sm-0">
+            <div style="white-space: normal;">
+              <h5 class="mr-2 heading-sm-dark d-block d-sm-none">Price </h5>
+              <div class="text-nowrap">
+                <div class="price-box price-box-sm">
+                  <span class="price 1" *ngIf="item.price > item.saleprice" [innerHTML]="item.saleprice | currency | priceAfterDotSmall"></span>
+                  <span class="price 2" *ngIf="item.price < item.saleprice" [innerHTML]="item.price | currency | priceAfterDotSmall"></span>
+                  <span class="price 3" *ngIf="item.price == item.saleprice" [innerHTML]="item.price | currency | priceAfterDotSmall"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cart Qty Update & Remove Cart Item -->
+          <!--
+            This code block represents the HTML template for the cart component.
+            It displays the quantity of an item in the cart and allows the user to increment or decrement the quantity.
+            If the item has a fixed quantity or is part of a bundle, the quantity cannot be changed.
+            The user can also remove the item from the cart.
+          -->
+          <div class="col-sm-2 mb-3 mb-sm-0">
+
+            <h5 class="heading-sm-dark mr-2 d-block d-sm-none">Quantity </h5>
+
+            <h4  *ngIf="+item.fixed_quantity === 1 || item.bundle" class="cart-qty-box" title="Can only bought one quantity in an order">
+              {{item.item_quantity}}
+            </h4>
+
+            <div class="qty-btn-box" *ngIf="+item.fixed_quantity === 0 && !item.bundle">
+              <span class="decrement" (click)="updateQty(item.cart_item_id, +qty.value, false)" [class.disabled]="+item.item_quantity === 1">-</span>
+              <input type="text" name="qty" [value]="item.item_quantity" value="1" #qty/>
+              <span class="increment" (click)="updateQty(item.cart_item_id, +qty.value, true)">+</span>
+            </div>
+
+            <button type="button" (click)="removeCartItem($event, item.cart_item_id)" *ngIf="!item.bundle" class="btn-link btn-link-sm btn-link-danger d-block mx-auto d-sm-inline-block mt-1" title="Remove Cart Item">
+              Remove Form Cart
+            </button>
+
+          </div>
+
+          <div class="col-sm-2 mb-3 mb-sm-0">
+            <h5 class="heading-sm-dark mr-2 d-block d-sm-none">Subtotal </h5>
+            <div class="text-nowrap">
+              <div class="price-box price-box-sm">
+                <span class="price" *ngIf="item.price > item.saleprice" [innerHTML]="(item.saleprice * item.item_quantity) | currency | priceAfterDotSmall"></span>
+                <span class="price" *ngIf="item.price < item.saleprice" [innerHTML]="(item.price * item.item_quantity) | currency | priceAfterDotSmall"></span>
+                <span class="price" *ngIf="item.price == item.saleprice" [innerHTML]="(item.price * item.item_quantity) | currency | priceAfterDotSmall"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!--<div class="text-right mb-3">
+        <button type="button" (click)="emptyCartItems()" class="btn btn-danger-alt btn-sm mt-2" title="Remove All Cart Items">
+          Empty Cart
+        </button>
+      </div>-->
+
+      <!-- Recommended Products -->
+      <section class="related-sec pt-4 pb-3" *ngIf="recommendedProductHolder.length > 0">
+        <div class="container">
+          <h2 class="title-sm text-center text-uppercase mb-4">We Recommend</h2>
+          <div class="owl-btn-center text-center">
+            <owl-carousel-o [options]="customOptions">
+              <ng-container *ngFor="let product of recommendedProductHolder">
+                <ng-template carouselSlide>
+                  <div class="card h-100 w-100">
+                    <div class="card-body">
+                      <a class="home-img-box" href="#">
+                        <img [src]="imgUrl + '/products/medium/' + product.images.filename" class="img-fluid" alt=" ">
+                      </a>
+                      <a class="heading-link" href="#">{{product.name}}</a>
+                      <div class="price-container mt-1">
+                        <div class="price-box price-box-sm">
+                          <del class="mr-2" *ngIf="product.price > product.saleprice" [innerHTML]="product.price | currency | priceAfterDotSmall"></del>
+                          <span class="price" *ngIf="product.price >= product.saleprice" [innerHTML]="product.saleprice | currency | priceAfterDotSmall"></span>
+                          <span class="price" *ngIf="product.saleprice > product.price" [innerHTML]="product.price | currency | priceAfterDotSmall"></span>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <button type="button" (click)="addToCart(+product.id)" *ngIf="+product.quantity > 0" class="btn btn-primary-alt btn-sm">Add to Cart</button>
+                      <h5 class="out-of-stock m-0" *ngIf="+product.quantity === 0">Out of Stock</h5>
+                    </div>
+                  </div>
+                </ng-template>
+              </ng-container>
+            </owl-carousel-o>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h4 class="title-sm">Price Details</h4>
+        </div>
+        <div class="card-body">
+          <!-- Cart SubTotal -->
+          <div class="row mb-2" *ngIf="priceDetailsHolder?.subtotal && priceDetailsHolder?.subtotal !== priceDetailsHolder?.total">
+            <div class="col">
+              <h6 class="heading-md fw-400">Subtotal</h6>
+            </div>
+            <div class="col-auto">
+              <div class="price-box price-box-sm">
+                <span class="price" [innerHTML]="priceDetailsHolder?.subtotal | currency | priceAfterDotSmall"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coupon Discount -->
+          <div class="row mb-2" *ngIf="priceDetailsHolder?.coupon_discount! > 0" >
+            <div class="col">
+              <h6 class="heading-md fw-400">Coupon Discount</h6>
+            </div>
+            <div class="col-auto">
+              <div class="price-box price-box-sm">
+                <span class="price" [innerHTML]="- priceDetailsHolder?.coupon_discount! | currency | priceAfterDotSmall"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GST Amount -->
+          <div class="row mb-2" *ngIf="priceDetailsHolder && priceDetailsHolder.subtotal && +priceDetailsHolder.gst_percent > 0">
+            <div class="col">
+              <h6 class="heading-md fw-400">GST ({{priceDetailsHolder?.gst_percent!}} %)</h6>
+            </div>
+            <div class="col-auto">
+              <div class="price-box price-box-sm">
+                +<span class="price" *ngIf="priceDetailsHolder?.coupon_discount! > 0" [innerHTML]="(((+priceDetailsHolder?.subtotal! - priceDetailsHolder?.coupon_discount!) * +priceDetailsHolder?.gst_percent!)/100) | currency | priceAfterDotSmall"></span>
+                <span class="price" *ngIf="+priceDetailsHolder?.coupon_discount! === 0" [innerHTML]="((+priceDetailsHolder?.subtotal! * +priceDetailsHolder?.gst_percent!)/100) | currency | priceAfterDotSmall"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grand Total -->
+          <div class="row mb-2">
+            <div class="col">
+              <h6 class="grand-total-title mb-1 card-heading">Total</h6>
+            </div>
+            <div class="col-auto">
+              <div class="price-box m-0">
+                <span class="price" [innerHTML]="priceDetailsHolder?.total | currency | priceAfterDotSmall"></span>
+              </div>
+            </div>
+            <div class="col-12 text-right">
+              <small class="text-success d-block">* Inclusive of all taxes</small>
+            </div>
+          </div>
+
+          <hr class="mt-0">
+
+          <!-- Check Pin & Continue Checkout -->
+          <div class="pin-box">
+            <div class="input-group input-group-sm">
+              <input type="text" #pin maxlength="6" [value]="pinAvailability()?.status ?  +pinAvailability()?.message.split(' ').pop() : ''" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" name="pincode" class="form-control" placeholder="Enter Pincode"/>
+              <div class="input-group-append">
+                <button type="button" (click)="checkPin(pin.value)" class="btn btn-primary">Check</button>
+              </div>
+            </div>
+            <div class="text-success mt-1 small text-capitalize" *ngIf="pinAvailability()?.status">
+              {{pinAvailability()?.message}}
+            </div>
+            <div class="text-success mt-1 small text-capitalize" *ngIf="pinAvailability()?.status">
+              <i class="fa fa-truck mr-1"></i>{{pinAvailability()?.TAT}}
+            </div>
+            <div class="text-danger mt-1 small text-capitalize" *ngIf="!pinAvailability()?.status">
+              {{pinAvailability()?.message}}
+            </div>
+          </div>
+          <div class="text-danger mt-1 small text-capitalize" *ngIf="isPin">
+            Please Enter 6 Digit Pin Code
+          </div>
+
+          <!-- Place Order Button -->
+          <button type="button" (click)="proceedToCheckout()" class="btn btn-primary btn-block mt-3">Continue Checkout</button>
+        </div>
+      </div>
+
+      <!-- Coupon Discount & Help Text -->
+      <div class="card">
+        <div class="card-header">
+          <h4 class="title-sm">Coupon Discount <span *ngIf="isCouponApplied">Applied</span></h4>
+        </div>
+
+        <div class="card-body">
+          <div class="input-group input-group-sm" *ngIf="!isCouponApplied">
+            <input type="text" name="coupon_code" id="coupon" placeholder="Enter Coupon Code" class="form-control text-uppercase" #couponCode>
+            <div class="input-group-append">
+              <button type="button" (click)="applyCoupon(couponCode.value)" class="btn btn-primary">Apply</button>
+            </div>
+          </div>
+          <div class="text-success text-center small text-capitalize" *ngIf="isCouponApplied">
+            <i class="fa fa-check-square fa-2x mb-2"></i><br> Coupon Successfully Applied
+          </div>
+          <div class="text-center">
+            <button type="button" (click)="removeCoupon()" *ngIf="isCouponApplied" class="btn btn-danger-alt btn-sm mt-3">Remove Coupon</button>
+          </div>
+          <hr>
+          <p class="pg m-0">
+            <i class="fa fa-info-circle mr-1"></i><strong>Need any help?</strong>
+            <br>
+            Speak to Our e-commerce specialist :
+            <a href="tel:18002677888" class="btn-link btn-link-primary btn-link-sm">
+              <i class="fa fa-phone mr-1"></i>
+              180098765
+            </a>
+          </p>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+

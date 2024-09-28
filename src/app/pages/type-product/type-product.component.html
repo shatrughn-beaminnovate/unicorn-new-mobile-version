@@ -1,0 +1,899 @@
+<!-- <ng-container *ngIf="!isPageLoading"> -->
+  <div class="container-fluid py-4">
+    <!-- Main Product Section -->
+    <div class="form-row mb-5" *ngIf="isProduct.status">
+
+      <!-- Left Side: Selected Product Details -->
+      <div class="col-sm-5 text-center position-relative">
+        <div class="sticky-top pr-sm-4" style="top: 87px;" *ngIf="!isVarinet">
+          <!-- <p-galleria *ngIf="selectedProduct && (selectedProduct | json) !== '{}' && selectedProduct.images.length > 0" [value]="selectedProduct.images" [responsiveOptions]="galleriaResponsiveOptions" [containerStyle]="{'max-width': '660px', 'height': '590px'}" [numVisible]="6" thumbnailsPosition="left">
+          <ng-template pTemplate="item" let-item>
+            <img [src]="imgUrl + '/full/' + item.filename" class="img-fluid" alt=" ">
+          </ng-template>isVarinet
+          <ng-template pTemplate="thumbnail" let-item>
+            <div class="grid grid-nogutter thumb-img-box justify-content-center">
+              <img [src]="imgUrl + '/thumbnail/' + item.filename" class="img-fluid" alt=" ">
+            </div>
+          </ng-template>
+        </p-galleria> -->
+          <div class="img-not-available-box" *ngIf="selectedProduct && (selectedProduct | json) !== '{}' && selectedProduct.images.length === 0">
+            <img src="assets/img/not-found/no-image-found.png" alt=" " class="img-fluid">
+          </div>
+
+          <div class="product-img-gallary position-relative" *ngIf="selectedProduct && selectedProduct.images && selectedProduct.images.length > 0">
+            <div class="main-img-preview-container">
+              <img [src]="imgUrl + '/full/' + selectedProductImgFileName" alt=" " class="img-fluid">
+            </div>
+            <swiper [config]="config" effect="fade" *ngIf="selectedProduct && selectedProduct.images && selectedProduct.images.length > 1">
+              <ng-container *ngFor="let img of selectedProduct.images">
+                <ng-template swiperSlide>
+                  <div class="thumbnails-img-box">
+                    <img [src]="imgUrl + '/small/' + img.filename" (error)="handleThumbnailsImgError(thumbnailsImg)" [alt]="img.alt" (click)="selectedProductImgFileName = img.filename" class="img-fluid" #thumbnailsImg>
+                  </div>
+                </ng-template>
+              </ng-container>
+            </swiper>
+          </div>
+        </div>
+        <div class="sticky-top pr-sm-4" style="top: 87px;" *ngIf="isVarinet">
+          <!-- <p-galleria *ngIf="selectedProduct && (selectedProduct | json) !== '{}' && selectedProduct.images.length > 0" [value]="selectedProduct.images" [responsiveOptions]="galleriaResponsiveOptions" [containerStyle]="{'max-width': '660px', 'height': '590px'}" [numVisible]="6" thumbnailsPosition="left">
+          <ng-template pTemplate="item" let-item>
+            <img [src]="imgUrl + '/full/' + item.filename" class="img-fluid" alt=" ">
+          </ng-template>
+          <ng-template pTemplate="thumbnail" let-item>
+            <div class="grid grid-nogutter thumb-img-box justify-content-center">
+              <img [src]="imgUrl + '/thumbnail/' + item.filename" class="img-fluid" alt=" ">
+            </div>
+          </ng-template>
+        </p-galleria> -->
+          <div class="img-not-available-box">
+            <p class="text-danger">{{varient}}</p>
+          </div>
+        </div>
+        <button type="button" (click)="wishlistToggle(selectedProduct.id)" class="btn btn-link text-dark mt-1 wishlist-fixed-btn">
+          <i *ngIf="!wishlist_check" class="far fa-heart fa-lg" title="Add to Wishlist"></i>
+          <i *ngIf="wishlist_check" class="fa fa-heart fa-lg" title="Remove to Wishlist"></i>
+        </button>
+      </div>
+
+      <!-- Right Side: Variant Selection Box -->
+      <div class="col-sm">
+        <div class="scroll-bar-hidden scroll-y">
+          <div class="form-row">
+            <div class="col-sm">
+
+              <div class="row">
+                <div class="col-sm">
+                  <ol class="breadcrumb mb-2" *ngIf="selectedProduct && selectedProduct?.name">
+                    <li class="breadcrumb-item"><a routerLink="/" class="link">Home</a></li>
+                    <li class="breadcrumb-item"><a [routerLink]="['/category', selectedProduct.parent_category_slug]" class="link">{{selectedProduct?.category_name}}</a></li>
+                    <li class="breadcrumb-item"><span>{{selectedProduct?.name}}</span></li>
+                  </ol>
+                  <h1 class="title-sm text-center text-sm-left " *ngIf="isVarinet">{{primaryProductDataName}}</h1>
+                  <h1 class="title-sm text-center text-sm-left " *ngIf="selectedProduct">{{selectedProduct.name}}</h1>
+                  <div class="read-only-rating-boxs" *ngIf="rating">
+                    <p-rating [ngModel]="rating" [cancel]="false" id="selected_product_rating"></p-rating>
+                  </div>
+                </div>
+                <div class="col-sm-auto">
+
+                </div>
+              </div>
+
+              <span class="badge badge-success mb-2" *ngIf="selectedProduct.quantity > 0">IN STOCK</span>
+              <span class="badge badge-danger mb-2" *ngIf="selectedProduct.quantity === 0">OUT OF STOCK</span>
+
+              <!--*ngIf="optionsHolder && (optionsHolder.length === attributesHolder.length)"-->
+              <app-product-price [selectedProduct]="selectedProduct"></app-product-price>
+
+              <p class="text" [innerHTML]="selectedProduct?.excerpt"></p>
+
+              <!-- <p class="current-visitors">
+              <i class="fa fa-regular fa-eye mr-2"></i>
+              39 people are viewing this right now (May or may not available)
+            </p> -->
+
+              <!-- <div class="row">
+              <div class="col-sm-8">
+                <div class="sold-product-count">
+                  <strong>47 Products Sold </strong> &nbsp; in last 13 hours.
+                </div>
+              </div>
+            </div> -->
+
+              <div class="variant-box">
+                <ng-container *ngFor="let group of attributesHolder; let i = index">
+                  <div class="variant-item mb-3">
+                    <h3 class="heading-md mb-2 text-capitalize">{{group.attribute_group.group_name}} - {{optionName(i)}}</h3>
+                    <!-- [class.disabled]="isAttributeOptionDisabled(option.attribute_id, option.id)" -->
+                    <div class="variant-options">
+                      <ng-container *ngFor="let option of group.attribute_options;">
+                        <div pRipple class="variant-option-item {{option.attribute_id +' '+ option.id }}" (click)="onClickOptions(option.id, i)" [class.selected]="optionsHolder[i] === option.id">
+                          <span class="option-color" *ngIf="option.swatch_type === 'color'" [style.background-color]="option.swatch_value"></span>
+                          <div class="option-img-box" *ngIf="option.swatch_type === 'file'">
+                            <img [src]="option.swatch_value" alt=" " class="img-fluid">
+                          </div>
+                          <h4 class="heading-sm fw-400">{{option.admin_name}}</h4>
+                          <!-- Customize Price -->
+                          <span class="heading-sm" *ngIf="option.swatch_type === 'text' && option.swatch_value > 0" [innerHTML]="'+ ' + (option.swatch_value | currency | priceAfterDotSmall)"></span>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+
+              <!-- Cashback Offers -->
+              <div class="cashback-offers-box" *ngIf="selectedProduct.cashback === 1 && selectedProduct.cashback_price !== 0 && selectedProduct.cashback_price !== null">
+                <h4 class="heading text-success" *ngIf=" selectedProduct.cashback_note.trim() !== ''">Cashback Offers</h4>
+                <h5 class="heading-md fw-400">{{selectedProduct.cashback_note}}</h5>
+              </div>
+              <div class="cashback-offers-box" *ngIf="selectedProduct.cashback === 0 && selectedProduct.cashback_amt !== 0 && selectedProduct.cashback_amt !== null">
+                <h4 class="heading text-success" *ngIf=" selectedProduct.cashback_note.trim() !== ''">Cashback Offers</h4>
+                <h5 class="heading-md fw-400">{{selectedProduct.cashback_note}}</h5>
+              </div>
+
+              <!-- Cashify -->
+              <div class="exchange-box" *ngIf="isCashifyEnabled">
+                <div class="without-exchange-box d-flex align-items-center">
+                  <div class="d-flex align-items-center">
+                    <input [(ngModel)]="withExchange" (ngModelChange)="proceedWithExchange()" class="exchange-radio mr-2" id="without_exchange" name="with-exchange" style="width: 18px; height: 18px" type="radio" value="N">
+                    <label for="without_exchange">Buy without Exchange</label>
+                  </div>
+                </div>
+
+                <div class="with-exchange-box d-flex align-items-center">
+                  <div class="d-flex align-items-center">
+                    <input [(ngModel)]="withExchange" (ngModelChange)="proceedWithExchange()" class="exchange-radio mr-2" id="with_exchange" name="with-exchange" style="width: 18px; height: 18px" type="radio" value="Y">
+                    <label for="with_exchange">Buy with Exchange</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bajaj EMI Integration -->
+              <!-- <div class="d-flex align-items-center">
+              <p-checkbox name="isProduct" [(ngModel)]="isBajajEmiAvailable" [ngModelOptions]="{standalone: true}" [binary]="true" label="Bajaj EMI available, Do you want it?"></p-checkbox>
+              <a href="javascript:void(0)" class="heading-link-sm">&nbsp;Details.</a>
+            </div> -->
+
+              <!-- Additional Note -->
+              <h5 class="heading-md mt-4 mb-0 fw-400" *ngIf="selectedProduct.custom_column_4"><b>Note: </b>{{ selectedProduct.custom_column_4 }}</h5>
+
+              <!-- All Action Box: Add to Cart, Notify Me, EMI Available -->
+              <div class="all-action-box mt-3" *ngIf="!isProductFetching && selectedProduct && optionsHolder && optionsHolder.length  === attributesHolder?.length">
+                <div class="d-flex align-items-center flex-sm-wrap">
+                  <button type="button" *ngIf="selectedProduct.quantity === 0" (click)="showNotifyModal()" class="btn btn-primary mr-2">
+                    Notify Me
+                  </button>
+                </div>
+
+                <!-- <h3 class="heading-md">Quantity</h3> -->
+                <!-- Enabled===1 For Add to Cart -->
+
+                <!-- Checkbox here commented  -->
+                <!-- <div class="py-2" *ngIf="products_custom_column_1 === 1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" [(ngModel)]="iphoneForLife" name="condition" value="1" id="tnc" class="custom-control-input ng-untouched ng-pristine ng-invalid" ng-reflect-name="condition">
+                  <label for="tnc" class="custom-control-label heading-md">iPhone For Life</label>
+                </div>
+              </div> -->
+
+                <button type="button" *ngIf="selectedProduct.quantity > 0  && selectedProduct.enabled === 1 && !agreeAndJoinClicked" (click)="addToCart(selectedProduct)" class="btn btn-info mb-3 text-center cart-buttons-type">
+                  Add to Cart {{allCareProduct}}
+                </button>
+
+                <!-- && +iPhoneForLifeEnabled === 1 -->
+                <button type="button" *ngIf="selectedProduct.quantity > 0  && selectedProduct.enabled === 1 && agreeAndJoinClicked && +iPhoneForLifeEnabled === 1" (click)="addToCart(selectedProduct)" class="btn btn-info mb-3 text-center cart-buttons-type">
+                  Add to Cart iPhone For Life {{allCareProduct}}
+                </button>
+
+                <!-- Enabled === 3 For Prebook -->
+                <button type="button" *ngIf="selectedProduct.quantity > 0 && selectedProduct.enabled === 3" (click)="addToCart(selectedProduct, false, false, '', true)" class="btn btn-info mb-3 text-center cart-buttons-type">
+                  Prebook
+                </button>
+
+                <!-- iPhone For Life *ngIf="+iPhoneForLifeEnabled === 1" -->
+                <div class="iphone-for-life-container" *ngIf="+iPhoneForLifeEnabled === 1">
+                  <div class="iphone-life ">
+                    <div class="row">
+                      <div class="col-12" *ngIf="products_custom_column_1 === 1 && !agreeAndJoinClicked">
+                        <h1 class="title-sm">iPhone For Life </h1>
+                        <h3 class="heading-link-md">Latest iPhone For Everytime</h3>
+                        <div class="tables-ipfl  ">
+                          <table class="easy-upgrade__table mt-3 mb-4">
+                            <thead class="thead">
+                              <tr class="tr">
+                                <th class="th headers">₹{{ payMonth | number:'1.2-2' }} /mo </th>
+                                <th class="th headers">₹{{finalSalePrice}}</th>
+                              </tr>
+                            </thead>
+                            <tbody class="tbody">
+                              <tr class="tr text-center body-table">
+                                <td class="td date">1 - 24 months</td>
+                                <td class="td date">in 25th month</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <p class="mb-3">
+                          Exclusively available with <img class="icon-blank" src="/assets/img/6c30345a376c88d1247ba31396d7a132.svg" lazy="loaded"> Credit Cards. Refer to payment page for final payment amount.
+                        </p>
+                        <button class="w-100 btn btn-info mb-2" (click)="showDialog()" *ngIf="!agreeAndJoinClicked">Join Now</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="" *ngIf="products_custom_column_1 === 1 && agreeAndJoinClicked">
+                    <h1 class="title-sm">iPhone For Life </h1>
+                    <h1 class="heading mb-4"> You have Join the iPhone for life Program</h1>
+                    <div class="row g-0">
+                      <div class="col-sm-4">
+                        <div class="installment-items p-3">
+                          <div class="text-top">
+                            <p class="installment-title">Pay</p>
+                            <div class="installment-num font-subheading-xl-display">
+                              75%
+                            </div>
+                            <div class="installment-tips ">
+                              Within 24 months.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="installment-items p-3">
+                          <div class="text-top">
+                            <div class="installment-title ">
+                              Clear rest of
+                            </div>
+                            <div class="installment-num font-subheading-xl-display">
+                              25%
+                            </div>
+                            <div class="installment-tips ">
+                              Use your Assured Value to pay the rest.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="installment-items p-3">
+                          <div class="text-top">
+                            <div class="installment-title ">
+                              Exchange
+                            </div>
+                            <div class="installment-num font-subheading-xl-display">
+                              Bonus
+                            </div>
+                            <div class="installment-tips ">
+                              Applicable with your current exchange on the iPhone for life.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="payment-tips mb-3 mt-2 ">
+                      Exclusively available with
+                      <img class="icon-blank" src="http://s3.amazonaws.com/oneplus-basex-file/zeus/zeus_file_operate/6c30345a376c88d1247ba31396d7a132?x-amz-process=image/format,webp/quality,Q_80" lazy="loaded">
+                      Credit Cards. Refer to payment page for final payment amount.
+                    </div>
+
+
+
+                    <button class="w-100 btn btn-grey mb-2" *ngIf="agreeAndJoinClicked" (click)="CancleAndJoin()">Cancel</button>
+                  </div>
+                  <a [routerLink]="['/iphone-for-life']" target="_blank" class="w-100  work mb-2" *ngIf="products_custom_column_1 === 1">What is iPhone for life ?</a>
+                </div>
+
+                <!-- <div class="text-nowrap mt-2">
+                  <span class="text-muted" *ngIf="isResult?.status"> <i class="fa fa-truck"></i> Estimated Delivery: {{ deliveryDateRange }}</span>
+                  <ng-container *ngIf="isResult?.status === false">
+                    <span class="text-muted"> <i class="fa fa-truck"></i> Estimated Delivery: <span class="text-danger"> {{ isResult?.message }}</span></span>
+                  </ng-container>
+                </div> -->
+
+                <!-- Bundle Product Start -->
+                <div class="bundle-products py-4 border-bottom" *ngIf="bundleProductHolder && bundleProductHolder.length > 0">
+                  <h3 class="heading">Bundle Products</h3>
+                  <hr class="my-2">
+
+
+                  <!-- Bundle Product -->
+                  <div *ngFor="let bundle of bundleProductHolder; let i = index" class="row align-items-center mb-5 position-relative">
+                    <div class="col-sm-12" *ngIf="+i === 0">
+                      <!-- Main Product -->
+                      <div class="row align-items-center mb-5 position-relative">
+                        <div class="col-sm-1 text-center">
+                          <p-checkbox name="main-product" styleClass="d-none" [value]="selectedProduct?.id" [(ngModel)]="mainBundleProductId"></p-checkbox>
+                        </div>
+                        <div class="col-sm-auto">
+                          <div class="img-bundle-box">
+                            <app-image-loader [imageUrl]="(selectedProduct?.images && selectedProduct?.images.length > 0) ? imgUrl + '/small/' + selectedProduct.images[0].filename : ''" [alt]="selectedProduct?.name" [imageClass]="'img-fluid rounded'" [imageContainerHeight]="'4rem'" imageContainerWidth="4rem" imageContainerClass="border rounded"></app-image-loader>
+                          </div>
+                        </div>
+                        <div class="col-sm">
+                          <h2 class="heading">{{selectedProduct?.name}}</h2>
+                          <app-price *ngIf="selectedProduct?.price" [price]="selectedProduct?.price" [saleprice]="bundle?.product_value" [strikePrice]="selectedProduct?.price" [priceStyleClass]="'price-sm'"></app-price>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-1 text-center">
+                      <p-checkbox [name]="'bundle-product-' + i" [value]="bundle.id" [(ngModel)]="selectedBundleProductIds[i]" (onChange)="toggleBundleProduct($event, bundle, i)"></p-checkbox>
+                    </div>
+                    <div class="col-sm-auto">
+                      <a [routerLink]="['/product', bundle.slug]" class="img-bundle-box">
+                        <app-image-loader [imageUrl]="(bundle.images && bundle.images.length > 0) ? imgUrl + '/small/' + bundle.images[0].filename : ''" [alt]="bundle.name" [imageClass]="'img-fluid rounded'" [imageContainerHeight]="'4rem'" imageContainerWidth="4rem" imageContainerClass="border rounded"></app-image-loader>
+                      </a>
+                      <i class="fa fa-plus main-bundle-plus"></i>
+                    </div>
+                    <div class="col-sm">
+                      <a [routerLink]="['/product', bundle.slug]" class="heading d-block">
+                        {{bundle.name}}
+                      </a>
+                      <app-price [price]="bundle.saleprice" [saleprice]="bundle.accessory_value" [strikePrice]="bundle.price" [priceStyleClass]="'price-sm'"></app-price>
+                    </div>
+                  </div>
+
+                  <div class="total-bundle-price my-1">
+                    <div class="d-flex align-items-baseline">
+                      <h5 class="heading-sm mr-2">Total Bundle Price : </h5>
+                      <app-price [price]="totalBundlePrice" [priceStyleClass]="'price-sm'"></app-price>
+                    </div>
+                  </div>
+
+                  <div class="d-flex align-items-baseline mb-2" *ngIf="bundlePriceWithCashback">
+                    <h5 class="heading-md mr-2">Bundle Price After Cashback: </h5>
+                    <app-price [price]="bundlePriceWithCashback" [priceStyleClass]="'price-sm'"></app-price>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary" (click)="addToCartBundleProducts(selectedProduct)">
+                    Add Bundle to Cart
+                  </button>
+                </div>
+
+                <!-- Apple Care Section -->
+                <div class="with-apple-care mt-3" *ngIf="relatedProductsHolder && relatedProductsHolder.length > 0">
+                  <h3 class="heading" *ngIf="isAppleCareFound">Would you like to protect your device?</h3>
+                  <div class="form-row">
+                    <ng-container *ngFor="let relatedProduct of relatedProductsHolder; let i = index" class="h-100">
+                      <div class="col-sm-6 position-relative" *ngIf="relatedProduct.add_on">
+                        <div class="with-apple-care-item h-100" [class.active]="selectedAppleCare[i]">
+                          <div class="row">
+                            <div class="col-sm-auto">
+                              <p-checkbox [(ngModel)]="selectedAppleCare[i]" [binary]="true" (onChange)="onAppleCareSelected($event, relatedProduct, i)" name="apple-care-{{i}}" styleClass="mb-3"></p-checkbox>
+                            </div>
+                            <div class="col-sm">
+                              <h3 class="heading">{{relatedProduct.name}}</h3>
+                            </div>
+                            <div class="col-sm-auto">
+                              <app-price [price]="relatedProduct.price" [saleprice]="relatedProduct.saleprice" priceStyleClass="price-sm"></app-price>
+                            </div>
+                          </div>
+                          <div class="apple-care-img-box mb-3">
+                            <app-image-loader [imageUrl]="(relatedProduct.images && relatedProduct.images.length > 0) ? imgUrl + '/small/' + relatedProduct.images[0]?.filename : ''" imageContainerHeight="5rem" imageContainerClass="justify-content-start" imageClass="img-fluid"></app-image-loader>
+                          </div>
+                          <div class="apple-care-description" [innerHTML]="relatedProduct.description"></div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <h6 class="text-danger text-center py-4" *ngIf="!isProduct.status">{{isProduct.message}}</h6>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Products -->
+  <section class="related-products-section py-4" *ngIf="relatedProductsHolder && relatedProductsHolder.length > 0">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-sm">
+          <h2 class="title-sm mb-0">Related Product | <small class="text-muted">The perfect match for you</small></h2>
+        </div>
+        <div class="col-sm-auto">
+          <div class="swiper_btn">
+            <div class="swiper-button-next related-product-swiper-next"></div>
+            <span class="slide_pipe  related-product-swiper-next ">|</span>
+            <div class="swiper-button-prev related-product-swiper-prev"></div>
+          </div>
+        </div>
+      </div>
+      <swiper [config]="swiperConfig" direction="horizontal" [autoHeight]="false"
+        [allowTouchMove]="true"
+        [autoplay]="{ delay: 1000, disableOnInteraction: false }"
+        [pagination]="false"
+        [navigation]="{ nextEl: '.related-product-swiper-next', prevEl: '.related-product-swiper-prev' }">
+        <ng-template swiperSlide *ngFor="let product of relatedProductsHolder">
+          <div class="card border-0 h-100">
+            <div class="card-body">
+
+              <h4 class="offer-stripe" *ngIf="product.price > product.saleprice"> {{ (((product.price - product.saleprice) / product.price) * 100).toFixed(0) + '%' + ' off' }}</h4>
+              <button type="button" (click)="wishlistToggle(selectedProduct.id)" class="wishlist-btn  Compares mt-3 mr-3">
+                <div class="center-icon">
+                  <i *ngIf="!isWishlistAdded" class="far fa-heart fa-lg" title="Add to Wishlist"></i>
+                  <i *ngIf="isWishlistAdded" class="fa fa-heart fa-lg" title="Remove to Wishlist"></i>
+                </div>
+              </button>
+              <button type="button" class="wishlist-btn Compare mr-3">
+                <div class="center-icon">
+                  <i class="fas fa-layer-group"></i>
+                </div>
+              </button>
+              <div class="center-images">
+
+                <a class="card-img-box align-items-end" routerLink="/product/{{product.slug}}">
+                  <img [src]="(product.images && product.images.length > 0) ? imgUrl + '/small/' + product.images[0]?.filename : ''" class="img-fluid" alt=" ">
+                </a>
+
+                <!-- <div class="slider-img-box">
+                <img class="img-fluid" [src]="product.image" alt="Product Image">
+              </div> -->
+                <!-- <div class="row p-2">
+                <div class="col-sm-6 p-2 col-6 col-md-6 col-xl-6">
+                  <span class="" (click)="wishlistToggle(selectedProduct.id)">Add To Cart</span>
+                </div>
+                <div class="col-sm-6 p-2 col-6 col-md-6 col-xl-6">
+                  <span> <i class="far fa-regular fa-eye" style="color: #ffffff; "></i></span>
+                </div>
+              </div> -->
+                <!-- <p-rating [ngModel]="product.ratings" [cancel]="false" class="rating ratings "></p-rating> -->
+                <h3 class="heading">{{ product.name }}</h3>
+              </div>
+              <div class="text-center">
+                <app-price [price]="+product.price" [saleprice]="+product.saleprice" [strikePrice]="+product.price" [priceStyleClass]="'price-sm'"></app-price>
+              </div>
+
+              <div class="cart-button text-center">
+                <app-add-to-cart [showPopularButton]="false" [product]="product" styleClass="mb-2  "></app-add-to-cart>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+  </section>
+
+  <!-- Product Details: Overview, Description & Review - Rating -->
+  <section class="product-details-section">
+    <div class="container-fluid">
+      <p-tabView>
+        <p-tabPanel header="Overview">
+          <div class="overview" [innerHTML]="pdpHTML ? pdpHTML : 'Product Overview Not Available'"></div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Description">
+          <div class="description" [innerHTML]="primaryProductData?.description?.length > 0 ? primaryProductData.description :  'Description Not Available'"></div>
+        </p-tabPanel>
+        <!-- *ngIf="parentProductReviews && parentProductReviews.length > 0" -->
+        <p-tabPanel header="Rating & Reviews" *ngIf="ratings_disable">
+          <div class="rating-and-review-container mt-4">
+            <!-- <h3>Rating & Review</h3> -->
+            <div class="row">
+              <div class="col-sm-4 border-right">
+                <h4 class="heading">Reviews </h4>
+                <div class="row">
+                  <div class="col-12 col-sm-6">
+                    <div class="stock-progress-bar">
+                      <svg viewBox="0 0 100 100" class="circular-progress" width="90" height="90">
+                        <circle cx="50" cy="50" r="40" stroke="#e4e4e4" stroke-width="10" fill="none"></circle>
+                        <circle cx="50" cy="50" r="40" stroke="#5a88e1" stroke-width="10" fill="none" [style.strokeDasharray]="90 * 2.5" [style.strokeDashoffset]="10 * 2.5"></circle>
+                        <text x="39" y="50" font-size="20" dy=".3em" fill="black">4.7</text>
+                      </svg>
+                    </div>
+
+                    <div class="rating">
+                      <p-rating [ngModel]="val3" [cancel]="false" class="rating  d-flex  justify-content-center"></p-rating>
+                    </div>
+
+                    <p class="text-center w-100">Based on 100 Reviews</p>
+                  </div>
+
+                  <div class="col-12 col-sm-6">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p-rating [ngModel]="val3" [cancel]="false"></p-rating>
+                      <span class="text-muted">500</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p-rating [ngModel]="val2" [cancel]="false"></p-rating>
+                      <span class="text-muted">400</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p-rating [ngModel]="val1" [cancel]="false"></p-rating>
+                      <span class="text-muted">300</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p-rating [ngModel]="val4" [cancel]="false"></p-rating>
+                      <span class="text-muted">200</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p-rating [ngModel]="val5" [cancel]="false"></p-rating>
+                      <span class="text-muted">100</span>
+                    </div>
+                  </div>
+                </div>
+
+                <h5 class="heading mt-4">Filter Review</h5>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <p-checkbox name="rating" [(ngModel)]="isFiveStarRating" [ngModelOptions]="{standalone: true}" [binary]="true" label="5 Stars"></p-checkbox>
+                      <label class="text-muted m-0">500</label>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <p-checkbox name="rating" [(ngModel)]="isFourStarRating" [ngModelOptions]="{standalone: true}" [binary]="true" label="4 Stars"></p-checkbox>
+                      <label class="text-muted m-0">400</label>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <p-checkbox name="rating" [(ngModel)]="isThreeStarRating" [ngModelOptions]="{standalone: true}" [binary]="true" label="3 Stars"></p-checkbox>
+                      <label class="text-muted m-0">300</label>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <p-checkbox name="rating" [(ngModel)]="isTwoStarRating" [ngModelOptions]="{standalone: true}" [binary]="true" label="2 Stars"></p-checkbox>
+                      <label class="text-muted m-0">200</label>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p-checkbox name="rating" [(ngModel)]="isOneStarRating" [ngModelOptions]="{standalone: true}" [binary]="true" label="1 Stars"></p-checkbox>
+                      <label class="text-muted m-0">100</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm">
+
+                <div class="row align-items-center mb-4">
+                  <div class="col-sm">
+                    <h5 class="heading-sm m-0">Showing 3 of 100 Reviews</h5>
+                  </div>
+                  <div class="col-sm-auto">
+                    <button type="button" class="btn btn-primary btn-sm">Write Review</button>
+                  </div>
+                </div>
+
+                <div class="row p-2" *ngFor="let review of fakeReviewHolder">
+                  <div class="col-sm-3">
+                    <div class="d-flex">
+                      <div class="profile-pic">
+                        <img [src]="review.image" class="img-fluid" alt=" ">
+                      </div>
+                      <div class="profile-details">
+                        <h5 class="heading-md text-capitalize">{{ review.name }}</h5>
+                        <p-rating [ngModel]="review.rating" [cancel]="false"></p-rating>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm review-text-box">
+                    <h5 class="heading-md text-capitalize">{{review.title}}</h5>
+                    <p>{{review.review}}</p>
+                    <div class="d-flex align-items-center justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <div class="text-nowrap text-success mr-3"><i class="fa fa-thumbs-up mr-2"></i><span>{{review.likes}}</span></div>
+                        <div class="text-nowrap text-primary">
+                          <i class="far fa-regular fa-comment-dots mr-2"></i> <span>Edit Your Comment</span>
+                        </div>
+                      </div>
+                      <span class="text-muted">{{review.date}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-sm">
+                    <h5 class="heading-sm m-0">Showing 3 of 100 Reviews</h5>
+                  </div>
+                  <div class="col-sm-auto">
+                    <button type="button" class="btn btn-primary btn-sm">Load More...</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <ng-container *ngIf="reviewRatingHolder.reviews && reviewRatingHolder.reviews.length > 0">
+          <div *ngFor="let review of reviewRatingHolder.reviews" class="all-reviews-list">
+            <div class="rating-box">
+              <div class="media">
+                <span>{{review.rating}} <i class="fa fa-star"></i></span>
+                <div class="media-body  ml-3">
+                  Below Heading is System Generated
+                  <h3 class="reviews-heading text-capitalize">{{review.sgh}}</h3>
+                  <h4 class="customer-name">{{review.firstname}}</h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              {{review.review}}
+            </p>
+            <div class="d-flex align-items-center" *ngIf="review.file_name && review.file_name.length > 0">
+              <div class="reviews-product-image mr-2" *ngFor="let fileName of review.file_name">
+                <img [src]="baseUrl + '/public/reviews/' + fileName" alt=" ">
+              </div>
+      
+            </div>
+          </div>
+          </ng-container> -->
+          <!--<div class="all-reviews-list">
+          <div class="rating-box">
+            <div class="media">
+              <span>5 <i class="fa fa-star"></i></span>
+              <div class="media-body  ml-3">
+                <h3 class="reviews-heading">Five stars all the way!</h3>
+                <h4 class="customer-name">Kshitij Jathar</h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The customer service was exceptional, and the quality of the product is top-notch. Highly recommended.
+          </p>
+          <div class="d-flex align-items-center">
+            <div class="reviews-product-image mr-2">
+              <img src="http://mum01.beaminnovate.com/beam_commerce_v1/public/product/medium/pdp_1663658213_2237.png" alt=" ">
+            </div>
+            <div class="reviews-product-image mr-2">
+              <img src="http://mum01.beaminnovate.com/beam_commerce_v1/public/product/medium/pdp_1663658213_2237.png" alt=" ">
+            </div>
+            <div class="reviews-product-image mr-2">
+              <img src="http://mum01.beaminnovate.com/beam_commerce_v1/public/product/medium/pdp_1663658213_2237.png" alt=" ">
+            </div>
+            <div class="reviews-product-image">
+              <img src="http://mum01.beaminnovate.com/beam_commerce_v1/public/product/medium/pdp_1663658213_2237.png" alt=" ">
+            </div>
+          </div>
+          </div>
+          <div class="all-reviews-list">
+          <div class="rating-box">
+            <div class="media">
+              <span>4 <i class="fa fa-star"></i></span>
+              <div class="media-body  ml-3">
+                <h3 class="reviews-heading">Absolutely outstanding!</h3>
+                <h4 class="customer-name">Rohit Bej</h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            I've tried many similar products, but this one stands out from the rest. It's incredibly user-friendly, and the results are remarkable. Well worth the investment.
+          </p>
+          <div class="d-flex align-items-center">
+            <div class="reviews-product-image mr-2">
+              <img src="http://mum01.beaminnovate.com/beam_commerce_v1/public/product/medium/pdp_1663658213_2237.png" alt=" ">
+            </div>
+            <div class="reviews-product-image mr-2">
+              <img src="http://mum01.beaminnovate.com/beam_commerce_v1/public/product/medium/pdp_1663658213_2237.png" alt=" ">
+            </div>
+          </div>
+          </div>
+          <div class="all-reviews-list">
+          <div class="rating-box">
+            <div class="media">
+              <span>4 <i class="fa fa-star"></i></span>
+              <div class="media-body  ml-3">
+                <h3 class="reviews-heading">Absolutely outstanding!</h3>
+                <h4 class="customer-name">Yogesh Rajbhar</h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This is hands down the best experience I've had with a product. It's reliable, efficient, and the customer support team is incredibly helpful. I can't praise it enough!
+          </p>
+          <div class="d-flex align-items-center">
+            <div class="reviews-product-image mr-2">
+              <img src="http://mum01.beaminnovate.com/beam_commerce_v1/public/product/medium/pdp_1663658213_2237.png" alt=" ">
+            </div>
+            <div class="reviews-product-image mr-2">
+              <img src="http://mum01.beaminnovate.com/beam_commerce_v1/public/product/medium/pdp_1663658213_2237.png" alt=" ">
+            </div>
+            <div class="reviews-product-image mr-2">
+              <img src="http://mum01.beaminnovate.com/beam_commerce_v1/public/product/medium/pdp_1663658213_2237.png" alt=" ">
+            </div>
+            <div class="reviews-product-image">
+              <img src="http://mum01.beaminnovate.com/beam_commerce_v1/public/product/medium/pdp_1663658213_2237.png" alt=" ">
+            </div>
+          </div>
+          </div>-->
+          <!-- </div> -->
+          <div class="rating-and-review-container d-none" *ngIf="reviewRatingHolder && reviewRatingHolder.rating">
+            <h3>Rating & Review</h3>
+            <div class="row">
+              <!-- <div class="col-sm-6">
+                  <div class="d-flex align-items-center">
+                    <span class="rating-breakup-star">5 <i class="fa fa-star"></i></span>
+                    <div class="progress">
+                      <div class="progress-bar " role="progressbar" style="width: 18.81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="rating-breakup-count">2,345</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <span class="rating-breakup-star">4 <i class="fa fa-star"></i></span>
+                    <div class="progress">
+                      <div class="progress-bar  bg-success" role="progressbar" style="width: 24.09%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="rating-breakup-count">3,000</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <span class="rating-breakup-star">3 <i class="fa fa-star"></i></span>
+                    <div class="progress">
+                      <div class="progress-bar  bg-info" role="progressbar" style="width: 20.07%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="rating-breakup-count">2,500</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <span class="rating-breakup-star">2 <i class="fa fa-star"></i></span>
+                    <div class="progress">
+                      <div class="progress-bar  bg-warning" role="progressbar" style="width: 16.86%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="rating-breakup-count">2,100</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <span class="rating-breakup-star">1 <i class="fa fa-star"></i></span>
+                    <div class="progress">
+                      <div class="progress-bar  bg-danger" role="progressbar" style="width: 12.14%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="rating-breakup-count">1,511</span>
+                  </div>
+                </div> -->
+              <div class="col-sm">
+                <h4 class="overall-rating">
+                  {{reviewRatingHolder.rating}} <i class="fa fa-star"></i>
+                </h4>
+                <p class="overall-rating-text">{{reviewRatingHolder.rating_star_count}} Ratings <br> {{reviewRatingHolder.review_count}} Reviews</p>
+              </div>
+            </div>
+            <ng-container *ngIf="reviewRatingHolder.reviews && reviewRatingHolder.reviews.length > 0">
+              <div *ngFor="let review of reviewRatingHolder.reviews" class="all-reviews-list">
+                <div class="rating-box">
+                  <div class="media">
+                    <span>{{review.rating}} <i class="fa fa-star"></i></span>
+                    <div class="media-body  ml-3">
+                      <!-- Below Heading is System Generated -->
+                      <h3 class="reviews-heading text-capitalize">{{review.sgh}}</h3>
+                      <h4 class="customer-name">{{review.firstname}}</h4>
+                    </div>
+                  </div>
+                </div>
+                <p>
+                  {{review.review}}
+                </p>
+                <div class="d-flex align-items-center" *ngIf="review.file_name && review.file_name.length > 0">
+                  <div class="reviews-product-image mr-2" *ngFor="let fileName of review.file_name">
+                    <img [src]="baseUrl + '/public/reviews/' + fileName" alt=" ">
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </section>
+
+  <!-- Recently Viewed Products -->
+  <!-- <section class="recently-viewed-products-section py-4">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-sm">
+        <h2 class="title-sm mb-0">Recently Viewed Products | <small class="text-muted">The perfect match for you</small></h2>
+      </div>
+      <div class="col-sm-auto">
+        <div class="swiper_btn">
+          <div class="swiper-button-next recently-viewed-swiper-next-btn"></div>
+          <span class="slide_pipe">|</span>
+          <div class="swiper-button-prev recently-viewed-swiper-prev-btn"></div>
+        </div>
+      </div>
+    </div>
+    <swiper [config]="swiperConfig" direction="horizontal"
+      [loop]="true"
+      [loopedSlides]="products.length"
+      [autoHeight]="true"
+      [allowTouchMove]="true"
+      [autoplay]="{ delay: 1000, disableOnInteraction: false }"
+      [pagination]="false"
+      [navigation]="{ nextEl: '.recently-viewed-swiper-next-btn', prevEl: '.recently-viewed-swiper-prev-btn' }">
+      <ng-template swiperSlide *ngFor="let product of fakeRelatedProductsHolder">
+        <div class="card">
+          <div class="card-body">
+            <span class="offer-stripe">{{product.sale}}</span>
+            <div class="center-images slider-img-box">
+              <img class=" img-fluid" [src]="product.image" alt=" ">
+            </div>
+            <h3 class="heading text-center mt-2">{{ product.name }}</h3>
+            <div class="text-center">
+              <app-price [price]="+product.price" [saleprice]="+product.saleprice" [strikePrice]="+product.price" [priceStyleClass]="'price-sm'"></app-price>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </swiper>
+  </div>
+</section> -->
+
+  <app-cashify-modal #cashifyModal (afterModalHide)="afterModalHide($event)"></app-cashify-modal>
+  <app-notify-me-modal #notifyMeModal></app-notify-me-modal>
+
+  <!-- Details iPhone For life -->
+  <p-dialog [(visible)]="display" [style]="{width: '50vw'}" [modal]="true" [baseZIndex]="10000"
+    [draggable]="true" [resizable]="false">
+    <div class="modal-body">
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="HDFC_loans">
+          <div class="container-fluid">
+            <h1 class="heading-lg mb-4"> Join the iPhone for life Program</h1>
+            <div class="row g-0">
+              <div class="col-sm-4">
+                <div class="installment-item">
+                  <div class="text-top">
+                    <div class="installment-title ">
+                      Pay
+                    </div>
+                    <div class="installment-num font-subheading-xl-display">
+                      75%
+                    </div>
+                    <div class="installment-tips ">
+                      Within 24 months.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="installment-item">
+                  <div class="text-top">
+                    <div class="installment-title ">
+                      Clear rest of
+                    </div>
+                    <div class="installment-num font-subheading-xl-display">
+                      25%
+                    </div>
+                    <div class="installment-tips ">
+                      Use your Assured Value to pay the rest.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="installment-item">
+                  <div class="text-top">
+                    <div class="installment-title ">
+                      Exchange
+                    </div>
+                    <div class="installment-num font-subheading-xl-display">
+                      Bonus
+                    </div>
+                    <div class="installment-tips ">
+                      Applicable with your current exchange on the iPhone for life.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="payment-tips ">
+              Exclusively available with
+
+              <img class="icon-blank" src="/assets/img/6c30345a376c88d1247ba31396d7a132.svg" lazy="loaded">
+
+              Credit Cards
+            </div>
+
+            <div class="agreement  mb-2">
+              I have read and agree to the following
+
+              <a (click)="openPdfInNewTab()" class="blue">
+                Terms and conditions of Easy Upgrades
+              </a>
+
+
+            </div>
+
+            <button class="w-100 btn btn-info mb-2" (click)="agreeAndJoin()">Agree and join</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+<!-- </ng-container> -->
+<!-- <div class="page-loader mt-5 text-center" *ngIf="isPageLoading">
+  Loading....
+</div> -->

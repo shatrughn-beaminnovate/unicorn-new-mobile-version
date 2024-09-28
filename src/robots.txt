@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://shop.unicornstore.in/sitemap.xml

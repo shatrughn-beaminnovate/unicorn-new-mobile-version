@@ -1,0 +1,57 @@
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4.5rem;
+    background: black;
+    width: 10rem;
+    margin: 3rem auto 2rem;
+    border-radius: 15px;
+    padding: 6px 0;
+}
+
+.logo img {
+    max-height: 100%;
+    height: auto;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+}
+
+.title-bold {
+    font-weight: 700;
+    font-size: 24px;
+    color: #343434;
+}
+
+.img-box img {
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.img-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 18rem;
+    margin-bottom: .5rem;
+}
+
+.text {
+    color: #494949eb;
+}
+
+.heading {
+    color: #303030f2;
+}
+
+.navbar-first,
+app-header,
+.delivery-quotes {
+    display: none !important;
+}

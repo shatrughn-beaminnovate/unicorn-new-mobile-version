@@ -1,0 +1,192 @@
+<div class="container py-3">
+  <!-- Breadcrumb Start -->
+  <!-- <div class="row">
+    <div class="col-auto">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/" class="link">Home</a></li>
+        <li class="breadcrumb-item">Product</li>
+        <li class="breadcrumb-item active d-flex align-items-center text-capitalize">{{title}}</li>
+      </ol>
+    </div>
+  </div>
+  <hr class="mt-1 mb-3"> -->
+  <!-- Breadcrumb End -->
+
+  <div *ngIf="product" class="row">
+    <div class="col-sm-5 text-center border-right">
+
+      <!-- Product Image Preview Box -->
+      <app-image-loader
+        [alt]="(product.images && product.images.length > 0) ? product.images[0].alt : ' '"
+        [imageUrl]="(product.images && product.images.length > 0) ? imgUrl + '/medium/' + product.images[0].filename : ''"
+        imageContainerClass="mb-4" imageContainerHeight="25rem">
+      </app-image-loader>
+
+      <!--<div class="product-img-box">-->
+      <!--<img [src]="getFirstImageFileName(product.images)" (error)="setFallbackImage($event)" [alt]="product.name">-->
+      <!--</div>-->
+      <div class="row mb-3 justify-content-center align-items-center">
+        <div class="col">
+          <a class="wishlist-btn  " href="#">
+            <i class="fa fa-heart-o fa-lg"></i>
+          </a>
+          <div class="d-none" id="share-box-mobile" style="top: 20% !important">
+            <div class="product-share-btn">
+              <i class="fa fa-share-square-o fa-lg"></i>
+            </div>
+            <div class="product-share-box d-none">
+              <a class="share-icon wp mb-2" data-action="share/whatsapp/share" href="https://api.whatsapp.com/send?text=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank">
+                <i class="fa fa-whatsapp"></i>
+              </a>
+              <a class="share-icon fb ml-2 mb-2" href="https://www.facebook.com/sharer/sharer.php?u=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a class="share-icon tw" data-action="share" data-network="twitter" href="https://twitter.com/intent/tweet?url=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank" title="Share on Twitter">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a class="share-icon ln ml-2" data-action="share" data-network="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank" title="Share on LinkedIn">
+                <i class="fa fa-linkedin "></i>
+              </a>
+              <!--<div class="fb-share-button" data-href="" data-layout="button_count" data-size="small">
+                  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=&src=" class="fb-xfbml-parse-ignore">
+                      Share
+                  </a>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-7 text-center text-sm-left">
+      <div class="row">
+        <div class="col-sm">
+          <h2 class="product-name mb-3">{{product.name}}</h2>
+          <div class="wishlist-btn d-none "  >
+            <button type="button" (click)="wishlistToggle(product.id)" class="btn btn-link text-dark mt-1">
+              <i *ngIf="!isWishlistAdded" class="far fa-heart fa-lg" title="Add to Wishlist"></i>
+              <i *ngIf="isWishlistAdded" class="fa fa-heart fa-lg" title="Remove to Wishlist"></i>
+              <!-- <i   class="fa fa-heart fa-lg" title="Remove to Wishlist"></i> -->
+            </button>
+          </div>
+        </div>
+        <!-- Desktop Share Icons -->
+        <div class="col-sm-auto">
+          <div (click)="onClickProductShare()" class="product-share-btn"><i class="fa fa-share-square-o fa-lg"></i></div>
+          <div [class.d-none]="!isProductShare" class="product-share-box">
+            <!-- Whatsapp Share -->
+            <a class="share-icon wp mb-2" data-action="share/whatsapp/share" href="https://api.whatsapp.com/send?text=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank">
+              <i class="fa fa-whatsapp"></i>
+            </a>
+
+            <!-- Facebook Share -->
+            <a class="share-icon fb ml-2 mb-2" href="https://www.facebook.com/sharer/sharer.php?u=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank">
+              <i class="fa fa-facebook"></i>
+            </a>
+
+            <!-- Twitter Share-->
+            <a class="share-icon tw" data-action="share" data-network="twitter" href="https://twitter.com/intent/tweet?url=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank" title="Share on Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+
+            <!-- Linkedin Share -->
+            <a class="share-icon ln ml-2" data-action="share" data-network="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https://shop.unicornstore.in/airpods-with-charging-case-unifest-2022-prebook" target="_blank" title="Share on LinkedIn">
+              <i class="fa fa-linkedin "></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="product?.excerpt" class="pg">
+        {{product?.excerpt}}
+      </p>
+
+      <!-- Cashback Offers Start -->
+
+
+      <div class="d-flex align-items-end">
+        <!-- Price Details -->
+        <div class="price-holder mt-2">
+          <div *ngIf="+product.price > +product.saleprice" class="price-box">
+            <span [innerHTML]="+product.price | currency | priceAfterDotSmall" class="price price-strike price-strike-sm mb-2 d-block"></span>
+            <span [innerHTML]="+product.saleprice | currency | priceAfterDotSmall" class="d-block mb-2 price-lg"></span>
+          </div>
+          <div *ngIf="+product.price === +product.saleprice" class="price-box mt-3">
+            <h4 [innerHTML]="product.saleprice | currency | priceAfterDotSmall" class="d-block mb-2 price-md"></h4>
+          </div>
+
+          <!-- For Prebook -->
+          <div *ngIf="+product.enabled === 3 && +product.custom_column_2 > 0" class="price-box">
+            <span class="price-text mb-2">Prebook Price</span>
+            <span class="price ml-2" [innerHTML]="product.custom_column_2 | currency | priceAfterDotSmall"></span>
+            <h5 class="heading-md mt-4 mb-0 fw-400" *ngIf="product.custom_column_4"><b>Note: </b>{{ product.custom_column_4 }}</h5>
+
+          </div>
+        </div>
+
+        <!-- Discount Percentage -->
+        <!-- <h4 *ngIf="+product.price > +product.saleprice" class="price-discount ml-2">
+          {{ (((+product.price - +product.saleprice) / +product.price) * 100).toFixed(0) + '%' + ' off' }}
+        </h4> -->
+
+        <!-- Discount Percentage: working fine -->
+        <h4 class="price-discount ml-2" *ngIf="+product.price > +product.saleprice">
+          {{(((+product.price - +product.saleprice) / +product.price) * 100) | number:'1.0-1'}}% off
+        </h4>
+      </div>
+
+      <!-- Cashback Price -->
+      <ng-container *ngIf="+product.saleprice > +product.cashback_amt">
+        <div *ngIf="+product.cashback === 1 && (product.cashback_price !== null && product.cashback_price !== '0')" class="price-box">
+          <!-- <span class="price"><span class="price-strike" [innerHTML]="'MRP: ' + (product.price | currency | priceAfterDotSmall)"></span></span>
+        <span class="price-md d-block mb-2" [innerHTML]="product.saleprice | currency | priceAfterDotSmall"></span> -->
+          <!-- <span class="price-text">Price After Cashback</span> 
+        <span class="price ml-2" [innerHTML]="product.after_cashback | currency | priceAfterDotSmall"></span> -->
+          <span class="price-text">Price After Cashback</span>
+          <span class="price ml-2">{{ (product.saleprice - product.cashback_price) | currency }}</span>
+        </div>
+        <div *ngIf="product.cashback === '0' && (product.cashback_amt !== null && product.cashback_amt !== '0')" class="price-box">
+          <span class="price-text">Price After Cashback</span>
+          <span class="price ml-2">{{ (product.saleprice - product.cashback_amt) | currency }}</span>
+        </div>
+        <!-- <div class="cashback-offers-box" *ngIf="product && product.cashback_note && (+product.cashback_price > 0 || +product.cashback_amt > 0)">
+        <h4 class="heading text-success">Cashback Offers</h4>
+        <h5 class="heading-md fw-400"  >{{product.cashback_note}}</h5>
+      </div> -->
+
+        <div *ngIf="product.cashback === '1' && (product.cashback_price !== null && product.cashback_price !== '0')" class="div">
+          <div *ngIf="product.cashback === '1' && product.cashback_note.trim() !== ''" class="cashback-offers-box">
+            <h4 class="heading text-success">Cashback Offers</h4>
+            <h5 class="heading-md fw-400">{{product.cashback_note}}</h5>
+          </div>
+        </div>
+        <div *ngIf="product.cashback === '0' && (product.cashback_amt !== null && product.cashback_amt !== '0')" class="div">
+          <div *ngIf="product.cashback === '0' && product.cashback_note.trim() !== ''" class="cashback-offers-box">
+            <h4 class="heading text-success">Cashback Offers</h4>
+            <h5 class="heading-md fw-400">{{ product.cashback_note }}</h5>
+          </div>
+        </div>
+      </ng-container>
+
+      <h4 *ngIf="+product.quantity === 0" class="out-of-stock mt-3 mb-1">Out of Stock</h4>
+      <!-- here i add class for add to cart button -->
+      <div class="mt-3 product-button">
+        <!-- {{product?.quantity}} {{product?.quantity > 1 ? 'items' : 'item'}} in stock -->
+
+        <app-add-to-cart *ngIf="+product.quantity && +product.quantity > 0" [product]="product"></app-add-to-cart>
+        <!-- <button type="button" *ngIf="+product?.quantity > 0" (click)="addToCart(product?.id)" class="btn btn-primary mt-3">Add To Cart</button> -->
+        <button (click)="notifyMeModal.show(product?.id)" *ngIf="+product?.quantity === 0" class="btn btn-primary mt-3 mr-2" type="button">
+          Notify Me
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container" *ngIf="product?.description">
+  <p-tabView>
+    <p-tabPanel header="Description">
+      <div class="description" [innerHTML]="product?.description"></div>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+<app-notify-me-modal #notifyMeModal></app-notify-me-modal>

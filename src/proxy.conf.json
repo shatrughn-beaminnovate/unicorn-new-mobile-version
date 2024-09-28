@@ -1,0 +1,10 @@
+{
+  "/social-login": {
+    "target": "http://192.168.1.95:8080",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": "/shop1.unicorn"
+    }
+  }
+}

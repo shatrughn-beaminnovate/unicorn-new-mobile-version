@@ -1,0 +1,61 @@
+<!-- showDialog false in ts file if you want to show this pop up then go ts file and true  -->
+<p-dialog [(visible)]="displayModal" [modal]="true" [style]="{ width: '50%' }" [draggable]="false" [resizable]="false">
+  <div class="dialog-class">
+    <img src="./assets/Creative/service-247/Creative 2.svg" class="newsletter_img1 img-fluid" alt="">
+    <img src="./assets/Creative/service-247/Creative 2.svg" class="newsletter_img2 img-fluid" alt="">
+    <div class="text-center">
+      <h1>Get Special Discount Offer</h1>
+      <p class="header_para1">Subscribe newsletter and Get 10% off.</p>
+      <p class="header_para2">Stay up to date with our exciting products developments ,get special offers,and receive</p>
+    </div>
+
+    <div class="row justify-content-center my-4">
+      <div class="col-sm-8">
+        <form [formGroup]="newsletterForm" (ngSubmit)="subscribe()">
+          <!-- Email Input -->
+          <div class="form-group">
+            <div class="custom-input-group">
+              <input type="text" formControlName="email" [class.is-invalid]="isNewsLetterSubmitted && f.email.errors" name="email" class="form-control custom_radius1" placeholder="Enter Your Email Address" aria-label="Enter Your Email Address" aria-describedby="button-addon2" />
+              <div class="input-group-append">
+                <button class="btn custom_radius2" type="submit" id="button-addon2">SUBSCRIBE</button>
+              </div>
+            </div>
+            <!-- Display validation errors -->
+            <div class="invalid-feedback" *ngIf="isNewsLetterSubmitted && f.email.errors">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+              <div *ngIf="f.email.errors.pattern">Email must be a valid email address</div>
+            </div>
+          </div>
+        </form>
+        <!-- Checkbox -->
+        <div class="form-group newsletter_checkbox">
+          <div class="custom-checkbox">
+            <input type="checkbox" name="dontPopup" class="custom-control-input border" id="dontPopup" [(ngModel)]="showSubscribe" (change)="handleCheckboxChange()" />
+            <label class="custom-control-label" for="dontPopup">Don't Show this popup again.</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="newsletter_recommend_product">
+      <p class="newsletter_recommend_para">Popular Deals</p>
+      <div class="row">
+        <div class="col-12 col-md-6 col-xl-4 col-xxl-4 mb-3" *ngFor="let p of newsletter_products">
+          <div class="card text-center h-100">
+            <div class="card-body">
+              <div class="newletter-img-box">
+                <img [src]="p.product_img" alt="" class="img-fluid">
+              </div>
+              <h3 class="heading">{{ p.product_name }}</h3>
+              <app-price [price]="24399" [saleprice]="23000" [strikePrice]="24399"></app-price>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center my-4">
+      <button type="button" class="btn btn-primary rounded-pill">View Collection</button>
+    </div>
+  </div>
+</p-dialog>

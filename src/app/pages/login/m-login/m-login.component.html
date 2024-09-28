@@ -1,0 +1,112 @@
+<p-dialog [(visible)]="display" styleClass="mobile-login-modal" [modal]="true" [closable]="false" [responsive]="true">
+  <form [hidden]="isLoginWithOtpForm || isForgotPasswordForm" [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
+    <div class="mobile-logo rounded-sm mt-4">
+      <img [src]="imgUrl + '/logo/client_logo.png'" alt="logo">
+    </div>
+    <h3 class="mb-2 mt-4  text-center">Login</h3>
+    <div class="form-group">
+      <label for="email" class="label_font">Email<span class="req">*</span></label>
+      <input type="email" id="email" formControlName="email" [class.is-invalid]="loginSubmitted && getLoginControls.email.errors" name="email" class="form-control form-control-sm">
+      <div *ngIf="loginSubmitted && getLoginControls.email.errors" class="invalid-feedback">
+        <div *ngIf="getLoginControls.email.errors.required">Email is required</div>
+        <div *ngIf="getLoginControls.email.errors.pattern">This email is not valid</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="label_font">Password<span class="req">*</span></label>
+      <div class="input-group">
+        <input [type]="showPassword ? 'text' : 'password'" formControlName="password" id="password" [class.is-invalid]="loginSubmitted && getLoginControls.password.errors" class="form-control rounded-right-0 rounded-bottom-right-0" style="border-right: none; background-color: white;" (focus)="onPasswordFocus()" (blur)="onPasswordBlur()" />
+        <div class="input-group-append">
+          <span class="input-group-text rounded-left-0 rounded-bottom-left-0 eye-icon" (click)="showUserPassword($event)" style="cursor: pointer; background-color: white !important;" [ngClass]="{'dark-border': isPasswordFocused, 'border-red': loginSubmitted}">
+            <i style="font-size: 14px; color: #000000;" class="fa fa-eye" *ngIf="showPassword"></i>
+            <i style="font-size: 14px;" class="fa fa-eye-slash" *ngIf="!showPassword"></i>
+          </span>
+        </div>
+      </div>
+      <div *ngIf="loginSubmitted && getLoginControls.password.errors" class="invalid-feedback d-block">
+        <div *ngIf="getLoginControls.password.errors.required">Password is Required</div>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <div class="form-check">
+          <input type="checkbox" id="rememberme" name="rememberme" class="form-check-input">
+          <label for="rememberme" class="form-check-label ml-2">Remember Me</label>
+        </div>
+      </div>
+      <div class="col-auto text-right">
+        <button type="button" class="btn-link btn-link-primary" (click)="showBasicDialog2()">Forgot Password?</button>
+      </div>
+    </div>
+    <!-- <div id="google-btn"></div> -->
+    <div class="form-row mt-2">
+      <div class="col-sm-6 mb-3">
+        <button type="submit" class="btn btn-success btn-sm w-100">Login</button>
+      </div>
+      <div class="col-sm-6 mb-3">
+        <button type="button" (click)="onClickOtpLogin()" class="btn btn-primary btn-sm w-100">OTP Login</button>
+      </div>
+    </div>
+    <!-- <div class="my-3">
+      <p class="text-secondary text-center my-3">Or login Using </p>
+      <div class="row justify-content-center login_using_brand my-3">
+        <div class="col-sm-auto">
+          <button (click)="onClickGoogleLogin()" class="btn btn-primary btn-sm" type="button"><i class="fab fa-google"></i></button>
+        </div>
+        <div class="col-sm-auto">
+          <i class="fab fa-facebook-f"></i>
+        </div>
+        <div class="col-sm-auto">
+          <i class="fab fa-twitter"></i>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div class="div"  >
+      <div id="google-btns"></div>
+    </div> -->
+  </form>
+  <!-- Mobile Number Form Fields -->
+  <div class="login-with-otp-container" [hidden]="!(isLoginWithOtpForm && !isOtp)">
+    <h3 class="mb-2">Login with OTP</h3>
+    <hr class="mt-0">
+    <div class="form-group">
+      <label for="mobile_no">Enter Mobile Number <span class="req">*</span></label>
+      <input type="text" #mobileNumber name="mobile_no" id="mobile_no" class="form-control form-control-sm">
+    </div>
+    <hr class="my-3">
+    <div class="form-row">
+      <div class="col">
+        <button type="button" (click)="verifyMobile(mobileNumber.value)" class="btn btn-primary mb-2">Request Otp</button>
+      </div>
+      <div class="col-auto">
+        <button type="button" (click)="loginWithEmail()" class="btn btn-primary mb-2">Login With Email</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTP Verify Form Fields -->
+  <div class="otp-varification-container" [hidden]="!(isLoginWithOtpForm && isOtp)">
+    <h3 class="mb-2">Login with OTP</h3>
+    <hr class="mt-0">
+    <div class="form-group">
+      <label>Enter Otp to verify your account <span class="req">*</span> </label>
+      <ngx-otp-input [config]="otpInputConfig" (otpChange)="handleOtpChange($event)" (fill)="handleFillEvent($event)"></ngx-otp-input>
+      <small class="d-block mb-2"> A code has been sent to {{mobile}}</small>
+      <h6 class="heading-sm my-2 font-weight-normal font-italic text-danger"> {{(otpExpires !== 0) ? 'OTP Expires in ' + otpExpires + ' Seconds' : 'Otp Expired' }} </h6>
+      <div class="d-flex align-items-end">Didn't get the code?
+        <button type="button" (click)="resendOtp()" class="btn-link btn-link-primary ml-2">Resend OTP</button>
+      </div>
+    </div>
+    <hr class="my-3">
+    <div class="form-row">
+      <div class="col" *ngIf="isOtp">
+        <button type="button" (click)="validateOtp()" class="btn btn-primary">Validate Otp</button>
+      </div>
+      <div class="col-auto">
+        <button type="button" (click)="loginWithEmail()" class="btn btn-primary">Login With Email</button>
+      </div>
+    </div>
+  </div>
+</p-dialog>

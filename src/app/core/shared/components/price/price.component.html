@@ -1,0 +1,9 @@
+<!-- *ngIf="+price > 0 && +saleprice > 0" -->
+<div class="price-box" [ngClass]="priceStyleClass" [class.inline-price]="isInlinePrice" [class.vertical-price]="isVerticalPrice">
+  <del *ngIf="!prebookPrice && strikePrice && onlyShowStrikePrice" class="mr-2" [class.vertical-price]="isVerticalPrice" [innerHTML]="(priceLabel ? priceLabel + ': \n' : '') + '' +(strikePrice | currency: priceCurrency)"></del>
+  <del *ngIf="!prebookPrice && strikePrice && price !== saleprice && !onlyShowStrikePrice" class="mr-2" [class.vertical-price]="isVerticalPrice" [innerHTML]="(priceLabel ? priceLabel + ': \n' : '') + '' +(strikePrice | currency: priceCurrency)"></del>
+  <span class="currency" *ngIf="!prebookPrice && saleprice && price >= saleprice && !onlyShowStrikePrice" [class.vertical-price]="isVerticalPrice" [innerHTML]="(priceLabel ? priceLabel + ': ' : '') + '' +(saleprice | currency: priceCurrency) | priceAfterDotSmall"></span>
+  <span class="currency" *ngIf="!prebookPrice && saleprice && saleprice > price && !onlyShowStrikePrice" [class.vertical-price]="isVerticalPrice" [innerHTML]="(priceLabel ? priceLabel + ': ' : '') + '' +(price | currency: priceCurrency) | priceAfterDotSmall"></span>
+  <span class="currency" *ngIf="!prebookPrice && !saleprice && price && !onlyShowStrikePrice" [class.vertical-price]="isVerticalPrice" [innerHTML]="(priceLabel ? priceLabel + ': ' : '') + '' +(price | currency: priceCurrency) | priceAfterDotSmall"></span>
+  <span class="currency" *ngIf="prebookPrice" [class.vertical-price]="isVerticalPrice" [innerHTML]="(priceLabel ? priceLabel + ': ' : '') + '' +(prebookPrice | currency: priceCurrency) | priceAfterDotSmall"></span>
+</div>

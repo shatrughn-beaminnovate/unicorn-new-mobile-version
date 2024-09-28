@@ -1,0 +1,1134 @@
+<!--TODO: All Images Download and Insert from assets folder -->
+
+<!-- Hero Section Clear -->
+<section class="sec-1 text-center">
+  <img src="https://s3.ap-south-1.amazonaws.com/shop.unicorn/crt_landing_page/main-banner.jpeg" class="img-fluid" alt=" ">
+  <div class="container">
+    <button class="btn btn-success btn-lg scroll-to-id px-4 mt-3" (click)="scrollToElement()">
+      Know More
+    </button>
+    <div class="row align-items-center">
+      <div class="col-sm-6 col-lg-6 mb-4 mb-sm-0">
+        <div class="hero-text-box">
+          <!-- <img src="./assets/Creative/Vector 705.png" alt="" class="vector_tag img-fluid ml-auto">
+          <h3>Exclusive <span class="font_discount">Discount</span> upto <br><span class="percent_discount">{{selectedMac?.discount_percentage}}% off</span> on Macs for <br> Students &amp; Teachers.
+          </h3>
+          <p class="pg d-none">
+            When inspiration strikes and the doing needs doing, get it done as ideas come to you. Ace your
+            assignments,
+            crush presentations and surprise yourself with what's possible.
+            Whatever tomorrow brings, you're more than ready for it.
+          </p> -->
+          
+        </div>
+        
+      </div>
+      <div class="col-sm-6 col-lg-6 text-right">
+
+        <!-- <div class="hero-img-right justify-content-center">
+          <img src="./assets/Creative/Group 1557.png" class="img1 img-fluid" alt="">
+          <img src="./assets/Creative/pngwing 4.png" class="img2 img-fluid" alt=" ">
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mac-price-breakup-section text-center" #scrollTargetElement>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-sm-6">
+        <img src="https://s3.ap-south-1.amazonaws.com/shop.unicorn/crt_landing_page/mac.jpeg" class="left_image img-fluid" alt="Image Not Available">
+      </div>
+      <div class="col-sm-6 text-center">
+
+        <div class="table-responsive">
+          <table class="table table-sm text-nowrap w-100 table-borderless">
+            <thead>
+              <tr>
+                <th></th>
+                <th>
+                  <!-- <b> {{selectedMac?.type_name}}  </b> -->
+                  <b>  Macbook Air M1 </b>
+                  <small>(21% off)</small>
+
+                  <!-- <small>({{selectedMac?.discount_percentage}}% off)</small> -->
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <!-- <td>{{selectedMac?.type_name}}</td> -->
+                <td>Macbook Air M1 </td>
+                <td>{{ 89900 | currency: 'INR'}}</td>
+              </tr>
+              <tr>
+                <td>Education Discount (21%)</td>
+                <td>{{71021| currency: 'INR'}}</td>
+              </tr>
+              <!-- <tr>
+                <td>Cashback</td>
+                 <td [innerHTML]=" selectedMac?.cashback | currency: 'INR'"></td>  
+                <td [innerHTML]="5000 | currency: 'INR'"></td>
+              </tr> -->
+              <tr>
+                <th class="custom-border-top"><b>Effective Price </b></th>
+                <th class="custom-border-top">{{71021 | currency: 'INR'}}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-success btn-lg scroll-to-id px-4 my-3" data-toggle="modal" data-target="#downloadModal">
+            Download the form &amp; Get Started
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec-3 py-5">
+  <div class="container text-center">
+    <h2 class="title-md mb-4 text-white">Find your brilliance with the latest Macs</h2>
+    <div class="row justify-content-center">
+      <div class="col-sm-6 col-lg-3 ">
+        <img src="./assets/Creative/Frame 11969.png" class="img-fluid" alt="">
+        <h4 class="text-white my-2">Apple Silicon</h4>
+        <p class="pg-sm text-white">
+          Powerful processors that easily zip through the most intensive tasks.
+        </p>
+      </div>
+      <div class="col-sm-6 col-lg-3 ">
+        <img src="./assets/Creative/Group 1570.png" class="img-fluid" alt="">
+        <h4 class="text-white my-2">Supercharged</h4>
+        <p class="pg-sm text-white">
+          Compatible with the apps used by pros in your future field. Mac will see you through college and beyond.
+        </p>
+      </div>
+      <div class="col-sm-6 col-lg-3 ">
+        <img src="./assets/Creative/retina-display-icon 1.png" class="img-fluid" alt="">
+        <h4 class="text-white my-2">Retina Display</h4>
+        <p class="pg-sm text-white">
+          Stunning displays for stunning work.
+        </p>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <img src="./assets/Creative/9c4a0a4fae51c61048020693c4715542 1.png" class="img-fluid" alt="">
+        <h4 class="text-white my-2">Performance</h4>
+        <p class="pg-sm text-white">
+          Juggles Microsoft Office, Autodesk, Maya and much more.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-4 py-5 d-none">
+  <div class="container">
+    <div class="row align-items-center text-center text-sm-left">
+      <div class="col-sm-6">
+        <h3 style="font-size: 36px">Our 18 years of achievements</h3>
+        <div class="text-white my-2">With our super powers we have reached this</div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row align-items-center">
+          <div class="col-6 col-sm-6 mb-4">
+            <div class="media align-items-center">
+
+              <div class="media-body ml-3">
+                <h3 class="heading-md mb-0">30+</h3>
+                <p class="pg-lg mb-0">Stores in India</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-6 mb-4">
+            <div class="media align-items-center">
+
+              <div class="media-body ml-3">
+                <h3 class="heading-md mb-0">30+</h3>
+                <p class="pg-lg mb-0">Service Centers</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-6 mb-4">
+            <div class="media align-items-center">
+
+              <div class="media-body ml-3">
+                <h3 class="heading-md mb-0">500 K+</h3>
+                <p class="pg-lg mb-0">Customers</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-6 mb-4 d-none">
+            <div class="media align-items-center">
+
+              <div class="media-body ml-3">
+                <h4 class="heading-md mb-0">XYZ</h4>
+                <p class="pg-lg mb-0">Point</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-5 pt-4 pb-5 text-center">
+  <div class="container">
+    <h2 class="mb-5"> <span style="border-bottom: 7px solid #92e3a9;">How Does </span>This Work</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-md-5 text-center">
+        <img src="./assets/Creative/printing-invoices/bro.png" class="img-fluid mx-auto" alt="">
+      </div>
+      <div class="col-md-5">
+        <span class="work_count_1">1</span>
+        <p class="work_count_1paragraph">Download the consent form, print it, fill in the details, sign it, and scan it along with your college/institute ID card and government ID proof before you proceed further.</p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <span class="work_count_2">2</span>
+        <p class="work_count_2paragraph">Select your preferred Mac model.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="./assets/Creative/search-engines/bro.png" class="img-fluid mx-auto" alt="">
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <img src="./assets/Creative/notebook/bro.png" class="img-fluid mx-auto" alt="">
+      </div>
+      <div class="col-md-5">
+        <span class="work_count_3">3</span>
+        <p class="work_count_3paragraph">Complete the registration process.</p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <span class="work_count_4">4</span>
+        <p class="work_count_4paragraph">Upload all the documents & you are done.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="./assets/Creative/online-document/bro.png" class="img-fluid mx-auto" alt="">
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <img src="./assets/Creative/search-engines/bro.png" class="img-fluid mx-auto" alt="">
+      </div>
+      <div class="col-md-5">
+        <span class="work_count_5">5</span>
+        <p class="work_count_5paragraph">We will contact you within 24 hrs to verify & process it further.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Frequently Asked Questions  -->
+<section class="faq-section py-5">
+  <img src="./assets/Creative/service-247/Creative 2.png" class="faq_img1 img-fluid" alt="">
+  <img src="./assets/Creative/service-247/Creative 2.svg" class="faq_img2 img-fluid" alt="">
+  <div class="container">
+    <div class="text-center">
+      <h2>Frequently Asked Questions</h2>
+      <p class="my-2">We Have Tried To Answer The Most Common Questions, if You Have Any Other Questions, Please Contact Us</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-sm-9 mt-3">
+
+        <div *ngFor="let question of faqQuestions; let i = index">
+          <div class="faq-button-container" data-toggle="collapse" [attr.data-target]="'#collapse' + i" (click)="toggleCollapse(i)">
+            <div class="faq_question d-flex justify-content-between pointer">
+              <span>{{ question.name }}</span>
+              <i class="fa" [ngClass]="{'fa-plus-circle': !question.isOpen, 'fa-minus-circle': question.isOpen}" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div [id]="'collapse' + i" class="collapse">
+            <p class="text-white">{{ question.description }}</p>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec-6 bg-light-green pt-5 pb-3 pb-sm-5">
+  <img src="./assets/Creative/service-247/Creative 2.png" class="sec_6_img1 img-fluid" alt="">
+  <img src="./assets/Creative/service-247/Creative 2.svg" class="sec_6_img2 img-fluid" alt="">
+  <div class="container ">
+    <div class="text-center">
+      <h2>Why Unicorn?</h2>
+      <p class="title_desc">Youre never too far from one of our stores and it s a great place to start when
+        you need some guidance.</p>
+    </div>
+
+    <div class="my-3">
+      <div class="row">
+        <div class="col-sm-8">
+          <h4></h4>
+        </div>
+        <div class="col-sm-2 text-center">
+          <h4>Unicorn</h4>
+        </div>
+        <div class="col-sm-2 text-center">
+          <h4>Open Markets</h4>
+        </div>
+      </div>
+      <div class="row" *ngFor="let g of unicornGuide">
+        <div class="col-sm-8">
+          <p>{{g.guides}}</p>
+        </div>
+        <div class="col-sm-2 text-center">
+          <span><i class="fa fa-check"></i></span>
+        </div>
+        <div class="col-sm-2 text-center">
+          <span><i class="fas fa-times text-danger"></i></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BTS Landing Page End -->
+
+<p-dialog [(visible)]="visible" [style]="{width: '90%'}" [contentStyle]="{height: '100vh'}" [modal]="true" [draggable]="false" [resizable]="false">
+  <!-- form-step Start here -->
+  <ng-template pTemplate="header">
+    <img class="logoLeft" alt="logo" src="assets/img/bg/unicorn-store-coupons-logo-large.jpg">
+    <span class=" p_header text-xl font-bold">Student Offer 2023</span>
+  </ng-template>
+
+  <!-- Stepper Start Here... -->
+  <div class="container mt-5 ">
+    <div class="wizard-inner">
+      <div class="bs-stepper">
+        <div class="bs-stepper-header">
+
+          <div class="step step-1">
+            <button type="button" class="steps_des">
+              <span class="bs-stepper-circle active">1</span>
+              <span class="bs-stepper-label active">Select Category</span>
+            </button>
+          </div>
+          <div class="line"></div>
+          <div class="step step-2" [ngClass]="{'active': additionalClassAdded }">
+            <button type="button" class="steps_des">
+              <span class="bs-stepper-circle">2</span>
+              <span class="bs-stepper-label">Select Product</span>
+            </button>
+          </div>
+
+
+
+
+          <div class="line"></div>
+
+          <div class="step step-3" *ngIf="!isLoggedIn" [class.active]="isThirdStepOpen">
+            <button type="button" class="steps_des">
+              <span class="bs-stepper-circle">3</span>
+              <span class="bs-stepper-label">Register & Enrollment</span>
+            </button>
+          </div>
+
+          <div class="line" *ngIf="!isLoggedIn"></div>
+          <div class="step step-4"   [ngClass]="{'active': additionalClassFour }">
+
+            <button type="button" class="steps_des">
+              <span class="bs-stepper-circle">{{(isLoggedIn) ? '3' : '4'}}</span>
+              <span class="bs-stepper-label">Document</span>
+            </button>
+          </div>
+
+          <div class="line"></div>
+
+          <div class="step step-5" [class.active]="isFiveStepOpen">
+            <button type="button" class="steps_des">
+              <span class="bs-stepper-circle">{{(isLoggedIn) ? '4' : '5'}}</span>
+              <span class="bs-stepper-label">Finish</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Form Stepper code end  -->
+
+  <!-- Stepper Form Start Here -->
+  <div class="container mt-4">
+
+    <!-- Step 1 Start: Product Selection -->
+    <fieldset class="fieldset-step-1" *ngIf="isFirstStepOpen ">
+      <!-- BTS Product List Slider Row -->
+      <div class="row position-relative">
+        <div class="col-sm-12">
+          <div class="swiper-bottom-btn">
+            <h5 class="text-center title-sm mb-3 mt-5">
+              Choose Your Category
+            </h5>
+            <swiper [config]="config" effect="fade">
+              <ng-container *ngFor="let item of studentComponentHolder;">
+                <ng-template swiperSlide>
+                  <div (click)="onSelectedProduct(item)" [ngClass]="{'selected-item': selectedProduct === item.id}" class="card h-100 cursor-pointer">
+                    <div class="card-body">
+                      <div class="bts-img-box">
+                        <img [src]="imgUrl +'/medium/' + item.image" class="img-fluid" alt="">
+                      </div>
+                      <h4 class="heading-link text-center">{{item.name}}</h4>
+                    </div>
+                  </div>
+                </ng-template>
+              </ng-container>
+            </swiper>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="card h-100">
+        <div class="card-body">
+          
+                  <div *ngIf="showVariantDropdown" class="dropdown">
+                      <p-dropdown [disabled]="!selectedProductId" [options]="selectedProductVariants" [(ngModel)]="selectedVariantSku" (onChange)="onSelectedSku($event)" optionLabel="crt_product_name" appendTo="body" styleClass="w-100 mb-4" placeholder="Select Your Options">
+                    </p-dropdown> 
+                                       
+                  </div>
+          <div class="bts-img-box">
+            <img [src]="imgUrl +'/medium/' + selectedProduct.image" class="img-fluid" alt=" ">
+          </div>
+          <h4 class="heading-link text-center">{{selectedProduct.variants.crt_product_name}}</h4>
+           <p>SKU: {{selectedProduct.variants.sku}}</p>
+          <p>Price: {{selectedProduct.variants.price}}</p>
+          <p>Offer Price: {{selectedProduct.variants.offer_price}}</p>
+          <p>Price After Cashback: {{selectedProduct.variants.price_after_cashback}}</p>
+        </div>
+      </div> -->
+      <!-- Product List Slider End Here -->
+      <!-- 
+      <div class="row justify-content-center">
+        <div class="col-sm-6">
+          <div class="after-select-product mt-4">
+
+            <h5 class="text-center title-sm mb-3 mt-5">
+              {{!selectedProductId ? 'Choose Your Options' : 'Your Options'}}
+            </h5>
+        
+            <p-dropdown [disabled]="!selectedProductId" [options]="selectedProductVariants" [(ngModel)]="selectedVariantSku" (onChange)="onSelectedSku($event)" optionLabel="crt_product_name" appendTo="body" styleClass="w-100 mb-4" placeholder="Select Your Options ">
+            </p-dropdown>
+       
+            <app-price [strikePrice]="selectedProductVariant?.price" priceLabel="MRP" priceStyleClass="price-md  justify-content-center" [isInlinePrice]="true">
+            </app-price>
+ 
+            <app-price [price]="selectedProductVariant?.offer_price" priceLabel="Offer Price" priceStyleClass="price-md  justify-content-center" [isInlinePrice]="true">
+            </app-price>
+ 
+            <app-price [price]="selectedProductVariant?.price_after_cashback" priceLabel="Price After Cashback" priceStyleClass="price-lg justify-content-center" [isInlinePrice]="true">
+            </app-price>
+
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div class="row justify-content-center">
+        <div class="col-sm-6">
+          <div class="after-select-product mt-4">
+
+            <h5 class="text-center title-sm mb-3 mt-5">
+              {{!selectedProductId ? 'Choose Your Category' : 'Your Options'}}
+            </h5>
+        
+            <p-dropdown [disabled]="!selectedProductId" [options]="selectedProductVariants" [(ngModel)]="selectedVariantSku" (onChange)="onSelectedSku($event)" optionLabel="crt_product_name" appendTo="body" styleClass="w-100 mb-4" placeholder="Select Your Options ">
+            </p-dropdown>
+       
+            <app-price [strikePrice]="selectedProductVariant?.price" priceLabel="MRP" priceStyleClass="price-md  justify-content-center" [isInlinePrice]="true">
+            </app-price>
+ 
+            <app-price [price]="selectedProductVariant?.offer_price" priceLabel="Offer Price" priceStyleClass="price-md  justify-content-center" [isInlinePrice]="true">
+            </app-price>
+ 
+            <app-price [price]="selectedProductVariant?.price_after_cashback" priceLabel="Price After Cashback" priceStyleClass="price-lg justify-content-center" [isInlinePrice]="true">
+            </app-price>
+
+          </div>
+        </div>
+      </div> -->
+      <div class="text-center mt-5">
+        <button type="button" (click)="goToNextStep('step-2')" class="btn btn-primary">Next</button>
+      </div>
+
+    </fieldset>
+    <!-- Step 2 End -->
+    <fieldset class="fieldset-step-2" *ngIf="isSecondStepOpen  ">
+      <!-- BTS Product List Slider Row -->
+      <div class="row position-relative">
+        <div class="col-sm-12">
+          <div class="swiper-bottom-btn">
+            <h5 class="text-center title-sm mb-3 mt-5">
+              Select Your Product
+            </h5>
+
+            <swiper [config]="config" effect="fade">
+              <ng-container *ngFor="let item of selectedMac;">
+                <ng-template swiperSlide>
+                  <div (click)="onSelectedProductss(item)" [ngClass]="{'selected-items': isSelected(item) || selectedProducts === item.id}" class="card h-100 cursor-pointer">
+                    <div class="card-body">
+                      <div class="bts-img-box">
+                        <img [src]="imgUrl +'/medium/' + item.image" class="img-fluid" alt="">
+                      </div>
+                      <h4 class="heading-link text-center">{{item.name}}</h4>
+                    </div>
+                  </div>
+                </ng-template>
+              </ng-container>
+            </swiper>
+            <h5 class="text-center title-sm mb-2 mt-2" *ngIf="selectedMacs && selectedMacs.length > 0">
+              Choose Your Options
+            </h5>
+            <p-dropdown (onChange)="onDropdownChange()" *ngIf="selectedMacs && selectedMacs.length > 0"
+              [options]="selectedMacs"
+              [(ngModel)]="selectedProducts"
+              optionLabel="crt_product_name"
+              styleClass="w-100 mb-4"
+              placeholder="Select Your Options">
+            </p-dropdown>
+
+            <div *ngIf="isItemSelectedDropdown && selectedProducts" class="price-div">
+              <app-price [strikePrice]="selectedProducts.price" [onlyShowStrikePrice]="true" priceLabel="MRP" priceStyleClass="price-md  justify-content-center" [isInlinePrice]="true"></app-price>
+              <app-price [price]="selectedProducts?.offer_price" priceLabel="Offer Price" priceStyleClass="price-md  justify-content-center" [isInlinePrice]="true"></app-price>
+              <app-price  *ngIf="selectedProducts?.offer_price !== selectedProducts?.price_after_cashback" [price]="selectedProducts?.price_after_cashback" priceLabel="Price After Cashback" priceStyleClass="price-lg justify-content-center" [isInlinePrice]="true"></app-price>
+           
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-right mt-5">
+        <button type="button" class="btn btn-secondary px-4  mr-3" (click)="onClickSecondStepBack()">Previous</button>
+        <button type="button" (click)="goToNextStep('step-3')" class="btn btn-primary px-4">Next</button>
+      </div>
+
+    </fieldset>
+    <!-- Step 3 Start: Register Or Login -->
+    <fieldset class="fieldset-step-3" *ngIf="isThirdStepOpen && !isLoggedIn">
+      <div class="form-card">
+        <div class="row">
+          <!-- Register From -->
+          <div class="col-sm-6 border-right bts-register-section ">
+            <div class="alert-box"></div>
+            <form [formGroup]="stdRegisterForm" (ngSubmit)="onRegisterFormSubmitted()">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="company">Institute Name<span class="text-danger">*</span></label>
+                    <input type="text" formControlName="company" name="company" id="company" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.company.errors }" />
+                    <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                      <div *ngIf="f.company.errors.required">company is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="bts-pincode">Pincode<span class="text-danger">*</span></label>
+                    <input type="text" formControlName="pincode" name="pincode" id="bts-pincode" maxlength="6" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }" />
+                    <div *ngIf="submitted && f.pincode.errors" class="invalid-feedback">
+                      <div *ngIf="f.pincode.errors.required">Pincode is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="bts-city">City</label>
+                    <input type="text" formControlName="city" name="city" id="bts-city" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="bts-state">State</label>
+                    <input type="text" formControlName="state" name="state" id="bts-state" class="form-control form-control-sm">
+
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Country</label>
+                    <select class="custom-select" formControlName="country" name="country">
+                      <option value="99">India</option>
+                    </select>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="bts-address1">Address 1<span class="text-danger">*</span></label>
+                    <input type="text" name="address1" formControlName="address1" id="bts-address1" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.address1.errors }" />
+                    <div *ngIf="submitted && f.address1.errors" class="invalid-feedback">
+                      <div *ngIf="f.address1.errors.required">address1 is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="firstname">First Name<span class="text-danger">*</span></label>
+                    <input type="text" formControlName="firstname" name="firstname" id="firstname" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                      <div *ngIf="f.firstname.errors.required">Firstname is required</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Full name -->
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="lastname">Last Name<span class="text-danger">*</span></label>
+                    <input type="text" formControlName="lastname" name="lastname" id="lastname" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                    <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                      <div *ngIf="f.lastname.errors.required">Lastname is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="register_email">Email<span class="text-danger">*</span></label>
+                    <input type="text" formControlName="email" name="email" id="register_email" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">Email is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Phone<span class="text-danger">*</span></label>
+                    <input type="text" formControlName="phone" name="phone" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+                    <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                      <div *ngIf="f.phone.errors.required">Phone no. is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-end d-none">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>OTP</label>
+                    <input type="text" name="phone_otp" class="form-control form-control-sm" maxlength="6" autocomplete="off" value="">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>&nbsp;</label>
+                    <div class="align-items-center">
+                      <h6 class="otp-timer">Resend otp in <span class="register-seconds">120</span> seconds</h6>
+                      <button type="button" class="btn-link pb-2 register-resend-otp d-none">Resend OTP</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Password<span class="text-danger">*</span></label>
+                    <input type="password" formControlName="password" name="password" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                      <div *ngIf="f['password'].errors['required']">Password is required</div>
+                      <div *ngIf="f['password'].errors['minlength']">
+                        Password must be at least 8 characters
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Confirm Password<span class="text-danger">*</span></label>
+                    <input type="password" formControlName="conf_password" name="conf_password" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f['conf_password'].errors }" />
+                    <div *ngIf="submitted && f['conf_password'].errors" class="invalid-feedback">
+                      <div *ngIf="f['conf_password'].errors['required']">
+                        Confirm Password is required
+                      </div>
+                      <div *ngIf="f.conf_password.errors.mustMatch">
+                        Confirm Password does not match
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row justify-content-end align-items-center">
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Login Form -->
+          <div class="col-sm-6 bts-login-section">
+            <div class="alert-box-login"></div>
+
+            <!-- Login With Email & password form -->
+            <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmitted()" *ngIf="!isLoginWithOtp">
+              <div class="bts-login">
+                <h3 class="fs-title">Login</h3>
+                <div class="form-group">
+                  <label for="email_id">Email<span class="text-danger">*</span></label>
+                  <input type="text" formControlName="email_id" name="email_id" id="email_id" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': isLoginFormSubmitted && l.email_id.errors }" />
+                  <div *ngIf="isLoginFormSubmitted && l.email_id.errors" class="invalid-feedback">
+                    <div *ngIf="l.email_id.errors.required">Email is required</div>
+                    <div *ngIf="l.email_id.errors.pattern">Email must be a valid email address</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="login_password">Password<span class="text-danger">*</span></label>
+                  <input type="password" formControlName="login_password" name="login_password" id="login_password" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': isLoginFormSubmitted && l.login_password.errors }" />
+                  <div *ngIf="isLoginFormSubmitted && l.login_password.errors" class="invalid-feedback">
+                    <div *ngIf="l.login_password.errors.required">password is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col">
+                  <button type="button" (click)="isLoginWithOtp = true" class="btn btn-primary px-4 mt-3">Login with OTP</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-primary px-4 mt-3" type="submit">Login</button>
+                </div>
+              </div>
+            </form>
+
+            <!-- Login With OTP Form -->
+            <div class="bts-otp-login" *ngIf="isLoginWithOtp">
+              <!-- Mobile Number Form Fields -->
+              <h3 class="fs-title">Login with OTP</h3>
+              <hr class="mt-0">
+              <ng-container *ngIf="!isOtp">
+                <div class="form-group">
+                  <label for="mobile_no">Enter Mobile Number <span class="req">*</span></label>
+                  <input type="text" #mobileNumber name="mobile_no" id="mobile_no" class="form-control form-control-sm">
+                </div>
+                <hr class="my-3">
+                <div class="row">
+                  <div class="col-sm">
+                    <button type="button" (click)="verifyMobile(mobileNumber.value)" class="btn btn-primary">Request Otp</button>
+                  </div>
+                  <div class="col-sm-auto">
+                    <button type="button" (click)="isLoginWithOtp = false" class="btn btn-primary">Login With Email</button>
+                  </div>
+                </div>
+              </ng-container>
+
+              <!-- OTP Verify Form Fields -->
+              <ng-container *ngIf="isOtp">
+                <div class="form-group">
+                  <label>Enter Otp to verify your account <span class="req">*</span> </label>
+                  <ngx-otp-input [config]="otpInputConfig" (otpChange)="handleOtpChange($event)" (fill)="handleFillEvent($event)"></ngx-otp-input>
+                  <small class="d-block mb-2"> A code has been sent to {{mobile}}</small>
+                  <h6 class="heading-xs my-2 font-weight-normal text-danger"> {{(otpExpires !== 0) ? 'OTP Expires in ' + otpExpires + ' Seconds' : 'Otp Expired' }} </h6>
+                  <div class="d-flex align-items-end">Didn't get the code?
+                    <button type="button" (click)="resendOtp()" class="btn-link btn-link-primary ml-2">Resend OTP</button>
+                  </div>
+                </div>
+                <hr class="my-3">
+                <div class="row">
+                  <div class="col-sm" *ngIf="isOtp">
+                    <button type="button" (click)="validateOtp()" class="btn btn-primary">Validate Otp</button>
+                  </div>
+                  <div class="col-sm-auto">
+                    <button type="button" (click)="isLoginWithOtp = false" class="btn btn-primary">Login With Email</button>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </fieldset>
+    <!-- Step 3 end -->
+
+    <!-- step 4 start: Document Upload -->
+
+    <fieldset class="fieldset-step-4" *ngIf="isFourthStepOpen">
+      <div class="container">
+        <form [formGroup]="documentsForm" (ngSubmit)="docFormSubmit()">
+          <div class="row">
+            <div class="col-sm">
+
+              <!-- Occupation Selection Box -->
+              <div class="occupation-selection-box">
+                <label for="occupation" class="text-nowrap">I <span class="text-lowercase">am a</span> </label>
+                <select formControlName="occupation" (change)="onSelectedOccupation()" name="occupation" id="occupation" class="custom-select border-0 pl-2 font-weight-bold" style="background-color: transparent !important;">
+                  <option value="student" selected>Student</option>
+                  <option value="teacher">Teacher</option>
+                </select>
+              </div>
+
+              <hr class="mt-0 mb-2">
+
+              <ng-container *ngIf="documentsFormControls.occupation.value == 'student'; else teacherUser">
+                <div class="when-student">
+                  <!-- Start Student Document One Box -->
+                  <div class="document-one-box">
+                    <div class="form-group">
+                      <label>Document 1<span class="req">*</span></label>
+                      <select name="docOneName" formControlName="docOneName" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docOneName.errors" class="custom-select custom-select-sm">
+                        <option value="">Select Document Type</option>
+                        <option value="icard">ID Card</option>
+                      </select>
+                      <div *ngIf="isDocFormSubmitted && documentsFormControls.docOneName.errors" class="invalid-feedback">
+                        <div *ngIf="documentsFormControls.docOneName.errors.required">Document 1 Type is required</div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="custom-file custom-file-sm">
+                        <input type="file" (change)="docUploader($event, documentsFormControls.docOneFile)" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docOneFile.errors" name="docOneFile" id="docOneFile" #docOneFile class="custom-file-input">
+                        <label class="custom-file-label" for="docOneFile">Choose file</label>
+                      </div>
+                      <div *ngIf="isDocFormSubmitted && documentsFormControls.docOneFile.errors" class="invalid-feedback d-block">
+                        <div *ngIf="documentsFormControls.docOneFile.errors.required">Document 1 is required</div>
+                      </div>
+
+                      <div class="img-box-with-remove-btn" *ngIf="documentsFormControls.docOneFile.value">
+                        <button type="button" class="remove-btn" (click)="removeUploadedFileAndReset(documentsFormControls.docOneFile); docOneFile.value = ''">&times;</button>
+                        <img [src]="documentsFormControls.docOneFile.value" alt=" " height="200">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>{{documentsFormControls.docOneName.value ? removeSpecialChars(documentsFormControls.docOneName.value) : 'Document Number 1'}}<span class="req">*</span></label>
+                      <input type="text" name="docOneNo" formControlName="docOneNo" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docOneNo.errors" id="stud-doc1-no" class="form-control form-control-sm" />
+                      <div *ngIf="isDocFormSubmitted && documentsFormControls.docOneNo.errors" class="invalid-feedback">
+                        <div *ngIf="documentsFormControls.docOneNo.errors.required">Document 1 Number is required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr>
+
+                  <!-- Student Document Two Box -->
+                  <div class="document-two-co">
+                    <div class="form-group">
+                      <label>Document 2</label>
+                      <select name="docTwoName" formControlName="docTwoName" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docTwoName.errors" class="custom-select custom-select-sm">
+                        <option value="">Select Document Type</option>
+                        <option value="last_year_of_marks_sheet">Last Year of Marks Sheet</option>
+                        <option value="aadhar_card">Aadhar Card</option>
+                        <option value="driving_license">Driving License</option>
+                        <option value="voter_id">Voter ID</option>
+                        <option value="bonafide">Bonafide</option>
+                      </select>
+                      <div *ngIf="isDocFormSubmitted && documentsFormControls.docTwoName.errors" class="invalid-feedback">
+                        <div *ngIf="documentsFormControls.docTwoName.errors.required">Document 2 Type is required</div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="custom-file custom-file-sm">
+                        <input type="file" name="docTwoFile" (change)="docUploader($event, documentsFormControls.docTwoFile)" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docTwoFile.errors" id="docTwoFile" #docTwoFile class="custom-file-input">
+                        <label class="custom-file-label" for="docTwoFile">Choose file</label>
+                      </div>
+
+                      <div *ngIf="isDocFormSubmitted && documentsFormControls.docTwoFile.errors" class="invalid-feedback d-block">
+                        <div *ngIf="documentsFormControls.docTwoFile.errors.required">Document 2 is required</div>
+                      </div>
+
+                      <div class="img-box-with-remove-btn" *ngIf="documentsFormControls.docTwoFile.value">
+                        <button type="button" class="remove-btn" (click)="removeUploadedFileAndReset(documentsFormControls.docTwoFile); docTwoFile.value = ''">&times;</button>
+                        <img [src]="documentsFormControls.docTwoFile.value" alt=" " height="200">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>{{documentsFormControls.docTwoName.value ? removeSpecialChars(documentsFormControls.docTwoName.value) : 'Document Number 2'}} </label>
+                      <input type="text" formControlName="docTwoNo" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docTwoNo.errors" name="docTwoNo" class="form-control form-control-sm">
+                      <div *ngIf="isDocFormSubmitted && documentsFormControls.docTwoNo.errors" class="invalid-feedback">
+                        <div *ngIf="documentsFormControls.docTwoNo.errors.required">Document 2 Number is required</div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <hr>
+
+                  <div class="d-flex align-items-center">
+                    <label class="text-nowrap mt-2">With :</label>
+                    <select name="docThreeName" formControlName="docThreeName" (change)="docThreeNameChange()" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docThreeName.errors" class="custom-select border-0 ml-2 mt-2" style="background-color: transparent !important;">
+                      <option value="new_admission" selected>New Admission (No ID Card)</option>
+                      <option value="valid_icard">Valid ID Card</option>
+                    </select>
+                    <div *ngIf="isDocFormSubmitted && documentsFormControls.docThreeName.errors" class="invalid-feedback">
+                      <div *ngIf="documentsFormControls.docThreeName.errors.required">This Field is required</div>
+                    </div>
+                  </div>
+
+                  <hr class="mt-0 mb-2">
+                  <ng-container *ngIf="documentsFormControls.docThreeName.value === 'new_admission'">
+                    <div class="row mt-2">
+                      <div class="col-sm">
+                        <div class="form-group">
+                          <label>Admission Confirmation Letter <span class="req">*</span></label>
+                          <div class="custom-file custom-file-sm">
+                            <input type="file" name="docThreeFile" (change)="docUploader($event, documentsFormControls.docThreeFile)" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docThreeFile.errors" id="docThreeFile" #docThreeFile class="custom-file-input">
+                            <label class="custom-file-label" for="docThreeFile">Choose file</label>
+                          </div>
+                          <div *ngIf="isDocFormSubmitted && documentsFormControls.docThreeFile.errors" class="invalid-feedback d-block">
+                            <div *ngIf="documentsFormControls.docThreeFile.errors.required">Admission Confirmation Letter is required</div>
+                          </div>
+                          <div class="img-box-with-remove-btn" *ngIf="documentsFormControls.docThreeFile.value">
+                            <button type="button" class="remove-btn" (click)="removeUploadedFileAndReset(documentsFormControls.docThreeFile); docThreeFile.value = ''">&times;</button>
+                            <img [src]="documentsFormControls.docThreeFile.value" alt=" " height="200">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label>Admission Confirmation Letter Number <span class="req">*</span></label>
+                          <input type="text" name="docThreeNo" formControlName="docThreeNo" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docThreeNo.errors" class="form-control form-control-sm">
+                          <div *ngIf="isDocFormSubmitted && documentsFormControls.docThreeNo.errors" class="invalid-feedback">
+                            <div *ngIf="documentsFormControls.docThreeNo.errors.required">Admission Confirmation Letter Number is required</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                  </ng-container>
+                </div>
+
+              </ng-container>
+
+              <!-- When Teacher Selected -->
+              <ng-template #teacherUser>
+
+                <div class="when-teacher">
+
+                  <div class="form-group">
+                    <label>With Employee ID<span class="req">*</span></label>
+                    <div class="custom-file custom-file-sm">
+                      <input type="file" (change)="docUploader($event, documentsFormControls.docOneFile)" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docOneFile.errors" name="docOneFile" id="docOneFile" #docOneFile class="custom-file-input">
+                      <label class="custom-file-label" for="docOneFile">Choose file</label>
+                    </div>
+                    <div *ngIf="isDocFormSubmitted && documentsFormControls.docOneFile.errors" class="invalid-feedback d-block">
+                      <div *ngIf="documentsFormControls.docOneFile.errors.required">Document 1 is required</div>
+                    </div>
+                    <div class="img-box-with-remove-btn" *ngIf="documentsFormControls.docOneFile.value">
+                      <button type="button" class="remove-btn" (click)="removeUploadedFileAndReset(documentsFormControls.docOneFile); docOneFile.value = ''">&times;</button>
+                      <img [src]="documentsFormControls.docOneFile.value" alt=" " height="200">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Employee Id Number <span class="req">*</span></label>
+                    <input type="text" name="docOneNo" formControlName="docOneNo" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docOneNo.errors" id="stud-doc1-no" class="form-control form-control-sm" />
+                    <div *ngIf="isDocFormSubmitted && documentsFormControls.docOneNo.errors" class="invalid-feedback">
+                      <div *ngIf="documentsFormControls.docOneNo.errors.required">Employee Id Number is required</div>
+                    </div>
+                  </div>
+
+
+                  <div class="document-two-co">
+                    <div class="form-group">
+                      <label>With</label>
+                      <select name="docTwoName" formControlName="docTwoName" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docTwoName.errors" class="custom-select custom-select-sm">
+                        <option value="">Select Document Type</option>
+                        <option value="aadhar_card">Aadhar Card</option>
+                        <option value="driving_license">Driving License</option>
+                        <option value="voter_id">Voter ID</option>
+                      </select>
+                      <div *ngIf="isDocFormSubmitted && documentsFormControls.docTwoName.errors" class="invalid-feedback">
+                        <div *ngIf="documentsFormControls.docTwoName.errors.required">Document Type is required</div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="custom-file custom-file-sm">
+                        <input type="file" name="docTwoFile" (change)="docUploader($event, documentsFormControls.docTwoFile)" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docTwoFile.errors" id="docTwoFile" #docTwoFile class="custom-file-input">
+                        <label class="custom-file-label" for="docTwoFile">Choose file</label>
+                      </div>
+                      <div *ngIf="isDocFormSubmitted && documentsFormControls.docTwoFile.errors" class="invalid-feedback d-block">
+                        <div *ngIf="documentsFormControls.docTwoFile.errors.required">Document 2 is required</div>
+                      </div>
+
+                      <div class="img-box-with-remove-btn" *ngIf="documentsFormControls.docTwoFile.value">
+                        <button type="button" class="remove-btn" (click)="removeUploadedFileAndReset(documentsFormControls.docTwoFile); docTwoFile.value = ''">&times;</button>
+                        <img [src]="documentsFormControls.docTwoFile.value" alt=" " height="200">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>{{documentsFormControls.docTwoName.value ? removeSpecialChars(documentsFormControls.docTwoName.value) : 'Document Number 2'}}</label>
+                      <input type="text" formControlName="docTwoNo" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.docTwoNo.errors" name="docTwoNo" class="form-control form-control-sm">
+                      <div *ngIf="isDocFormSubmitted && documentsFormControls.docTwoNo.errors" class="invalid-feedback">
+                        <div *ngIf="documentsFormControls.docTwoNo.errors.required">Document Number is required</div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+
+
+          <!-- Upload Apple Agreement Starts-->
+          <div class="row">
+            <div class="col-sm">
+              <div class="form-group">
+                <label>Upload Apple Agreement <span class="req">*</span></label>
+                <div class="custom-file custom-file-sm">
+                  <input type="file" name="appleDocAgreement" (change)="docUploader($event, documentsFormControls.appleDocAgreement)" [class.is-invalid]="isDocFormSubmitted && documentsFormControls.appleDocAgreement.errors" id="appleDocAgreement" class="custom-file-input">
+                  <label class="custom-file-label" for="emp-doc3">Choose file</label>
+                </div>
+                <div *ngIf="isDocFormSubmitted && documentsFormControls.appleDocAgreement.errors" class="invalid-feedback d-block">
+                  <div *ngIf="documentsFormControls.appleDocAgreement.errors.required">Apple Agreement is required</div>
+                </div>
+
+                <div class="img-box-with-remove-btn" *ngIf="documentsFormControls.appleDocAgreement.value">
+                  <button type="button" class="remove-btn" (click)="removeUploadedFileAndReset(documentsFormControls.appleDocAgreement)">&times;</button>
+                  <img [src]="documentsFormControls.appleDocAgreement.value" (error)="showAppleAgreement = true" *ngIf="!showAppleAgreement" alt=" " height="200">
+                  <object [data]="getSafeUrl()" *ngIf="showAppleAgreement" type="application/pdf" width="100%" height="250px">
+                    <p>
+                      It appears you don't have a PDF plugin for this browser. No biggie... you can
+                      <a [href]="documentsFormControls.appleDocAgreement.value">click here to download the PDF file.</a>
+                    </p>
+                  </object>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Upload PDF Ends -->
+
+          <div class="row mt-2">
+            <div class="col-sm">
+              <p><span class="font-bold">Note</span>: Please consider the following points while uploading the documents:</p>
+              <p>1.Each image should be either in jpg, jpeg or png format.</p>
+              <p>2.Each image to be uploaded should not be more than 300kb.</p>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="col-sm">
+              <p>Customer undertaking <sup class="text-danger">*</sup></p>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" name="docAccept" [(ngModel)]="isAwareChecked" [ngModelOptions]="{standalone: true}" class="custom-control-input" id="customer_undertaking">
+                <label class="custom-control-label" for="customer_undertaking">
+                  I am aware of the video verification and allow Unicorn info solutions Pvt ltd to go ahead with my video verification for completion of the back to school process and schedule the video call.
+                </label>
+              </div>
+              <div *ngIf="!isAwareChecked" class="invalid-feedback d-block">Please accept the undertaking</div>
+            </div>
+          </div>
+
+          <!-- Submit and Previous Btn -->
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary px-4 mt-3 mr-3" (click)="onClickThirdStepBack()">Previous</button>
+            <button type="submit" class="btn btn-success px-4 mt-3 mr-3">Submit</button>
+          </div>
+
+        </form>
+      </div>
+
+    </fieldset>
+
+    <!-- step 4 end -->
+
+    <!-- step 5 start: Finish Step with success message -->
+    <fieldset class="fieldset-step-5" *ngIf="isFiveStepOpen">
+      <div class="row">
+        <div class="col-sm">
+          <div class="alert alert-success">
+            <h4 class="alert-heading">Thank You!</h4>
+            <p>Your application has been submitted successfully.</p>
+            <hr>
+            <p class="mb-0">We will get back to you soon.</p>
+          </div>
+          <!-- modal close button -->
+          <div class="text-center">
+            <button type="button" class="btn btn-primary px-4 mt-3" (click)="visible = false">Close</button>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+</p-dialog>
+
+<button type="button" class="btn btn-success btn-lg scroll-to-id px-4 mt-3 floating-btn" data-toggle="modal" data-target="#downloadModal">
+  Get Started
+</button>
+
+
+<!-- Education Program Consent Form -->
+<div class="modal fade" id="downloadModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-flex align-items-center justify-content-between">
+        <h5 class="modal-title">Education Program Consent Form</h5>
+        <button type="button" class="close-btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row justify-content-center align-items-center">
+          <div class="col mb-2">
+            <img src="assets/img/crt/download.png" alt="Download" class="img-fluid">
+          </div>
+          <div class="col mb-2">
+            <img src="assets/img/crt/sign.png" alt="Sign" class="img-fluid">
+          </div>
+          <div class="col mb-2">
+            <img src="assets/img/crt/scan.png" alt="Scan" class="img-fluid">
+          </div>
+          <div class="col mb-2">
+            <img src="assets/img/crt/upload.png" alt="Upload" class="img-fluid">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <p>
+              <a href="assets/files/crt/consent_form.pdf" download="Consent_form.pdf">
+                Click Here
+              </a>
+              to Download
+            </p>
+            <p>
+              <b>Note:</b> Once you download the consent form take a print, fill in the details, sign and scan it in
+              JPEG or PNG format.
+              Scan your college/institute ID card and government ID proof as well, as you will need to upload them to
+              complete the process.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="visible = true">Proceed</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<p-button
+    *ngIf="!showPopularButton  && +product.enabled === 1"
+    label="Add To Cart"
+    [loading]="isAddingToCart"
+    (onClick)="addToCart()"
+    [disabled]="isAddingToCart"
+    styleClass="btn btn-primary btn-sm"
+    [ngClass]="styleClass">
+</p-button>
+
+<!-- <button type="button" *ngIf="!showFirstButton" (click)="addToCart()" class="add_cart btn btn-sm  d-flex align-items-center mb-2"> Add To Cart </button> -->
+
+<button type="button" *ngIf="showPopularButton && +product.enabled === 1" (click)="addToCart()" class="add_carts align-items-center">
+    Add To Cart
+</button>
+
+<p-button
+    *ngIf="!showPopularButton  && +product.enabled === 3"
+    label="Prebook"
+    [loading]="isAddingToCart"
+    (onClick)="addToCart(true)"
+    [disabled]="isAddingToCart"
+    styleClass="btn btn-primary btn-sm"
+    [ngClass]="styleClass">
+</p-button>

@@ -1,0 +1,18 @@
+<app-header [hidden]="!showHeaderFooter"></app-header>
+
+<!-- Invoke button for open inAppBrowser -->
+<!-- <div class="text-center">
+  <button type="button" class="btn btn-success btn-lg my-5" #openLink>
+    Open InAppBrowser
+   </button>
+</div> -->
+<!-- <app-onboarding-swiper></app-onboarding-swiper> -->
+
+<p-confirmPopup></p-confirmPopup>
+<app-newsletter></app-newsletter>
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>
+<p-toast position="top-center"></p-toast>
+<app-footer [hidden]="!showHeaderFooter"></app-footer>
+<span style="display: none;">UnicornFront app is running!</span>

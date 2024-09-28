@@ -1,0 +1,47 @@
+
+<div class="container">
+  <section class="first-section ">
+    <div class="container">
+      <h1 class="iphoneforlife">iPhone for Life.</h1>
+      <h4 class="text-center">
+        Always have the latest iPhone. For life.
+        <br>
+        Upgrade to iPhone with an EMI starting ₹2341 p.m*
+      </h4>
+      <img src="/assets/img/iphone_for_life_banner-24.png" class="img-fluid iphone-for-you" alt="Banners">
+    </div>
+  </section>
+</div>
+<div class="text-center">
+  <a routerLink="/iphone-for-life" class="btn btn-success" target="_blank">What is iPhone for life?</a>
+
+</div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-sm-3 mb-5" *ngFor="let re_product of weekly_bestsellersHolder">
+      <div class="card h-100" *ngIf="re_product.enabled === '1'">
+        <div class="card-body">
+          <span class="saless p-1" *ngIf="re_product.price > re_product.saleprice"> {{ calculateSalePercentage(re_product) }}</span>
+          <div class="text-center slider-img-box">
+            <!-- Image Skeleton -->
+            <img *ngIf="re_product.images?.length > 0" [src]="imgUrl + '/full/' + re_product.images[0].filename" alt="Product Image" class="img-fluid">
+            <img *ngIf="!re_product.images || re_product.images.length === 0" src="./assets/img/not-found/no-image-found.png" alt=" ">
+          </div>
+          <div class="text-center">
+            <p class="mt-2 pricee truncated" style="text-align: center;">{{ re_product.name }}</p>
+            <!-- Prebook Amount -->
+            <h6 *ngIf="re_product.enabled === '3'" [innerHTML]="re_product.prebook_amt | currency | priceAfterDotSmall"></h6>
+
+            <!-- Sale Price Amount  -->
+            <h6 *ngIf="re_product.enabled === '1'" [innerHTML]="re_product.saleprice | currency | priceAfterDotSmall"></h6>
+          
+            <div class="product-button d-flex justify-content-center mt-2" >
+              <button type="button" (click)="addToCart(re_product)" class="btn btn-info mb-3 text-center cart-buttons-type">Add To Cart</button>
+            </div>
+         
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
