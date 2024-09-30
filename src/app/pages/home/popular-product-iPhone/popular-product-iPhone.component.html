@@ -68,17 +68,7 @@
 
 <!-- p-dialog use here  -->
 
-<p-dialog [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false" [showHeader]="false">
-  <div class="p-dialog-header p-dialog-headerss">
-    <span class="p-dialog-title" id="pr_id_4-label"></span>
-    <div class="p-dialog-header-icons">
-      <button type="button" (click)="displayModal = false" class="p-ripple p-element p-dialog-header-icon p-dialog-header-close p-link">
-        <span class="p-dialog-header-close-icon pi pi-times"></span><span class="p-ink"></span>
-      </button>
-    </div>
-  </div>
-
-
+<p-dialog [(visible)]="displayModal" header="Quick View" [modal]="true" [closable]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
   <div *ngFor="let re_product of recently_popup | filterById:selectedProductId">
     <div class="row">
       <div class="col-sm-6 col-12 text-center">

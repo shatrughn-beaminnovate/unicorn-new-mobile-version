@@ -48,7 +48,6 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
   showErrorMessage: boolean = false;
   isChecked: boolean = false;
   recommendedProductHolder: any[] = [];
-
   guestCheckoutStatus = false;
   customOptions: OwlOptions = {
     loop: true,
@@ -84,32 +83,6 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
   pinResponseHolder: any;
   isQuantity: any;
   isCouponApplyingLoader: boolean = false;
-
-
-
-  // decreaseQuantity(item: any) {
-  //   if (item.quantity > 1) {
-  //     item.quantity--;
-  //     this.updateSessionStorage();
-  //   }
-  // }
-
-  // increaseQuantity(item: any) {
-  //   item.quantity++;
-  //   this.updateSessionStorage();
-  // }
-
-  // updateSessionStorage() {
-  //   sessionStorage.setItem('guest-cart-items', JSON.stringify(this.retrievedData));
-  // }
-
-  closeSidebarCart() {
-    if (this.isCartOpen) {
-      this.isCartOpen = false;
-      this.renderer.removeClass(document.body, 'body-overflow-hidden');
-    }
-  }
-
   Recommended_Accessories = [
     {
       "id": "663",
@@ -347,7 +320,6 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
     return this.authService.isLoggedIn;
   }
 
-
   ngOnInit(): void {
     this.commonService.baseUrls$.subscribe((result) => {
       this.imgUrl = result?.asset_url?.s3_link || result?.asset_url?.fallback || environment.imgUrl;
@@ -409,6 +381,13 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
 
   ngAfterViewChecked(): void {
     this.cd.detectChanges();
+  }
+
+  closeSidebarCart() {
+    if (this.isCartOpen) {
+      this.isCartOpen = false;
+      this.renderer.removeClass(document.body, 'body-overflow-hidden');
+    }
   }
 
   handleRemoveFromCartGA4(item: any) {
@@ -574,7 +553,6 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
     });
   }
 
-
   /**
    * Handles the view cart event for Google Tag Manager (GTM).
    * @param data - The data containing the cart items.
@@ -644,105 +622,6 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
     }
   }
 
-
-  products = [
-    {
-      image: 'https://s3.ap-south-1.amazonaws.com/shop.unicorn/medium/6493443f702959921c7dbc2461a560bd.png',
-      rating: 4.5,
-      id: '5',
-      name: 'iPhone 14 Pro Leather Case with MagSafe  Forest Green',
-      sale: 'Sale 20% off',
-      actual_price: ' 79,900',
-      sel_price: ' 74,900',
-      backgroung_color: 'gray',
-    },
-    {
-      image: 'https://shop.unicornstore.in/uploads/images/medium/20e6769a1abc10892b7a1cf8006a4ae7.jpg',
-      rating: 3.8,
-      name: 'iPhone 14 Pro Leather Case with MagSafe  Forest Green',
-      sale: 'Sale 25% off',
-      id: '8',
-      actual_price: ' 79,900',
-      sel_price: ' 73,900',
-      backgroung_color: '#4e4f51',
-
-    },
-    {
-      image: 'https://shop.unicornstore.in/uploads/images/medium/dd98802c7d8c8452596fc474a3de339d.jpg',
-      rating: 3.8,
-      id: '6',
-      name: 'iPhone 14 Pro Leather Case with MagSafe Forest Gree',
-      sale: 'Sale 10% off',
-      actual_price: ' 78,900',
-      sel_price: ' 73,900',
-      backgroung_color: '#e9818b',
-
-    },
-    {
-      image: 'https://s3.ap-south-1.amazonaws.com/shop.unicorn/medium/6493443f702959921c7dbc2461a560bd.png',
-      rating: 4.5,
-      id: '5',
-      name: 'iPhone 14 Pro Leather Case with MagSafe  Forest Green',
-      sale: 'Sale 20% off',
-      actual_price: ' 79,900',
-      sel_price: ' 74,900',
-      backgroung_color: 'gray',
-    },
-
-
-
-
-  ];
-  accessories = [
-    {
-      product_id: "1637",
-      product_name: "iPhone 14 Leather Case with MagSafe - Umber",
-      image: "e822cc759c2fc8ef2bcf6f2c31368ea5.jpeg",
-      slug: "iPhone-14-Leather-Case-with-MagSafe---Umber",
-      price: "3,500",
-      saleprice: " 5,000",
-    },
-    {
-      product_id: "1638",
-      product_name: "iPhone 14 Leather Case with MagSafe - Ink",
-      image: "7eebbc737692dd19f2f6846e5581f853.jpeg",
-      slug: "iPhone-14-Leather-Case-with-MagSafe---Ink",
-      price: "3,500",
-      saleprice: " 5,000",
-    },
-    {
-      product_id: "1639",
-      product_name: "iPhone 14 Leather Case with MagSafe - Orange",
-      image: "dc58cec00a29667037de623ae8e1383f.jpeg",
-      slug: "iPhone-14-Leather-Case-with-MagSafe---Forest-Green",
-      price: "4,000",
-      saleprice: " 5,000",
-    },
-    {
-      product_id: "1205",
-      product_name: "Skech STARK Naked Case for iPhone 14 - Midnight Black",
-      image: "d7272d57999e879adada6d540d91bc3f.jpg",
-      slug: "Skech-STARK-Naked-Case-for-iPhone-14---Midnight-Black",
-      price: "4,000",
-      saleprice: " 5,000",
-    },
-    {
-      product_id: "1345",
-      product_name: "Skech Matrix Snow Spark for iPhone 13 Pro Max",
-      image: "0cae1faa43aa2662b97d0632c42ce81e.png",
-      slug: "Skech-Matrix-Snow-Spark-for-iPhone-13-Pro-Max",
-      price: "4,000",
-      saleprice: " 5,000",
-    },
-    {
-      product_id: "1030",
-      product_name: "iKlear Complete Cleaning Kit",
-      image: "2390ffa9dcd52edf9800a1419fe0cf0d.png",
-      slug: "iklear-complete-cleaning-kit",
-      price: "1,799",
-      saleprice: "2,990",
-    }
-  ]
   swiperConfig = {
     slidesPerView: 1,
     spaceBetween: 30,
@@ -783,6 +662,7 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
 
     }
   }
+
   swiperConfigs = {
     slidesPerView: 1,
     spaceBetween: 20,
@@ -827,6 +707,7 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
 
     }
   }
+
   // mobile swiper here 
   swiperConfigs_recently = {
     slidesPerView: 1,
@@ -868,44 +749,7 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
 
     }
   }
-  // confirmMoveToWishlist(event: any, cartItemId: number) {
-  //   this.confirmationService.confirm({
-  //     target: event.target ,
-  //     message: 'Do you want to Add this to Wishlist?',
-  //     accept: () => {
-  //       this.moveToWishlist(cartItemId);
-  //     },
-  //     rejectLabel: 'Remove',
-  //     reject: () => {
-  //       this.removeItem(cartItemId);
-  //     },
-  //   });
-  // }
 
-  // moveToWishlist(cartItemId: number) {
-  //   this.cartService.moveToWishlist(cartItemId).subscribe((resp) => {
-  //     if (resp.success) {
-  //       this.getCartItems();
-  //     }
-  //   });
-  // }
-
-  // removeItem(cartItemId: number) {
-  //   this.cartService.removeFromCart(cartItemId).subscribe((resp) => {
-  //     if (resp.success) {
-  //       this.getCartItems();
-  //       this.messageService.add({
-  //         severity: 'success',
-  //         detail: 'The item has been successfully removed from the cart.',
-  //       });
-  //     } else {
-  //       this.messageService.add({
-  //         severity: 'error',
-  //         detail: 'An error occurred while removing the item from the cart.',
-  //       });
-  //     }
-  //   });
-  // }  
   incrementQty(productId: number, qty: any) {
     if (this.authService.isLoggedIn) {
       qty++;
@@ -1123,7 +967,6 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
     })
   }
 
-
   // confirmRemove(event: Event) {
   //   this.confirmationService.confirm({
   //     message: 'Are you sure you want to remove this item?',
@@ -1209,37 +1052,6 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
     })
   }
 
-
-
-
-  //  removeItem(cartItemId: number) {
-  //     if (this.authService.isLoggedIn) {
-  //       // User is logged in, remove the item directly
-  //       this.cartService.removeFromCart(cartItemId).subscribe((resp) => {
-  //         this.getCartItems();
-
-  //         if (resp.success) {
-  //           this.messageService.add({
-  //             severity: 'success',
-  //             detail: resp.message,
-  //           });
-  //         } else {
-  //           this.messageService.add({
-  //             severity: 'error',
-  //             detail: resp.message,
-  //           });
-  //         }
-  //       });
-  //     } else {
-  //       // User is not logged in, handle this scenario as needed.
-  //       // For example, display a message or perform other actions.
-  //       this.messageService.add({
-  //         severity: 'info',
-  //         detail: 'You need to log in to remove items from the cart.',
-  //       });
-  //     }
-  //   }
-
   addToCart(productId: number): void {
     let payload = {
       product_id: productId,
@@ -1264,30 +1076,11 @@ export class SidebarcartComponent implements OnInit, OnDestroy, AfterViewChecked
     });
   }
 
-  // addToCart(product: any): void {
-  //   // Get the current cart data from the cart service
-  //   this.cartService.cartData$.pipe(take(1)).subscribe((cartData) => {
-  //     // Check if the product is already in the cart
-  //     const existingProduct = cartData.find((item) => item.productId === product.productId);
-
-  //     if (existingProduct) {
-  //       // If the product is already in the cart, increase its quantity
-  //       existingProduct.quantity += 1;
-  //     } else {
-  //       // If the product is not in the cart, add it with a quantity of 1
-  //       product.quantity = 1;
-  //       cartData.push(product);
-  //     }
-
-  //     // Update the cart data in the cart service
-  //     this.cartService.updateCartData(cartData);
-  //   });
-  // }
-
   getFirstImageFileName(images: any) {
     if (!images) return;
     return this.imgUrl + '/medium/' + images[0]?.filename;
   }
+
   setFallbackImage(event: any) {
     event.target.src = 'assets/img/not-found/no-image-found.png';
   }

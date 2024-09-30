@@ -24,6 +24,7 @@ import { DummyDataService } from 'src/app/core/services/dummy-data.service';
 import { PopularProductAirPod } from './popular-product-airpod/popular-product-airpod.component';
 import Swal from 'sweetalert2';
 import { finalize } from 'rxjs/operators';
+import { Platform } from '@angular/cdk/platform';
 
 
 @Pipe({
@@ -905,6 +906,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('PopularsProductsAirpod', { read: ViewContainerRef })
   PopularsProductsAirpod!: ViewContainerRef;
   PopularsProductsAirpodRendered = false;
+
+
   isVerifying = false;
   displayCartGuestItemsCompare: boolean = false;
   guestCartItems: any[] = [];
@@ -932,6 +935,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     private cartService: CartService,
     private messageService: MessageService,
     private dummyService: DummyDataService,
+    private platform: Platform,
   ) {
     this.dummyDataServices.getIphoneData().subscribe(() => {
       // console.log('Dummy iPhone Data : ', result); dummy data here call api 
@@ -1187,49 +1191,49 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  @HostListener('window:scroll', ['$event'])
-  checkScroll() {
-    const scrollPosition = window.scrollY + document.documentElement.clientHeight + 50;
-    const featuredProductContainerPos = this.featuredProductContainer.element.nativeElement.offsetTop;
-    if (!this.featuredProductListRendered && scrollPosition >= featuredProductContainerPos) {
-      this.featuredProductListRendered = true;
-      this.loadFeaturedProductComponent();
-      // console.log('Call Deals of the Day Loading component : ', scrollPosition);
-    }
-    const productListContainerPos = this.dealsOfTheDayContainer.element.nativeElement.offsetTop;
-    if (!this.dealsOfTheDayListRendered && scrollPosition >= productListContainerPos) {
-      this.dealsOfTheDayListRendered = true;
-      this.loadProductListContainer();
-      // console.log('Call Deals of the Day Loading component : ', scrollPosition);
-    }
+  // @HostListener('window:scroll', ['$event'])
+  // checkScroll() {
+  //   const scrollPosition = window.scrollY + document.documentElement.clientHeight + 50;
+  //   const featuredProductContainerPos = this.featuredProductContainer.element.nativeElement.offsetTop;
+  //   if (!this.featuredProductListRendered && scrollPosition >= featuredProductContainerPos) {
+  //     this.featuredProductListRendered = true;
+  //     this.loadFeaturedProductComponent();
+  //     // console.log('Call Deals of the Day Loading component : ', scrollPosition);
+  //   }
+  //   const productListContainerPos = this.dealsOfTheDayContainer.element.nativeElement.offsetTop;
+  //   if (!this.dealsOfTheDayListRendered && scrollPosition >= productListContainerPos) {
+  //     this.dealsOfTheDayListRendered = true;
+  //     this.loadProductListContainer();
+  //     // console.log('Call Deals of the Day Loading component : ', scrollPosition);
+  //   }
 
-    const recommendedAccessoriesContainerPos = this.recommendedAccessoriesContainer.element.nativeElement.offsetTop;
-    if (!this.recommendedAccessoriesListRendered && scrollPosition >= recommendedAccessoriesContainerPos) {
-      this.recommendedAccessoriesListRendered = true;
-      this.loadRecommendedAccessoriesContainer();
-    }
+  //   const recommendedAccessoriesContainerPos = this.recommendedAccessoriesContainer.element.nativeElement.offsetTop;
+  //   if (!this.recommendedAccessoriesListRendered && scrollPosition >= recommendedAccessoriesContainerPos) {
+  //     this.recommendedAccessoriesListRendered = true;
+  //     this.loadRecommendedAccessoriesContainer();
+  //   }
 
-    const weeklyBestSellersContainerPos = this.weeklyBestSellersContainer.element.nativeElement.offsetTop;
-    if (!this.weeklyBestSellersRendered && scrollPosition >= weeklyBestSellersContainerPos) {
-      this.weeklyBestSellersRendered = true;
-      this.loadWeeklyBestSellersContainer();
-    }
+  //   const weeklyBestSellersContainerPos = this.weeklyBestSellersContainer.element.nativeElement.offsetTop;
+  //   if (!this.weeklyBestSellersRendered && scrollPosition >= weeklyBestSellersContainerPos) {
+  //     this.weeklyBestSellersRendered = true;
+  //     this.loadWeeklyBestSellersContainer();
+  //   }
 
-    const bestSellersProductsContainerPos = this.bestSellersProductsContainer.element.nativeElement.offsetTop;
-    if (!this.bestSellersProductsRendered && scrollPosition >= bestSellersProductsContainerPos) {
-      this.bestSellersProductsRendered = true;
-      this.loadBestSellersProductsContainer();
-      this.loadPopularProductiPhone();
+  //   const bestSellersProductsContainerPos = this.bestSellersProductsContainer.element.nativeElement.offsetTop;
+  //   if (!this.bestSellersProductsRendered && scrollPosition >= bestSellersProductsContainerPos) {
+  //     this.bestSellersProductsRendered = true;
+  //     this.loadBestSellersProductsContainer();
+  //     this.loadPopularProductiPhone();
 
-    }
-    // const Highlight_new_inPos = this.Highlight_new_in.element.nativeElement.offsetTop;
-    // if (!this.Highlight_new_inRendered && scrollPosition >= Highlight_new_inPos) {
-    //   this.Highlight_new_inRendered = true;
-    //   this.loadHighlight_new_in();
+  //   }
+  //   // const Highlight_new_inPos = this.Highlight_new_in.element.nativeElement.offsetTop;
+  //   // if (!this.Highlight_new_inRendered && scrollPosition >= Highlight_new_inPos) {
+  //   //   this.Highlight_new_inRendered = true;
+  //   //   this.loadHighlight_new_in();
 
-    // }
+  //   // }
 
-  }
+  // }
 
   // MacLoad() {
   //   if (!this.Highlight_MacRendered) {
@@ -1399,7 +1403,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.bannerHolder = result.Banners;
       if (this.bannerHolder.length > 0) {
         let itemsArray: any[] = [];
-        this.bannerHolder.forEach((item) => {
+        this.bannerHolder.forEach((item, index) => {
+          if (this.platform.ANDROID) {
+            this.bannerHolder[index].link = this.removeBaseUrl(item.link);
+          }
           itemsArray.push({
             item_id: item.banner_id,
             item_name: item.name,
@@ -1421,6 +1428,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }, () => {
       this.isBannersLoading = false;
     });
+  }
+
+  removeBaseUrl(url: string): string {
+    const baseUrl = 'https://shop.unicornstore.in';
+    return url.replace(baseUrl, '');
   }
 
   isKeyExist(item: any, type: string) {

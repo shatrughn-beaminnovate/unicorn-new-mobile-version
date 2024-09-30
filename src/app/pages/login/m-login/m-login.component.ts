@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl, AbstractControlOpt
 import { Router } from "@angular/router";
 import { NgxOtpInputConfig } from "ngx-otp-input";
 import { MessageService } from "primeng/api";
+import { finalize } from "rxjs/operators";
 import { MustMatch } from "src/app/core/helper/must-match-validators";
 import { AuthService } from "src/app/core/services/auth.service";
 import { CartService } from "src/app/core/services/cart.service";
@@ -65,6 +66,8 @@ export class MLoginComponent implements OnInit {
     },
   };
   private popStateListener: any;
+
+  alert = { show: false, type: '', message: '' };
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -112,7 +115,7 @@ export class MLoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}'),]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required]],
     });
 
     const formOptions: AbstractControlOptions = {
@@ -197,8 +200,7 @@ export class MLoginComponent implements OnInit {
   }
 
   // show password
-  showUserPassword(event: Event) {
-    event.stopPropagation(); // Stop event propagation to prevent the sidebar from closing
+  showUserPassword() {
     this.showPassword = !this.showPassword; // Your existing code for toggling password visibility
   }
 
@@ -215,7 +217,9 @@ export class MLoginComponent implements OnInit {
   async onLoginFormSubmit() {
     console.log('Login Form : ', this.loginForm.value);
     this.loginSubmitted = true;
-
+    if (this.loginForm.invalid) {
+      return;
+    }
     // Check if there are any items in the guest cart
     const guestCartItems = JSON.parse(sessionStorage.getItem('guest-cart-items') || '[]');
     if (guestCartItems.length > 0) {
@@ -235,19 +239,25 @@ export class MLoginComponent implements OnInit {
         return;
       }
     }
-    this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((resp) => {
+
+
+    this.alert.show = false;
+    this.alert.type = '';
+    this.alert.message = '';
+    this.isLoading = true;
+
+    this.authService.login(this.loginForm.value.email, this.loginForm.value.password).pipe(finalize(() => {
+      this.isLoading = false;
+      this.loginSubmitted = false;
+    })).subscribe((resp) => {
       if (resp && resp.status === true) {
-        this.loginSidebar = false;
-        this.showPassword = false;
-        this.showConfirmPassword = false;
         localStorage.clear();
         sessionStorage.clear();
         localStorage.setItem('customer_data', JSON.stringify(resp.data));
         localStorage.setItem('customer_token', resp.data.token);
         this.cartService.emptyCart().subscribe(); // Empty the cart after login
-        this.messageService.add({ severity: 'success', detail: 'Login successful' });
         this.router.navigate(['/']);
-
+        this.display = false;
         // Call the API to get the guest is allowed to checkout or not
         // this.commonService.getRequest('guest_checkout_status').subscribe((resp) => {
         this.dummyService.getGuestCheckoutStatus().subscribe((resp) => {
@@ -257,22 +267,8 @@ export class MLoginComponent implements OnInit {
             localStorage.setItem('guest', 'allowed');
           }
         });
-
-        // Commented the below code reason: After Login, PineLabs detect the guest cart items price
-        // this.commonService.crt.next(true)
-        // const cartItemsJson = sessionStorage.getItem('guest-cart-items');
-        // const cartItems = JSON.parse(cartItemsJson!);
-        // if (Array.isArray(cartItems) && cartItems.length > 0) {
-        //   cartItems.forEach((selectedProduct) => {
-        //     const payload = {
-        //       product_id: selectedProduct.id,
-        //       quantity: selectedProduct.item_quantity
-        //     };
-        //     this.cartService.addToCart(payload).subscribe();
-        //   });
-        // }
       } else {
-        this.messageService.add({ severity: 'error', detail: resp.message || 'Login failed' });
+        this.alert = { show: true, type: 'alert-error', message: resp.message || 'Login failed' };
       }
     });
   }

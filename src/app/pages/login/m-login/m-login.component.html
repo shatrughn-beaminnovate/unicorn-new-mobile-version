@@ -3,10 +3,19 @@
     <div class="mobile-logo rounded-sm mt-4">
       <img [src]="imgUrl + '/logo/client_logo.png'" alt="logo">
     </div>
-    <h3 class="mb-2 mt-4  text-center">Login</h3>
+    <h3 class="mb-3 mt-4  text-center">Login</h3>
+
+    <!-- Show BS Alert -->
+    <div class="alert alert-dismissible fade show" [ngClass]="alert.type" *ngIf="alert.show" role="alert">
+      {{alert.message}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
     <div class="form-group">
       <label for="email" class="label_font">Email<span class="req">*</span></label>
-      <input type="email" id="email" formControlName="email" [class.is-invalid]="loginSubmitted && getLoginControls.email.errors" name="email" class="form-control form-control-sm">
+      <input type="email" id="email" formControlName="email" [class.is-invalid]="loginSubmitted && getLoginControls.email.errors" name="email" class="form-control">
       <div *ngIf="loginSubmitted && getLoginControls.email.errors" class="invalid-feedback">
         <div *ngIf="getLoginControls.email.errors.required">Email is required</div>
         <div *ngIf="getLoginControls.email.errors.pattern">This email is not valid</div>
@@ -15,20 +24,20 @@
 
     <div class="form-group">
       <label for="password" class="label_font">Password<span class="req">*</span></label>
-      <div class="input-group">
-        <input [type]="showPassword ? 'text' : 'password'" formControlName="password" id="password" [class.is-invalid]="loginSubmitted && getLoginControls.password.errors" class="form-control rounded-right-0 rounded-bottom-right-0" style="border-right: none; background-color: white;" (focus)="onPasswordFocus()" (blur)="onPasswordBlur()" />
-        <div class="input-group-append">
-          <span class="input-group-text rounded-left-0 rounded-bottom-left-0 eye-icon" (click)="showUserPassword($event)" style="cursor: pointer; background-color: white !important;" [ngClass]="{'dark-border': isPasswordFocused, 'border-red': loginSubmitted}">
+      <!-- <div class="input-group"> -->
+      <input type="password" formControlName="password" id="password" [class.is-invalid]="loginSubmitted && getLoginControls.password.errors" class="form-control rounded-right-0 rounded-bottom-right-0" style="border-right: none; background-color: white;" (focus)="onPasswordFocus()" (blur)="onPasswordBlur()" />
+      <!-- <div class="input-group-append" (click)="showUserPassword()">
+          <span class="input-group-text rounded-left-0 rounded-bottom-left-0 eye-icon" style="cursor: pointer; background-color: white !important;" [ngClass]="{'dark-border': isPasswordFocused, 'border-red': loginSubmitted}">
             <i style="font-size: 14px; color: #000000;" class="fa fa-eye" *ngIf="showPassword"></i>
             <i style="font-size: 14px;" class="fa fa-eye-slash" *ngIf="!showPassword"></i>
           </span>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
       <div *ngIf="loginSubmitted && getLoginControls.password.errors" class="invalid-feedback d-block">
         <div *ngIf="getLoginControls.password.errors.required">Password is Required</div>
       </div>
     </div>
-    <div class="row my-3">
+    <div class="row my-3 d-none">
       <div class="col">
         <div class="form-check">
           <input type="checkbox" id="rememberme" name="rememberme" class="form-check-input">
@@ -42,10 +51,10 @@
     <!-- <div id="google-btn"></div> -->
     <div class="form-row mt-2">
       <div class="col-sm-6 mb-3">
-        <button type="submit" class="btn btn-success btn-sm w-100">Login</button>
+        <button type="submit" class="btn btn-success w-100">Login</button>
       </div>
       <div class="col-sm-6 mb-3">
-        <button type="button" (click)="onClickOtpLogin()" class="btn btn-primary btn-sm w-100">OTP Login</button>
+        <button type="button" (click)="onClickOtpLogin()" class="btn btn-primary w-100">OTP Login</button>
       </div>
     </div>
     <!-- <div class="my-3">
@@ -69,7 +78,10 @@
   </form>
   <!-- Mobile Number Form Fields -->
   <div class="login-with-otp-container" [hidden]="!(isLoginWithOtpForm && !isOtp)">
-    <h3 class="mb-2">Login with OTP</h3>
+    <div class="mobile-logo rounded-sm mt-4">
+      <img [src]="imgUrl + '/logo/client_logo.png'" alt="logo">
+    </div>
+    <h3 class="mb-2 mt-4  text-center">Login with OTP</h3>
     <hr class="mt-0">
     <div class="form-group">
       <label for="mobile_no">Enter Mobile Number <span class="req">*</span></label>

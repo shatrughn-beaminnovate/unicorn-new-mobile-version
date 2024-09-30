@@ -94,6 +94,8 @@
       </div>
     </div>
     <!-- Featured Product component lazy loaded -->
+    <app-featured-products></app-featured-products>
+    
   </div>
 </section>
 
@@ -105,6 +107,8 @@
         <h4 class="deal_best weekly_best p-2">Product Categories</h4>
       </div>
     </div>
+    <app-deals-of-the-day></app-deals-of-the-day>
+    
   </div>
 </section>
 
@@ -123,6 +127,7 @@
       </div>
     </div>
     <!-- Recommended Accessories component lazy loaded -->
+    <app-recommended-accessories></app-recommended-accessories>
   </div>
 </section>
 
@@ -144,50 +149,11 @@
         </div> -->
       </div>
       <!-- Weekly Bestsellers Lazy Loaded here... -->
+      <app-weekly-bestsellers></app-weekly-bestsellers>
+      
     </div>
   </div>
 </div>
-
-<!-- This Week's Highlights started here  -->
-
-<!-- <section class="weeks-highlights">
-  <div class="container-fluid">
-    <h4 class="week_high mt-3">This Week's Highlights</h4>
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-        <nav class="d-flex justify-content-center">
-          <div class="nav nav-tabs container-fluid pdp-tab text-center m-0" role="tablist">
-            <a class="nav-link active show" data-toggle="tab" href="#new_in">New In</a>
-            <a class="nav-link" data-toggle="tab" href="#Mac" (click)="MacLoad()">Mac</a>
-            <a class="nav-link" data-toggle="tab" href="#Accessories" (click)="Accessories()">Accessories</a>
-            <a class="nav-link" data-toggle="tab" href="#Unicorn" (click)="UnicornFamily()">Unicorn Family</a>
-          </div>
-        </nav>
-      </div>
-
-      <div class="tab-content pt-3">
-        <div class="tab-pane fade active show" id="new_in">
-          <div class=" " #Highlight_new_in>
-             </div>
-        </div>
-          <div class="tab-pane fade" id="Mac">
-          <div class=" " #Highlight_Mac>
-           </div>
-        </div>
-
-        <div class="tab-pane fade" id="Accessories">
-            <div class=" " #HighlightAccessories>
-             </div>
-           </div>
-
-        <div class="tab-pane fade" id="Unicorn">
-          <div class=" " #HighlightUnicornFamily>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
 
 <!-- Popular Product started Here -->
 <section class="popular-products">
@@ -214,29 +180,29 @@
       <div class="tab-content">
         <div class="tab-pane  fade active show  " id="Iphone">
           <!-- Lazy Loading Here For iPhone -->
-          <div #PopularsProductsiPhone>
-          </div>
+          <div #PopularsProductsiPhone></div>
+          <app-popular-product-iPhone></app-popular-product-iPhone>
         </div>
         <div class="tab-pane  fade" id="Macc">
           <!-- Lazy Loading Here For Mac -->
-          <div #PopularsProductsMAC>
-          </div>
+          <div #PopularsProductsMAC></div>
+          <app-popular-product-Mac></app-popular-product-Mac>
         </div>
         <div class="tab-pane fade" id="Ipad">
           <!-- Lazy Loading Start here For iPad -->
-          <div #PopularsProducts_iPad>
-          </div>
+          <div #PopularsProducts_iPad></div>
+          <app-popular-product-iPad></app-popular-product-iPad>
         </div>
 
         <div class="tab-pane fade" id="Watch">
           <!-- Lazy LoadingStart here for Watch -->
-          <div #PopularsProductsWatch>
-          </div>
+          <div #PopularsProductsWatch></div>
+          <app-popular-product-watch></app-popular-product-watch>
         </div>
         <div class="tab-pane fade" id="airpod">
           <!-- Lazy LoadingStart here for Watch -->
-          <div #PopularsProductsAirpod>
-          </div>
+          <div #PopularsProductsAirpod></div>
+          <app-popular-product-airpod></app-popular-product-airpod>
         </div>
       </div>
     </div>
@@ -269,6 +235,7 @@
           </div> -->
         </div>
         <!-- Bestsellers products Lazy Loaded here... -->
+        <app-bestsellers></app-bestsellers>
       </div>
       <!-- <div class="col-sm-auto   mt-2 col-md-3 col-lg-3 col-xl-2 text-center">
         <a [routerLink]="'/accessories/airpods-earpods1'"  class="pointer">
